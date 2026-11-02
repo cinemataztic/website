@@ -188,7 +188,7 @@
         .pflow__tile, .pflow__accord { z-index: 1; }
         /* Below 1024px: a column, each step a row with the tile on the left */
         @media (max-width: 1023px) {
-            .pflow { --tile: 60px; margin-top: 2.5rem; padding-left: 22px; }
+            .pflow { --tile: 60px; margin-top: 2.5rem; }
             .pflow__row { flex-direction: column; align-items: stretch; }
             .pflow__node { flex-direction: row; align-items: center; text-align: left; }
             .pflow__top:empty { display: none; }
@@ -204,16 +204,23 @@
             .pflow__link--oneway .pflow__dot { animation-name: pflow-y-once; }
             @keyframes pflow-y { from { top: 10%; } to { top: 90%; } }
             @keyframes pflow-y-once { from { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { top: 100%; opacity: 0; } }
-            .pflow__tile--brands { font-size: 12px; gap: 5px 7px; }
-            /* The accord sits under the ad server label, off the main line */
-            .pflow__node--accord { display: grid; grid-template-columns: var(--tile) 1fr; column-gap: 18px; align-items: center; }
-            .pflow__node--accord .pflow__tile { grid-column: 1; grid-row: 1 / span 2; }
-            .pflow__node--accord .pflow__label { grid-column: 2; grid-row: 1; align-self: end; margin: 0; }
-            .pflow__node--accord .pflow__top { grid-column: 2; grid-row: 2; align-self: start; height: auto; padding-top: 6px; }
-            .pflow__accord { position: static; transform: none; align-items: flex-start; }
-            .pflow__up { display: none; }
-            .pflow__pa { white-space: normal; }
-            .pflow__pa { padding: 6px 12px 6px 6px; }
+            .pflow__tile--brands { grid-template-columns: repeat(2, auto); font-size: 12px; gap: 6px 7px; text-shadow: 0 0 8px rgba(var(--c), 0.7); }
+            .pflow__tile--brands i { width: 1.25em; text-align: center; }
+            /* The platform sits beside the DCH, off the main line, joined to the tile by a short two-way link */
+            /* The DCH tile drops level with the platform box so the link runs straight across; the line from
+               the sales agency grows to meet it, and the DCH name sits beside that line, above the box */
+            .pflow__node--accord { display: grid; grid-template-columns: var(--tile) 1fr; grid-template-rows: 40px auto; align-items: center; margin-top: -40px; }
+            .pflow__node--accord .pflow__tile { grid-column: 1; grid-row: 2; }
+            .pflow__node--accord .pflow__label { grid-column: 2; grid-row: 1; align-self: end; margin: 0; padding: 0 0 6px 18px; }
+            .pflow__node--accord .pflow__top { grid-column: 2; grid-row: 2; height: auto; }
+            .pflow__link--to-dch { height: 80px; }
+            .pflow__accord { position: static; transform: none; flex-direction: row-reverse; align-items: center; width: 100%; }
+            .pflow__up { flex: 0 0 36px; height: 20px; margin: 0; }
+            .pflow__up::before { left: 0; right: 0; top: 50%; bottom: auto; width: auto; height: 2px; margin-top: -1px; }
+            .pflow__up::after { left: 1px; top: 50%; margin-top: -3.5px; transform: rotate(-45deg); }
+            .pflow__up-tip { left: auto; right: 1px; top: 50%; bottom: auto; margin-top: -3.5px; transform: rotate(135deg); }
+            .pflow__up .pflow__dot { top: 50%; margin: -3px 0 0 -3px; animation-name: pflow-x; }
+            .pflow__pa { flex: 1; white-space: normal; padding: 6px 12px 6px 6px; }
             .pflow__pa b { width: 30px; height: 30px; }
             .pflow__pa b svg { width: 16px; height: 16px; }
             .pflow__pa span { font-size: 11px; }
@@ -488,7 +495,7 @@
                                     <span class="pflow__tile" style="--c: 254, 169, 23"><i class="fa-solid fa-user-tie"></i></span>
                                     <span class="pflow__label">Cinema sales agency</span>
                                 </div>
-                                <div class="pflow__link" style="--a: 254, 169, 23; --b: 61, 192, 200; --i: 5" aria-hidden="true"><span class="pflow__tip pflow__tip--start"></span><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
+                                <div class="pflow__link pflow__link--to-dch" style="--a: 254, 169, 23; --b: 61, 192, 200; --i: 5" aria-hidden="true"><span class="pflow__tip pflow__tip--start"></span><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
                                 <div class="pflow__node pflow__node--accord">
                                     <div class="pflow__top"><div class="pflow__accord">
                                         <span class="pflow__pa" data-pflow="io"><b><svg viewBox="0 0 32 32" aria-hidden="true"><g transform="matrix(0.0309066,0,0,0.0309066,0.17581,0.10728)"><path fill="currentColor" d="M594.616,1020.23L594.616,773.955C636.148,760.745 675.091,737.331 707.489,703.782C811.75,595.816 808.747,423.772 700.782,319.511C592.816,215.25 420.772,218.253 316.511,326.218C212.25,434.184 215.253,606.228 323.218,710.489C354.336,740.539 390.777,761.679 429.384,773.963L429.384,1020.36C361.433,1009.29 294.622,984.251 233.178,944.349C-3.945,790.36 -71.338,473.3 82.651,236.178C236.64,-0.945 553.7,-68.338 790.822,85.651C1027.94,239.64 1095.34,556.7 941.349,793.822C859.606,919.696 731.911,997.742 594.616,1020.23ZM531.135,503.594C498.411,482.343 489.11,438.587 510.362,405.863C531.613,373.139 575.368,363.839 608.092,385.09C640.816,406.341 650.117,450.097 628.866,482.821C607.614,515.544 563.859,524.845 531.135,503.594Z"/></g></svg></b><span>Cinemataztic<small>Programmatic IO platform</small></span></span>
@@ -1231,7 +1238,7 @@
         // --- HOW PROGRAMMATIC WORKS: the direct line ---
         // The media buying agency also books straight on the Cinemataztic Programmatic IO platform, with no tech fees. On a row the
         // line runs up from the agency and across to the platform box; in the phone column it runs down the
-        // left side to the DCH. Redrawn whenever the graphic changes size.
+        // right side onto the platform box. Redrawn whenever the graphic changes size.
         (function () {
             const flow = document.querySelector('.pflow');
             if (!flow) return;
@@ -1263,12 +1270,14 @@
                 const a = rel(agency);
                 let pts, tip, label;
                 if (column.matches) {
-                    const d = rel(dch), x = 6, ay = (a.t + a.b) / 2, dy = (d.t + d.b) / 2;
-                    pts = [[a.l, ay], [x, ay], [x, dy], [d.l - 3, dy]];
-                    tip = `M${d.l - 9},${dy - 5} L${d.l - 3},${dy} L${d.l - 9},${dy + 5}`;
-                    // Upright, just left of the line
-                    const my = (ay + dy) / 2;
-                    label = `<text x="${x - 8}" y="${my}" text-anchor="middle" transform="rotate(-90 ${x - 8} ${my})">No tech fees</text>`;
+                    // From the end of the agency's name across to the right, then down onto the platform box
+                    const n = rel(agency.parentElement.querySelector('.pflow__label')), p = rel(io);
+                    const x = p.r - 16, ay = (n.t + n.b) / 2;
+                    pts = [[n.r + 8, ay], [x, ay], [x, p.t - 3]];
+                    tip = `M${x - 5},${p.t - 9} L${x},${p.t - 3} L${x + 5},${p.t - 9}`;
+                    // Upright, just right of the line
+                    const my = (ay + p.t) / 2;
+                    label = `<text x="${x + 10}" y="${my}" text-anchor="middle" transform="rotate(90 ${x + 10} ${my})">No tech fees</text>`;
                 } else {
                     const p = rel(io), ax = (a.l + a.r) / 2, py = (p.t + p.b) / 2;
                     pts = [[ax, a.t], [ax, py], [p.l - 3, py]];
