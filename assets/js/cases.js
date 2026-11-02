@@ -155,6 +155,18 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "iberdrola-quiz",
+        featured: true,
+        title: "Quizshow",
+        client: "Iberdrola",
+        category: "CineGame",
+        gameType: "Quizshow",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Iberdrola_Quiz_PT2026_CutDown.mp4",
+        description: "Quizshow, a CineGame for Iberdrola in Portuguese cinemas in 2026."
+    },
+    {
         id: "odeon-sportsball",
         title: "Sports Ball",
         client: "ODEON",
@@ -270,7 +282,7 @@ const siteCases = [
     },
     {
         id: "mars",
-        featured: true,
+        featured: false,
         title: "M&M's – The Jumper",
         client: "M&M's + Extra",
         category: "CineGame",

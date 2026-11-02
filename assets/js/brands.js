@@ -41,6 +41,7 @@ const siteBrands = [
     // Clients with cases on the site (added 2026-10-27); same logos as their case cards
     { name: "ODEON", logo: "assets/logos/odeon.svg" },
     { name: "Kirppu", logo: "assets/logos/kirppu.svg" },
+    { name: "Iberdrola", logo: "assets/logos/iberdrola.svg" },
     { name: "REDyPLAY", logo: "assets/logos/redyplay.png", badge: true },
     { name: "Danone", logo: "assets/logos/danone.png" },
     { name: "The Home Guard", logo: "assets/logos/hjv.png" },
