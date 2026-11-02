@@ -109,6 +109,119 @@
            1700px; cases get 5 from 2300px. Two classes, so they win over the xl:grid-cols-3 in site.css */
         @media (min-width: 1700px) { .grid.card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (min-width: 2300px) { .grid.card-grid--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+        /* How programmatic works: the chain from brand to cinema. Tiles lit from the top left with a glow in their
+           own colour, links with a dot of light running along them. A row from 1024px, a column on smaller screens */
+        .pflow { --tile: 72px; --top: 112px; position: relative; margin-top: 3.5rem; padding: 1rem 0 0.5rem;
+            background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0) 70%); }
+        .pflow__row { display: flex; align-items: flex-start; }
+        .pflow__node { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .pflow__top { position: relative; height: var(--top); width: 100%; }
+        .pflow__tile {
+            --c: 255, 255, 255;
+            position: relative; flex: none; width: var(--tile); height: var(--tile); border-radius: 18px;
+            display: flex; align-items: center; justify-content: center; font-size: 28px; color: #fff;
+            background-color: rgb(var(--c));
+            background-image:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.06) 35%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.32) 100%),
+                linear-gradient(rgba(10, 10, 12, 0.55), rgba(10, 10, 12, 0.55));
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 1px 0 0 rgba(255, 255, 255, 0.18),
+                inset 0 0 0 1px rgba(var(--c), 0.6),
+                0 0 30px -4px rgba(var(--c), 0.55),
+                0 18px 30px -10px rgba(0, 0, 0, 0.85);
+            text-shadow: 0 0 14px rgba(var(--c), 0.9);
+            transition: box-shadow 200ms ease, transform 200ms ease;
+        }
+        .pflow__node:hover .pflow__tile { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 1px 0 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(var(--c), 0.8), 0 0 42px -2px rgba(var(--c), 0.8), 0 18px 30px -10px rgba(0, 0, 0, 0.85); }
+        .pflow__tile--brands { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 8px; font-size: 15px; place-content: center; }
+        .pflow__tile .fa-arrows-rotate { animation: pflow-spin 6s linear infinite; }
+        @keyframes pflow-spin { to { transform: rotate(360deg); } }
+        .pflow__label { margin-top: 16px; padding: 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.35; text-transform: uppercase; color: #fff; }
+        .pflow__label small { display: block; margin-top: 2px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: #9ca3af; }
+        /* The link between two tiles: a line in the two tiles' colours with arrow tips, and a dot of light */
+        .pflow__link { --a: 255, 255, 255; --b: 255, 255, 255; position: relative; flex: 0 0 clamp(18px, 2.6vw, 52px); height: var(--tile); margin-top: var(--top); }
+        .pflow__link::before {
+            content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px;
+            background: linear-gradient(90deg, rgba(var(--a), 0.8), rgba(var(--b), 0.8));
+            box-shadow: 0 0 8px rgba(var(--a), 0.35);
+        }
+        .pflow__link--oneway::before { background: repeating-linear-gradient(90deg, rgba(var(--a), 0.85) 0 6px, transparent 6px 10px); box-shadow: none; }
+        .pflow__tip { position: absolute; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-top: 2px solid rgb(var(--b)); border-right: 2px solid rgb(var(--b)); }
+        .pflow__tip--end { right: 0; transform: rotate(45deg); }
+        .pflow__tip--start { left: 0; transform: rotate(-135deg); border-color: rgb(var(--a)); }
+        .pflow__dot { position: absolute; top: 50%; left: 0; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #fff;
+            box-shadow: 0 0 8px 2px rgba(var(--b), 0.9); animation: pflow-x 2.4s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * -0.35s); }
+        .pflow__link--oneway .pflow__dot { animation: pflow-x-once 1.8s linear infinite; }
+        @keyframes pflow-x { from { left: 10%; } to { left: 90%; } }
+        @keyframes pflow-x-once { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: 100%; opacity: 0; } }
+        /* The Cinemataztic Programmatic IO platform above the DCH, joined by a dashed arrow */
+        .pflow__accord { position: absolute; left: 50%; bottom: 0; top: 0; display: flex; flex-direction: column; align-items: center; transform: translateX(-50%); }
+        .pflow__pa {
+            display: flex; align-items: center; gap: 10px; white-space: nowrap; padding: 8px 14px 8px 8px; border-radius: 14px;
+            background: linear-gradient(135deg, rgba(61, 192, 200, 0.14), rgba(61, 192, 200, 0.03) 60%), #121216;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 0 0 1px rgba(61, 192, 200, 0.45), 0 0 28px -6px rgba(61, 192, 200, 0.5), 0 14px 26px -10px rgba(0, 0, 0, 0.85);
+        }
+        .pflow__pa b {
+            flex: none; width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+            color: #0a0a0c; background-color: #3dc0c8;
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 55%, rgba(0, 0, 0, 0.2));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 0 18px -2px rgba(61, 192, 200, 0.7);
+        }
+        .pflow__pa b svg { width: 20px; height: 20px; }
+        .pflow__pa span { text-align: left; font-size: 13px; font-weight: 700; line-height: 1.2; letter-spacing: 0.04em; text-transform: uppercase; color: #3dc0c8; }
+        .pflow__pa small { display: block; margin-top: 2px; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: #9ca3af; }
+        /* Platform <-> DCH: a two-way link like the others, standing upright */
+        .pflow__up { --b: 61, 192, 200; position: relative; flex: 1; width: 34px; margin: 2px 0 8px; }
+        .pflow__up::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: rgba(61, 192, 200, 0.8); box-shadow: 0 0 8px rgba(61, 192, 200, 0.35); }
+        .pflow__up::after, .pflow__up-tip { content: ''; position: absolute; left: 13.5px; width: 7px; height: 7px; border-top: 2px solid #3dc0c8; border-left: 2px solid #3dc0c8; }
+        .pflow__up::after { top: 1px; transform: rotate(45deg); }
+        .pflow__up-tip { bottom: 1px; transform: rotate(-135deg); }
+        .pflow__up .pflow__dot { left: 17px; top: 0; animation-name: pflow-v; }
+        @keyframes pflow-v { from { top: 10%; } to { top: 90%; } }
+        /* "No tech fees" on the direct line */
+        .pflow__direct text { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; fill: #ffffff; paint-order: stroke; stroke: #121216; stroke-width: 4px; }
+        /* The direct line from the media buying agency to the Cinemataztic platform, drawn by the script below */
+        .pflow__direct { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+        .pflow__direct path { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .pflow__direct .pflow__glow { filter: drop-shadow(0 0 4px rgba(61, 192, 200, 0.6)); }
+        .pflow__tile, .pflow__accord { z-index: 1; }
+        /* Below 1024px: a column, each step a row with the tile on the left */
+        @media (max-width: 1023px) {
+            .pflow { --tile: 60px; margin-top: 2.5rem; padding-left: 22px; }
+            .pflow__row { flex-direction: column; align-items: stretch; }
+            .pflow__node { flex-direction: row; align-items: center; text-align: left; }
+            .pflow__top:empty { display: none; }
+            .pflow__label { margin: 0 0 0 18px; }
+            .pflow__tile { font-size: 24px; }
+            .pflow__link { flex: none; width: var(--tile); height: 40px; margin-top: 0; }
+            .pflow__link::before { left: 50%; right: auto; top: 0; bottom: 0; width: 2px; height: auto; margin: 0 0 0 -1px; background: linear-gradient(180deg, rgba(var(--a), 0.8), rgba(var(--b), 0.8)); }
+            .pflow__link--oneway::before { background: repeating-linear-gradient(180deg, rgba(var(--a), 0.85) 0 6px, transparent 6px 10px); }
+            .pflow__tip { left: 50%; right: auto; top: auto; margin: 0 0 0 -3.5px; }
+            .pflow__tip--end { bottom: 1px; transform: rotate(135deg); }
+            .pflow__tip--start { top: 1px; transform: rotate(-45deg); }
+            .pflow__dot { left: 50%; top: 0; margin: -3px 0 0 -3px; animation-name: pflow-y; }
+            .pflow__link--oneway .pflow__dot { animation-name: pflow-y-once; }
+            @keyframes pflow-y { from { top: 10%; } to { top: 90%; } }
+            @keyframes pflow-y-once { from { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { top: 100%; opacity: 0; } }
+            .pflow__tile--brands { font-size: 12px; gap: 5px 7px; }
+            /* The accord sits under the ad server label, off the main line */
+            .pflow__node--accord { display: grid; grid-template-columns: var(--tile) 1fr; column-gap: 18px; align-items: center; }
+            .pflow__node--accord .pflow__tile { grid-column: 1; grid-row: 1 / span 2; }
+            .pflow__node--accord .pflow__label { grid-column: 2; grid-row: 1; align-self: end; margin: 0; }
+            .pflow__node--accord .pflow__top { grid-column: 2; grid-row: 2; align-self: start; height: auto; padding-top: 6px; }
+            .pflow__accord { position: static; transform: none; align-items: flex-start; }
+            .pflow__up { display: none; }
+            .pflow__pa { white-space: normal; }
+            .pflow__pa { padding: 6px 12px 6px 6px; }
+            .pflow__pa b { width: 30px; height: 30px; }
+            .pflow__pa b svg { width: 16px; height: 16px; }
+            .pflow__pa span { font-size: 11px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .pflow__dot, .pflow__tile .fa-arrows-rotate { animation: none; }
+            .pflow__dot { display: none; }
+        }
     </style>
     <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -335,6 +448,62 @@
                         <h2 class="section-title font-black uppercase !leading-none">How programmatic cinema works?</h2>
                         <div class="max-w-3xl space-y-5 text-lg sm:text-xl text-gray-300 !leading-relaxed">
                             <p>Programmatic is an add-on to the traditional offline cinema advertising (DCP) and provides exhibitors and cinema sales houses with new incremental digital revenue. Unless the preshow is already sold out – this is a way of generating additional revenue.</p>
+                        </div>
+                        <!-- The chain from brand to cinema; the Cinemataztic DCH is connected to the Cinemataztic Programmatic IO platform -->
+                        <div class="pflow" role="img" aria-label="Programmatic cinema: brands work through a media buying agency (which also books the Cinemataztic platform directly) and a demand side platform (DSP), an ad exchange, a supply side platform (SSP), a cinema sales agency and the Cinemataztic DCH (Digital Cinema Hub) to the cinema. The DCH is connected to the Cinemataztic Programmatic IO platform.">
+                            <svg class="pflow__direct" aria-hidden="true"></svg>
+                            <div class="pflow__row">
+                                <div class="pflow__node">
+                                    <div class="pflow__top"></div>
+                                    <span class="pflow__tile pflow__tile--brands" style="--c: 248, 105, 185"><i class="fa-solid fa-plane"></i><i class="fa-solid fa-burger"></i><i class="fa-solid fa-gamepad"></i><i class="fa-solid fa-car-side"></i></span>
+                                    <span class="pflow__label">Brands</span>
+                                </div>
+                                <div class="pflow__link pflow__link--oneway" style="--a: 248, 105, 185; --b: 248, 105, 185; --i: 0" aria-hidden="true"><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
+                                <div class="pflow__node">
+                                    <div class="pflow__top"></div>
+                                    <span class="pflow__tile" style="--c: 248, 105, 185" data-pflow="agency"><i class="fa-solid fa-photo-film"></i></span>
+                                    <span class="pflow__label">Media buying agency</span>
+                                </div>
+                                <div class="pflow__link" style="--a: 248, 105, 185; --b: 248, 105, 185; --i: 1" aria-hidden="true"><span class="pflow__tip pflow__tip--start"></span><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
+                                <div class="pflow__node">
+                                    <div class="pflow__top"></div>
+                                    <span class="pflow__tile" style="--c: 248, 105, 185"><i class="fa-solid fa-database"></i></span>
+                                    <span class="pflow__label">Demand side platform<small>DSP</small></span>
+                                </div>
+                                <div class="pflow__link" style="--a: 248, 105, 185; --b: 254, 206, 0; --i: 2" aria-hidden="true"><span class="pflow__tip pflow__tip--start"></span><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
+                                <div class="pflow__node">
+                                    <div class="pflow__top"></div>
+                                    <span class="pflow__tile" style="--c: 254, 206, 0"><i class="fa-solid fa-arrows-rotate"></i></span>
+                                    <span class="pflow__label">Ad exchange</span>
+                                </div>
+                                <div class="pflow__link" style="--a: 254, 206, 0; --b: 254, 169, 23; --i: 3" aria-hidden="true"><span class="pflow__tip pflow__tip--start"></span><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
+                                <div class="pflow__node">
+                                    <div class="pflow__top"></div>
+                                    <span class="pflow__tile" style="--c: 254, 169, 23"><i class="fa-solid fa-database"></i></span>
+                                    <span class="pflow__label">Supply side platform<small>SSP</small></span>
+                                </div>
+                                <div class="pflow__link" style="--a: 254, 169, 23; --b: 254, 169, 23; --i: 4" aria-hidden="true"><span class="pflow__tip pflow__tip--start"></span><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
+                                <div class="pflow__node">
+                                    <div class="pflow__top"></div>
+                                    <span class="pflow__tile" style="--c: 254, 169, 23"><i class="fa-solid fa-user-tie"></i></span>
+                                    <span class="pflow__label">Cinema sales agency</span>
+                                </div>
+                                <div class="pflow__link" style="--a: 254, 169, 23; --b: 61, 192, 200; --i: 5" aria-hidden="true"><span class="pflow__tip pflow__tip--start"></span><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
+                                <div class="pflow__node pflow__node--accord">
+                                    <div class="pflow__top"><div class="pflow__accord">
+                                        <span class="pflow__pa" data-pflow="io"><b><svg viewBox="0 0 32 32" aria-hidden="true"><g transform="matrix(0.0309066,0,0,0.0309066,0.17581,0.10728)"><path fill="currentColor" d="M594.616,1020.23L594.616,773.955C636.148,760.745 675.091,737.331 707.489,703.782C811.75,595.816 808.747,423.772 700.782,319.511C592.816,215.25 420.772,218.253 316.511,326.218C212.25,434.184 215.253,606.228 323.218,710.489C354.336,740.539 390.777,761.679 429.384,773.963L429.384,1020.36C361.433,1009.29 294.622,984.251 233.178,944.349C-3.945,790.36 -71.338,473.3 82.651,236.178C236.64,-0.945 553.7,-68.338 790.822,85.651C1027.94,239.64 1095.34,556.7 941.349,793.822C859.606,919.696 731.911,997.742 594.616,1020.23ZM531.135,503.594C498.411,482.343 489.11,438.587 510.362,405.863C531.613,373.139 575.368,363.839 608.092,385.09C640.816,406.341 650.117,450.097 628.866,482.821C607.614,515.544 563.859,524.845 531.135,503.594Z"/></g></svg></b><span>Cinemataztic<small>Programmatic IO platform</small></span></span>
+                                        <span class="pflow__up" style="--i: 7" aria-hidden="true"><span class="pflow__up-tip"></span><span class="pflow__dot"></span></span>
+                                    </div></div>
+                                    <span class="pflow__tile" style="--c: 61, 192, 200" data-pflow="dch"><i class="fa-solid fa-server"></i></span>
+                                    <span class="pflow__label">Cinemataztic DCH<small>Digital Cinema Hub</small></span>
+                                </div>
+                                <div class="pflow__link" style="--a: 61, 192, 200; --b: 108, 238, 196; --i: 6" aria-hidden="true"><span class="pflow__tip pflow__tip--start"></span><span class="pflow__tip pflow__tip--end"></span><span class="pflow__dot"></span></div>
+                                <div class="pflow__node">
+                                    <div class="pflow__top"></div>
+                                    <span class="pflow__tile" style="--c: 108, 238, 196"><i class="fa-solid fa-users-rectangle"></i></span>
+                                    <span class="pflow__label">Cinema</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -1058,6 +1227,77 @@
         })();
     </script>
     <!-- More products: the three other product cards, as the last section above the footer -->
+    <script>
+        // --- HOW PROGRAMMATIC WORKS: the direct line ---
+        // The media buying agency also books straight on the Cinemataztic Programmatic IO platform, with no tech fees. On a row the
+        // line runs up from the agency and across to the platform box; in the phone column it runs down the
+        // left side to the DCH. Redrawn whenever the graphic changes size.
+        (function () {
+            const flow = document.querySelector('.pflow');
+            if (!flow) return;
+            const svg = flow.querySelector('.pflow__direct');
+            const agency = flow.querySelector('[data-pflow="agency"]');
+            const io = flow.querySelector('[data-pflow="io"]');
+            const dch = flow.querySelector('[data-pflow="dch"]');
+            const column = window.matchMedia('(max-width: 1023px)');
+            const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const R = 12;
+
+            // An orthogonal polyline with rounded corners
+            function roundedPath(pts) {
+                let d = `M${pts[0][0]},${pts[0][1]}`;
+                for (let i = 1; i < pts.length - 1; i++) {
+                    const [px, py] = pts[i - 1], [x, y] = pts[i], [nx, ny] = pts[i + 1];
+                    const r = Math.min(R, Math.hypot(x - px, y - py) / 2, Math.hypot(nx - x, ny - y) / 2);
+                    const ax = x - Math.sign(x - px) * r, ay = y - Math.sign(y - py) * r;
+                    const bx = x + Math.sign(nx - x) * r, by = y + Math.sign(ny - y) * r;
+                    d += ` L${ax},${ay} Q${x},${y} ${bx},${by}`;
+                }
+                const [ex, ey] = pts[pts.length - 1];
+                return d + ` L${ex},${ey}`;
+            }
+
+            function draw() {
+                const box = flow.getBoundingClientRect();
+                const rel = el => { const r = el.getBoundingClientRect(); return { l: r.left - box.left, r: r.right - box.left, t: r.top - box.top, b: r.bottom - box.top }; };
+                const a = rel(agency);
+                let pts, tip, label;
+                if (column.matches) {
+                    const d = rel(dch), x = 6, ay = (a.t + a.b) / 2, dy = (d.t + d.b) / 2;
+                    pts = [[a.l, ay], [x, ay], [x, dy], [d.l - 3, dy]];
+                    tip = `M${d.l - 9},${dy - 5} L${d.l - 3},${dy} L${d.l - 9},${dy + 5}`;
+                    // Upright, just left of the line
+                    const my = (ay + dy) / 2;
+                    label = `<text x="${x - 8}" y="${my}" text-anchor="middle" transform="rotate(-90 ${x - 8} ${my})">No tech fees</text>`;
+                } else {
+                    const p = rel(io), ax = (a.l + a.r) / 2, py = (p.t + p.b) / 2;
+                    pts = [[ax, a.t], [ax, py], [p.l - 3, py]];
+                    tip = `M${p.l - 9},${py - 5} L${p.l - 3},${py} L${p.l - 9},${py + 5}`;
+                    // Centred over the long stretch of the line
+                    label = `<text x="${(ax + p.l) / 2}" y="${py - 9}" text-anchor="middle">No tech fees</text>`;
+                }
+                const [sx, sy] = pts[0], [ex, ey] = pts[pts.length - 1];
+                const d = roundedPath(pts);
+                svg.innerHTML = `
+                    <defs><linearGradient id="pflowDirect" gradientUnits="userSpaceOnUse" x1="${sx}" y1="${sy}" x2="${ex}" y2="${ey}">
+                        <stop offset="0" stop-color="#f869b9"/><stop offset="1" stop-color="#3dc0c8"/>
+                    </linearGradient></defs>
+                    <g class="pflow__glow">
+                        <path d="${d}" stroke="url(#pflowDirect)" stroke-opacity="0.85"/>
+                        <path d="${tip}" stroke="#3dc0c8"/>
+                    </g>
+                    ${label}
+                    ${still ? '' : `<circle r="3" fill="#ffffff" style="filter: drop-shadow(0 0 4px #3dc0c8)"><animateMotion dur="3.2s" repeatCount="indefinite" path="${d}"/></circle>`}`;
+            }
+
+            let frame = 0;
+            const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(draw); };
+            new ResizeObserver(schedule).observe(flow);
+            column.addEventListener('change', schedule);
+            if (document.fonts) document.fonts.ready.then(schedule);
+            draw();
+        })();
+    </script>
     <script src="assets/js/more-products.js?v=6" data-current="programmatic"></script>
 </body>
 </html>
