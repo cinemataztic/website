@@ -177,7 +177,7 @@
         /* Preshow timeline: where the Cinemataztic Show sits in the preshow. Blocks are placed in % of the
            timeline; on narrow screens the timeline keeps its width and scrolls sideways. */
         .preshow-scroll { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
-        .preshow { position: relative; min-width: 760px; padding-top: 2.25rem; padding-bottom: 12px; }
+        .preshow { position: relative; min-width: 1040px; padding-top: 2.25rem; padding-bottom: 12px; }
         .preshow-row { position: relative; height: 112px; margin-top: 2.5rem; }
         .preshow-row + .preshow-row { margin-top: 4.5rem; }
         .preshow-row-label { position: absolute; left: 0; top: -1.6rem; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #9ca3af; white-space: nowrap; }
@@ -186,6 +186,8 @@
         .preshow-show-parts { flex: 1; display: flex; gap: 4px; }
         .preshow-show-parts span { flex: 1; display: flex; align-items: center; justify-content: center; border-radius: 9px; color: #0a0a0c; font-size: 12px; font-weight: 700; writing-mode: vertical-rl; transform: rotate(180deg); }
         .preshow-show figcaption { align-self: center; padding: 0 4px; background: #121216; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #ffffff; text-align: center; white-space: nowrap; line-height: 1; }
+        .preshow-block--vertical { padding: 0; writing-mode: vertical-rl; }
+        .preshow-show--narrow figcaption { font-size: 8px; }
         .preshow-start { position: absolute; top: 1.4rem; bottom: 0; width: 0; border-left: 2px dashed #ffffff; opacity: 0.8; }
         .preshow-start span { position: absolute; bottom: calc(100% + 0.4rem); left: -1px; transform: translateX(-50%); font-size: 10px; font-weight: 700; text-transform: uppercase; color: #ffffff; white-space: nowrap; }
     </style>
@@ -358,9 +360,23 @@
                         </div>
                         <!-- Preshow timeline: the Cinemataztic Show before the preshow (DK/FI) or across the announced start time (DE) -->
                         <p class="md:hidden pt-4 -mb-2 text-[10px] font-bold uppercase text-gray-400">Swipe to see the whole preshow <i class="fa-solid fa-arrow-right ml-1"></i></p>
-                        <div class="preshow-scroll pt-6" role="img" aria-label="Timeline of the cinema preshow. In Denmark and Finland the Cinemataztic Show with CineGame and CineAd runs before the announced start time, followed by local ads, the ad-reel, premium placement, trailers, the golden spot and the feature. In Germany the Cinemataztic Show starts before the announced start time and continues into the beginning of the preshow, followed by the ad-reel, premium placement, trailers, the golden spot and the feature.">
+                        <div class="preshow-scroll pt-6" role="img" aria-label="Timeline of the cinema preshow. A programmatic CineAd can run right after the announced start time, followed by local ads, the ad-reel, premium placement, trailers, the golden spot and the feature. In Denmark and Finland the Cinemataztic Show with CineGame and CineAd runs before the announced start time, followed by local ads, the ad-reel, premium placement, trailers, the golden spot and the feature. In Germany the Cinemataztic Show starts before the announced start time and continues into the beginning of the preshow, followed by the ad-reel, premium placement, trailers, the golden spot and the feature.">
                             <div class="preshow" aria-hidden="true">
                                 <span class="preshow-start" style="left: 14.8%"><span>Announced start time</span></span>
+                                <div class="preshow-row">
+                                    <figure class="preshow-show preshow-show--narrow" style="left: 15.8%; width: 6.8%;">
+                                        <div class="preshow-show-parts">
+                                            <span style="background: #3dc0c8">CineAd</span>
+                                        </div>
+                                        <figcaption>Programmatic</figcaption>
+                                    </figure>
+                                    <span class="preshow-block preshow-block--vertical" style="left: 23.3%; width: 2.7%; background: linear-gradient(to right, #7b7b83, #86868d)">Local ads</span>
+                                    <span class="preshow-block" style="left: 26.8%; width: 28.6%; background: linear-gradient(to right, #87878f, #a8a8ae)">Ad-reel</span>
+                                    <span class="preshow-block" style="left: 56.6%; width: 9.5%; background: linear-gradient(to right, #a9a9af, #b4b4b9)">Premium placement</span>
+                                    <span class="preshow-block" style="left: 67.2%; width: 11.6%; background: linear-gradient(to right, #b5b5ba, #c2c2c7)">Trailers</span>
+                                    <span class="preshow-block" style="left: 79.9%; width: 9.5%; background: linear-gradient(to right, #c3c3c8, #ceced3)">Golden Spot</span>
+                                    <span class="preshow-block" style="left: 90.5%; width: 9.5%; background: linear-gradient(to right, #cfcfd4, #dadade)">Feature</span>
+                                </div>
                                 <div class="preshow-row">
                                     <span class="preshow-row-label">Denmark &amp; Finland</span>
                                     <figure class="preshow-show" style="left: 0; width: 13.8%;">
