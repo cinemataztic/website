@@ -167,6 +167,17 @@ const siteCases = [
         description: "Quizshow, a CineGame for Iberdrola in Portuguese cinemas in 2026."
     },
     {
+        id: "odeon-quiz",
+        title: "Quiz",
+        client: "ODEON",
+        category: "CineGame",
+        gameType: "Quiz",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/MovieQuiz%20IE%20ODEON%202026Q4%20SimpleQuiz%20Recording%201.mp4",
+        description: "Quiz, a CineGame for ODEON cinemas in Ireland in 2026."
+    },
+    {
         id: "odeon-sportsball",
         title: "Sports Ball",
         client: "ODEON",
