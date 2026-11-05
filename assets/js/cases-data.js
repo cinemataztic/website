@@ -90,7 +90,7 @@ const caseLogos = {
         .case-logo img { filter: brightness(0) invert(1); }
         .case-logo img.is-knockout { filter: url(#caseLogoKnockout); }
         .case-logo img.is-knockout-light { filter: url(#caseLogoKnockoutLight); }
-        .case-logo span { display: block; text-align: center; font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.01em; color: #ffffff; font-size: clamp(1.4rem, 9cqw, 2.6rem); transition: transform 500ms; overflow-wrap: anywhere; }
+        .case-logo span { display: block; text-align: center; font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.01em; color: rgba(255, 255, 255, 0.87); font-size: clamp(1.4rem, 9cqw, 2.6rem); transition: transform 500ms; overflow-wrap: anywhere; }
         :has(> .case-logo) { container-type: inline-size; }
         /* The logo in the case popup (cases without a video or picture yet): centred in the frame */
         .case-modal-logo .case-logo { top: 20%; }

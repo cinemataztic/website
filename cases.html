@@ -25,7 +25,7 @@
     <!-- Page transition (same as the old site): loads first, so arriving pages start covered -->
     <script src="assets/js/page-transition.js?v=3"></script>
     <!-- Menu logo turns into the round mark when scrolling -->
-    <script src="assets/js/site-header.js?v=16" defer></script>
+    <script src="assets/js/site-header.js?v=18" defer></script>
     <style>
         /* Premium buttons: light from above, a soft drop shadow, and a light sweep on hover */
         .btn-shine {
@@ -84,7 +84,7 @@
         .game-types { padding: 0.25rem 0 0.5rem 0.75rem; border-left: 2px solid #f869b9; }
         .game-type { border: 1px solid #2a2a33; color: #d1d5db; }
         .game-type span { color: #6b7280; }
-        .game-type:hover { border-color: #f869b9; color: #ffffff; }
+        .game-type:hover { border-color: #f869b9; color: rgba(255, 255, 255, 0.87); }
         .game-type.is-on { background: #f869b9; border-color: #f869b9; color: #0a0a0c; }
         .game-type.is-on span { color: rgba(10, 10, 12, 0.6); }
         /* Not on phones: there the filters wrap in rows above the cases and would push them far down (two classes, so it wins over the flex in site.css) */
@@ -134,7 +134,7 @@
         }
     </style>
     <!-- Tailwind CSS, built once for the whole site (classes from all pages and scripts) -->
-    <link rel="stylesheet" href="assets/css/site.css?v=1">
+    <link rel="stylesheet" href="assets/css/site.css?v=4">
 </head>
 <body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
 
@@ -228,7 +228,7 @@
                 <div class="flex items-center space-x-3">
                     <span id="caseModalCategory" class="px-3 py-1 rounded text-xs font-bold uppercase">Category</span>
                     <!-- CineGame cases: the kind of game, in white -->
-                    <span id="caseModalGameType" class="hidden px-3 py-1 rounded text-xs font-bold uppercase" style="background-color: rgba(255, 255, 255, 0.2); color: #ffffff"></span>
+                    <span id="caseModalGameType" class="hidden px-3 py-1 rounded text-xs font-bold uppercase" style="background-color: rgba(255, 255, 255, 0.2); color: rgba(255, 255, 255, 0.87)"></span>
                     <span id="caseModalClient" class="text-xs font-bold uppercase tracking-wider text-gray-400">Client Name</span>
                 </div>
                 <h2 id="caseModalTitle" class="text-3xl sm:text-4xl font-black uppercase">Case Title</h2>
@@ -291,7 +291,7 @@
     </footer>
 
     <script src="assets/js/cases.js?v=26"></script>
-    <script src="assets/js/cases-data.js?v=48"></script>
+    <script src="assets/js/cases-data.js?v=49"></script>
     <script>
         // --- CASE DATA ---
         // Every case, in the order of assets/js/cases.js
@@ -397,7 +397,7 @@
                             <p class="text-sm text-white/80 line-clamp-2 leading-relaxed">${c.description}</p>
                             <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/70">
                                 <span class="px-2 py-0.5 rounded" style="background-color: ${categoryColor(c.category)}40; color: ${categoryColor(c.category)}">${c.category}</span>
-                                ${c.gameType ? `<span class="px-2 py-0.5 rounded" style="background-color: rgba(255, 255, 255, 0.2); color: #ffffff">${c.gameType}</span>` : ''}
+                                ${c.gameType ? `<span class="px-2 py-0.5 rounded" style="background-color: rgba(255, 255, 255, 0.2); color: rgba(255, 255, 255, 0.87)">${c.gameType}</span>` : ''}
                                 <span>${String(i + 1).padStart(2, '0')}</span>
                             </div>
                         </div>

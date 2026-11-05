@@ -25,7 +25,7 @@
     <!-- Page transition (same as the old site): loads first, so arriving pages start covered -->
     <script src="assets/js/page-transition.js?v=3"></script>
     <!-- Menu logo turns into the round mark when scrolling -->
-    <script src="assets/js/site-header.js?v=16" defer></script>
+    <script src="assets/js/site-header.js?v=18" defer></script>
     <style>
         /* Premium buttons: light from above, a soft drop shadow, and a light sweep on hover */
         .btn-shine {
@@ -103,7 +103,7 @@
         header.on-hero { background-color: var(--hero-bg) !important; border-color: rgba(10, 10, 12, 0.12) !important; color: #0a0a0c; }
         header.on-hero .text-white,
         header.on-hero nav > a.text-brand-cyan { color: #0a0a0c !important; }
-        header.on-hero #mobileDrawer { color: #ffffff; }
+        header.on-hero #mobileDrawer { color: rgba(255, 255, 255, 0.87); }
     </style>
     <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -121,8 +121,8 @@
             white-space: nowrap;
             padding: 4px 8px;
             background: #0a0a0c;
-            border: 1px solid #1f1f26;
-            color: #ffffff;
+            border: 1px solid #2b303a;
+            color: rgba(255, 255, 255, 0.87);
             font-size: 11px;
             font-weight: 700;
             opacity: 0;
@@ -183,7 +183,7 @@
         .cf-phone__app { position: absolute; top: 26px; inset-inline: 0; text-align: center; font-size: 9px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: #6ceec4; }
     </style>
     <!-- Tailwind CSS, built once for the whole site (classes from all pages and scripts) -->
-    <link rel="stylesheet" href="assets/css/site.css?v=1">
+    <link rel="stylesheet" href="assets/css/site.css?v=4">
 </head>
 <body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
 
@@ -1190,7 +1190,7 @@
             for (let i = 0; i < SEGMENTS; i++) {
                 const a0 = (i / SEGMENTS) * Math.PI * 2 - Math.PI / 2, a1 = ((i + 1) / SEGMENTS) * Math.PI * 2 - Math.PI / 2;
                 const d = `M0,0 L${R * Math.cos(a0)},${R * Math.sin(a0)} A${R},${R} 0 0 1 ${R * Math.cos(a1)},${R * Math.sin(a1)} Z`;
-                const slice = el('path', { d, fill: i % 2 ? 'rgba(254, 169, 23, 0.35)' : ORANGE, stroke: '#121216', 'stroke-width': 2 });
+                const slice = el('path', { d, fill: i % 2 ? 'rgba(254, 169, 23, 0.35)' : ORANGE, stroke: '#1e222a', 'stroke-width': 2 });
                 slice.style.transition = 'fill 300ms linear';
                 wheel.append(slice);
                 slices.push({ slice, base: slice.getAttribute('fill') });
