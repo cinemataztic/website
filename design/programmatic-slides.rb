@@ -76,6 +76,46 @@ CASES.each do |id, name, imp, vouchers, ctr, leads|
   File.write(File.join(dir, "#{id}-results.svg"), svg)
 end
 
+# The same results in the shape of a case card (4:5), shown across the whole card under the mouse
+def card_stat(x, y, value, label, size = 60)
+  words = value.split(' ')
+  body = if words.size > 1
+    half = (words.size / 2.0).ceil
+    %(<tspan x="30" y="78">#{words[0...half].join(' ')}</tspan><tspan x="30" y="122">#{words[half..].join(' ')}</tspan>)
+  else
+    value
+  end
+  %(<g transform="translate(#{x} #{y})">
+    <rect width="340" height="205" rx="22" fill="#1e222a" fill-opacity="0.88" stroke="#2b303a" stroke-width="2"/>
+    <text x="30" y="106" fill="#3dc0c8" font-size="#{size}" font-weight="900" filter="url(#glow)">#{body}</text>
+    <text x="30" y="166" fill="#9ca3af" font-size="23" font-weight="700" letter-spacing="3">#{label}</text>
+  </g>)
+end
+
+CASES.each do |id, name, imp, vouchers, ctr, leads|
+  data = Base64.strict_encode64(File.binread(File.join(dir, PHOTOS[id])))
+  title = [92, (700 / (name.size * 0.72)).floor].min
+  svg = <<~SVG
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!-- Results for the #{esc.(name)} programmatic case in the shape of a case card -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" #{FONT}>
+      <defs>
+        <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16191f" stop-opacity="0.8"/><stop offset="0.3" stop-color="#16191f" stop-opacity="0.15"/><stop offset="0.55" stop-color="#16191f" stop-opacity="0.35"/><stop offset="1" stop-color="#16191f" stop-opacity="0.92"/></linearGradient>
+        <filter id="glow" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <image href="data:image/jpeg;base64,#{data}" width="800" height="1000" preserveAspectRatio="xMidYMid slice"/>
+      <rect width="800" height="1000" fill="url(#shade)"/>
+      <text x="50" y="86" fill="#3dc0c8" font-size="24" font-weight="700" letter-spacing="4">PROGRAMMATIC CASE</text>
+      <text x="48" y="#{86 + title + 6}" fill="#ffffff" font-size="#{title}" font-weight="900" letter-spacing="-1">#{esc.(name.upcase)}</text>
+      #{card_stat(50, 530, imp, 'IMPRESSIONS')}
+      #{card_stat(410, 530, vouchers, 'VOUCHERS')}
+      #{card_stat(50, 755, ctr, 'CTR')}
+      #{card_stat(410, 755, esc.(leads), 'LEADS', 38)}
+    </svg>
+  SVG
+  File.write(File.join(dir, "#{id}-card.svg"), svg)
+end
+
 placeholder = <<~SVG
   <?xml version="1.0" encoding="UTF-8"?>
   <!-- Shared placeholder for programmatic case galleries: replace with the campaign's own pictures -->
