@@ -14,7 +14,7 @@
 //   mediaType    "video" or "image": what the popup shows first
 //   cover        picture used in the popup
 //   video        video link (may be "")
-//   images       pictures for the popup's gallery (may be left out)
+//   images       pictures for the popup's gallery (may be left out); a video link here becomes a slide with a player
 //   logo         optional: own logo instead of the one picked by client name
 //   description  text on the card and in the popup; \n starts a new line
 
@@ -38,8 +38,8 @@ const siteCases = [
         category: "Programmatic",
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-ase-results.svg",
-        video: "",
-        images: ["assets/cases/programmatic/prog-ase-results.svg"],
+        video: "https://storage.googleapis.com/cinemataztic-public/video/programmatic_ase_case_story.mp4",
+        images: ["assets/cases/programmatic/prog-ase-results.svg", "https://storage.googleapis.com/cinemataztic-public/video/programmatic_ase_case_story.mp4"],
         description: "150,000 impressions and 20,000 vouchers with a 11.5% CTR. Leads: call center."
     },
     {
@@ -95,8 +95,8 @@ const siteCases = [
         category: "Programmatic",
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-specsavers-results.svg",
-        video: "",
-        images: ["assets/cases/programmatic/prog-specsavers-results.svg"],
+        video: "https://storage.googleapis.com/cinemataztic-public/video/programmatic_case_story_-_louis_nielsen_essence_media_final%20(1080p).mp4",
+        images: ["assets/cases/programmatic/prog-specsavers-results.svg", "https://storage.googleapis.com/cinemataztic-public/video/programmatic_case_story_-_louis_nielsen_essence_media_final%20(1080p).mp4"],
         description: "160,000 impressions and 20,000 vouchers with a 11.6% CTR. Leads: web bookings."
     },
     {

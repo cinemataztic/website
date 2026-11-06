@@ -482,8 +482,8 @@
         </div>
     </footer>
 
-    <script src="assets/js/cases.js?v=27"></script>
-    <script src="assets/js/cases-data.js?v=51"></script>
+    <script src="assets/js/cases.js?v=29"></script>
+    <script src="assets/js/cases-data.js?v=53"></script>
     <script>
         // --- LATEST GAMES ---
         // From assets/js/cases.js, where the newest cases come first.
@@ -503,8 +503,9 @@
                     <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-brand-card border border-brand-border group-hover:border-white transition-colors">
                         ${caseCover(c)}
                         ${c.category === 'Programmatic' ? `
-                            <div class="absolute top-3 right-3 px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-white" style="background-color: rgba(255, 255, 255, 0.25)">
-                                <i class="fa-solid fa-chart-column mr-1"></i> Results
+                            <div class="absolute top-3 right-3 flex gap-2">
+                                ${c.video ? `<div class="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-white" style="background-color: rgba(255, 255, 255, 0.25)"><i class="fa-solid fa-play mr-1"></i> Video</div>` : ''}
+                                <div class="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-white" style="background-color: rgba(255, 255, 255, 0.25)"><i class="fa-solid fa-chart-column mr-1"></i> Results</div>
                             </div>
                         ` : c.images && c.images.length ? `
                             <div class="absolute top-3 right-3 px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-white" style="background-color: rgba(255, 255, 255, 0.25)">

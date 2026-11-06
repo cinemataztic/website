@@ -194,7 +194,8 @@ const categoryColor = cat => categoryColors[cat] || '#3dc0c8';
 
 // --- IMAGE SLIDER IN THE CASE POPUP ---
 // Cases with `images` (all pitches, and e.g. Hummel) show them one at a time with arrows instead of a video (also the arrow keys and
-// swiping), a counter and dots.
+// swiping), a counter and dots. A video link in `images` (e.g. Ase) becomes a slide with a player; it starts when you reach it
+// and pauses when you leave. The dots and counter step aside there, so the player's controls stay free.
 function mountImageSlider(box, images, color = '#fece00', title = '') {
     // A single image is just shown: no arrows, dots or counter
     if (images.length === 1) {
@@ -202,14 +203,15 @@ function mountImageSlider(box, images, color = '#fece00', title = '') {
         return;
     }
     let index = 0;
+    const isVideo = src => /\.(mp4|mov)$/i.test(src);
     box.innerHTML = `
         <div class="pitch-slider absolute inset-0 overflow-hidden select-none">
             <div class="pitch-track flex h-full transition-transform duration-500 ease-out">
-                ${images.map((src, i) => `<img src="${escapeCoverText(src)}" alt="${escapeCoverText(title ? `${title}, image ${i + 1} of ${images.length}` : `Image ${i + 1} of ${images.length}`)}" class="w-full h-full shrink-0 object-contain bg-black" draggable="false">`).join('')}
+                ${images.map((src, i) => isVideo(src) ? `<video src="${escapeCoverText(src)}" controls playsinline preload="metadata" class="w-full h-full shrink-0 object-contain bg-black"></video>` : `<img src="${escapeCoverText(src)}" alt="${escapeCoverText(title ? `${title}, image ${i + 1} of ${images.length}` : `Image ${i + 1} of ${images.length}`)}" class="w-full h-full shrink-0 object-contain bg-black" draggable="false">`).join('')}
             </div>
             <button type="button" data-step="-1" aria-label="Previous image" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-black transition disabled:opacity-30 disabled:pointer-events-none"><i class="fa-solid fa-arrow-left"></i></button>
             <button type="button" data-step="1" aria-label="Next image" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-black transition disabled:opacity-30 disabled:pointer-events-none"><i class="fa-solid fa-arrow-right"></i></button>
-            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+            <div class="pitch-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                 ${images.map((_, i) => `<button type="button" data-go="${i}" aria-label="Image ${i + 1}" class="pitch-dot w-2 h-2 rounded-full bg-white/40 transition"></button>`).join('')}
             </div>
             <span class="pitch-count absolute bottom-3 right-4 text-[10px] font-bold uppercase tracking-widest text-white/80"></span>
@@ -218,6 +220,7 @@ function mountImageSlider(box, images, color = '#fece00', title = '') {
     const track = slider.querySelector('.pitch-track');
     const show = (i) => {
         index = Math.max(0, Math.min(images.length - 1, i));
+        slider.pitchCurrent = images[index];
         track.style.transform = `translateX(-${index * 100}%)`;
         slider.querySelector('[data-step="-1"]').disabled = index === 0;
         slider.querySelector('[data-step="1"]').disabled = index === images.length - 1;
@@ -226,6 +229,11 @@ function mountImageSlider(box, images, color = '#fece00', title = '') {
             d.style.width = n === index ? '1.25rem' : '';
         });
         slider.querySelector('.pitch-count').textContent = `${index + 1} / ${images.length}`;
+        slider.querySelector('.pitch-dots').classList.toggle('hidden', isVideo(images[index]));
+        slider.querySelector('.pitch-count').classList.toggle('hidden', isVideo(images[index]));
+        track.querySelectorAll('video').forEach(v => v.pause());
+        const video = track.children[index];
+        if (video.tagName === 'VIDEO') video.play().catch(() => {});
     };
     slider.addEventListener('click', (e) => {
         const step = e.target.closest('[data-step]');
@@ -235,7 +243,7 @@ function mountImageSlider(box, images, color = '#fece00', title = '') {
     });
     // Swipe on touch screens
     let startX = null;
-    slider.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+    slider.addEventListener('pointerdown', (e) => { startX = e.target.tagName === 'VIDEO' ? null : e.clientX; }); // dragging on the player is its timeline
     slider.addEventListener('pointerup', (e) => {
         if (startX === null) return;
         const dx = e.clientX - startX;
@@ -262,7 +270,7 @@ try {
 // showing, in the same order, and wrap around at the ends. The arrow keys do the same unless the case
 // has an image slider, which uses them for its images. getList returns the cases currently listed.
 // A copy button copies a link that opens the case on the cases page, to paste into a mail or a chat.
-// A download button saves the case's video, or else its pictures (several in one zip); Programmatic results
+// A download button saves the case's video, or else its pictures (several in one zip), or the slide being shown when a case has both; Programmatic results
 // slides are saved as PNG, the photo with the graphics on top.
 function initCaseNav(getList) {
     const modal = document.getElementById('caseDetailModal');
@@ -405,6 +413,12 @@ const loadZip = () => zipLib || (zipLib = new Promise((resolve, reject) => {
     document.head.appendChild(s);
 }));
 async function downloadCase(c) {
+    // Pictures and a video in one slider: save the slide being shown (a results slide as PNG)
+    const shown = document.querySelector('#caseDetailModal:not(.hidden) .pitch-slider')?.pitchCurrent;
+    if (c.video && c.images?.includes(c.video) && shown && shown !== c.video) {
+        const f = await caseFile(shown);
+        return saveBlob(f.blob, f.name);
+    }
     // A video on this site downloads straight away
     if (c.video && !/^https?:/.test(c.video)) {
         const a = Object.assign(document.createElement('a'), { href: c.video, download: fileName(c.video) });
