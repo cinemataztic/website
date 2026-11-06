@@ -156,6 +156,61 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "kraeftensbekaempelse-quizshow",
+        title: "Kræftens Bekæmpelse",
+        client: "Kræftens Bekæmpelse",
+        category: "CineGame",
+        gameType: "Quizshow",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Kr%C3%A6ftensBek%C3%A6mpelse_Quiz_CutDown.mp4",
+        description: "Quizshow, a CineGame for Kræftens Bekæmpelse."
+    },
+    {
+        id: "bepanthen-quizshow",
+        title: "Bepanthen",
+        client: "Bepanthen",
+        category: "CineGame",
+        gameType: "Quizshow",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Bepanthern_QuizshowUCI_DE_1.mov",
+        description: "Quizshow, a CineGame for Bepanthen in German cinemas."
+    },
+    {
+        id: "nordea-quizshow",
+        title: "Nordea",
+        client: "Nordea",
+        category: "CineGame",
+        gameType: "Quizshow",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/UpdatedNordeaQuizFI-Recording.mp4",
+        description: "Quizshow, a CineGame for Nordea in Finnish cinemas."
+    },
+    {
+        id: "tryg-quizshow",
+        title: "Tryg",
+        client: "Tryg",
+        category: "CineGame",
+        gameType: "Quizshow",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Tryg_quizshow_dk_6.mp4",
+        description: "Quizshow, a CineGame for Tryg in Danish cinemas."
+    },
+    {
+        id: "teknicar-quizshow",
+        title: "Teknicar",
+        client: "Teknicar",
+        category: "CineGame",
+        gameType: "Quizshow",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Teckikcar_%202026_%20build%2027.mov",
+        description: "Quizshow, a CineGame for Teknicar in Danish cinemas in 2026."
+    },
+    {
         id: "boozt-wheel",
         title: "Boozt",
         client: "Boozt",
@@ -662,11 +717,11 @@ const siteCases = [
         title: "TV2 Play – Join the fun",
         client: "TV2 Play",
         category: "CineGame",
-        gameType: "Quiz",
+        gameType: "Quizshow",
         mediaType: "video",
         cover: "assets/cases/tv2-play.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/TV2play_2023_dk.mp4",
-        description: "A quiz game for TV2 Play."
+        description: "A quizshow game for TV2 Play."
     },
     {
         id: "mcd",

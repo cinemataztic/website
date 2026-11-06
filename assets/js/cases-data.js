@@ -71,6 +71,10 @@ const caseLogos = {
     "Lapsimessut": { src: "assets/logos/lapsimessut-white.png" }, // logo from lapsimessut.messukeskus.com
     "HelloFresh": { src: "assets/logos/hellofresh-white.png" }, // from seeklogo.com, made white on transparent
     "Frezza": { src: "assets/logos/frezza-white.png" }, // supplied by the user, made white on transparent
+    "Kræftens Bekæmpelse": { src: "assets/logos/kraeftensbekaempelse.svg" }, // logo from cancer.dk
+    "Nordea": { src: "assets/logos/nordea.svg" }, // Wikimedia Commons, File:Nordea 201x logo.svg
+    "Bepanthen": { src: "assets/logos/bepanthen-white.png" }, // supplied by the user, made white on transparent
+    "Teknicar": { src: "assets/logos/teknicar-white.png" }, // supplied by the user, the name cut out of a white badge
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },
     "Viking Line": { src: "assets/logos/vikingline.svg" }, // Wikimedia Commons, File:Viking Line wordmark.svg
