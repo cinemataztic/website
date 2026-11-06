@@ -155,8 +155,19 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "matkahuolto-experience",
+        title: "Matkahuolto",
+        client: "Matkahuolto",
+        category: "CineGame",
+        gameType: "Experience",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Matkahoulto_FI_Recording_3.mov",
+        description: "Experience, a CineGame for Matkahuolto in Finnish cinemas."
+    },
+    {
         id: "liikenneturva-experience",
-        title: "Experience",
+        title: "Liikenneturva",
         client: "Liikenneturva",
         category: "CineGame",
         gameType: "Experience",
@@ -167,7 +178,7 @@ const siteCases = [
     },
     {
         id: "pick-up-arcade",
-        title: "Arcade",
+        title: "PICK-UP",
         client: "PICK-UP",
         category: "CineGame",
         gameType: "Arcade",
@@ -178,7 +189,7 @@ const siteCases = [
     },
     {
         id: "terveystalo-shooter",
-        title: "Shooter",
+        title: "Terveystalo",
         client: "Terveystalo",
         category: "CineGame",
         gameType: "Shooter",
@@ -189,7 +200,7 @@ const siteCases = [
     },
     {
         id: "apotekets-shuffle",
-        title: "Shuffle",
+        title: "Apotekets",
         client: "Apotekets",
         category: "CineGame",
         gameType: "Shuffle",
@@ -200,7 +211,7 @@ const siteCases = [
     },
     {
         id: "knorr-shuffle",
-        title: "Shuffle",
+        title: "Knorr",
         client: "Knorr",
         category: "CineGame",
         gameType: "Shuffle",
@@ -211,7 +222,7 @@ const siteCases = [
     },
     {
         id: "politiken-quiz",
-        title: "Quiz",
+        title: "Politiken",
         client: "Politiken",
         category: "CineGame",
         gameType: "Quiz",
@@ -222,7 +233,7 @@ const siteCases = [
     },
     {
         id: "vikingline-shuffle",
-        title: "Shuffle",
+        title: "Viking Line",
         client: "Viking Line",
         category: "CineGame",
         gameType: "Shuffle",
@@ -233,7 +244,7 @@ const siteCases = [
     },
     {
         id: "spiderman-shuffle",
-        title: "Shuffle",
+        title: "Spider-Man",
         client: "Spider-Man",
         category: "CineGame",
         gameType: "Shuffle",
@@ -244,7 +255,7 @@ const siteCases = [
     },
     {
         id: "tui-quizshow",
-        title: "Quizshow",
+        title: "TUI",
         client: "TUI",
         category: "CineGame",
         gameType: "Quizshow",

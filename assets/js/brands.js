@@ -49,6 +49,7 @@ const siteBrands = [
     { name: "Terveystalo", logo: "assets/logos/terveystalo.svg" },
     { name: "PICK-UP", logo: "assets/logos/pickup-white.png" },
     { name: "Liikenneturva", logo: "assets/logos/liikenneturva.svg" },
+    { name: "Matkahuolto", logo: "assets/logos/matkahuolto.svg", badge: true },
     { name: "REDyPLAY", logo: "assets/logos/redyplay.png", badge: true },
     { name: "Danone", logo: "assets/logos/danone.png" },
     { name: "The Home Guard", logo: "assets/logos/hjv.png" },
