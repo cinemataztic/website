@@ -156,6 +156,61 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "gonordic-simon",
+        title: "Go Nordic Cruiseline",
+        client: "Go Nordic Cruiseline",
+        category: "CineGame",
+        gameType: "Simon",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/alivina_simon_8.mp4",
+        description: "Simon, a CineGame for Go Nordic Cruiseline in Danish cinemas."
+    },
+    {
+        id: "lapsimessut-simon",
+        title: "Lapsimessut",
+        client: "Lapsimessut",
+        category: "CineGame",
+        gameType: "Simon",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Lapsimessut_Simon_FI_Recording_5.mov",
+        description: "Simon, a CineGame for Lapsimessut in Finnish cinemas."
+    },
+    {
+        id: "frezza-simon",
+        title: "Frezza",
+        client: "Frezza",
+        category: "CineGame",
+        gameType: "Simon",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Frezza_Recording_Week13_Translated_Winner_H.264.mp4",
+        description: "Simon, a CineGame for Frezza."
+    },
+    {
+        id: "hellofresh-simon",
+        title: "HelloFresh",
+        client: "HelloFresh",
+        category: "CineGame",
+        gameType: "Simon",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/HelloFresh_Simon_Recording_3_DE.mov",
+        description: "Simon, a CineGame for HelloFresh in German cinemas."
+    },
+    {
+        id: "dfds-simon",
+        title: "DFDS",
+        client: "DFDS",
+        category: "CineGame",
+        gameType: "Simon",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/DFDS_Simon_Recording_6.mov",
+        description: "Simon, a CineGame for DFDS."
+    },
+    {
         id: "ferdifuchs-water-power",
         title: "FerdiFuchs Water Power",
         client: "FerdiFuchs",

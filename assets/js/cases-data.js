@@ -66,6 +66,10 @@ const caseLogos = {
     "Metropolia": { src: "assets/logos/metropolia.svg" }, // Wikimedia Commons, File:Metropolia-logo.svg
     "Löfbergs": { src: "assets/logos/lofbergs-white.png" }, // from seeklogo.com, made white on transparent
     "Anaconda - The Movie": { src: "assets/logos/anaconda-white.png" }, // supplied by the user, made white on transparent
+    "Go Nordic Cruiseline": { src: "assets/logos/gonordic.svg" }, // logo from gonordiccruiseline.dk
+    "Lapsimessut": { src: "assets/logos/lapsimessut-white.png" }, // logo from lapsimessut.messukeskus.com
+    "HelloFresh": { src: "assets/logos/hellofresh-white.png" }, // from seeklogo.com, made white on transparent
+    "Frezza": { src: "assets/logos/frezza-white.png" }, // supplied by the user, made white on transparent
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },
     "Viking Line": { src: "assets/logos/vikingline.svg" }, // Wikimedia Commons, File:Viking Line wordmark.svg
