@@ -134,6 +134,36 @@
         #brandWall.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         @media (min-width: 640px) { #brandWall.grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         #brandWall.grid.brand-wall--big { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+        /* News pill: starts as the word News, which gives way to the headline as the pill grows. To change the news, edit the link in the page */
+        @property --news-angle { syntax: '<angle>'; inherits: true; initial-value: 0deg; }
+        @keyframes news-spin { to { --news-angle: 360deg; } }
+        .news-pill { --news-colours: conic-gradient(from var(--news-angle), #f869b9, #fea917, #fece00, #6ceec4, #3dc0c8, #f869b9); position: fixed; right: 20px; bottom: 20px; z-index: 40; max-width: calc(100vw - 32px); border-radius: 999px; opacity: 0; transform: translateY(12px); transition: opacity 300ms, transform 300ms; animation: news-spin 4s linear infinite; }
+        /* The colours run around the edge and glow softly behind it, in the site's product colours */
+        .news-pill::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--news-colours); filter: blur(12px); opacity: 0.55; }
+        .news-pill__box { display: flex; align-items: center; min-width: 0; border: 2px solid transparent; border-radius: inherit; background: linear-gradient(#5b5b59, #5b5b59) padding-box, var(--news-colours) border-box; color: rgba(255, 255, 255, 0.87); }
+        .news-pill.is-in { opacity: 1; transform: none; }
+        .news-pill.is-in.is-away { opacity: 0; transform: translateY(12px); pointer-events: none; }
+        .news-pill a { display: flex; align-items: center; min-width: 0; padding: 12px 20px; font-size: 14px; font-weight: 600; line-height: 1.2; }
+        .news-pill b { max-width: 60px; overflow: hidden; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; transition: max-width 500ms, opacity 200ms; }
+        .news-pill.is-open b { max-width: 0; opacity: 0; }
+        .news-pill__grow { display: grid; grid-template-columns: 0fr; min-width: 0; transition: grid-template-columns 700ms cubic-bezier(0.16, 1, 0.3, 1); }
+        .news-pill.is-open .news-pill__grow { grid-template-columns: 1fr; }
+        .news-pill__grow > span { display: flex; align-items: center; gap: 8px; min-width: 0; overflow: hidden; white-space: nowrap; }
+        .news-pill__grow i { font-size: 12px; transition: transform 200ms; }
+        .news-pill a:hover .news-pill__grow i { transform: translateX(3px); }
+        .news-pill__text { overflow: hidden; text-overflow: ellipsis; }
+        .news-pill button { display: none; width: 36px; height: 36px; margin-right: 6px; margin-left: -12px; flex: none; align-items: center; justify-content: center; border-radius: 50%; font-size: 13px; transition: background-color 150ms; }
+        .news-pill.is-open button { display: flex; }
+        .news-pill button:hover { background: rgba(255, 255, 255, 0.15); }
+        /* Phones: smaller and without the arrow, so the whole headline fits */
+        @media (max-width: 480px) {
+            .news-pill { right: 12px; bottom: 12px; max-width: calc(100vw - 24px); }
+            .news-pill a { padding: 11px 12px; font-size: 12px; }
+            .news-pill b { font-size: 10px; }
+            .news-pill__grow i { display: none; }
+            .news-pill button { width: 30px; height: 30px; margin-left: -6px; margin-right: 4px; }
+        }
+        @media (prefers-reduced-motion: reduce) { .news-pill, .news-pill__grow { transition: none; animation: none; } }
         /* Menu sits on the yellow hero: yellow bar with dark text while the hero is in view */
         header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
         header.on-hero { background-color: #fece00 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
@@ -515,6 +545,17 @@
     </div>
 
     <!-- FOOTER -->
+    <!-- NEWS: change the link and the text here; remove the block when there is no news -->
+    <div id="newsPill" class="news-pill">
+      <div class="news-pill__box">
+        <a href="cases.html?case=redyplay">
+            <b>News</b>
+            <span class="news-pill__grow"><span><span class="news-pill__text">Brand new collector's game for Germany</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></span>
+        </a>
+        <button type="button" aria-label="Close news"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+    </div>
+
     <footer class="bg-black border-t border-brand-border text-sm text-gray-500">
         <!-- LET'S TALK: same sidebar layout as the page sections -->
         <div class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28 border-b border-brand-border">
@@ -704,6 +745,24 @@ const MAX_FEATURED = 9;
             })(0);
             return best.map(k => groups[k].shift());
         }
+
+        // --- NEWS PILL ---
+        // Comes in after the intro as the word News, then grows. It leaves when you scroll down and returns at the very
+        // top of the page. Closing it lasts until the browser tab is closed.
+        (function initNewsPill() {
+            const pill = document.getElementById('newsPill');
+            if (!pill) return;
+            try { if (sessionStorage.getItem('newsClosed')) { pill.remove(); return; } } catch (e) { /* storage unavailable */ }
+            const follow = () => pill.classList.toggle('is-away', window.scrollY > 10);
+            window.addEventListener('scroll', follow, { passive: true });
+            follow();
+            setTimeout(() => pill.classList.add('is-in'), 2200);
+            setTimeout(() => pill.classList.add('is-open'), 3000);
+            pill.querySelector('button').addEventListener('click', () => {
+                pill.remove();
+                try { sessionStorage.setItem('newsClosed', '1'); } catch (e) { /* storage unavailable */ }
+            });
+        })();
 
         // --- FEATURED WORK ---
         const categories = ['All', 'CineGame', 'Programmatic', 'CineFun']; // Leadsite cases only show under All; Pitch cases never on the front page
