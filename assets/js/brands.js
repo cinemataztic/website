@@ -59,7 +59,7 @@ const siteBrands = [
     { name: "Tuborg", logo: "assets/logos/tuborg.png" },
     { name: "Liiga", logo: "assets/logos/liiga.png", badge: true },
     { name: "Toms", logo: "assets/logos/toms.svg" },
-    { name: "Battery", logo: "assets/logos/battery.png" },
+    { name: "Battery", logo: "assets/logos/battery-white.png" },
     { name: "Bet25", logo: "assets/logos/bet25.svg" },
     { name: "Sonic", logo: "assets/logos/sonic.png" },
     { name: "Trolls World Tour", logo: "assets/logos/trolls.png" },

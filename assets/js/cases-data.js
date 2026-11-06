@@ -52,7 +52,7 @@ const caseLogos = {
     "Ase": { src: "assets/logos/ase.svg" }, // logos below from the clients' own websites
     "Royal Copenhagen": { src: "assets/logos/royal-copenhagen.svg" },
     "Liiga": { src: "assets/logos/liiga.png" },
-    "Battery": { src: "assets/logos/battery.png" },
+    "Battery": { src: "assets/logos/battery-white.png" }, // supplied by the user, made white on transparent
     "Bet25": { src: "assets/logos/bet25.svg" },
     "Tryg": { src: "assets/logos/tryg.svg" }, // Wikimedia Commons, File:Tryg logo.svg
     "Toms": { src: "assets/logos/toms.svg" }, // Wikimedia Commons, File:Toms.svg
