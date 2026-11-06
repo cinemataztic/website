@@ -151,7 +151,8 @@ function caseCover(c) {
     let logo = c.logo ? { src: c.logo } : caseLogos[c.client];
     if (logo && NAME_INSTEAD_OF_LOGO.has(logo.src)) logo = null;
     const name = escapeCoverText(c.client).replace(/\s*\(demo\)$/i, '');
-    const preview = c.category === 'Programmatic' ? c.cover.replace('-results.svg', '-card.svg') : c.preview; // Programmatic: the results in the shape of the card
+    // Programmatic: the results in the shape of the card. Without a clip: the first pictures of the gallery, one after the other
+    const preview = c.category === 'Programmatic' ? c.cover.replace('-results.svg', '-card.svg') : c.preview || (c.images || []).slice(0, 5).map(escapeCoverText).join('|');
     const bg = `<div class="case-logo-bg"${preview ? ` data-preview="${preview}"` : ''}></div>`;
     // logoBox [x, y, w, h, image w, image h]: show only the visible part of a logo image with empty margins
     if (logo && c.logoBox) {
@@ -168,7 +169,7 @@ function caseCover(c) {
 
 // --- VIDEO PREVIEW ON THE CARD ---
 // With the mouse on a card, its short clip (`preview` in cases.js) plays over the logo, without sound; a Programmatic card
-// shows its results across the whole card instead. The short wait
+// shows its results across the whole card instead, and a card with a gallery shows the pictures in turn. The short wait
 // keeps cards that only pass under the mouse, as on the moving cases page, from starting. Screens without a mouse keep the logo.
 (function () {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -179,6 +180,8 @@ function caseCover(c) {
             -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent); mask-image: linear-gradient(to bottom, #000 80%, transparent); }
         .case-preview.is-on { opacity: 1; }
         img.case-preview { height: 100%; z-index: 1; -webkit-mask-image: none; mask-image: none; }
+        .case-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 400ms; }
+        .case-preview img.is-on { opacity: 1; }
     `;
     document.head.appendChild(style);
     let card = null, video = null, timer = 0;
@@ -189,9 +192,26 @@ function caseCover(c) {
         const old = video;
         video = null;
         old.classList.remove('is-on');
+        clearInterval(old.turn);
         setTimeout(() => { old.pause?.(); old.remove(); }, 250);
     }
+    function startGallery(bg) {
+        const shown = video = document.createElement('div');
+        shown.className = 'case-preview';
+        const pictures = bg.dataset.preview.split('|').map(src => Object.assign(new Image(), { src, alt: '' }));
+        shown.append(...pictures);
+        let at = 0;
+        pictures[0].addEventListener('load', () => { pictures[0].classList.add('is-on'); shown.classList.add('is-on'); }, { once: true });
+        if (pictures.length > 1) shown.turn = setInterval(() => {
+            if (!pictures[(at + 1) % pictures.length].complete) return;
+            pictures[at].classList.remove('is-on');
+            at = (at + 1) % pictures.length;
+            pictures[at].classList.add('is-on');
+        }, 1500);
+        bg.nextElementSibling.after(shown);
+    }
     function start(bg) {
+        if (bg.dataset.preview.includes('|') || /\.(jpe?g|png|webp)$/i.test(bg.dataset.preview)) return startGallery(bg);
         const clip = /\.mp4$/.test(bg.dataset.preview);
         video = clip ? Object.assign(document.createElement('video'), { muted: true, loop: true, playsInline: true }) : new Image();
         const shown = video;
