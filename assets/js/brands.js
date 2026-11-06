@@ -61,6 +61,7 @@ const siteBrands = [
     { name: "Bepanthen", logo: "assets/logos/bepanthen-white.png" },
     { name: "Nordea", logo: "assets/logos/nordea.svg" },
     { name: "Teknicar", logo: "assets/logos/teknicar-white.png" },
+    { name: "3F", logo: "assets/logos/3f.png" },
     { name: "Anaconda - The Movie", logo: "assets/logos/anaconda-white.png" },
     { name: "REDyPLAY", logo: "assets/logos/redyplay.png", badge: true },
     { name: "Danone", logo: "assets/logos/danone.png" },

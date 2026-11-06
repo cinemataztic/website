@@ -156,6 +156,17 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "3f-swipehero",
+        title: "3F",
+        client: "3F",
+        category: "CineGame",
+        gameType: "Swipe Hero",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/3F_SwipeHero_Recording_1_DK.mov",
+        description: "Swipe Hero, a CineGame for 3F in Danish cinemas."
+    },
+    {
         id: "mms-wheel",
         title: "M&M's",
         client: "M&M's",

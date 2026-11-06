@@ -76,6 +76,7 @@ const caseLogos = {
     "Nordea": { src: "assets/logos/nordea.svg" }, // Wikimedia Commons, File:Nordea 201x logo.svg
     "Bepanthen": { src: "assets/logos/bepanthen-white.png" }, // supplied by the user, made white on transparent
     "Teknicar": { src: "assets/logos/teknicar-white.png" }, // supplied by the user, the name cut out of a white badge
+    "3F": { src: "assets/logos/3f.png" }, // logo from 3f.dk
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },
     "Viking Line": { src: "assets/logos/vikingline.svg" }, // Wikimedia Commons, File:Viking Line wordmark.svg
