@@ -155,6 +155,61 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "apotekets-shuffle",
+        title: "Shuffle",
+        client: "Apotekets",
+        category: "CineGame",
+        gameType: "Shuffle",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Apotekets_CutDown_DK.mp4",
+        description: "Shuffle, a CineGame for Apotekets in Danish cinemas."
+    },
+    {
+        id: "knorr-shuffle",
+        title: "Shuffle",
+        client: "Knorr",
+        category: "CineGame",
+        gameType: "Shuffle",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/KnorrShuffleCutdown.mp4",
+        description: "Shuffle, a CineGame for Knorr."
+    },
+    {
+        id: "politiken-shuffle",
+        title: "Shuffle",
+        client: "Politiken",
+        category: "CineGame",
+        gameType: "Shuffle",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Politikken_SimpleQuiz_Recording_2_DK.mov",
+        description: "Shuffle, a CineGame for Politiken in Danish cinemas."
+    },
+    {
+        id: "vikingline-shuffle",
+        title: "Shuffle",
+        client: "Viking Line",
+        category: "CineGame",
+        gameType: "Shuffle",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Viking_shuffle_FI_2026_3.mov",
+        description: "Shuffle, a CineGame for Viking Line in Finnish cinemas in 2026."
+    },
+    {
+        id: "spiderman-shuffle",
+        title: "Shuffle",
+        client: "Spider-Man",
+        category: "CineGame",
+        gameType: "Shuffle",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Spiderman_EN_Recording_01.mov",
+        description: "Shuffle, a CineGame for Spider-Man."
+    },
+    {
         id: "tui-quizshow",
         title: "Quizshow",
         client: "TUI",

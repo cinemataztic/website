@@ -58,6 +58,10 @@ const caseLogos = {
     "Toms": { src: "assets/logos/toms.svg" }, // Wikimedia Commons, File:Toms.svg
     "Santander": { src: "assets/logos/santander.svg" }, // Wikimedia Commons, File:Banco Santander Logotipo.svg
     "ODEON": { src: "assets/logos/odeon.svg" }, // Wikimedia Commons, File:Odeon logo.svg
+    "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
+    "Politiken": { src: "assets/logos/politiken.svg", white: true },
+    "Viking Line": { src: "assets/logos/vikingline.svg" }, // Wikimedia Commons, File:Viking Line wordmark.svg
+    "Spider-Man": { src: "assets/logos/spiderman.svg", scale: 1.4 }, // Wikimedia Commons, File:Spider-Man-Logo.svg
     "TUI": { src: "assets/logos/tui.svg" }, // simple-icons
     "Iberdrola": { src: "assets/logos/iberdrola.svg" }, // Wikimedia Commons, File:Logo Iberdrola (2023).svg
     "Kirppu": { src: "assets/logos/kirppu.svg" }, // logo from kirppu.dk (the version for dark backgrounds)
@@ -112,7 +116,7 @@ const NAME_INSTEAD_OF_LOGO = new Set(['assets/cases/pitch/logo_kims.png']);
 
 // Badge logos (a name on a filled shape) shown as a white shape with the name cut out
 const KNOCKOUT_LOGOS = new Set([
-    'assets/logos/ase.svg',
+    'assets/logos/ase.svg', 'assets/logos/knorr.svg',
     'assets/logos/lego.svg', 'assets/logos/specsavers.svg', 'assets/logos/arla.svg', 'assets/logos/fanta.svg', 'assets/logos/ikea.svg',
     'assets/logos/redyplay.png', 'assets/logos/tv2play.png',
     'assets/logos/fazer.svg', 'assets/logos/benjerry.svg', 'assets/logos/mentos.svg', 'assets/logos/droetker.svg', 'assets/logos/oister.svg', 'assets/logos/tryg.svg',
