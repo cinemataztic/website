@@ -102,7 +102,7 @@ const caseLogos = {
     const style = document.createElement('style');
     style.textContent = `
         .case-logo { position: absolute; left: 0; right: 0; top: 0; height: 60%; display: flex; align-items: center; justify-content: center; padding: 0 14%; }
-        .case-logo-bg { position: absolute; inset: 0; background: #232323; }
+        .case-logo-bg { position: absolute; inset: 0; background: #282828; }
         .case-logo img { display: block; width: auto; height: 0; object-fit: contain; transition: transform 500ms; }
         .group:hover .case-logo img, .group:hover .case-logo span { transform: scale(1.05); }
         .case-logo-crop { position: relative; display: block; overflow: hidden; flex: none; transition: transform 500ms; }

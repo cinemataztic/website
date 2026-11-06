@@ -25,7 +25,7 @@
     <!-- Page transition (same as the old site): loads first, so arriving pages start covered -->
     <script src="assets/js/page-transition.js?v=3"></script>
     <!-- Menu logo turns into the round mark when scrolling -->
-    <script src="assets/js/site-header.js?v=18" defer></script>
+    <script src="assets/js/site-header.js?v=19" defer></script>
     <style>
         /* Premium buttons: light from above, a soft drop shadow, and a light sweep on hover */
         .btn-shine {
@@ -71,9 +71,9 @@
         }
         /* Menu sits on the orange hero: orange bar with dark text while the hero is in view */
         header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
-        header.on-hero { background-color: #fea917 !important; border-color: rgba(22, 25, 31, 0.12) !important; color: #16191f; }
+        header.on-hero { background-color: #fea917 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
         header.on-hero .text-white,
-        header.on-hero nav > a.text-brand-cyan { color: #16191f !important; }
+        header.on-hero nav > a.text-brand-cyan { color: #1a1a1a !important; }
         header.on-hero #mobileDrawer { color: rgba(255, 255, 255, 0.87); }
         /* Case cards: text sits on the image over a blur that fades in towards the bottom */
         .case-blur {
@@ -117,7 +117,7 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Tailwind CSS, built once for the whole site (classes from all pages and scripts) -->
-    <link rel="stylesheet" href="assets/css/site.css?v=4">
+    <link rel="stylesheet" href="assets/css/site.css?v=5">
 </head>
 </head>
 <body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
@@ -495,7 +495,7 @@
             for (let i = 0; i < SEGMENTS; i++) {
                 const a0 = (i / SEGMENTS) * Math.PI * 2 - Math.PI / 2, a1 = ((i + 1) / SEGMENTS) * Math.PI * 2 - Math.PI / 2;
                 const d = `M0,0 L${R * Math.cos(a0)},${R * Math.sin(a0)} A${R},${R} 0 0 1 ${R * Math.cos(a1)},${R * Math.sin(a1)} Z`;
-                const slice = el('path', { d, fill: i % 2 ? 'rgba(254, 169, 23, 0.35)' : ORANGE, stroke: '#1e222a', 'stroke-width': 2 });
+                const slice = el('path', { d, fill: i % 2 ? 'rgba(254, 169, 23, 0.35)' : ORANGE, stroke: '#282828', 'stroke-width': 2 });
                 slice.style.transition = 'fill 300ms linear';
                 wheel.append(slice);
                 slices.push({ slice, base: slice.getAttribute('fill') });
@@ -567,6 +567,6 @@
         })();
     </script>
     <!-- More products: the three other product cards, as the last section above the footer -->
-    <script src="assets/js/more-products.js?v=7" data-current="leadsite"></script>
+    <script src="assets/js/more-products.js?v=8" data-current="leadsite"></script>
 </body>
 </html>

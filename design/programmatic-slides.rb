@@ -86,7 +86,7 @@ def card_stat(x, y, value, label, size = 60)
     value
   end
   %(<g transform="translate(#{x} #{y})">
-    <rect width="340" height="205" rx="22" fill="#1e222a" fill-opacity="0.88" stroke="#2b303a" stroke-width="2"/>
+    <rect width="340" height="205" rx="22" fill="#282828" fill-opacity="0.88" stroke="#3a3a3a" stroke-width="2"/>
     <text x="30" y="106" fill="#3dc0c8" font-size="#{size}" font-weight="900" filter="url(#glow)">#{body}</text>
     <text x="30" y="166" fill="#9ca3af" font-size="23" font-weight="700" letter-spacing="3">#{label}</text>
   </g>)
@@ -100,7 +100,7 @@ CASES.each do |id, name, imp, vouchers, ctr, leads|
     <!-- Results for the #{esc.(name)} programmatic case in the shape of a case card -->
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" #{FONT}>
       <defs>
-        <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16191f" stop-opacity="0.8"/><stop offset="0.3" stop-color="#16191f" stop-opacity="0.15"/><stop offset="0.55" stop-color="#16191f" stop-opacity="0.35"/><stop offset="1" stop-color="#16191f" stop-opacity="0.92"/></linearGradient>
+        <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1a1a" stop-opacity="0.8"/><stop offset="0.3" stop-color="#1a1a1a" stop-opacity="0.15"/><stop offset="0.55" stop-color="#1a1a1a" stop-opacity="0.35"/><stop offset="1" stop-color="#1a1a1a" stop-opacity="0.92"/></linearGradient>
         <filter id="glow" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
       <image href="data:image/jpeg;base64,#{data}" width="800" height="1000" preserveAspectRatio="xMidYMid slice"/>

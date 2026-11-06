@@ -623,7 +623,7 @@
             for (let i = 0; i < SEGMENTS; i++) {
                 const a0 = (i / SEGMENTS) * Math.PI * 2 - Math.PI / 2, a1 = ((i + 1) / SEGMENTS) * Math.PI * 2 - Math.PI / 2;
                 const d = `M0,0 L${R * Math.cos(a0)},${R * Math.sin(a0)} A${R},${R} 0 0 1 ${R * Math.cos(a1)},${R * Math.sin(a1)} Z`;
-                const slice = el('path', { d, fill: i % 2 ? 'rgba(254, 169, 23, 0.35)' : ORANGE, stroke: '#1e222a', 'stroke-width': 2 });
+                const slice = el('path', { d, fill: i % 2 ? 'rgba(254, 169, 23, 0.35)' : ORANGE, stroke: '#282828', 'stroke-width': 2 });
                 slice.style.transition = 'fill 300ms linear';
                 wheel.append(slice);
                 slices.push({ slice, base: slice.getAttribute('fill') });

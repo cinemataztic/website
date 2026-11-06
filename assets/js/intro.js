@@ -17,7 +17,7 @@
 
     const style = document.createElement('style');
     style.textContent = `
-        html.intro { background: #16191f !important; overflow: hidden; }
+        html.intro { background: #1a1a1a !important; overflow: hidden; }
         html.intro body { visibility: hidden; }
         .intro-splash { position: fixed; top: -10vh; left: 0; right: 0; height: 120vh; z-index: 10001; visibility: visible; pointer-events: none; }
         .intro-splash > div { position: absolute; inset: 0; transform: translateY(100%); animation: intro-up ${RISE}s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
