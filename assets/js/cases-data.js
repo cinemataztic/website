@@ -58,6 +58,7 @@ const caseLogos = {
     "Toms": { src: "assets/logos/toms.svg" }, // Wikimedia Commons, File:Toms.svg
     "Santander": { src: "assets/logos/santander.svg" }, // Wikimedia Commons, File:Banco Santander Logotipo.svg
     "ODEON": { src: "assets/logos/odeon.svg" }, // Wikimedia Commons, File:Odeon logo.svg
+    "Terveystalo": { src: "assets/logos/terveystalo.svg" }, // logo from terveystalo.com
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },
     "Viking Line": { src: "assets/logos/vikingline.svg" }, // Wikimedia Commons, File:Viking Line wordmark.svg

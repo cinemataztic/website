@@ -10,7 +10,7 @@
 //   category     CineGame, Programmatic, CineFun, Leadsite or Pitch
 //   gameType     CineGame only: the kind of game, for the second row of filters on the cases page:
 //                Quizshow, Quiz, Shuffle, Word game, Experience, Collector, Swipe Hero, Simon, Jumper,
-//                SportsBall, Find object, AR, Wheel of Fortune, Build, Arcade, Catch or Miscellaneous
+//                SportsBall, Find object, AR, Wheel of Fortune, Build, Arcade, Catch, Shooter or Miscellaneous
 //   mediaType    "video" or "image": what the popup shows first
 //   cover        picture used in the popup
 //   video        video link (may be "")
@@ -153,6 +153,17 @@ const siteCases = [
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Appotek.mov",
         description: "A CineFun game for Apotekets."
+    },
+    {
+        id: "terveystalo-shooter",
+        title: "Shooter",
+        client: "Terveystalo",
+        category: "CineGame",
+        gameType: "Shooter",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Terveystalo_Shooter_Recording_FI_5.mp4",
+        description: "Shooter, a CineGame for Terveystalo in Finnish cinemas."
     },
     {
         id: "apotekets-shuffle",
