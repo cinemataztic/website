@@ -570,7 +570,7 @@
 
     <script src="assets/js/cases.js?v=56"></script>
     <script src="assets/js/brands.js?v=26"></script>
-    <script src="assets/js/cases-data.js?v=76"></script>
+    <script src="assets/js/cases-data.js?v=77"></script>
     <script>
 // Cases come from assets/js/cases.js and the brand wall from assets/js/brands.js
 const MAX_FEATURED = 9;
@@ -599,8 +599,13 @@ const MAX_FEATURED = 9;
         }
 
         function fillBrandCell(cell, i) {
-            cell.title = siteBrands[i].name;
+            const { name } = siteBrands[i];
+            cell.title = name;
             cell.innerHTML = brandCellContent(i);
+            // A brand with cases links to them on the cases page
+            const term = searchText(name);
+            if (siteCases.some(c => c.category !== 'Pitch' && caseMatches(c, term))) cell.href = `cases.html?search=${encodeURIComponent(name)}`;
+            else cell.removeAttribute('href');
             // A broken logo link falls back to the name
             const img = cell.querySelector('img[data-brand-index]');
             if (!img) return;
@@ -614,7 +619,7 @@ const MAX_FEATURED = 9;
             wall.classList.toggle('brand-wall--big', bigBrandWall.matches);
             brandSlots = [...Array(Math.min(bigBrandWall.matches ? 12 : tabletBrandWall.matches ? 8 : 4, total)).keys()];
             wall.innerHTML = brandSlots.map(() => `
-                <div class="brand-cell group flex items-center justify-center aspect-[3/2] px-4 bg-brand-card border border-brand-border hover:border-brand-cyan transition-colors"></div>
+                <a class="brand-cell group flex items-center justify-center aspect-[3/2] px-4 bg-brand-card border border-brand-border hover:border-brand-cyan transition-colors"></a>
             `).join('');
             [...wall.children].forEach((cell, slot) => fillBrandCell(cell, brandSlots[slot]));
 

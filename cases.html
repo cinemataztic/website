@@ -302,7 +302,7 @@
     </footer>
 
     <script src="assets/js/cases.js?v=56"></script>
-    <script src="assets/js/cases-data.js?v=76"></script>
+    <script src="assets/js/cases-data.js?v=77"></script>
     <script>
         // --- CASE DATA ---
         // Every case, in the order of assets/js/cases.js
@@ -316,9 +316,10 @@
         // Under CineGame a second row narrows the list to one kind of game (gameType in cases.js)
         const gameTypes = ['Quizshow', 'Quiz', 'Shuffle', 'Word game', 'Experience', 'Collector', 'Swipe Hero', 'Simon', 'Jumper', 'SportsBall', 'Find object', 'AR', 'Wheel of Fortune', 'Build', 'Arcade', 'Catch', 'Shooter', 'Miscellaneous'];
         let currentGameType = 'All';
-        let currentSearch = '';
-        // Search ignores case, accents and punctuation, so "lofbergs" finds Löfbergs and "pickup" finds PICK-UP
-        const searchText = text => String(text).normalize('NFD').replace(/[^a-z0-9]/gi, '').toLowerCase();
+        // A brand on the front page links here with ?search=<name>
+        const requestedSearch = new URLSearchParams(window.location.search).get('search') || '';
+        document.getElementById('caseSearch').value = requestedSearch;
+        let currentSearch = searchText(requestedSearch);
         // Spreads each product evenly through the list, so All doesn't start with one product only; each keeps its own order
         function spreadProducts(list) {
             const seen = {}, totals = {};
@@ -335,7 +336,7 @@
                 const inCategory = allCases.filter(c => c.category === currentFilter);
                 return currentFilter === 'CineGame' && currentGameType !== 'All' ? inCategory.filter(c => c.gameType === currentGameType) : inCategory;
             };
-            return currentSearch ? inFilter().filter(c => searchText(`${c.client} ${c.title}`).includes(currentSearch)) : inFilter();
+            return currentSearch ? inFilter().filter(c => caseMatches(c, currentSearch)) : inFilter();
         }
         let cardStates = [];
 

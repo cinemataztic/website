@@ -167,6 +167,14 @@ function caseCover(c) {
     return `${bg}<div class="case-logo">${mark}</div>`;
 }
 
+// --- SEARCH BY CLIENT ---
+// Ignores case, accents and punctuation, so "lofbergs" finds Löfbergs and "pickup" finds PICK-UP. A number only
+// matches a whole word of the client name, so "3" finds 3 and 3 Mobile, but not 3F.
+const searchText = text => String(text).normalize('NFD').replace(/[^a-z0-9]/gi, '').toLowerCase();
+const caseMatches = (c, term) => /^\d+$/.test(term)
+    ? c.client.toLowerCase().split(/\s+/).includes(term)
+    : searchText(`${c.client} ${c.title}`).includes(term);
+
 // --- VIDEO PREVIEW ON THE CARD ---
 // With the mouse on a card, its short clip (`preview` in cases.js) plays over the logo, without sound; a Programmatic card
 // shows its results across the whole card instead, and a card with a gallery shows the pictures in turn. The short wait
