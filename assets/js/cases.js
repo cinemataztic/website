@@ -155,6 +155,17 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "pick-up-arcade",
+        title: "Arcade",
+        client: "PICK-UP",
+        category: "CineGame",
+        gameType: "Arcade",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/PickUp%20Arcade%20DE%20build%206.mp4",
+        description: "Arcade, a CineGame for PICK-UP in German cinemas."
+    },
+    {
         id: "terveystalo-shooter",
         title: "Shooter",
         client: "Terveystalo",
