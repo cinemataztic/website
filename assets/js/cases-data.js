@@ -60,6 +60,7 @@ const caseLogos = {
     "ODEON": { src: "assets/logos/odeon.svg" }, // Wikimedia Commons, File:Odeon logo.svg
     "Terveystalo": { src: "assets/logos/terveystalo.svg" }, // logo from terveystalo.com
     "PICK-UP": { src: "assets/logos/pickup-white.png" }, // from seeklogo.com, the letters made white on transparent
+    "Liikenneturva": { src: "assets/logos/liikenneturva.svg" }, // logo from liikenneturva.fi
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },
     "Viking Line": { src: "assets/logos/vikingline.svg" }, // Wikimedia Commons, File:Viking Line wordmark.svg

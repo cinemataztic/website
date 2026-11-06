@@ -155,6 +155,17 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "liikenneturva-experience",
+        title: "Experience",
+        client: "Liikenneturva",
+        category: "CineGame",
+        gameType: "Experience",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/TrafficSafetyCutdownPromo.mp4",
+        description: "Experience, a CineGame for Liikenneturva in Finnish cinemas."
+    },
+    {
         id: "pick-up-arcade",
         title: "Arcade",
         client: "PICK-UP",
@@ -903,24 +914,12 @@ const siteCases = [
         description: "A game for Oister on the big screen."
     },
     {
-        id: "trafficsafety",
-        featured: false,
-        title: "Traffic safety – The Traffic Safety Game",
-        client: "Traffic safety",
-        category: "CineGame",
-        gameType: "Miscellaneous",
-        mediaType: "video",
-        cover: "assets/cases/trafficsafety.jpg",
-        video: "https://storage.googleapis.com/cinemataztic-public/video/TrafficSafetyCutdownPromo.mp4",
-        description: "Stay safe in traffic."
-    },
-    {
         id: "visitgermany",
         featured: false,
         title: "Visit Germany – Green travel",
         client: "Visit Germany",
         category: "CineGame",
-        gameType: "Experience",
+        gameType: "Jumper",
         mediaType: "image",
         cover: "assets/cases/visitgermany.jpg",
         video: "",

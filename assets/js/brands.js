@@ -48,6 +48,7 @@ const siteBrands = [
     { name: "Spider-Man", logo: "assets/logos/spiderman.svg" },
     { name: "Terveystalo", logo: "assets/logos/terveystalo.svg" },
     { name: "PICK-UP", logo: "assets/logos/pickup-white.png" },
+    { name: "Liikenneturva", logo: "assets/logos/liikenneturva.svg" },
     { name: "REDyPLAY", logo: "assets/logos/redyplay.png", badge: true },
     { name: "Danone", logo: "assets/logos/danone.png" },
     { name: "The Home Guard", logo: "assets/logos/hjv.png" },
