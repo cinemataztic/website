@@ -14,6 +14,7 @@
 //   mediaType    "video" or "image": what the popup shows first
 //   cover        picture used in the popup
 //   video        video link (may be "")
+//   preview      short silent clip shown on the card under the mouse (made with tools/preview-clip.swift; may be left out)
 //   images       pictures for the popup's gallery (may be left out); a video link here becomes a slide with a player
 //   logo         optional: own logo instead of the one picked by client name
 //   description  text on the card and in the popup; \n starts a new line
@@ -40,6 +41,7 @@ const siteCases = [
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-ase-results.svg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/programmatic_ase_case_story.mp4",
+        preview: "assets/video/previews/prog-ase.mp4",
         images: ["assets/cases/programmatic/prog-ase-results.svg", "https://storage.googleapis.com/cinemataztic-public/video/programmatic_ase_case_story.mp4"],
         description: "150,000 impressions and 20,000 vouchers with a 11.5% CTR. Leads: call center."
     },
@@ -97,6 +99,7 @@ const siteCases = [
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-specsavers-results.svg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/programmatic_case_story_-_louis_nielsen_essence_media_final%20(1080p).mp4",
+        preview: "assets/video/previews/prog-specsavers.mp4",
         images: ["assets/cases/programmatic/prog-specsavers-results.svg", "https://storage.googleapis.com/cinemataztic-public/video/programmatic_case_story_-_louis_nielsen_essence_media_final%20(1080p).mp4"],
         description: "160,000 impressions and 20,000 vouchers with a 11.6% CTR. Leads: web bookings."
     },
@@ -132,6 +135,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Nordlys.mp4",
+        preview: "assets/video/previews/nordlys.mp4",
         description: "A CineFun game for Norlys."
     },
     {
@@ -143,6 +147,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Allianz.mp4",
+        preview: "assets/video/previews/allianz.mp4",
         description: "A CineFun game for Allianz."
     },
     {
@@ -153,6 +158,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Appotek.mov",
+        preview: "assets/video/previews/appotek.mp4",
         description: "A CineFun game for Apotekets."
     },
     {
@@ -164,6 +170,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/3F_SwipeHero_Recording_1_DK.mov",
+        preview: "assets/video/previews/3f-swipehero.mp4",
         description: "Swipe Hero, a CineGame for 3F in Danish cinemas."
     },
     {
@@ -175,6 +182,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/m%26m%20wheel%20of%20fortune%20Cinegame%20EN.mp4",
+        preview: "assets/video/previews/mms-wheel.mp4",
         description: "Wheel of Fortune, a CineGame for M&M's."
     },
     {
@@ -186,6 +194,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Kr%C3%A6ftensBek%C3%A6mpelse_Quiz_CutDown.mp4",
+        preview: "assets/video/previews/kraeftensbekaempelse-quizshow.mp4",
         description: "Quizshow, a CineGame for Kræftens Bekæmpelse."
     },
     {
@@ -197,6 +206,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Bepanthern_QuizshowUCI_DE_1.mov",
+        preview: "assets/video/previews/bepanthen-quizshow.mp4",
         description: "Quizshow, a CineGame for Bepanthen in German cinemas."
     },
     {
@@ -208,6 +218,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/UpdatedNordeaQuizFI-Recording.mp4",
+        preview: "assets/video/previews/nordea-quizshow.mp4",
         description: "Quizshow, a CineGame for Nordea in Finnish cinemas."
     },
     {
@@ -219,6 +230,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Tryg_quizshow_dk_6.mp4",
+        preview: "assets/video/previews/tryg-quizshow.mp4",
         description: "Quizshow, a CineGame for Tryg in Danish cinemas."
     },
     {
@@ -230,6 +242,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Teckikcar_%202026_%20build%2027.mov",
+        preview: "assets/video/previews/teknicar-quizshow.mp4",
         description: "Quizshow, a CineGame for Teknicar in Danish cinemas in 2026."
     },
     {
@@ -241,6 +254,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/no_wheel_boozt_kids_2021.mp4",
+        preview: "assets/video/previews/boozt-wheel.mp4",
         description: "Wheel of Fortune, a CineGame for Boozt in Norwegian cinemas in 2021."
     },
     {
@@ -252,6 +266,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/alivina_simon_8.mp4",
+        preview: "assets/video/previews/gonordic-simon.mp4",
         description: "Simon, a CineGame for Go Nordic Cruiseline in Danish cinemas."
     },
     {
@@ -263,6 +278,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Lapsimessut_Simon_FI_Recording_5.mov",
+        preview: "assets/video/previews/lapsimessut-simon.mp4",
         description: "Simon, a CineGame for Lapsimessut in Finnish cinemas."
     },
     {
@@ -274,6 +290,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Frezza_Recording_Week13_Translated_Winner_H.264.mp4",
+        preview: "assets/video/previews/frezza-simon.mp4",
         description: "Simon, a CineGame for Frezza."
     },
     {
@@ -285,6 +302,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/HelloFresh_Simon_Recording_3_DE.mov",
+        preview: "assets/video/previews/hellofresh-simon.mp4",
         description: "Simon, a CineGame for HelloFresh in German cinemas."
     },
     {
@@ -296,6 +314,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/DFDS_Simon_Recording_6.mov",
+        preview: "assets/video/previews/dfds-simon.mp4",
         description: "Simon, a CineGame for DFDS."
     },
     {
@@ -307,6 +326,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/FerdiFuchs_Jumper_DE_2025_Recording_4.mov",
+        preview: "assets/video/previews/ferdifuchs-water-power.mp4",
         description: "Jumper, a CineGame for FerdiFuchs Water Power in German cinemas in 2025."
     },
     {
@@ -319,6 +339,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Jumper_FerdiFuchsNinja_DE2026_CutDown.mp4",
+        preview: "assets/video/previews/ferdifuchs-ninja.mp4",
         description: "Jumper, a CineGame for FerdiFuchs Ninja in German cinemas in 2026."
     },
     {
@@ -330,6 +351,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Jumper_Metropolia_FI2026_CutDown.mp4",
+        preview: "assets/video/previews/metropolia-jumper.mp4",
         description: "Jumper, a CineGame for Metropolia in Finnish cinemas in 2026."
     },
     {
@@ -341,6 +363,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Lofbergs_Jumper_Recording_4_FI.mov",
+        preview: "assets/video/previews/lofbergs-jumper.mp4",
         description: "Jumper, a CineGame for Löfbergs in Finnish cinemas."
     },
     {
@@ -353,6 +376,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Battery_Cutdown_EN.mp4",
+        preview: "assets/video/previews/battery-jumper.mp4",
         description: "Jumper, a CineGame for Battery."
     },
     {
@@ -364,6 +388,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Anaconda_Jumper_EN2025_CutDown.mp4",
+        preview: "assets/video/previews/anaconda-jumper.mp4",
         description: "Jumper, a CineGame for Anaconda - The Movie from 2025."
     },
     {
@@ -375,6 +400,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Norlys_Cutdown_EN.mp4",
+        preview: "assets/video/previews/norlys-jumper.mp4",
         description: "Jumper, a CineGame for Norlys."
     },
     {
@@ -386,6 +412,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Matkahoulto_FI_Recording_3.mov",
+        preview: "assets/video/previews/matkahuolto-experience.mp4",
         description: "Experience, a CineGame for Matkahuolto in Finnish cinemas."
     },
     {
@@ -397,6 +424,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/TrafficSafetyCutdownPromo.mp4",
+        preview: "assets/video/previews/liikenneturva-experience.mp4",
         description: "Experience, a CineGame for Liikenneturva in Finnish cinemas."
     },
     {
@@ -408,6 +436,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/PickUp%20Arcade%20DE%20build%206.mp4",
+        preview: "assets/video/previews/pick-up-arcade.mp4",
         description: "Arcade, a CineGame for PICK-UP in German cinemas."
     },
     {
@@ -419,6 +448,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Terveystalo_Shooter_Recording_FI_5.mp4",
+        preview: "assets/video/previews/terveystalo-shooter.mp4",
         description: "Shooter, a CineGame for Terveystalo in Finnish cinemas."
     },
     {
@@ -430,6 +460,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Apotekets_CutDown_DK.mp4",
+        preview: "assets/video/previews/apotekets-shuffle.mp4",
         description: "Shuffle, a CineGame for Apotekets in Danish cinemas."
     },
     {
@@ -441,6 +472,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/KnorrShuffleCutdown.mp4",
+        preview: "assets/video/previews/knorr-shuffle.mp4",
         description: "Shuffle, a CineGame for Knorr."
     },
     {
@@ -452,6 +484,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Politikken_SimpleQuiz_Recording_2_DK.mov",
+        preview: "assets/video/previews/politiken-quiz.mp4",
         description: "Quiz, a CineGame for Politiken in Danish cinemas."
     },
     {
@@ -463,6 +496,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Viking_shuffle_FI_2026_3.mov",
+        preview: "assets/video/previews/vikingline-shuffle.mp4",
         description: "Shuffle, a CineGame for Viking Line in Finnish cinemas in 2026."
     },
     {
@@ -474,6 +508,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Spiderman_EN_Recording_01.mov",
+        preview: "assets/video/previews/spiderman-shuffle.mp4",
         description: "Shuffle, a CineGame for Spider-Man."
     },
     {
@@ -485,6 +520,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/TUI_QuizShow_Recording_DK_2.mov",
+        preview: "assets/video/previews/tui-quizshow.mp4",
         description: "Quizshow, a CineGame for TUI in Danish cinemas."
     },
     {
@@ -497,6 +533,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Iberdrola_Quiz_PT2026_CutDown.mp4",
+        preview: "assets/video/previews/iberdrola-quiz.mp4",
         description: "Quizshow, a CineGame for Iberdrola in Portuguese cinemas in 2026."
     },
     {
@@ -508,6 +545,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/MovieQuiz%20IE%20ODEON%202026Q4%20SimpleQuiz%20Recording%201.mp4",
+        preview: "assets/video/previews/odeon-quiz.mp4",
         description: "Quiz, a CineGame for ODEON cinemas in Ireland in 2026."
     },
     {
@@ -519,6 +557,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/CineGame_SportsBall_2026_IE_Recording_1.mov",
+        preview: "assets/video/previews/odeon-sportsball.mp4",
         description: "Sports Ball, a CineGame for ODEON cinemas in Ireland in 2026."
     },
     {
@@ -531,6 +570,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Collector_IKEA_EN2026_CutDown.mp4",
+        preview: "assets/video/previews/ikea-collector.mp4",
         description: "Collector, a CineGame for IKEA from 2026."
     },
     {
@@ -542,6 +582,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Kirppu_Collector_CutDown.mp4",
+        preview: "assets/video/previews/kirppu.mp4",
         description: "Collector, a CineGame for Kirppu."
     },
     {
@@ -553,6 +594,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/CineGame_Collector_DE_Recording_1.mov",
+        preview: "assets/video/previews/redyplay.mp4",
         description: "Collector, a CineGame for REDyPLAY."
     },
     {
@@ -564,6 +606,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/McDonalds_SwipeHero_SE2024_cutdown.mp4",
+        preview: "assets/video/previews/mcd-swipehero.mp4",
         description: "Swipe Hero, a CineGame for McDonald's in Swedish cinemas in 2024."
     },
     {
@@ -575,6 +618,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/danone_swipehero_FinishedGame.mp4",
+        preview: "assets/video/previews/danone-swipehero.mp4",
         description: "Swipe Hero, a CineGame for Danone."
     },
     {
@@ -586,6 +630,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/QuizShow_Hjemmev%C3%A6rnet_DK2025_CutDown.mp4",
+        preview: "assets/video/previews/homeguard.mp4",
         description: "Quizshow, a CineGame for the Danish Home Guard (Hjemmeværnet)."
     },
     {
@@ -598,6 +643,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/SwipeHero_Santander_DK2025_CutDown.mp4",
+        preview: "assets/video/previews/santander.mp4",
         description: "Swipe Hero, a CineGame for Santander in Danish cinemas in 2025."
     },
     {
@@ -610,6 +656,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/subway.png",
         video: "https://storage.googleapis.com/cinemataztic-public/video/SubwaySE2024-CutDown.mp4",
+        preview: "assets/video/previews/subway.mp4",
         description: "A jumper game built to drive footfall: jump, stay alive and get the Footlong."
     },
     {
@@ -622,6 +669,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/fanta-zip-and-ride.png",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Fanta-EN2024-Cutdown60sec%20(1).mp4",
+        preview: "assets/video/previews/fanta-zip-and-ride.mp4",
         description: "An experience game promoting a new Fanta flavour. Sit back and enjoy the ride."
     },
     {
@@ -634,6 +682,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/mms.svg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Mars_Cutdown_EN_1.mp4",
+        preview: "assets/video/previews/mars.mp4",
         description: "A jumper game on the big screen for M&M's and Extra."
     },
     {
@@ -646,6 +695,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/politikens-publisher.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Politiken_CutDown_DK_1.mp4",
+        preview: "assets/video/previews/politikens-publisher.mp4",
         description: "A children's book game for Politikens Forlag: follow the book."
     },
     {
@@ -658,6 +708,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/tivoli.png",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Tivoli_2023_DKmp4.mp4",
+        preview: "assets/video/previews/tivoli.mp4",
         description: "A 1:1 digital version of Tivoli's iconic roller coaster, built to capture a young audience and boost ticket sales for the 180-year-old Copenhagen amusement park."
     },
     {
@@ -670,6 +721,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/ikea.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/IKEA_FI2024cutdown.mp4",
+        preview: "assets/video/previews/ikea.mp4",
         description: "Meatball Friday comes to the big screen. Every Friday, with IKEA."
     },
     {
@@ -682,6 +734,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/3dk2024.png",
         video: "https://storage.googleapis.com/cinemataztic-public/video/3Mobil_QuizShow_Cutdown_DK.mp4",
+        preview: "assets/video/previews/3dk2024.mp4",
         description: "A quiz game that increases knowledge of 3's lightning fast 5G internet."
     },
     {
@@ -694,6 +747,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/fazer.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Fazer_swipehero_10.mp4",
+        preview: "assets/video/previews/fazer.mp4",
         description: "A swipe game for Fazer's re-mix MINI."
     },
     {
@@ -719,6 +773,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/jdsports.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/JDSports_2022_de.mp4",
+        preview: "assets/video/previews/jdsports.mp4",
         description: "Run baby, run: a runner game for JD Sports."
     },
     {
@@ -731,6 +786,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/samsung.png",
         video: "https://storage.googleapis.com/cinemataztic-public/video/SamsungGalaxy_English_Recording.mov",
+        preview: "assets/video/previews/samsung.mp4",
         description: "The runner game for the Galaxy S23 series. Every player got an extra chance to win a Samsung prize in a bonus wheel of fortune after the game."
     },
     {
@@ -743,6 +799,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/tv2-play.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/TV2play_2023_dk.mp4",
+        preview: "assets/video/previews/tv2-play.mp4",
         description: "A quizshow game for TV2 Play."
     },
     {
@@ -768,6 +825,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/tryg.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Tryg_2023_dk.mp4",
+        preview: "assets/video/previews/tryg.mp4",
         description: "Spin the wheel with Tryg."
     },
     {
@@ -806,6 +864,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/arla.jpg",
         video: "assets/video/cases/arla_findobject_web_18_skiplobby.mp4",
+        preview: "assets/video/previews/arla.mp4",
         description: "Each player gets a unique cow on their phone and has to find it on the cinema screen with a magnifying lens. The game brings ARLA's AR universe for children to the cinema."
     },
     {
@@ -818,6 +877,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/redbull.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/redbull_nologo.mp4",
+        preview: "assets/video/previews/redbull.mp4",
         description: "Guide your plane through the mountains, collect as many points as possible and avoid crashing."
     },
     {
@@ -830,6 +890,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/coke-x-mas.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Coke-cinemaarcade-DE-UK%20Gameplay.mp4",
+        preview: "assets/video/previews/coke-x-mas.mp4",
         description: "Five fun little Christmas games combined in one Coke holiday game."
     },
     {
@@ -842,6 +903,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/boozt.jpg",
         video: "assets/video/cases/boozt_shuffle_en_web_7.mp4",
+        preview: "assets/video/previews/boozt.mp4",
         description: "The Boozt.com Shuffle Game introduces five categories, one for each card. Each card presents both brand and product."
     },
     {
@@ -854,6 +916,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/liiga.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/liga_nologo.mp4",
+        preview: "assets/video/previews/liiga.mp4",
         description: "Team vs. team: sharpen your skates, select your team and win the trophy."
     },
     {
@@ -866,6 +929,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/fanta-halloween.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Fanta_simon_dk_13.mp4",
+        preview: "assets/video/previews/fanta-halloween.mp4",
         description: "Follow the scary one: a Halloween game for Fanta."
     },
     {
@@ -891,6 +955,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/new-can.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/cokenewcans_nologo.mp4",
+        preview: "assets/video/previews/new-can.mp4",
         description: "Find the words! The fastest player wins a Coke."
     },
     {
@@ -903,6 +968,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/pepsimax.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/PepsiHero_nologo.mp4",
+        preview: "assets/video/previews/pepsimax.mp4",
         description: "Hit the tones and win the prize: an ice cold Pepsi."
     },
     {
@@ -915,6 +981,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/cinerunner.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/CinemaRunner-EE.mp4",
+        preview: "assets/video/previews/cinerunner.mp4",
         description: "Get through the magical movie city."
     },
     {
@@ -940,6 +1007,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/ben-and-jerry.png",
         video: "https://storage.googleapis.com/cinemataztic-public/video/BenJerrry.mp4",
+        preview: "assets/video/previews/ben-and-jerry.mp4",
         description: "Developed with MindShare, the game ran simultaneously in all the Nordic countries and made Ben & Jerry's part of the cinema experience."
     },
     {
@@ -952,6 +1020,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/coke-maze-game.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Cokepackman_nologo.mp4",
+        preview: "assets/video/previews/coke-maze-game.mp4",
         description: "Survive the maze and get the prize."
     },
     {
@@ -1133,6 +1202,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/scream6.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/scream6_2023_dk.mp4",
+        preview: "assets/video/previews/scream6.mp4",
         description: "A game for the cinema release of Scream VI."
     },
     {
@@ -1145,6 +1215,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/oister.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Oister_2023_dk_9.mp4",
+        preview: "assets/video/previews/oister.mp4",
         description: "A game for Oister on the big screen."
     },
     {
@@ -1183,6 +1254,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/podimo-quiz-2024.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/PodimoDK2024-Cutdown.mp4",
+        preview: "assets/video/previews/podimo-quiz-2024.mp4",
         description: "Join the fun in Podimo's quiz show."
     },
     {
@@ -1195,6 +1267,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/matas.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Matas-Shuffle-DK-Cutdown.mp4",
+        preview: "assets/video/previews/matas.mp4",
         description: "A shuffle game celebrating Matas' 75th birthday."
     },
     {
@@ -1207,6 +1280,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/bundeswehr.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/GermanMinistryOfDefence_Quiz_build6.mp4",
+        preview: "assets/video/previews/bundeswehr.mp4",
         description: "A quiz game for Bundeswehr career counselling."
     },
     {
@@ -1219,6 +1293,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/specsavers.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Specsavers_Video_Cutdown.mp4",
+        preview: "assets/video/previews/specsavers.mp4",
         description: "Test your vision on the big screen."
     },
     {
@@ -1231,6 +1306,7 @@ const siteCases = [
         mediaType: "video",
         cover: "assets/cases/bookbeat.jpg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/BookBeat_Video_CutDown.mp4",
+        preview: "assets/video/previews/bookbeat.mp4",
         description: "A game for BookBeat."
     },
     // --- PITCH CASES (from cinemataztic.com/games/pitch) ---

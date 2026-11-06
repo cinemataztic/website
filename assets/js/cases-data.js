@@ -151,18 +151,61 @@ function caseCover(c) {
     let logo = c.logo ? { src: c.logo } : caseLogos[c.client];
     if (logo && NAME_INSTEAD_OF_LOGO.has(logo.src)) logo = null;
     const name = escapeCoverText(c.client).replace(/\s*\(demo\)$/i, '');
+    const bg = `<div class="case-logo-bg"${c.preview ? ` data-preview="${c.preview}"` : ''}></div>`;
     // logoBox [x, y, w, h, image w, image h]: show only the visible part of a logo image with empty margins
     if (logo && c.logoBox) {
         const [x, y, w, h, W, H] = c.logoBox;
-        return `<div class="case-logo-bg"></div><div class="case-logo"><span class="case-logo-crop" data-ratio="${w / h}">`
+        return `${bg}<div class="case-logo"><span class="case-logo-crop" data-ratio="${w / h}">`
             + `<img src="${logo.src}" alt="${name}" loading="lazy" onload="fitCaseLogo(this.closest('.case-logo').parentElement)" class="${logoClass(logo.src)}"`
             + ` style="width: ${W / w * 100}%; left: ${-x / w * 100}%; top: ${-y / h * 100}%"></span></div>`;
     }
     const mark = logo
         ? `<img ${logo.color ? `data-src="${logo.src}" data-color="${logo.color}"` : `src="${logo.src}"`} alt="${name}"${logo.scale ? ` data-scale="${logo.scale}"` : ''} loading="lazy" onload="fitCaseLogo(this.closest('.case-logo').parentElement)" class="${logoClass(logo.src)}">`
         : `<span>${name}</span>`;
-    return `<div class="case-logo-bg"></div><div class="case-logo">${mark}</div>`;
+    return `${bg}<div class="case-logo">${mark}</div>`;
 }
+
+// --- VIDEO PREVIEW ON THE CARD ---
+// With the mouse on a card, its short clip (`preview` in cases.js) plays over the logo, without sound. The short wait
+// keeps cards that only pass under the mouse, as on the moving cases page, from starting. Screens without a mouse keep the logo.
+(function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const style = document.createElement('style');
+    style.textContent = `
+        .case-preview { position: absolute; left: 0; top: 0; width: 100%; height: 60%; object-fit: cover; opacity: 0; pointer-events: none; transition: opacity 250ms;
+            -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent); mask-image: linear-gradient(to bottom, #000 80%, transparent); }
+        .case-preview.is-on { opacity: 1; }
+    `;
+    document.head.appendChild(style);
+    let card = null, video = null, timer = 0;
+    function stop() {
+        clearTimeout(timer);
+        card = null;
+        if (!video) return;
+        const old = video;
+        video = null;
+        old.classList.remove('is-on');
+        setTimeout(() => { old.pause(); old.remove(); }, 250);
+    }
+    function start(bg) {
+        video = Object.assign(document.createElement('video'), { src: bg.dataset.preview, muted: true, loop: true, playsInline: true, className: 'case-preview' });
+        const shown = video;
+        shown.addEventListener('playing', () => shown.classList.add('is-on'), { once: true });
+        bg.nextElementSibling.after(shown);
+        shown.play().catch(() => {});
+    }
+    document.addEventListener('pointerover', (e) => {
+        const next = e.target.closest?.('.group');
+        if (next === card) return;
+        stop();
+        const bg = next?.querySelector('[data-preview]');
+        if (!bg) return;
+        card = next;
+        timer = setTimeout(() => start(bg), 200);
+    });
+    document.documentElement.addEventListener('pointerleave', stop);
+})();
 
 // One-colour icons that the colour CDN does not have: fetch the SVG and paint it in the brand colour
 const colouredLogos = {};
