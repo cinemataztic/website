@@ -112,11 +112,15 @@
         /* Conveyor mode (set by JS): the window is pinned and cards are placed along the snake path */
         /* Search field in the sidebar; 16px text so phones don't zoom in on it */
         .case-search { position: relative; }
-        .case-search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; color: #9ca3af; pointer-events: none; }
-        .case-search input { width: 100%; padding: 10px 12px 10px 38px; background: #1e222a; border: 1px solid #2b303a; border-radius: 0; color: rgba(255, 255, 255, 0.87); font-size: 16px; line-height: 1.25; outline: none; transition: border-color 150ms; -webkit-appearance: none; appearance: none; }
+        .case-search > i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; color: #9ca3af; pointer-events: none; }
+        .case-search input { width: 100%; padding: 10px 44px 10px 38px; background: #1e222a; border: 1px solid #2b303a; border-radius: 0; color: rgba(255, 255, 255, 0.87); font-size: 16px; line-height: 1.25; outline: none; transition: border-color 150ms; -webkit-appearance: none; appearance: none; }
         .case-search input::placeholder { color: #9ca3af; }
         .case-search input:focus { border-color: #3dc0c8; }
-        .case-search input::-webkit-search-cancel-button { filter: invert(1); cursor: pointer; }
+        .case-search input::-webkit-search-cancel-button { display: none; }
+        /* The cross stays visible while there is a search, so it is clear that other clients are hidden */
+        .case-search button { position: absolute; right: 0; top: 0; bottom: 0; width: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #fece00; transition: color 150ms; }
+        .case-search button[hidden] { display: none; }
+        .case-search button:hover { color: rgba(255, 255, 255, 0.87); }
         .conveyor-on #conveyorWindow {
             position: sticky;
             top: 5rem;
@@ -190,6 +194,7 @@
                     <div class="case-search">
                         <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                         <input id="caseSearch" type="search" placeholder="Search client" aria-label="Search by client name" autocomplete="off" spellcheck="false">
+                        <button id="caseSearchClear" type="button" aria-label="Clear search" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
                     </div>
                     <div class="flex flex-wrap lg:flex-col lg:items-start gap-2" id="filterContainer">
                         <!-- Filter buttons populated by JS -->
@@ -388,8 +393,17 @@
             renderCasesGrid();
         }
 
+        const searchClear = document.getElementById('caseSearchClear');
+        searchClear.hidden = !requestedSearch;
+        searchClear.addEventListener('click', () => {
+            const input = document.getElementById('caseSearch');
+            input.value = '';
+            input.dispatchEvent(new Event('input'));
+            input.focus();
+        });
         document.getElementById('caseSearch').addEventListener('input', (e) => {
             currentSearch = searchText(e.target.value);
+            searchClear.hidden = !e.target.value;
             window.scrollTo({ top: 0, behavior: 'instant' });
             renderFilters();
             renderCasesGrid();
