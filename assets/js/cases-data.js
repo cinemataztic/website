@@ -468,7 +468,8 @@ async function downloadCase(c) {
     const style = document.createElement('style');
     style.textContent = `
         .roll { display: inline-flex; line-height: 1; }
-        .roll-col { display: inline-block; height: 1em; overflow: hidden; }
+        /* Extra room at the sides: the heavy digits are drawn wider than their own width and would be cut off */
+        .roll-col { display: inline-block; height: 1em; overflow: hidden; padding: 0 0.1em; margin: 0 -0.1em; }
         .roll-strip { display: block; will-change: transform; }
         .roll-strip > span { display: block; height: 1em; line-height: 1em; text-align: center; }
     `;
