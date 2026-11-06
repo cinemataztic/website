@@ -156,6 +156,17 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "mms-wheel",
+        title: "M&M's",
+        client: "M&M's",
+        category: "CineGame",
+        gameType: "Wheel of Fortune",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/m%26m%20wheel%20of%20fortune%20Cinegame%20EN.mp4",
+        description: "Wheel of Fortune, a CineGame for M&M's."
+    },
+    {
         id: "kraeftensbekaempelse-quizshow",
         title: "Kræftens Bekæmpelse",
         client: "Kræftens Bekæmpelse",

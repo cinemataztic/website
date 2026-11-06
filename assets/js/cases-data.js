@@ -12,6 +12,7 @@ const caseLogos = {
     "Subway": { src: "assets/logos/subway.svg" },
     "Fanta": { src: "assets/logos/fanta.svg" },
     "M&M's + Extra": { src: "assets/logos/mms.svg", outline: true },
+    "M&M's": { src: "assets/logos/mms.svg", outline: true },
     "Politikens Forlag": { src: "assets/logos/politiken.svg", white: true },
     "Tivoli": { src: "assets/logos/tivoli.svg", white: true },
     "IKEA": { src: "assets/logos/ikea.svg" },
