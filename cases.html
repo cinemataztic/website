@@ -319,10 +319,19 @@
         let currentSearch = '';
         // Search ignores case, accents and punctuation, so "lofbergs" finds Löfbergs and "pickup" finds PICK-UP
         const searchText = text => String(text).normalize('NFD').replace(/[^a-z0-9]/gi, '').toLowerCase();
+        // Spreads each product evenly through the list, so All doesn't start with one product only; each keeps its own order
+        function spreadProducts(list) {
+            const seen = {}, totals = {};
+            list.forEach(c => { totals[c.category] = (totals[c.category] || 0) + 1; });
+            return list.map(c => {
+                seen[c.category] = (seen[c.category] || 0) + 1;
+                return { c, place: (seen[c.category] - 0.5) / totals[c.category] };
+            }).sort((a, b) => a.place - b.place).map(item => item.c);
+        }
         // The cases the grid and the popup's arrows go through. A search under All also looks through the pitches.
         function listedCases() {
             const inFilter = () => {
-                if (currentFilter === 'All') return currentSearch ? allCases : allCases.filter(inAll);
+                if (currentFilter === 'All') return currentSearch ? allCases : spreadProducts(allCases.filter(inAll));
                 const inCategory = allCases.filter(c => c.category === currentFilter);
                 return currentFilter === 'CineGame' && currentGameType !== 'All' ? inCategory.filter(c => c.gameType === currentGameType) : inCategory;
             };
