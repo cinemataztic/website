@@ -33,6 +33,7 @@ const siteCases = [
     },
     {
         id: "prog-ase",
+        featured: true,
         title: "Ase",
         client: "Ase",
         category: "Programmatic",
@@ -77,7 +78,7 @@ const siteCases = [
     },
     {
         id: "prog-lego-house",
-        featured: true,
+        featured: false,
         title: "LEGO House",
         client: "LEGO House",
         category: "Programmatic",
@@ -153,6 +154,85 @@ const siteCases = [
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Appotek.mov",
         description: "A CineFun game for Apotekets."
+    },
+    {
+        id: "ferdifuchs-water-power",
+        title: "FerdiFuchs Water Power",
+        client: "FerdiFuchs",
+        category: "CineGame",
+        gameType: "Jumper",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/FerdiFuchs_Jumper_DE_2025_Recording_4.mov",
+        description: "Jumper, a CineGame for FerdiFuchs Water Power in German cinemas in 2025."
+    },
+    {
+        id: "ferdifuchs-ninja",
+        featured: true,
+        title: "FerdiFuchs Ninja",
+        client: "FerdiFuchs",
+        category: "CineGame",
+        gameType: "Jumper",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Jumper_FerdiFuchsNinja_DE2026_CutDown.mp4",
+        description: "Jumper, a CineGame for FerdiFuchs Ninja in German cinemas in 2026."
+    },
+    {
+        id: "metropolia-jumper",
+        title: "Metropolia",
+        client: "Metropolia",
+        category: "CineGame",
+        gameType: "Jumper",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Jumper_Metropolia_FI2026_CutDown.mp4",
+        description: "Jumper, a CineGame for Metropolia in Finnish cinemas in 2026."
+    },
+    {
+        id: "lofbergs-jumper",
+        title: "Löfbergs",
+        client: "Löfbergs",
+        category: "CineGame",
+        gameType: "Jumper",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Lofbergs_Jumper_Recording_4_FI.mov",
+        description: "Jumper, a CineGame for Löfbergs in Finnish cinemas."
+    },
+    {
+        id: "battery-jumper",
+        featured: true,
+        title: "Battery",
+        client: "Battery",
+        category: "CineGame",
+        gameType: "Jumper",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Battery_Cutdown_EN.mp4",
+        description: "Jumper, a CineGame for Battery."
+    },
+    {
+        id: "anaconda-jumper",
+        title: "Anaconda - The Movie",
+        client: "Anaconda - The Movie",
+        category: "CineGame",
+        gameType: "Jumper",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Anaconda_Jumper_EN2025_CutDown.mp4",
+        description: "Jumper, a CineGame for Anaconda - The Movie from 2025."
+    },
+    {
+        id: "norlys-jumper",
+        title: "Norlys",
+        client: "Norlys",
+        category: "CineGame",
+        gameType: "Jumper",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Norlys_Cutdown_EN.mp4",
+        description: "Jumper, a CineGame for Norlys."
     },
     {
         id: "matkahuolto-experience",
@@ -266,7 +346,7 @@ const siteCases = [
     },
     {
         id: "iberdrola-quiz",
-        featured: true,
+        featured: false,
         title: "Quizshow",
         client: "Iberdrola",
         category: "CineGame",
@@ -427,7 +507,7 @@ const siteCases = [
     },
     {
         id: "tivoli",
-        featured: true,
+        featured: false,
         title: "The Rollercoaster",
         client: "Tivoli",
         category: "CineGame",

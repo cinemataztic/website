@@ -568,9 +568,9 @@
         </div>
     </footer>
 
-    <script src="assets/js/cases.js?v=40"></script>
-    <script src="assets/js/brands.js?v=19"></script>
-    <script src="assets/js/cases-data.js?v=61"></script>
+    <script src="assets/js/cases.js?v=44"></script>
+    <script src="assets/js/brands.js?v=21"></script>
+    <script src="assets/js/cases-data.js?v=63"></script>
     <script>
 // Cases come from assets/js/cases.js and the brand wall from assets/js/brands.js
 const MAX_FEATURED = 9;
@@ -674,7 +674,30 @@ const MAX_FEATURED = 9;
         // Cases marked featured in cases.js, max 9; pitches are only on the cases page
         function frontPageCases() {
             const cases = siteCases.filter(c => c.category !== 'Pitch');
-            return cases.filter(c => c.featured).slice(0, MAX_FEATURED);
+            return mixCategories(cases.filter(c => c.featured).slice(0, MAX_FEATURED));
+        }
+
+        // Spreads the products out, so cases of one kind don't stand together: tries the orders of the kinds and keeps the
+        // one with the fewest clashes, counting neighbours most, then the case above in a 3-column and a 2-column grid
+        function mixCategories(list) {
+            const groups = {};
+            list.forEach(c => (groups[c.category] = groups[c.category] || []).push(c));
+            const kinds = Object.keys(groups), left = {}, order = [];
+            kinds.forEach(k => { left[k] = groups[k].length; });
+            const clash = (kind) => [[1, 8], [3, 4], [2, 2], [4, 1]].reduce((sum, [back, weight]) =>
+                sum + (order[order.length - back] === kind ? weight : 0), 0);
+            let best = [], bestScore = Infinity;
+            (function place(score) {
+                if (score >= bestScore) return;
+                if (order.length === list.length) { best = order.slice(); bestScore = score; return; }
+                kinds.filter(k => left[k]).forEach(k => {
+                    const cost = clash(k);
+                    left[k]--; order.push(k);
+                    place(score + cost);
+                    order.pop(); left[k]++;
+                });
+            })(0);
+            return best.map(k => groups[k].shift());
         }
 
         // --- FEATURED WORK ---
