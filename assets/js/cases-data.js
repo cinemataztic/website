@@ -27,6 +27,7 @@ const caseLogos = {
     "Red Bull": { src: "assets/logos/redbull.svg", scale: 1.35 }, // Simple Icons, cropped to the drawing
     "Coca-Cola": { src: "assets/logos/cocacola.svg" }, // Simple Icons, cropped to the drawing
     "Boozt.com": { src: "assets/logos/boozt.svg", white: true },
+    "Boozt": { src: "assets/logos/boozt.svg", white: true },
     // Pepsi left Simple Icons after 9.x: the old icon is painted here instead (see colourCaseLogo)
     "Pepsi Max": { src: "https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/pepsi.svg", color: "#2152A4" },
     "Cinemataztic": { src: "assets/logos/cinemataztic-mark-white.svg" },

@@ -156,6 +156,17 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "boozt-wheel",
+        title: "Boozt",
+        client: "Boozt",
+        category: "CineGame",
+        gameType: "Wheel of Fortune",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/no_wheel_boozt_kids_2021.mp4",
+        description: "Wheel of Fortune, a CineGame for Boozt in Norwegian cinemas in 2021."
+    },
+    {
         id: "gonordic-simon",
         title: "Go Nordic Cruiseline",
         client: "Go Nordic Cruiseline",
