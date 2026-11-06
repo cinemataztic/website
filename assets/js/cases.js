@@ -41,7 +41,6 @@ const siteCases = [
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-ase-results.svg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/programmatic_ase_case_story.mp4",
-        preview: "assets/video/previews/prog-ase.mp4",
         images: ["assets/cases/programmatic/prog-ase-results.svg", "https://storage.googleapis.com/cinemataztic-public/video/programmatic_ase_case_story.mp4"],
         description: "150,000 impressions and 20,000 vouchers with a 11.5% CTR. Leads: call center."
     },
@@ -99,7 +98,6 @@ const siteCases = [
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-specsavers-results.svg",
         video: "https://storage.googleapis.com/cinemataztic-public/video/programmatic_case_story_-_louis_nielsen_essence_media_final%20(1080p).mp4",
-        preview: "assets/video/previews/prog-specsavers.mp4",
         images: ["assets/cases/programmatic/prog-specsavers-results.svg", "https://storage.googleapis.com/cinemataztic-public/video/programmatic_case_story_-_louis_nielsen_essence_media_final%20(1080p).mp4"],
         description: "160,000 impressions and 20,000 vouchers with a 11.6% CTR. Leads: web bookings."
     },

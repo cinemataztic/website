@@ -151,7 +151,8 @@ function caseCover(c) {
     let logo = c.logo ? { src: c.logo } : caseLogos[c.client];
     if (logo && NAME_INSTEAD_OF_LOGO.has(logo.src)) logo = null;
     const name = escapeCoverText(c.client).replace(/\s*\(demo\)$/i, '');
-    const bg = `<div class="case-logo-bg"${c.preview ? ` data-preview="${c.preview}"` : ''}></div>`;
+    const preview = c.category === 'Programmatic' ? c.cover : c.preview; // Programmatic cards show their results slide
+    const bg = `<div class="case-logo-bg"${preview ? ` data-preview="${preview}"` : ''}></div>`;
     // logoBox [x, y, w, h, image w, image h]: show only the visible part of a logo image with empty margins
     if (logo && c.logoBox) {
         const [x, y, w, h, W, H] = c.logoBox;
@@ -166,7 +167,8 @@ function caseCover(c) {
 }
 
 // --- VIDEO PREVIEW ON THE CARD ---
-// With the mouse on a card, its short clip (`preview` in cases.js) plays over the logo, without sound. The short wait
+// With the mouse on a card, its short clip (`preview` in cases.js) plays over the logo, without sound; a Programmatic card
+// shows its results slide instead. The short wait
 // keeps cards that only pass under the mouse, as on the moving cases page, from starting. Screens without a mouse keep the logo.
 (function () {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -176,6 +178,7 @@ function caseCover(c) {
         .case-preview { position: absolute; left: 0; top: 0; width: 100%; height: 60%; object-fit: cover; opacity: 0; pointer-events: none; transition: opacity 250ms;
             -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent); mask-image: linear-gradient(to bottom, #000 80%, transparent); }
         .case-preview.is-on { opacity: 1; }
+        img.case-preview { object-fit: contain; object-position: top; background: #232323; -webkit-mask-image: none; mask-image: none; }
     `;
     document.head.appendChild(style);
     let card = null, video = null, timer = 0;
@@ -186,14 +189,17 @@ function caseCover(c) {
         const old = video;
         video = null;
         old.classList.remove('is-on');
-        setTimeout(() => { old.pause(); old.remove(); }, 250);
+        setTimeout(() => { old.pause?.(); old.remove(); }, 250);
     }
     function start(bg) {
-        video = Object.assign(document.createElement('video'), { src: bg.dataset.preview, muted: true, loop: true, playsInline: true, className: 'case-preview' });
+        const clip = /\.mp4$/.test(bg.dataset.preview);
+        video = clip ? Object.assign(document.createElement('video'), { muted: true, loop: true, playsInline: true }) : new Image();
         const shown = video;
-        shown.addEventListener('playing', () => shown.classList.add('is-on'), { once: true });
+        shown.className = 'case-preview';
+        shown.addEventListener(clip ? 'playing' : 'load', () => shown.classList.add('is-on'), { once: true });
+        shown.src = bg.dataset.preview;
         bg.nextElementSibling.after(shown);
-        shown.play().catch(() => {});
+        if (clip) shown.play().catch(() => {});
     }
     document.addEventListener('pointerover', (e) => {
         const next = e.target.closest?.('.group');
