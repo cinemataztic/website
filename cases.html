@@ -110,6 +110,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Conveyor mode (set by JS): the window is pinned and cards are placed along the snake path */
+        /* Search field in the sidebar; 16px text so phones don't zoom in on it */
+        .case-search { position: relative; }
+        .case-search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; color: #9ca3af; pointer-events: none; }
+        .case-search input { width: 100%; padding: 10px 12px 10px 38px; background: #1e222a; border: 1px solid #2b303a; border-radius: 0; color: rgba(255, 255, 255, 0.87); font-size: 16px; line-height: 1.25; outline: none; transition: border-color 150ms; -webkit-appearance: none; appearance: none; }
+        .case-search input::placeholder { color: #9ca3af; }
+        .case-search input:focus { border-color: #3dc0c8; }
+        .case-search input::-webkit-search-cancel-button { filter: invert(1); cursor: pointer; }
         .conveyor-on #conveyorWindow {
             position: sticky;
             top: 5rem;
@@ -178,8 +185,12 @@
                     <span class="block text-xs font-bold uppercase tracking-widest text-brand-yellow">Portfolio</span>
                     <h1 class="section-title font-black uppercase !leading-none">All<br>Cases</h1>
                     <p class="text-sm text-gray-400 leading-relaxed">
-                        All published Cinemataztic campaigns in one place. Filter by product.
+                        All published Cinemataztic campaigns in one place. Filter by product or search by client.
                     </p>
+                    <div class="case-search">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input id="caseSearch" type="search" placeholder="Search client" aria-label="Search by client name" autocomplete="off" spellcheck="false">
+                    </div>
                     <div class="flex flex-wrap lg:flex-col lg:items-start gap-2" id="filterContainer">
                         <!-- Filter buttons populated by JS -->
                     </div>
@@ -305,17 +316,23 @@
         // Under CineGame a second row narrows the list to one kind of game (gameType in cases.js)
         const gameTypes = ['Quizshow', 'Quiz', 'Shuffle', 'Word game', 'Experience', 'Collector', 'Swipe Hero', 'Simon', 'Jumper', 'SportsBall', 'Find object', 'AR', 'Wheel of Fortune', 'Build', 'Arcade', 'Catch', 'Shooter', 'Miscellaneous'];
         let currentGameType = 'All';
-        // The cases the grid and the popup's arrows go through
+        let currentSearch = '';
+        // Search ignores case, accents and punctuation, so "lofbergs" finds Löfbergs and "pickup" finds PICK-UP
+        const searchText = text => String(text).normalize('NFD').replace(/[^a-z0-9]/gi, '').toLowerCase();
+        // The cases the grid and the popup's arrows go through. A search under All also looks through the pitches.
         function listedCases() {
-            if (currentFilter === 'All') return allCases.filter(inAll);
-            const inCategory = allCases.filter(c => c.category === currentFilter);
-            return currentFilter === 'CineGame' && currentGameType !== 'All' ? inCategory.filter(c => c.gameType === currentGameType) : inCategory;
+            const inFilter = () => {
+                if (currentFilter === 'All') return currentSearch ? allCases : allCases.filter(inAll);
+                const inCategory = allCases.filter(c => c.category === currentFilter);
+                return currentFilter === 'CineGame' && currentGameType !== 'All' ? inCategory.filter(c => c.gameType === currentGameType) : inCategory;
+            };
+            return currentSearch ? inFilter().filter(c => searchText(`${c.client} ${c.title}`).includes(currentSearch)) : inFilter();
         }
         let cardStates = [];
 
         // --- FILTERS ---
         function renderFilters() {
-            document.getElementById('gridHeading').innerText = currentFilter === 'All' ? 'All Cases'
+            document.getElementById('gridHeading').innerText = currentSearch ? `Search: ${document.getElementById('caseSearch').value.trim()}` : currentFilter === 'All' ? 'All Cases'
                 : currentFilter === 'CineGame' && currentGameType !== 'All' ? `CineGame: ${currentGameType}` : currentFilter;
             const container = document.getElementById('filterContainer');
             container.innerHTML = categories.map(cat => {
@@ -361,6 +378,13 @@
             renderCasesGrid();
         }
 
+        document.getElementById('caseSearch').addEventListener('input', (e) => {
+            currentSearch = searchText(e.target.value);
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            renderFilters();
+            renderCasesGrid();
+        });
+
         // --- GRID ---
         function renderCasesGrid() {
             const grid = document.getElementById('casesGrid');
@@ -368,7 +392,7 @@
             rollNumber(document.getElementById('caseCount'), filtered.length);
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-12 text-center text-gray-500 font-bold uppercase">No cases found in this category.</div>`;
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-gray-500 font-bold uppercase">${currentSearch ? 'No cases found for this client.' : 'No cases found in this category.'}</div>`;
                 cardStates = [];
                 layoutConveyor();
                 return;
