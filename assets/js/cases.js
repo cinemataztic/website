@@ -177,15 +177,15 @@ const siteCases = [
         description: "Shuffle, a CineGame for Knorr."
     },
     {
-        id: "politiken-shuffle",
-        title: "Shuffle",
+        id: "politiken-quiz",
+        title: "Quiz",
         client: "Politiken",
         category: "CineGame",
-        gameType: "Shuffle",
+        gameType: "Quiz",
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Politikken_SimpleQuiz_Recording_2_DK.mov",
-        description: "Shuffle, a CineGame for Politiken in Danish cinemas."
+        description: "Quiz, a CineGame for Politiken in Danish cinemas."
     },
     {
         id: "vikingline-shuffle",
