@@ -58,6 +58,7 @@ const caseLogos = {
     "Toms": { src: "assets/logos/toms.svg" }, // Wikimedia Commons, File:Toms.svg
     "Santander": { src: "assets/logos/santander.svg" }, // Wikimedia Commons, File:Banco Santander Logotipo.svg
     "ODEON": { src: "assets/logos/odeon.svg" }, // Wikimedia Commons, File:Odeon logo.svg
+    "TUI": { src: "assets/logos/tui.svg" }, // simple-icons
     "Iberdrola": { src: "assets/logos/iberdrola.svg" }, // Wikimedia Commons, File:Logo Iberdrola (2023).svg
     "Kirppu": { src: "assets/logos/kirppu.svg" }, // logo from kirppu.dk (the version for dark backgrounds)
     "Magasin": { src: "assets/logos/magasin.png" }, // supplied by the user, made transparent

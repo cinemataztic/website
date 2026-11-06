@@ -155,6 +155,17 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "tui-quizshow",
+        title: "Quizshow",
+        client: "TUI",
+        category: "CineGame",
+        gameType: "Quizshow",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/TUI_QuizShow_Recording_DK_2.mov",
+        description: "Quizshow, a CineGame for TUI in Danish cinemas."
+    },
+    {
         id: "iberdrola-quiz",
         featured: true,
         title: "Quizshow",
