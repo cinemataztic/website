@@ -169,6 +169,10 @@
         .award:hover .award-logo { opacity: 1; }
         .awards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
         @media (min-width: 640px) { .awards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; } }
+        /* Who we are headings: always two lines (one span each, never wrapping). The size is set so the
+           longest line ("Digital cinema advertising") fits the screen, up to 60px */
+        .about-title { font-size: min(3.75rem, calc((100vw - 3rem) / 14.6)); }
+        .about-title > span { display: block; white-space: nowrap; }
         /* Who we are, slide 5: years on a line, a glowing dot for each (pink = CineGame launch, cyan = programmatic) */
         .years { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
         @media (min-width: 640px) { .years { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 20px; } }
@@ -180,6 +184,14 @@
         .year.is-pink .year-num { color: #f869b9; }
         .year.is-cyan .year-num { color: #3dc0c8; }
         .year-text { font-size: 0.875rem; line-height: 1.4; color: #e5e7eb; }
+        /* Phones: a compact list down a thin line, year beside the text, so the slide (and the section) stays short */
+        @media (max-width: 639px) {
+            .years { grid-template-columns: 1fr; gap: 0; border-left: 1px solid rgba(255, 255, 255, 0.2); margin-left: 3px; }
+            .year { flex-direction: row; align-items: baseline; gap: 12px; padding: 5px 0 5px 16px; border-top: 0; }
+            .year::before { left: -4px; top: 50%; margin-top: -3.5px; }
+            .year-num { flex: none; width: 3.1rem; font-size: 1.05rem; }
+            .year-text { font-size: 0.8rem; line-height: 1.3; }
+        }
         /* Menu sits on the yellow hero: yellow bar with dark text while the hero is in view */
         header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
         header.on-hero { background-color: #fece00 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
@@ -461,34 +473,34 @@
             <div class="relative w-full px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
                 <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow mb-10">Who we are</span>
                 <!-- Slides share one grid cell, so the block keeps the height of the tallest text -->
-                <div id="aboutSlides" class="grid max-w-3xl" aria-roledescription="carousel" aria-label="Who we are">
+                <div id="aboutSlides" class="grid max-w-4xl" aria-roledescription="carousel" aria-label="Who we are">
                     <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" aria-roledescription="slide" aria-label="1 of 5">
-                        <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
-                            We love <span class="text-brand-cyan">cinemas!</span>
+                        <h2 class="about-title font-black uppercase !leading-none">
+                            <span>We love</span><span class="text-brand-cyan">cinemas!</span>
                         </h2>
                         <p class="text-lg sm:text-xl text-gray-200 !leading-relaxed max-w-2xl">
                             We’re Cinemataztic and we want to shape the future of the cinema experience by developing new creative and interactive formats that the audience love. Because what people love, matters…..
                         </p>
                     </div>
                     <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="2 of 5">
-                        <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
-                            Our stack...<br><span class="text-brand-cyan">it's better than yours</span>
+                        <h2 class="about-title font-black uppercase !leading-none">
+                            <span>Our stack...</span><span class="text-brand-cyan">it's better than yours</span>
                         </h2>
                         <p class="text-lg sm:text-xl text-gray-200 !leading-relaxed max-w-2xl">
                             Cinemataztic is a cinema-loving, design thinking and software engineering company, developing new digital products for cinemas to both enhance the cinema experience for the audience and create new digital revenue streams for exhibitors and ad networks.
                         </p>
                     </div>
                     <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="3 of 5">
-                        <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
-                            Tech &amp; <span class="text-brand-cyan">creativity</span>
+                        <h2 class="about-title font-black uppercase !leading-none">
+                            <span>Tech &amp;</span><span class="text-brand-cyan">creativity</span>
                         </h2>
                         <p class="text-lg sm:text-xl text-gray-200 !leading-relaxed max-w-2xl">
                             The digital transformation is not about 1 and 0, but about shaping experiences to match new digital behaviors and social relations of an audience. We believe in mixing the physical analog experience with a digital interactive layer to enhance engagement and allow the audience to become part of the experience.
                         </p>
                     </div>
                     <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="4 of 5">
-                        <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
-                            Awards &amp; <span class="text-brand-cyan">recognition</span>
+                        <h2 class="about-title font-black uppercase !leading-none">
+                            <span>Awards &amp;</span><span class="text-brand-cyan">recognition</span>
                         </h2>
                         <ul class="awards grid">
                             <li>
@@ -516,8 +528,8 @@
                         </ul>
                     </div>
                     <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="5 of 5">
-                        <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
-                            Digital cinema advertising <span class="text-brand-cyan">through the years</span>
+                        <h2 class="about-title font-black uppercase !leading-none">
+                            <span>Digital cinema advertising</span><span class="text-brand-cyan">through the years</span>
                         </h2>
                         <ol class="years grid">
                             <li class="year is-pink"><span class="year-num">2013</span><span class="year-text">CineGame launches in Denmark</span></li>
