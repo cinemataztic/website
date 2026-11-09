@@ -164,6 +164,13 @@
             .news-pill button { width: 30px; height: 30px; margin-left: -6px; margin-right: 4px; }
         }
         @media (prefers-reduced-motion: reduce) { .news-pill, .news-pill__grow { transition: none; animation: none; } }
+        /* Awards slide: the festival logos in white, brighter on hover */
+        .award-logo { max-width: 100%; object-fit: contain; object-position: left center; filter: brightness(0) invert(1); opacity: 0.85; transition: opacity 200ms; }
+        .award:hover .award-logo { opacity: 1; }
+        .awards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+        @media (min-width: 640px) { .awards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; } }
+        /* An award without a logo file shows its name in the same place */
+        .award-name { font-size: 15px; font-weight: 900; line-height: 1.05; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); }
         /* Menu sits on the yellow hero: yellow bar with dark text while the hero is in view */
         header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
         header.on-hero { background-color: #fece00 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
@@ -446,7 +453,7 @@
                 <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow mb-10">Who we are</span>
                 <!-- Slides share one grid cell, so the block keeps the height of the tallest text -->
                 <div id="aboutSlides" class="grid max-w-3xl" aria-roledescription="carousel" aria-label="Who we are">
-                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" aria-roledescription="slide" aria-label="1 of 3">
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" aria-roledescription="slide" aria-label="1 of 4">
                         <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
                             We love <span class="text-brand-cyan">cinemas!</span>
                         </h2>
@@ -454,7 +461,7 @@
                             We’re Cinemataztic and we want to shape the future of the cinema experience by developing new creative and interactive formats that the audience love. Because what people love, matters…..
                         </p>
                     </div>
-                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="2 of 3">
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="2 of 4">
                         <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
                             Our stack...<br><span class="text-brand-cyan">it's better than yours</span>
                         </h2>
@@ -462,7 +469,7 @@
                             Cinemataztic is a cinema-loving, design thinking and software engineering company, developing new digital products for cinemas to both enhance the cinema experience for the audience and create new digital revenue streams for exhibitors and ad networks.
                         </p>
                     </div>
-                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="3 of 3">
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="3 of 4">
                         <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
                             Tech &amp; <span class="text-brand-cyan">creativity</span>
                         </h2>
@@ -470,11 +477,40 @@
                             The digital transformation is not about 1 and 0, but about shaping experiences to match new digital behaviors and social relations of an audience. We believe in mixing the physical analog experience with a digital interactive layer to enhance engagement and allow the audience to become part of the experience.
                         </p>
                     </div>
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="4 of 4">
+                        <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
+                            Awards &amp; <span class="text-brand-cyan">recognition</span>
+                        </h2>
+                        <ul class="awards grid">
+                            <li>
+                                <a href="https://www.canneslions.com" target="_blank" rel="noopener" class="award group flex flex-col gap-4">
+                                    <span class="flex items-center" style="height: 64px"><img src="assets/logos/cannes-lions.svg" alt="Cannes Lions" loading="lazy" class="award-logo w-auto" style="height: 40px"></span>
+                                    <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan">Shortlist <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]" aria-hidden="true"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://rambukken.dk" target="_blank" rel="noopener" class="award group flex flex-col gap-4">
+                                    <span class="flex items-center" style="height: 64px"><img src="assets/logos/rambuk.png" alt="Årets Rambuk" loading="lazy" class="award-logo w-auto" style="height: 22px"></span>
+                                    <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan">Winner <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]" aria-hidden="true"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.festivalofmedia.com" target="_blank" rel="noopener" class="award group flex flex-col gap-4">
+                                    <span class="flex items-center" style="height: 64px"><img src="assets/logos/festival-of-media.svg" alt="Festival of Media" loading="lazy" class="award-logo w-auto" style="height: 64px"></span>
+                                    <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan">Nominated <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]" aria-hidden="true"></i></span>
+                                </a>
+                            </li>
+                            <li class="flex flex-col gap-4">
+                                <span class="flex items-center award-name" style="height: 64px">Danish Digital<br>Awards</span>
+                                <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan">Nominated</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="mt-10 flex items-center gap-4">
                     <button type="button" id="aboutPrev" aria-label="Previous text" class="w-11 h-11 flex items-center justify-center rounded-full border border-white/40 text-white hover:bg-white hover:text-black transition"><i class="fa-solid fa-arrow-left"></i></button>
                     <button type="button" id="aboutNext" aria-label="Next text" class="w-11 h-11 flex items-center justify-center rounded-full border border-white/40 text-white hover:bg-white hover:text-black transition"><i class="fa-solid fa-arrow-right"></i></button>
-                    <span id="aboutCounter" class="text-[10px] font-bold uppercase tracking-widest text-white/70 tabular-nums" aria-live="polite">01 / 03</span>
+                    <span id="aboutCounter" class="text-[10px] font-bold uppercase tracking-widest text-white/70 tabular-nums" aria-live="polite">01 / 04</span>
                 </div>
             </div>
         </section>
