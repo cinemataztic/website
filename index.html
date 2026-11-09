@@ -169,8 +169,6 @@
         .award:hover .award-logo { opacity: 1; }
         .awards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
         @media (min-width: 640px) { .awards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; } }
-        /* An award without a logo file shows its name in the same place */
-        .award-name { font-size: 15px; font-weight: 900; line-height: 1.05; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); }
         /* Menu sits on the yellow hero: yellow bar with dark text while the hero is in view */
         header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
         header.on-hero { background-color: #fece00 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
@@ -501,7 +499,7 @@
                                 </a>
                             </li>
                             <li class="flex flex-col gap-4">
-                                <span class="flex items-center award-name" style="height: 64px">Danish Digital<br>Awards</span>
+                                <span class="flex items-center" style="height: 64px"><img src="assets/logos/danish-digital-award-white.png" alt="Danish Digital Award" loading="lazy" class="award-logo w-auto" style="height: 64px"></span>
                                 <span class="text-xs font-bold uppercase tracking-widest text-brand-cyan">Nominated</span>
                             </li>
                         </ul>
