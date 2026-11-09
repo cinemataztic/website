@@ -5,14 +5,14 @@ dir = File.join(root, 'assets/cases/programmatic')
 Dir.mkdir(dir) unless Dir.exist?(dir)
 
 CASES = [
-  ['prog-3-mobile', '3 Mobile', '250,000', '35,000', '10.9%', 'Call Center'],
+  ['prog-3-mobile', '3', '250,000', '35,000', '10.9%', 'Call Center'],
   ['prog-ase', 'Ase', '150,000', '20,000', '11.5%', 'Call Center'],
   ['prog-royal-copenhagen', 'Royal Copenhagen', '350,000', '55,000', '5.4%', 'Newsletter sign-ups'],
   ['prog-magasin', 'Magasin', '170,000', '25,000', '4.6%', 'Web traffic'],
   ['prog-villavilla', 'VillaVilla', '50,000', '7,000', '12.2%', 'Web traffic'],
   ['prog-lego-house', 'LEGO House', '250,000', '30,000', '10.4%', 'Web traffic'],
   ['prog-specsavers', 'Specsavers', '160,000', '20,000', '11.6%', 'Web bookings'],
-  ['prog-arla', 'ARLA', '70,000', '10,000', '5.8%', 'Web traffic'],
+  ['prog-arla', 'Arla', '70,000', '10,000', '5.8%', 'Web traffic'],
   ['prog-lyko', 'LYKO', '130,000', '14,000', '23.1%', 'Club members']
 ]
 

@@ -24,13 +24,12 @@ const caseLogos = {
     "McDonald's": { src: brandIcon("mcdonalds", "FBC817") },
     "Podimo": { src: "assets/logos/podimo.svg" },
     "LEGO": { src: "assets/logos/lego.svg" },
-    "ARLA": { src: "assets/logos/arla.svg" },
+    "Arla": { src: "assets/logos/arla.svg" },
     "Red Bull": { src: "assets/logos/redbull.svg", scale: 1.35 }, // Simple Icons, cropped to the drawing
     "Coca-Cola": { src: "assets/logos/cocacola.svg" }, // Simple Icons, cropped to the drawing
-    "Boozt.com": { src: "assets/logos/boozt.svg", white: true },
     "Boozt": { src: "assets/logos/boozt.svg", white: true },
     // Pepsi left Simple Icons after 9.x: the old icon is painted here instead (see colourCaseLogo)
-    "Pepsi Max": { src: "https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/pepsi.svg", color: "#2152A4" },
+    "Pepsi": { src: "https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/pepsi.svg", color: "#2152A4" },
     "Cinemataztic": { src: "assets/logos/cinemataztic-mark-white.svg" },
     "Ben & Jerry's": { src: "assets/logos/benjerry.svg" },
     "Nokia": { src: brandIcon("nokia", "005AFF") },
@@ -47,7 +46,6 @@ const caseLogos = {
     "Allianz": { src: "assets/logos/allianz.svg", white: true }, // Wikimedia Commons, File:Allianz.svg
     "Norlys": { src: "assets/logos/norlys.svg" }, // logo from norlys.dk
     "Apotekets": { src: "assets/logos/apotekets-white.png" }, // logo from apotekets.dk, made white on transparent
-    "3 Mobile": { src: "assets/logos/three.svg", white: true },
     "LEGO House": { src: "assets/logos/lego.svg" },
     "VillaVilla": { src: "assets/logos/villavilla.svg" }, // logo from villavilla.dk
     "LYKO": { src: "assets/logos/lyko.svg" }, // logo from lyko.com (white)
@@ -67,7 +65,7 @@ const caseLogos = {
     "FerdiFuchs": { src: "assets/logos/ferdifuchs-white.png" }, // from ferdifuchs.de, the letters made white on transparent
     "Metropolia": { src: "assets/logos/metropolia.svg" }, // Wikimedia Commons, File:Metropolia-logo.svg
     "Löfbergs": { src: "assets/logos/lofbergs-white.png" }, // from seeklogo.com, made white on transparent
-    "Anaconda - The Movie": { src: "assets/logos/anaconda-white.png" }, // supplied by the user, made white on transparent
+    "Anaconda – The Movie": { src: "assets/logos/anaconda-white.png" }, // supplied by the user, made white on transparent
     "Go Nordic Cruiseline": { src: "assets/logos/gonordic.svg" }, // logo from gonordiccruiseline.dk
     "Lapsimessut": { src: "assets/logos/lapsimessut-white.png" }, // logo from lapsimessut.messukeskus.com
     "HelloFresh": { src: "assets/logos/hellofresh-white.png" }, // from seeklogo.com, made white on transparent
@@ -89,7 +87,7 @@ const caseLogos = {
     "Tuborg": { src: "assets/logos/tuborg.png" }, // supplied by the user
     "REDyPLAY": { src: "assets/logos/redyplay.png" }, // supplied by the client: a white R on a red square (cut out, see KNOCKOUT_LOGOS)
     "Danone": { src: "assets/logos/danone.png", white: true }, // Wikimedia Commons, File:Danone Logo.png
-    "The Home Guard (DK)": { src: "assets/logos/hjv.png" }, // supplied by the client, made white on transparent
+    "The Home Guard": { src: "assets/logos/hjv.png" }, // supplied by the client, made white on transparent
     // White on transparent, made from the logo images supplied for these cases
     "Sonic": { src: "assets/logos/sonic.png" },
     "Scream VI": { src: "assets/logos/scream.png", scale: 1.4 },
@@ -169,7 +167,7 @@ function caseCover(c) {
 
 // --- SEARCH BY CLIENT ---
 // Ignores case, accents and punctuation, so "lofbergs" finds Löfbergs and "pickup" finds PICK-UP. A number only
-// matches a whole word of the client name, so "3" finds 3 and 3 Mobile, but not 3F.
+// matches a whole word of the client name, so "3" finds 3, but not 3F.
 const searchText = text => String(text).normalize('NFD').replace(/[^a-z0-9]/gi, '').toLowerCase();
 const caseMatches = (c, term) => /^\d+$/.test(term)
     ? c.client.toLowerCase().split(/\s+/).includes(term)

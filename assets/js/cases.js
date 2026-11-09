@@ -23,8 +23,8 @@ const siteCases = [
     // --- PROGRAMMATIC CASES: results slide + placeholder until the campaign pictures are in ---
     {
         id: "prog-3-mobile",
-        title: "3 Mobile",
-        client: "3 Mobile",
+        title: "3",
+        client: "3",
         category: "Programmatic",
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-3-mobile-results.svg",
@@ -103,8 +103,8 @@ const siteCases = [
     },
     {
         id: "prog-arla",
-        title: "ARLA",
-        client: "ARLA",
+        title: "Arla",
+        client: "Arla",
         category: "Programmatic",
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-arla-results.svg",
@@ -379,15 +379,15 @@ const siteCases = [
     },
     {
         id: "anaconda-jumper",
-        title: "Anaconda - The Movie",
-        client: "Anaconda - The Movie",
+        title: "Anaconda – The Movie",
+        client: "Anaconda – The Movie",
         category: "CineGame",
         gameType: "Jumper",
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Anaconda_Jumper_EN2025_CutDown.mp4",
         preview: "assets/video/previews/anaconda-jumper.mp4",
-        description: "Jumper, a CineGame for Anaconda - The Movie from 2025."
+        description: "Jumper, a CineGame for Anaconda – The Movie from 2025."
     },
     {
         id: "norlys-jumper",
@@ -622,7 +622,7 @@ const siteCases = [
     {
         id: "homeguard",
         title: "Quizshow",
-        client: "The Home Guard (DK)",
+        client: "The Home Guard",
         category: "CineGame",
         gameType: "Quizshow",
         mediaType: "video",
@@ -855,8 +855,8 @@ const siteCases = [
     {
         id: "arla",
         featured: false,
-        title: "ARLA – The Cows",
-        client: "ARLA",
+        title: "Arla – The Cows",
+        client: "Arla",
         category: "CineGame",
         gameType: "Find object",
         mediaType: "video",
@@ -894,8 +894,8 @@ const siteCases = [
     {
         id: "boozt",
         featured: false,
-        title: "Boozt.com – Follow the fashion",
-        client: "Boozt.com",
+        title: "Boozt – Follow the fashion",
+        client: "Boozt",
         category: "CineGame",
         gameType: "Shuffle",
         mediaType: "video",
@@ -960,7 +960,7 @@ const siteCases = [
         id: "pepsimax",
         featured: false,
         title: "Max the music",
-        client: "Pepsi Max",
+        client: "Pepsi",
         category: "CineGame",
         gameType: "Swipe Hero",
         mediaType: "video",

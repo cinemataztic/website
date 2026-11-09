@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Results for the ARLA programmatic case in the shape of a case card -->
+<!-- Results for the Arla programmatic case in the shape of a case card -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
   <defs>
     <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1a1a" stop-opacity="0.8"/><stop offset="0.3" stop-color="#1a1a1a" stop-opacity="0.15"/><stop offset="0.55" stop-color="#1a1a1a" stop-opacity="0.35"/><stop offset="1" stop-color="#1a1a1a" stop-opacity="0.92"/></linearGradient>
