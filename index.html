@@ -538,7 +538,7 @@
                     <span id="caseModalCategory" class="px-3 py-1 rounded text-xs font-bold uppercase">Category</span>
                     <!-- CineGame cases: the kind of game, in white -->
                     <span id="caseModalGameType" class="hidden px-3 py-1 rounded text-xs font-bold uppercase" style="background-color: rgba(255, 255, 255, 0.2); color: rgba(255, 255, 255, 0.87)"></span>
-                    <span id="caseModalClient" class="text-xs font-bold uppercase tracking-wider text-gray-400">Client Name</span>
+                    <a id="caseModalClient" href="cases.html" title="See all cases for this client" class="inline-flex items-center gap-2 px-3 py-1 rounded border border-white/30 text-xs font-bold uppercase text-white hover:bg-white hover:text-black transition"><i class="fa-solid fa-magnifying-glass text-[10px]" aria-hidden="true"></i><span>Client Name</span></a>
                 </div>
                 <h2 id="caseModalTitle" class="text-3xl sm:text-4xl font-black uppercase">Case Title</h2>
                 <p id="caseModalDescription" class="text-gray-300 text-base leading-relaxed">Full description content...</p>
@@ -842,7 +842,10 @@ const MAX_FEATURED = 9;
             if (!item) return;
 
             document.getElementById('caseModalTitle').innerText = item.title;
-            document.getElementById('caseModalClient').innerText = item.client;
+            // The client name links to a search for all the client's cases
+            const clientEl = document.getElementById('caseModalClient');
+            clientEl.querySelector('span').innerText = item.client;
+            clientEl.href = `cases.html?search=${encodeURIComponent(item.client)}`;
             const categoryEl = document.getElementById('caseModalCategory');
             categoryEl.innerText = item.category;
             categoryEl.style.backgroundColor = `${categoryColor(item.category)}40`; // the colour, tinted
