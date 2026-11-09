@@ -174,19 +174,27 @@
         /* Preshow timeline: where the Cinemataztic Show sits in the preshow. Blocks are placed in % of the
            timeline; on narrow screens the timeline keeps its width and scrolls sideways. */
         .preshow-scroll { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
-        .preshow { position: relative; min-width: 1040px; padding-top: 2.25rem; padding-bottom: 12px; }
+        .preshow { position: relative; min-width: 1040px; padding-top: 2.25rem; padding-bottom: 36px; }
         .preshow-row { position: relative; height: 112px; margin-top: 2.5rem; }
-        .preshow-row + .preshow-row { margin-top: 4.5rem; }
-        .preshow-row-label { position: absolute; left: 0; top: -1.6rem; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #9ca3af; white-space: nowrap; }
-        .preshow-block { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; padding: 0 0.5rem; border-radius: 10px; color: #0a0a0c; font-size: 12px; font-weight: 700; text-align: center; line-height: 1.2; }
-        .preshow-show { position: absolute; top: -8px; bottom: -8px; display: flex; flex-direction: column; gap: 6px; padding: 7px; border: 2px solid rgba(255, 255, 255, 0.85); border-radius: 16px; background: #282828; }
-        .preshow-show-parts { flex: 1; display: flex; gap: 4px; }
-        .preshow-show-parts span { flex: 1; display: flex; align-items: center; justify-content: center; border-radius: 9px; color: #0a0a0c; font-size: 12px; font-weight: 700; writing-mode: vertical-rl; transform: rotate(180deg); }
-        .preshow-show figcaption { align-self: center; padding: 0 4px; background: #282828; font-size: 10px; font-weight: 700; text-transform: uppercase; color: rgba(255, 255, 255, 0.87); text-align: center; white-space: nowrap; line-height: 1; }
+        .preshow-row + .preshow-row { margin-top: 5.5rem; }
+        .preshow-row-label { position: absolute; left: 0; top: -2.4rem; font-size: 10px; font-weight: 700; text-transform: uppercase; color: #9ca3af; white-space: nowrap; }
+        /* Same look as the platform diagram: dark tiles with a thin border, small uppercase labels,
+           glowing pink/cyan for the Cinemataztic parts and a yellow dashed line with a running dot */
+        .preshow-block { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; padding: 0 0.5rem; border-radius: 16px; background: #1a1a1a; border: 1px solid #3a3a3a; color: #9ca3af; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.021em; text-align: center; line-height: 1.3; }
+        .preshow-block:last-child { color: rgba(255, 255, 255, 0.87); }
+        .preshow-show { position: absolute; top: -13px; bottom: -28px; display: flex; flex-direction: column; gap: 8px; padding: 12px 12px 9px; border: 1px solid #3a3a3a; border-radius: 20px; background: #1a1a1a; box-shadow: 0 0 24px rgba(61, 192, 200, 0.12); }
+        .preshow-show-parts { flex: 1; display: flex; gap: 8px; }
+        .preshow-show-parts span { flex: 1; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 1px solid; font-size: 10px; font-weight: 700; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
+        .preshow-show-parts .is-pink { color: #f869b9; border-color: rgba(248, 105, 185, 0.6); background: rgba(248, 105, 185, 0.1); box-shadow: 0 0 14px rgba(248, 105, 185, 0.3), inset 0 0 12px rgba(248, 105, 185, 0.15); }
+        .preshow-show-parts .is-cyan { color: #3dc0c8; border-color: rgba(61, 192, 200, 0.6); background: rgba(61, 192, 200, 0.1); box-shadow: 0 0 14px rgba(61, 192, 200, 0.3), inset 0 0 12px rgba(61, 192, 200, 0.15); }
+        .preshow-show figcaption { align-self: center; padding: 0 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.021em; color: rgba(255, 255, 255, 0.87); text-align: center; white-space: nowrap; line-height: 1; }
         .preshow-block--vertical { padding: 0; writing-mode: vertical-rl; }
-        .preshow-show--narrow figcaption { font-size: 8px; }
-        .preshow-start { position: absolute; top: 1.4rem; bottom: 0; width: 0; border-left: 2px dashed #ffffff; opacity: 0.8; }
-        .preshow-start span { position: absolute; bottom: calc(100% + 0.4rem); left: -1px; transform: translateX(-50%); font-size: 10px; font-weight: 700; text-transform: uppercase; color: rgba(255, 255, 255, 0.87); white-space: nowrap; }
+        .preshow-show--narrow { padding-left: 10px; padding-right: 10px; }
+        .preshow-show--narrow figcaption { font-size: 10px; padding: 0; }
+        .preshow-start { position: absolute; top: 1.4rem; bottom: 0; width: 0; border-left: 2px dashed #fece00; }
+        .preshow-start::after { content: ''; position: absolute; left: -4.5px; top: 0; width: 7px; height: 7px; border-radius: 999px; background: #fece00; box-shadow: 0 0 10px #fece00; animation: tech-flow-v 3.2s linear infinite; }
+        .preshow-start span { position: absolute; bottom: calc(100% + 0.4rem); left: -1px; transform: translateX(-50%); font-size: 10px; font-weight: 700; text-transform: uppercase; color: #fece00; white-space: nowrap; }
+        @media (prefers-reduced-motion: reduce) { .preshow-start::after { display: none; } }
     </style>
     <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -361,49 +369,49 @@
                             <div class="preshow" aria-hidden="true">
                                 <span class="preshow-start" style="left: 14.8%"><span>Announced start time</span></span>
                                 <div class="preshow-row">
-                                    <figure class="preshow-show preshow-show--narrow" style="left: 15.8%; width: 6.8%;">
+                                    <figure class="preshow-show preshow-show--narrow" style="left: 15.8%; width: 10%;">
                                         <div class="preshow-show-parts">
-                                            <span style="background: #3dc0c8">CineAd</span>
+                                            <span class="is-cyan">CineAd</span>
                                         </div>
                                         <figcaption>Programmatic</figcaption>
                                     </figure>
-                                    <span class="preshow-block preshow-block--vertical" style="left: 23.3%; width: 2.7%; background: linear-gradient(to right, #7b7b83, #86868d)">Local ads</span>
-                                    <span class="preshow-block" style="left: 26.8%; width: 28.6%; background: linear-gradient(to right, #87878f, #a8a8ae)">Ad-reel</span>
-                                    <span class="preshow-block" style="left: 56.6%; width: 9.5%; background: linear-gradient(to right, #a9a9af, #b4b4b9)">Premium placement</span>
-                                    <span class="preshow-block" style="left: 67.2%; width: 11.6%; background: linear-gradient(to right, #b5b5ba, #c2c2c7)">Trailers</span>
-                                    <span class="preshow-block" style="left: 79.9%; width: 9.5%; background: linear-gradient(to right, #c3c3c8, #ceced3)">Golden Spot</span>
-                                    <span class="preshow-block" style="left: 90.5%; width: 9.5%; background: linear-gradient(to right, #cfcfd4, #dadade)">Feature</span>
+                                    <span class="preshow-block preshow-block--vertical" style="left: 26.6%; width: 1.8%">Local ads</span>
+                                    <span class="preshow-block" style="left: 29.2%; width: 26.2%">Ad-reel</span>
+                                    <span class="preshow-block" style="left: 56.6%; width: 9.5%">Premium placement</span>
+                                    <span class="preshow-block" style="left: 67.2%; width: 11.6%">Trailers</span>
+                                    <span class="preshow-block" style="left: 79.9%; width: 9.5%">Golden Spot</span>
+                                    <span class="preshow-block" style="left: 90.5%; width: 9.5%">Feature</span>
                                 </div>
                                 <div class="preshow-row">
                                     <span class="preshow-row-label">Denmark &amp; Finland</span>
                                     <figure class="preshow-show" style="left: 0; width: 13.8%;">
                                         <div class="preshow-show-parts">
-                                            <span style="background: #f869b9">CineGame</span>
-                                        <span style="background: #3dc0c8">CineAd</span>
+                                            <span class="is-pink">CineGame</span>
+                                        <span class="is-cyan">CineAd</span>
                                         </div>
                                         <figcaption>Cinemataztic Show</figcaption>
                                     </figure>
-                                    <span class="preshow-block" style="left: 15.75%; width: 9.83%; background: linear-gradient(to right, #7b7b83, #86868d)">Local ads</span>
-                                    <span class="preshow-block" style="left: 26.8%; width: 28.6%; background: linear-gradient(to right, #87878f, #a8a8ae)">Ad-reel</span>
-                                    <span class="preshow-block" style="left: 56.6%; width: 9.5%; background: linear-gradient(to right, #a9a9af, #b4b4b9)">Premium placement</span>
-                                    <span class="preshow-block" style="left: 67.2%; width: 11.6%; background: linear-gradient(to right, #b5b5ba, #c2c2c7)">Trailers</span>
-                                    <span class="preshow-block" style="left: 79.9%; width: 9.5%; background: linear-gradient(to right, #c3c3c8, #ceced3)">Golden Spot</span>
-                                    <span class="preshow-block" style="left: 90.5%; width: 9.5%; background: linear-gradient(to right, #cfcfd4, #dadade)">Feature</span>
+                                    <span class="preshow-block" style="left: 15.75%; width: 9.83%">Local ads</span>
+                                    <span class="preshow-block" style="left: 26.8%; width: 28.6%">Ad-reel</span>
+                                    <span class="preshow-block" style="left: 56.6%; width: 9.5%">Premium placement</span>
+                                    <span class="preshow-block" style="left: 67.2%; width: 11.6%">Trailers</span>
+                                    <span class="preshow-block" style="left: 79.9%; width: 9.5%">Golden Spot</span>
+                                    <span class="preshow-block" style="left: 90.5%; width: 9.5%">Feature</span>
                                 </div>
                                 <div class="preshow-row">
                                     <span class="preshow-row-label">Germany</span>
                                     <figure class="preshow-show" style="left: 11.1%; width: 13.8%;">
                                         <div class="preshow-show-parts">
-                                            <span style="background: #f869b9">CineGame</span>
-                                        <span style="background: #3dc0c8">CineAd</span>
+                                            <span class="is-pink">CineGame</span>
+                                        <span class="is-cyan">CineAd</span>
                                         </div>
                                         <figcaption>Cinemataztic Show</figcaption>
                                     </figure>
-                                    <span class="preshow-block" style="left: 26.8%; width: 28.6%; background: linear-gradient(to right, #87878f, #a8a8ae)">Ad-reel</span>
-                                    <span class="preshow-block" style="left: 56.6%; width: 9.5%; background: linear-gradient(to right, #a9a9af, #b4b4b9)">Premium placement</span>
-                                    <span class="preshow-block" style="left: 67.2%; width: 11.6%; background: linear-gradient(to right, #b5b5ba, #c2c2c7)">Trailers</span>
-                                    <span class="preshow-block" style="left: 79.9%; width: 9.5%; background: linear-gradient(to right, #c3c3c8, #ceced3)">Golden Spot</span>
-                                    <span class="preshow-block" style="left: 90.5%; width: 9.5%; background: linear-gradient(to right, #cfcfd4, #dadade)">Feature</span>
+                                    <span class="preshow-block" style="left: 26.8%; width: 28.6%">Ad-reel</span>
+                                    <span class="preshow-block" style="left: 56.6%; width: 9.5%">Premium placement</span>
+                                    <span class="preshow-block" style="left: 67.2%; width: 11.6%">Trailers</span>
+                                    <span class="preshow-block" style="left: 79.9%; width: 9.5%">Golden Spot</span>
+                                    <span class="preshow-block" style="left: 90.5%; width: 9.5%">Feature</span>
                                 </div>
                             </div>
                         </div>
