@@ -69,12 +69,9 @@
         .animate-blink {
             animation: cursorBlink 1s infinite;
         }
-        /* Menu sits on the orange hero: orange bar with dark text while the hero is in view */
+        /* Menu sits on the grey hero: grey bar (card colour) while the hero is in view */
         header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
-        header.on-hero { background-color: #fea917 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
-        header.on-hero .text-white,
-        header.on-hero nav > a.text-brand-cyan { color: #1a1a1a !important; }
-        header.on-hero #mobileDrawer { color: rgba(255, 255, 255, 0.87); }
+        header.on-hero { background-color: #282828 !important; }
         /* Case cards: text sits on the image over a blur that fades in towards the bottom */
         .case-blur {
             position: absolute;
@@ -233,22 +230,22 @@
     </header>
 
     <main class="flex-grow pt-20">
-        <!-- HERO: same animated hero as the front page, in orange -->
-        <section id="hero" class="relative overflow-hidden border-b border-brand-border bg-brand-orange">
+        <!-- HERO: same animated hero as the front page, in the card grey -->
+        <section id="hero" class="relative overflow-hidden border-b border-brand-border bg-brand-card">
             <!-- Canvas Interactive Background -->
             <canvas id="heroCanvas" class="absolute inset-0 z-0 w-full h-full"></canvas>
             <div class="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-28 lg:pb-32">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
                     <div class="lg:col-span-8 space-y-8">
-                        <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-brand-dark">
-                            <span class="w-2 h-2 rounded-full bg-brand-dark animate-ping"></span>
+                        <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-brand-yellow">
+                            <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping"></span>
                             <span>Technology</span>
                         </span>
-                        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tighter !leading-none text-black">
+                        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tighter !leading-none text-white">
                             What’s next?
                         </h1>
                     </div>
-                    <div class="hero-copy lg:col-span-4 space-y-5 text-brand-dark text-base leading-relaxed lg:pb-3">
+                    <div class="hero-copy lg:col-span-4 space-y-5 text-gray-300 text-base leading-relaxed lg:pb-3">
                         <p>
                             The future success of the cinema media depends on a successful digital transformation of the cinema experience and the creation of new digital revenue streams.
                         </p>
@@ -524,7 +521,8 @@
                     this.vx = (Math.random() - 0.5) * 0.8;
                     this.vy = (Math.random() - 0.5) * 0.8;
                     this.radius = Math.random() * 2 + 1.5;
-                    this.color = Math.random() > 0.3 ? '#3dc0c8' : '#ffffff';
+                    // All five site colours: pink, blue, green, orange, yellow
+                    this.color = ['#f869b9', '#3dc0c8', '#6ceec4', '#fea917', '#fece00'][Math.floor(Math.random() * 5)];
                 }
 
                 update() {
@@ -581,7 +579,7 @@
                             ctx.beginPath();
                             ctx.moveTo(particles[a].x, particles[a].y);
                             ctx.lineTo(particles[b].x, particles[b].y);
-                            ctx.strokeStyle = `rgba(61, 192, 200, ${opacity * 0.35})`;
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.25})`;
                             ctx.lineWidth = 1;
                             ctx.stroke();
                         }
@@ -611,7 +609,7 @@
         })();
 
         // --- MENU ON THE HERO ---
-        // The menu bar turns orange while any of the (orange) hero is visible below it.
+        // The menu bar turns grey while any of the (grey) hero is visible below it.
         (function initHeroMenu() {
             const header = document.querySelector('body > header');
             const hero = document.getElementById('hero');
