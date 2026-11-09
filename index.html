@@ -169,6 +169,17 @@
         .award:hover .award-logo { opacity: 1; }
         .awards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
         @media (min-width: 640px) { .awards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; } }
+        /* Who we are, slide 5: years on a line, a glowing dot for each (pink = CineGame launch, cyan = programmatic) */
+        .years { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
+        @media (min-width: 640px) { .years { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 20px; } }
+        .year { position: relative; display: flex; flex-direction: column; gap: 6px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+        .year::before { content: ''; position: absolute; left: 0; top: -4px; width: 7px; height: 7px; border-radius: 999px; }
+        .year.is-pink::before { background: #f869b9; box-shadow: 0 0 10px #f869b9; }
+        .year.is-cyan::before { background: #3dc0c8; box-shadow: 0 0 10px #3dc0c8; }
+        .year-num { font-size: 1.75rem; font-weight: 900; line-height: 1; }
+        .year.is-pink .year-num { color: #f869b9; }
+        .year.is-cyan .year-num { color: #3dc0c8; }
+        .year-text { font-size: 0.875rem; line-height: 1.4; color: #e5e7eb; }
         /* Menu sits on the yellow hero: yellow bar with dark text while the hero is in view */
         header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
         header.on-hero { background-color: #fece00 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
@@ -451,7 +462,7 @@
                 <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow mb-10">Who we are</span>
                 <!-- Slides share one grid cell, so the block keeps the height of the tallest text -->
                 <div id="aboutSlides" class="grid max-w-3xl" aria-roledescription="carousel" aria-label="Who we are">
-                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" aria-roledescription="slide" aria-label="1 of 4">
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" aria-roledescription="slide" aria-label="1 of 5">
                         <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
                             We love <span class="text-brand-cyan">cinemas!</span>
                         </h2>
@@ -459,7 +470,7 @@
                             We’re Cinemataztic and we want to shape the future of the cinema experience by developing new creative and interactive formats that the audience love. Because what people love, matters…..
                         </p>
                     </div>
-                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="2 of 4">
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="2 of 5">
                         <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
                             Our stack...<br><span class="text-brand-cyan">it's better than yours</span>
                         </h2>
@@ -467,7 +478,7 @@
                             Cinemataztic is a cinema-loving, design thinking and software engineering company, developing new digital products for cinemas to both enhance the cinema experience for the audience and create new digital revenue streams for exhibitors and ad networks.
                         </p>
                     </div>
-                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="3 of 4">
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="3 of 5">
                         <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
                             Tech &amp; <span class="text-brand-cyan">creativity</span>
                         </h2>
@@ -475,7 +486,7 @@
                             The digital transformation is not about 1 and 0, but about shaping experiences to match new digital behaviors and social relations of an audience. We believe in mixing the physical analog experience with a digital interactive layer to enhance engagement and allow the audience to become part of the experience.
                         </p>
                     </div>
-                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="4 of 4">
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="4 of 5">
                         <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
                             Awards &amp; <span class="text-brand-cyan">recognition</span>
                         </h2>
@@ -504,11 +515,26 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="about-slide [grid-area:1/1] space-y-8 transition-opacity duration-500" style="opacity: 0" aria-hidden="true" aria-roledescription="slide" aria-label="5 of 5">
+                        <h2 class="text-4xl sm:text-6xl font-black uppercase !leading-none">
+                            Digital cinema advertising <span class="text-brand-cyan">through the years</span>
+                        </h2>
+                        <ol class="years grid">
+                            <li class="year is-pink"><span class="year-num">2013</span><span class="year-text">CineGame launches in Denmark</span></li>
+                            <li class="year is-pink"><span class="year-num">2016</span><span class="year-text">CineGame launches in Finland</span></li>
+                            <li class="year is-pink"><span class="year-num">2019</span><span class="year-text">CineGame launches in Germany</span></li>
+                            <li class="year is-pink"><span class="year-num">2022</span><span class="year-text">CineGame launches in Ireland</span></li>
+                            <li class="year is-pink"><span class="year-num">2023</span><span class="year-text">CineGame launches in Sweden</span></li>
+                            <li class="year is-cyan"><span class="year-num">2025</span><span class="year-text">Programmatic cinema advertising to launch in Denmark</span></li>
+                            <li class="year is-pink"><span class="year-num">2025</span><span class="year-text">CineGame launches in Portugal</span></li>
+                            <li class="year is-cyan"><span class="year-num">2026</span><span class="year-text">Programmatic cinema advertising to launch in Finland</span></li>
+                        </ol>
+                    </div>
                 </div>
                 <div class="mt-10 flex items-center gap-4">
                     <button type="button" id="aboutPrev" aria-label="Previous text" class="w-11 h-11 flex items-center justify-center rounded-full border border-white/40 text-white hover:bg-white hover:text-black transition"><i class="fa-solid fa-arrow-left"></i></button>
                     <button type="button" id="aboutNext" aria-label="Next text" class="w-11 h-11 flex items-center justify-center rounded-full border border-white/40 text-white hover:bg-white hover:text-black transition"><i class="fa-solid fa-arrow-right"></i></button>
-                    <span id="aboutCounter" class="text-[10px] font-bold uppercase tracking-widest text-white/70 tabular-nums" aria-live="polite">01 / 04</span>
+                    <span id="aboutCounter" class="text-[10px] font-bold uppercase tracking-widest text-white/70 tabular-nums" aria-live="polite">01 / 05</span>
                 </div>
             </div>
         </section>
