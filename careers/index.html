@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers — Cinemataztic</title>
+    <meta name="description" content="Careers at Cinemataztic: join a cinema-loving, design thinking and software engineering company shaping the future of the cinema experience.">
+    <!-- The one address search engines should use for this page (add it to sitemap.xml when careers goes live) -->
+    <link rel="canonical" href="https://www.cinemataztic.com/careers/">
+    <!-- Favicon: the Cinemataztic mark (SVG for modern browsers, ICO as fallback, PNG for the iPhone home screen) -->
+    <link rel="icon" href="../favicon.ico" sizes="32x32">
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+    <!-- Google Analytics 4 (not on a local preview, so testing doesn't count as visits) -->
+    <script>
+        if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+            const ga = Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-NSK27WGTDK' });
+            document.head.appendChild(ga);
+        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-NSK27WGTDK');
+    </script>
+    <!-- Menu logo turns into the round mark when scrolling -->
+    <script src="../assets/js/site-header.js?v=19" defer></script>
+    <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS, built once for the whole site (classes from all pages and scripts) -->
+    <link rel="stylesheet" href="../assets/css/site.css?v=5">
+    <!-- Same layout as the docs: left menu and page text -->
+    <link rel="stylesheet" href="../docs/docs.css?v=49">
+    <style>
+        /* Hero copied from technology.html: grey hero with the particle canvas, and the menu bar turns
+           the same grey while the hero is in view */
+        header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
+        header.on-hero { background-color: #282828 !important; }
+        .hero-copy.text-base { font-size: clamp(1rem, 0.4rem + 0.6vw, 1.5rem); }
+    </style>
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
+    <!-- HEADER / NAVIGATION: the same top menu as the rest of the site -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
+        <div class="w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center space-x-2 group">
+                <span class="text-2xl sm:text-3xl font-logo font-bold tracking-[0.05em] uppercase text-white group-hover:opacity-90 transition">
+                    CINEMATAZTIC / CAREERS
+                </span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase">
+                <a href="../cases.html" class="hover:text-brand-cyan transition">Cases</a>
+                <a href="../products.html" class="hover:text-brand-cyan transition">Products</a>
+                <a href="../technology.html" class="hover:text-brand-cyan transition">Technology</a>
+                <a href="../contact.html" class="btn-shine px-5 py-2.5 bg-white text-brand-dark hover:bg-brand-dark hover:text-white transition">Contact</a>
+            </nav>
+            <button id="mobileMenuBtn" class="md:hidden text-2xl text-white focus:outline-none" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobileDrawer" class="hidden md:hidden bg-brand-dark/95 border-b border-brand-border px-6 py-6 space-y-4">
+            <a href="../cases.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Cases</a>
+            <a href="../products.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Products</a>
+            <a href="../technology.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Technology</a>
+            <a href="../contact.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Contact</a>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <!-- HERO: same animated hero as technology.html -->
+        <section id="hero" class="relative overflow-hidden border-b border-brand-border bg-brand-card">
+            <canvas id="heroCanvas" class="absolute inset-0 z-0 w-full h-full"></canvas>
+            <div class="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-28 lg:pb-32">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+                    <div class="lg:col-span-8 space-y-8">
+                        <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-brand-yellow">
+                            <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping"></span>
+                            <span>Careers</span>
+                        </span>
+                        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tighter !leading-none text-white">
+                            The future of <span class="text-brand-cyan">cinema advertising</span> starts with you.
+                        </h1>
+                    </div>
+                    <div class="hero-copy lg:col-span-4 space-y-5 text-gray-300 text-base leading-relaxed lg:pb-3">
+                        <p>
+                            Join ambitious innovators who are shaping the future of cinema while working with the world’s biggest brands on our industry-defining platform.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="docs-layout">
+            <!-- LEFT MENU: filled from careers-nav.js -->
+            <aside class="docs-side px-4 sm:px-6 lg:px-8">
+                <div class="docs-side-inner lg:py-10">
+                    <details>
+                        <summary><span>Careers: <span id="docsNavLabel" class="text-gray-400">Menu</span></span><i class="fa-solid fa-chevron-down"></i></summary>
+                        <nav id="docsNav" aria-label="Careers"></nav>
+                    </details>
+                </div>
+            </aside>
+
+            <!-- PAGE TEXT -->
+            <article class="docs-content docs-home">
+                <!-- OVERVIEW: who we are, across the full width -->
+                <section class="docs-home-section">
+                    <div>
+                        <aside class="space-y-6">
+                            <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Join us</span>
+                            <h2 class="section-title font-black uppercase !leading-none">Careers</h2>
+                            <p class="text-sm text-gray-400 leading-relaxed">Cinemataztic is a cinema-loving, design thinking and software engineering company. We develop new digital products for cinemas that enhance the cinema experience for the audience and create new digital revenue streams.</p>
+                            <p class="text-sm text-gray-400 leading-relaxed">We work with cinemas and media partners across Europe, from our office in Hellerup, Denmark.</p>
+                            <!-- WHAT WE STAND FOR: three text boxes in the docs card look -->
+                            <div class="docs-topics">
+                                <div class="docs-topic" style="--topic: #f869b9">
+                                    <i class="fa-solid fa-bullseye" aria-hidden="true"></i>
+                                    <strong>Making an impact</strong>
+                                    <div class="docs-topic-body"><p>We’re committed to shaping the future of cinema advertising for the benefit of the entire industry, not just a few Big Tech platforms. We believe the contributions of individuals have the power to change the entire industry, which is why we encourage all our employees to get involved in as many parts of the business as possible. Because the next great idea can come from anywhere.</p></div>
+                                </div>
+                                <div class="docs-topic" style="--topic: #3dc0c8">
+                                    <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+                                    <strong>Entrepreneurial spirit</strong>
+                                    <div class="docs-topic-body"><p>We’re leading the industry by fostering the next generation of cinema advertising. Here, curiosity isn’t just appreciated, it’s rewarded. Because curiosity is the launchpad for innovation.</p></div>
+                                </div>
+                                <div class="docs-topic" style="--topic: #fece00">
+                                    <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                                    <strong>Commitment to growth</strong>
+                                    <div class="docs-topic-body"><p>We’ve cemented our role as a leader and innovator for cinema advertising. We constantly push the boundaries of what’s possible, not just for our business and our clients, but for our people as well. And as our company grows, we invite our employees to grow with it.</p></div>
+                                </div>
+                            </div>
+                            <div class="docs-links" role="group" aria-label="Useful links" style="max-width: 22rem">
+                                <span class="docs-links-title">Useful links</span>
+                                <a href="../index.html#about"><span>Who we are</span><i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="../technology.html"><span>Our technology</span><i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="../contact.html"><span>Contact us</span><i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-brand-border text-sm text-gray-500">
+        <!-- LET'S TALK: same sidebar layout as the page sections -->
+        <div class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28 border-b border-brand-border">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+                <aside class="lg:col-span-3 space-y-6">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Contact</span>
+                    <h2 class="section-title font-black uppercase !leading-none text-white">Let’s Talk</h2>
+                    <a href="../contact.html" class="inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-wider bg-white text-black hover:bg-brand-cyan transition">Contact</a>
+                    <div class="space-y-1">
+                        <a href="tel:+4531667341" class="block text-lg font-bold text-white hover:text-brand-cyan transition">+45 31 66 73 41</a>
+                        <span class="block text-xs text-gray-400">(Not for support related inquiries)</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">All support requests should be made <a href="http://support.cinegame.com/" target="_blank" rel="noopener" class="text-white underline decoration-brand-orange underline-offset-4 hover:text-brand-cyan">here</a>.</p>
+                </aside>
+                <!-- Resources, The App and Partners sit close together and wrap on narrow phones -->
+                <div class="lg:col-span-7 flex flex-wrap gap-10 lg:gap-16">
+                <!-- RESOURCES: links that are not in the top menu -->
+                <nav class="space-y-6" aria-label="Resources">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Resources</span>
+                    <ul class="space-y-2">
+                        <li><a href="../order.html" class="text-sm text-gray-400 hover:text-white transition">Order</a></li>
+                        <li><a href="../docs/index.html" class="text-sm text-gray-400 hover:text-white transition">Docs</a></li>
+                        <li><a href="index.html" class="text-sm text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="https://support.cinegame.com/" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">End user support</a></li>
+                        <li><a href="https://form.asana.com/?k=_R4s-PqZgwO2LCVGomfuXw&amp;d=107314682691555" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">TechSupport</a></li>
+                        <li><a href="https://legal.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Privacy &amp; legal</a></li>
+                    </ul>
+                </nav>
+                <!-- THE APP: the CineGame app in each market (external sites) -->
+                <nav class="space-y-6" aria-label="The App">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">The App</span>
+                    <ul class="space-y-2">
+                        <li><a href="https://cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame</a></li>
+                        <li><a href="https://biospil.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Biospil DK</a></li>
+                        <li><a href="https://leffapeli.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">LeffaPeli FI</a></li>
+                        <li><a href="https://cinegame.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame SE</a></li>
+                        <li><a href="https://redyplay.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">REDyPLAY DE</a></li>
+                        <li><a href="https://ie.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame IE</a></li>
+                        <li><a href="https://cinegame.pt" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame PT</a></li>
+                    </ul>
+                </nav>
+                <!-- PARTNERS: our cinema partners (same links as the Where we are map) -->
+                <nav class="space-y-6" aria-label="Partners">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Partners</span>
+                    <ul class="space-y-2">
+                        <li><a href="https://drf.dk" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">DRF</a></li>
+                        <li><a href="https://www.finnkino.fi" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Finnkino</a></li>
+                        <li><a href="https://pearlanddean.ie" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Pearl &amp; Dean</a></li>
+                        <li><a href="https://weischer.net" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Weischer</a></li>
+                        <li><a href="https://www.filmstaden.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Filmstaden</a></li>
+                        <li><span class="text-sm text-gray-400">AdLine</span></li>
+                    </ul>
+                </nav>
+                </div>
+            </div>
+        </div>
+        <div class="w-full px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-xs text-gray-500">
+            <span>© 2026 Cinemataztic ApS. All rights reserved.</span>
+            <span class="md:text-center">Hellerupvej 46 - 2900 Hellerup - Denmark - VAT: 37207187</span>
+            <div class="flex items-center md:justify-end gap-5 text-lg">
+                <a href="https://www.facebook.com/CinemaTaztic" target="_blank" rel="noopener" aria-label="Cinemataztic on Facebook" class="text-gray-400 hover:text-brand-cyan transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/company/cinemataztic" target="_blank" rel="noopener" aria-label="Cinemataztic on LinkedIn" class="text-gray-400 hover:text-brand-cyan transition"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="careers-nav.js?v=3"></script>
+    <script>
+        // --- INTERACTIVE HERO CANVAS CONSTELLATION MESH ---
+        (function initHeroCanvas() {
+            const canvas = document.getElementById('heroCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            let width, height;
+            let particles = [];
+            const particleCount = 45;
+            const maxDistance = 140;
+
+            const mouse = { x: null, y: null, radius: 180 };
+
+            function resize() {
+                width = canvas.width = canvas.parentElement.offsetWidth;
+                height = canvas.height = canvas.parentElement.offsetHeight;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            // Track Mouse Position
+            const heroSection = document.getElementById('hero');
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            heroSection.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.radius = Math.random() * 2 + 1.5;
+                    // All five site colours: pink, blue, green, orange, yellow
+                    this.color = ['#f869b9', '#3dc0c8', '#6ceec4', '#fea917', '#fece00'][Math.floor(Math.random() * 5)];
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                    // Mouse Interaction
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = mouse.x - this.x;
+                        const dy = mouse.y - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < mouse.radius) {
+                            const angle = Math.atan2(dy, dx);
+                            const force = (mouse.radius - dist) / mouse.radius;
+                            this.x -= Math.cos(angle) * force * 2;
+                            this.y -= Math.sin(angle) * force * 2;
+                        }
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw connecting lines between particles
+                for (let a = 0; a < particles.length; a++) {
+                    particles[a].update();
+                    particles[a].draw();
+
+                    for (let b = a + 1; b < particles.length; b++) {
+                        const dx = particles[a].x - particles[b].x;
+                        const dy = particles[a].y - particles[b].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < maxDistance) {
+                            const opacity = 1 - (dist / maxDistance);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.25})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+
+                    // Draw line to mouse if close
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mdx = particles[a].x - mouse.x;
+                        const mdy = particles[a].y - mouse.y;
+                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+                        if (mdist < mouse.radius) {
+                            const mOpacity = 1 - (mdist / mouse.radius);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${mOpacity * 0.5})`;
+                            ctx.lineWidth = 1.2;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        })();
+
+        // --- MENU ON THE HERO ---
+        // The menu bar turns grey while any of the (grey) hero is visible below it.
+        (function initHeroMenu() {
+            const header = document.querySelector('body > header');
+            const hero = document.getElementById('hero');
+            if (!header || !hero) return;
+            const observer = new IntersectionObserver(([entry]) => {
+                header.classList.toggle('on-hero', entry.isIntersecting);
+            }, { rootMargin: `-${header.offsetHeight}px 0px 0px 0px` });
+            observer.observe(hero);
+        })();
+
+
+    </script>
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileDrawer').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
