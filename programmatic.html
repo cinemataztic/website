@@ -592,8 +592,8 @@
         </div>
     </footer>
 
-    <script src="assets/js/cases.js?v=58"></script>
-    <script src="assets/js/cases-data.js?v=80"></script>
+    <script src="assets/js/cases.js?v=59"></script>
+    <script src="assets/js/cases-data.js?v=81"></script>
     <script>
         // --- LATEST PROGRAMMATIC CASES ---
         // From assets/js/cases.js, where the newest cases come first.
@@ -612,9 +612,9 @@
                 <a href="cases.html?case=${encodeURIComponent(c.id)}" class="group block">
                     <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-brand-card border border-brand-border group-hover:border-white transition-colors">
                         ${caseCover(c)}
-                        ${c.category === 'Programmatic' ? `
+                        ${c.category === 'Programmatic' || (c.images || []).some(i => /-results\.svg$/.test(i)) ? `
                             <div class="absolute top-3 right-3 flex gap-2">
-                                ${c.video ? `<div class="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-white" style="background-color: rgba(255, 255, 255, 0.25)"><i class="fa-solid fa-play mr-1"></i> Case video</div>` : ''}
+                                ${c.video ? `<div class="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-white" style="background-color: rgba(255, 255, 255, 0.25)"><i class="fa-solid fa-play mr-1"></i> ${c.category === 'Programmatic' ? 'Case video' : 'Video'}</div>` : ''}
                                 <div class="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-white" style="background-color: rgba(255, 255, 255, 0.25)"><i class="fa-solid fa-chart-column mr-1"></i> Results</div>
                             </div>
                         ` : c.images && c.images.length ? `

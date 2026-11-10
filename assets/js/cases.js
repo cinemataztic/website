@@ -160,6 +160,19 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "sygeforsikring-jumper",
+        title: "Sygeforsikringen “danmark”",
+        client: "Sygeforsikringen “danmark”",
+        category: "CineGame",
+        gameType: "Jumper",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/sygesikringenDK%207.mp4",
+        images: ["https://storage.googleapis.com/cinemataztic-public/video/sygesikringenDK%207.mp4", "assets/cases/cinegame/sygeforsikring-jumper-results.svg"],
+        preview: "assets/video/previews/sygeforsikring-jumper.mp4",
+        description: "Jumper, a CineGame for Sygeforsikringen “danmark” in Danish cinemas."
+    },
+    {
         id: "3f-swipehero",
         title: "3F",
         client: "3F",
