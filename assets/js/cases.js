@@ -1324,6 +1324,25 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-atlante",
+        title: "Atlante",
+        client: "Atlante",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/atlante-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/atlante-1.jpg",
+            "assets/cases/pitch/atlante-2.jpg",
+            "assets/cases/pitch/atlante-3.jpg",
+            "assets/cases/pitch/atlante-4.jpg",
+            "assets/cases/pitch/atlante-5.jpg",
+            "assets/cases/pitch/atlante-6.jpg",
+            "assets/cases/pitch/atlante-7.jpg"
+        ],
+        description: "A CineGame pitch for Atlante, the fast-charging network across Europe. The audience drives electric cars past Atlante stations, picking up green gems and coins and avoiding obstacles, and wins gems for the MyAtlante app."
+    },
+    {
         id: "pitch-very",
         title: "Very",
         client: "Very",
