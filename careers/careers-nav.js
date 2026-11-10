@@ -14,7 +14,8 @@ const docsMenu = [
     {
         group: "Jobs",
         pages: [
-            { title: "Browse jobs", file: "jobs.html" }
+            { title: "Browse jobs", file: "jobs.html" },
+            { title: "Game Artist Intern", file: "game-artist-intern.html" }
         ]
     }
 ];
