@@ -80,6 +80,7 @@ const caseLogos = {
     "Re-turn": { src: "assets/logos/return.svg" }, // the white logo from re-turn.ie
     "Elgiganten": { src: "assets/logos/elgiganten.svg" }, // Wikimedia Commons, File:Elgiganten logo.svg, made white
     "Telenor": { src: "assets/logos/telenor.svg" }, // Wikimedia Commons, File:Telenor Logo (symbol and wordmark).svg, made white
+    "Very": { src: "assets/logos/very-white.png" }, // Wikimedia Commons, File:Very Logo.png, the white letters on transparent
     "Sygeforsikringen “danmark”": { src: "assets/logos/sygeforsikring.svg" }, // from sygeforsikring.dk, made white with the heart cut out
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },

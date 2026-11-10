@@ -1324,6 +1324,26 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-very",
+        title: "Very",
+        client: "Very",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/very-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/very-1.jpg",
+            "assets/cases/pitch/very-2.jpg",
+            "assets/cases/pitch/very-3.jpg",
+            "assets/cases/pitch/very-4.jpg",
+            "assets/cases/pitch/very-5.jpg",
+            "assets/cases/pitch/very-6.jpg",
+            "assets/cases/pitch/very-7.jpg",
+            "assets/cases/pitch/very-8.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Very.ie in Ireland: We've Got the Very Thing. The audience keeps an eye on the product while the phones shuffle, the winner gets a €25 Very voucher, and everyone who plays gets 10% off."
+    },
+    {
         id: "pitch-telenor",
         title: "Telenor",
         client: "Telenor",
