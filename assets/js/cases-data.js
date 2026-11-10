@@ -102,7 +102,6 @@ const caseLogos = {
     "Dendy Cinemas": { src: "assets/logos/dendy-white.png" }, // taken from the pitch images, made white
     "Kilroy": { src: "assets/logos/kilroy-white.png" }, // taken from the pitch images, made white
     "Krifa": { src: "assets/logos/krifa-white.png" }, // taken from the pitch images, made white
-    "Mr Green": { src: "assets/logos/mrgreen-white.png" }, // taken from the pitch images, made white
     "Nextory": { src: "assets/logos/nextory-white.png" }, // taken from the pitch images, made white
     "Sky": { src: "assets/logos/sky-white.png" }, // taken from the pitch images, made white
     "Stryhns": { src: "assets/logos/stryhns-white.png" }, // taken from the pitch images, made white
@@ -181,7 +180,7 @@ const escapeCoverText = s => String(s || '').replace(/[&<>"]/g, ch => ({ '&': '&
 const KNOCKOUT_LIGHT_LOGOS = new Set(['assets/logos/liiga.png']);
 
 // Logos that turn into a blob either way (letters with a dark outline): the card shows the name instead
-const NAME_INSTEAD_OF_LOGO = new Set(['assets/cases/pitch/logo_kims.png']);
+const NAME_INSTEAD_OF_LOGO = new Set(['assets/cases/pitch/logo_kims.png', 'assets/cases/pitch/hj_logo.png']);
 
 // Badge logos (a name on a filled shape) shown as a white shape with the name cut out
 const KNOCKOUT_LOGOS = new Set([

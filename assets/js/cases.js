@@ -2542,8 +2542,7 @@ const siteCases = [
         category: "Pitch",
         mediaType: "image",
         cover: "assets/cases/pitch/kfc1.jpg",
-        logo: "assets/cases/pitch/kfc-logo.png",
-        logoBox: [13, 1, 133, 134, 350, 136],
+        logo: "assets/logos/kfc.svg",
         video: "",
         images: [
             "assets/cases/pitch/kfc1.jpg",
@@ -2560,7 +2559,6 @@ const siteCases = [
         mediaType: "image",
         cover: "assets/cases/pitch/hj1.jpg",
         logo: "assets/cases/pitch/hj_logo.png",
-        logoBox: [0, 0, 140, 136, 350, 136],
         video: "",
         images: [
             "assets/cases/pitch/hj1.jpg",
@@ -2617,8 +2615,7 @@ const siteCases = [
         category: "Pitch",
         mediaType: "image",
         cover: "assets/cases/pitch/cocio_1.jpg",
-        logo: "assets/cases/pitch/cocio_logo.png",
-        logoBox: [8, 12, 113, 112, 350, 136],
+        logo: "assets/logos/cocio-white.png",
         video: "",
         images: [
             "assets/cases/pitch/cocio_1.jpg",
@@ -2682,9 +2679,7 @@ const siteCases = [
         category: "Pitch",
         mediaType: "image",
         cover: "assets/cases/pitch/vw_1.jpg",
-        logo: "assets/cases/pitch/vw_logo.png",
-        logoBox: [2, 2, 132, 132, 350, 136],
-        logoWhite: true,
+        logo: "assets/logos/volkswagen.svg",
         video: "",
         images: [
             "assets/cases/pitch/vw_1.jpg",
@@ -2702,8 +2697,7 @@ const siteCases = [
         category: "Pitch",
         mediaType: "image",
         cover: "assets/cases/pitch/sunweb-obstaclerunner.jpg",
-        logo: "assets/cases/pitch/sunweb_logo.png",
-        logoBox: [5, 2, 78, 84, 194, 87],
+        logo: "assets/logos/sunweb-white.png",
         video: "",
         images: [
             "assets/cases/pitch/sunweb-obstaclerunner.jpg",
