@@ -1324,6 +1324,287 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-codan-shuffle",
+        title: "Codan – Shuffle",
+        client: "Codan",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/codan-shuffle-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/codan-shuffle-1.jpg",
+            "assets/cases/pitch/codan-shuffle-2.jpg",
+            "assets/cases/pitch/codan-shuffle-3.jpg",
+            "assets/cases/pitch/codan-shuffle-4.jpg",
+            "assets/cases/pitch/codan-shuffle-5.jpg",
+            "assets/cases/pitch/codan-shuffle-6.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Codan in Danish cinemas. The audience keeps an eye on the insurance cards while they shuffle, for a chance to save money on their insurance or win a free popcorn."
+    },
+    {
+        id: "pitch-fishermansfriend",
+        title: "Fisherman's Friend",
+        client: "Fisherman's Friend",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/fishermansfriend-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/fishermansfriend-1.jpg",
+            "assets/cases/pitch/fishermansfriend-2.jpg",
+            "assets/cases/pitch/fishermansfriend-3.jpg",
+            "assets/cases/pitch/fishermansfriend-4.jpg",
+            "assets/cases/pitch/fishermansfriend-5.jpg",
+            "assets/cases/pitch/fishermansfriend-6.jpg",
+            "assets/cases/pitch/fishermansfriend-7.jpg",
+            "assets/cases/pitch/fishermansfriend-8.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Fisherman's Friend: The Strong Original. The audience keeps an eye on the packs while they shuffle, and one player wins a Fisherman's Friend."
+    },
+    {
+        id: "pitch-kaptenandson",
+        title: "Kapten & Son",
+        client: "Kapten & Son",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/kaptenandson-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/kaptenandson-1.jpg",
+            "assets/cases/pitch/kaptenandson-2.jpg",
+            "assets/cases/pitch/kaptenandson-3.jpg",
+            "assets/cases/pitch/kaptenandson-4.jpg",
+            "assets/cases/pitch/kaptenandson-5.jpg",
+            "assets/cases/pitch/kaptenandson-6.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Kapten & Son in German cinemas, for a chance to win a discount on kapten-son.com."
+    },
+    {
+        id: "pitch-lindex",
+        title: "Lindex",
+        client: "Lindex",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/lindex-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/lindex-1.jpg",
+            "assets/cases/pitch/lindex-2.jpg",
+            "assets/cases/pitch/lindex-3.jpg",
+            "assets/cases/pitch/lindex-4.jpg",
+            "assets/cases/pitch/lindex-5.jpg",
+            "assets/cases/pitch/lindex-6.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Lindex, for a chance to win a discount on Lindex.com."
+    },
+    {
+        id: "pitch-lipton",
+        title: "Lipton",
+        client: "Lipton",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/lipton-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/lipton-1.jpg",
+            "assets/cases/pitch/lipton-2.jpg",
+            "assets/cases/pitch/lipton-3.jpg",
+            "assets/cases/pitch/lipton-4.jpg",
+            "assets/cases/pitch/lipton-5.jpg",
+            "assets/cases/pitch/lipton-6.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Lipton, together with Paddington. The audience keeps an eye on the Lipton teas while they shuffle."
+    },
+    {
+        id: "pitch-lynx",
+        title: "Lynx",
+        client: "Lynx",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/lynx-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/lynx-1.jpg",
+            "assets/cases/pitch/lynx-2.jpg",
+            "assets/cases/pitch/lynx-3.jpg",
+            "assets/cases/pitch/lynx-4.jpg",
+            "assets/cases/pitch/lynx-5.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Lynx. One player wins a premium Lynx deodorant bodyspray of their choice, and every player gets a 20% discount voucher."
+    },
+    {
+        id: "pitch-masku",
+        title: "Masku",
+        client: "Masku",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/masku-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/masku-1.jpg",
+            "assets/cases/pitch/masku-2.jpg",
+            "assets/cases/pitch/masku-3.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Masku in Danish cinemas. The audience keeps an eye on the furniture cards, round by round."
+    },
+    {
+        id: "pitch-netonnet",
+        title: "NetOnNet",
+        client: "NetOnNet",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/netonnet-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/netonnet-1.jpg",
+            "assets/cases/pitch/netonnet-2.jpg",
+            "assets/cases/pitch/netonnet-3.jpg",
+            "assets/cases/pitch/netonnet-4.jpg",
+            "assets/cases/pitch/netonnet-5.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for NetOnNet. Join and win, right now."
+    },
+    {
+        id: "pitch-otto",
+        title: "OTTO",
+        client: "OTTO",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/otto-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/otto-1.jpg",
+            "assets/cases/pitch/otto-2.jpg",
+            "assets/cases/pitch/otto-3.jpg",
+            "assets/cases/pitch/otto-4.jpg",
+            "assets/cases/pitch/otto-5.jpg",
+            "assets/cases/pitch/otto-6.jpg"
+        ],
+        description: "A Christmas CineGame Shuffle pitch for OTTO in German cinemas: A very merry Christmas from OTTO."
+    },
+    {
+        id: "pitch-rituals",
+        title: "Rituals",
+        client: "Rituals",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/rituals-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/rituals-1.jpg",
+            "assets/cases/pitch/rituals-2.jpg",
+            "assets/cases/pitch/rituals-3.jpg",
+            "assets/cases/pitch/rituals-4.jpg",
+            "assets/cases/pitch/rituals-5.jpg",
+            "assets/cases/pitch/rituals-6.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Rituals in German cinemas: The Art of Soulful Living."
+    },
+    {
+        id: "pitch-snocks",
+        title: "Snocks",
+        client: "Snocks",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/snocks-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/snocks-1.jpg",
+            "assets/cases/pitch/snocks-2.jpg",
+            "assets/cases/pitch/snocks-3.jpg",
+            "assets/cases/pitch/snocks-4.jpg",
+            "assets/cases/pitch/snocks-5.jpg",
+            "assets/cases/pitch/snocks-6.jpg",
+            "assets/cases/pitch/snocks-7.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Snocks in German cinemas: Game on. Conquer the highest level. One player wins a 10 euro gift card, and every player gets a 20% discount voucher."
+    },
+    {
+        id: "pitch-spotify",
+        title: "Spotify",
+        client: "Spotify",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/spotify-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/spotify-1.jpg",
+            "assets/cases/pitch/spotify-2.jpg",
+            "assets/cases/pitch/spotify-3.jpg",
+            "assets/cases/pitch/spotify-4.jpg",
+            "assets/cases/pitch/spotify-5.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Spotify in German cinemas, for a chance to win 3 months of free Spotify Premium."
+    },
+    {
+        id: "pitch-streetfighter",
+        title: "Street Fighter",
+        client: "Street Fighter",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/streetfighter-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/streetfighter-1.jpg",
+            "assets/cases/pitch/streetfighter-2.jpg",
+            "assets/cases/pitch/streetfighter-3.jpg",
+            "assets/cases/pitch/streetfighter-4.jpg",
+            "assets/cases/pitch/streetfighter-5.jpg",
+            "assets/cases/pitch/streetfighter-6.jpg",
+            "assets/cases/pitch/streetfighter-7.jpg",
+            "assets/cases/pitch/streetfighter-8.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Street Fighter. The audience keeps an eye on the cards while they shuffle."
+    },
+    {
+        id: "pitch-tkmaxx",
+        title: "TK Maxx",
+        client: "TK Maxx",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/tkmaxx-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/tkmaxx-1.jpg",
+            "assets/cases/pitch/tkmaxx-2.jpg",
+            "assets/cases/pitch/tkmaxx-3.jpg",
+            "assets/cases/pitch/tkmaxx-4.jpg",
+            "assets/cases/pitch/tkmaxx-5.jpg",
+            "assets/cases/pitch/tkmaxx-6.jpg",
+            "assets/cases/pitch/tkmaxx-7.jpg",
+            "assets/cases/pitch/tkmaxx-8.jpg",
+            "assets/cases/pitch/tkmaxx-9.jpg",
+            "assets/cases/pitch/tkmaxx-10.jpg",
+            "assets/cases/pitch/tkmaxx-11.jpg",
+            "assets/cases/pitch/tkmaxx-12.jpg",
+            "assets/cases/pitch/tkmaxx-13.jpg",
+            "assets/cases/pitch/tkmaxx-14.jpg",
+            "assets/cases/pitch/tkmaxx-15.jpg",
+            "assets/cases/pitch/tkmaxx-16.jpg",
+            "assets/cases/pitch/tkmaxx-17.jpg",
+            "assets/cases/pitch/tkmaxx-18.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for TK Maxx: If you love surprises. The audience keeps an eye on two cards while they shuffle."
+    },
+    {
+        id: "pitch-zalando",
+        title: "Zalando",
+        client: "Zalando",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/zalando-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/zalando-1.jpg",
+            "assets/cases/pitch/zalando-2.jpg",
+            "assets/cases/pitch/zalando-3.jpg",
+            "assets/cases/pitch/zalando-4.jpg",
+            "assets/cases/pitch/zalando-5.jpg",
+            "assets/cases/pitch/zalando-6.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for Zalando in Finnish cinemas. Every player gets 15% off on zalando.fi, and the winner gets a popcorn."
+    },
+    {
         id: "pitch-ally",
         title: "Ally",
         client: "Ally",
@@ -1338,7 +1619,7 @@ const siteCases = [
     },
     {
         id: "pitch-codan",
-        title: "Codan",
+        title: "Codan – Quiz Show",
         client: "Codan",
         category: "Pitch",
         mediaType: "image",

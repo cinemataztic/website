@@ -107,6 +107,17 @@ const caseLogos = {
     "Sky": { src: "assets/logos/sky-white.png" }, // taken from the pitch images, made white
     "Stryhns": { src: "assets/logos/stryhns-white.png" }, // taken from the pitch images, made white
     "Vattenfall": { src: "assets/logos/vattenfall-white.png" }, // taken from the pitch images, made white
+    "Fisherman's Friend": { src: "assets/logos/fishermansfriend-white.png" }, // taken from the pitch images, made white
+    "Kapten & Son": { src: "assets/logos/kaptenandson-white.png" }, // taken from the pitch images, made white
+    "Lindex": { src: "assets/logos/lindex-white.png" }, // taken from the pitch images, made white
+    "Lipton": { src: "assets/logos/lipton-white.png" }, // taken from the pitch images, made white
+    "Masku": { src: "assets/logos/masku-white.png" }, // taken from the pitch images, made white
+    "OTTO": { src: "assets/logos/otto-white.png" }, // taken from the pitch images, made white
+    "Snocks": { src: "assets/logos/snocks-white.png" }, // taken from the pitch images, made white
+    "Spotify": { src: "assets/logos/spotify-white.png" }, // taken from the pitch images, made white
+    "Street Fighter": { src: "assets/logos/streetfighter-white.png" }, // taken from the pitch images, made white
+    "TK Maxx": { src: "assets/logos/tkmaxx-white.png" }, // taken from the pitch images, made white
+    "Zalando": { src: "assets/logos/zalando-white.png" }, // taken from the pitch images, made white
     "Airtox": { src: "assets/logos/airtox-white.png" }, // taken from the pitch images, made white
     "Chili Mobil": { src: "assets/logos/chilimobil-white.png" }, // taken from the pitch images, the white speech bubble with the name cut out
     "E.ON": { src: "assets/logos/eon-white.png" }, // taken from the pitch images, made white
