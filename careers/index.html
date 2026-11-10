@@ -34,13 +34,6 @@
     <link rel="stylesheet" href="../assets/css/site.css?v=5">
     <!-- Same layout as the docs: left menu and page text -->
     <link rel="stylesheet" href="../docs/docs.css?v=49">
-    <style>
-        /* Hero copied from technology.html: grey hero with the particle canvas, and the menu bar turns
-           the same grey while the hero is in view */
-        header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
-        header.on-hero { background-color: #282828 !important; }
-        .hero-copy.text-base { font-size: clamp(1rem, 0.4rem + 0.6vw, 1.5rem); }
-    </style>
 </head>
 <body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
     <!-- HEADER / NAVIGATION: the same top menu as the rest of the site -->
@@ -70,28 +63,6 @@
     </header>
 
     <main class="flex-grow pt-20">
-        <!-- HERO: same animated hero as technology.html -->
-        <section id="hero" class="relative overflow-hidden border-b border-brand-border bg-brand-card">
-            <canvas id="heroCanvas" class="absolute inset-0 z-0 w-full h-full"></canvas>
-            <div class="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-28 lg:pb-32">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
-                    <div class="lg:col-span-8 space-y-8">
-                        <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-brand-yellow">
-                            <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping"></span>
-                            <span>Careers</span>
-                        </span>
-                        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tighter !leading-none text-white">
-                            The future of <span class="text-brand-cyan">cinema advertising</span> starts with you.
-                        </h1>
-                    </div>
-                    <div class="hero-copy lg:col-span-4 space-y-5 text-gray-300 text-base leading-relaxed lg:pb-3">
-                        <p>
-                            Join ambitious innovators who are shaping the future of cinema while working with the world’s biggest brands on our industry-defining platform.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
         <div class="docs-layout">
             <!-- LEFT MENU: filled from careers-nav.js -->
             <aside class="docs-side px-4 sm:px-6 lg:px-8">
@@ -110,7 +81,12 @@
                     <div>
                         <aside class="space-y-6">
                             <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Join us</span>
-                            <h2 class="section-title font-black uppercase !leading-none">Careers</h2>
+                            <h1 class="section-title font-black uppercase !leading-none">Careers</h1>
+                            <!-- The headline and text that used to sit in the hero: side by side, under each other on narrow screens -->
+                            <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1rem 3rem">
+                                <p class="text-2xl sm:text-3xl font-black uppercase" style="flex: 1 1 26rem; margin: 0; color: rgba(255, 255, 255, 0.87); line-height: 1.05">The future of <span class="text-brand-cyan">cinema advertising</span> starts with you.</p>
+                                <p class="text-base leading-relaxed" style="flex: 1 1 20rem; margin: 0; color: #d1d5db">Join ambitious innovators who are shaping the future of cinema while working with the world’s biggest brands on our industry-defining platform.</p>
+                            </div>
                             <p class="text-sm text-gray-400 leading-relaxed">Cinemataztic is a cinema-loving, design thinking and software engineering company. We develop new digital products for cinemas that enhance the cinema experience for the audience and create new digital revenue streams.</p>
                             <p class="text-sm text-gray-400 leading-relaxed">We work with cinemas and media partners across Europe, from our office in Hellerup, Denmark.</p>
                             <!-- WHAT WE STAND FOR: three text boxes in the docs card look -->
@@ -211,149 +187,6 @@
     </footer>
 
     <script src="careers-nav.js?v=5"></script>
-    <script>
-        // --- INTERACTIVE HERO CANVAS CONSTELLATION MESH ---
-        (function initHeroCanvas() {
-            const canvas = document.getElementById('heroCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-
-            let width, height;
-            let particles = [];
-            const particleCount = 45;
-            const maxDistance = 140;
-
-            const mouse = { x: null, y: null, radius: 180 };
-
-            function resize() {
-                width = canvas.width = canvas.parentElement.offsetWidth;
-                height = canvas.height = canvas.parentElement.offsetHeight;
-            }
-
-            window.addEventListener('resize', resize);
-            resize();
-
-            // Track Mouse Position
-            const heroSection = document.getElementById('hero');
-            heroSection.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                mouse.x = e.clientX - rect.left;
-                mouse.y = e.clientY - rect.top;
-            });
-
-            heroSection.addEventListener('mouseleave', () => {
-                mouse.x = null;
-                mouse.y = null;
-            });
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.vx = (Math.random() - 0.5) * 0.8;
-                    this.vy = (Math.random() - 0.5) * 0.8;
-                    this.radius = Math.random() * 2 + 1.5;
-                    // All five site colours: pink, blue, green, orange, yellow
-                    this.color = ['#f869b9', '#3dc0c8', '#6ceec4', '#fea917', '#fece00'][Math.floor(Math.random() * 5)];
-                }
-
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-
-                    if (this.x < 0 || this.x > width) this.vx *= -1;
-                    if (this.y < 0 || this.y > height) this.vy *= -1;
-
-                    // Mouse Interaction
-                    if (mouse.x !== null && mouse.y !== null) {
-                        const dx = mouse.x - this.x;
-                        const dy = mouse.y - this.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < mouse.radius) {
-                            const angle = Math.atan2(dy, dx);
-                            const force = (mouse.radius - dist) / mouse.radius;
-                            this.x -= Math.cos(angle) * force * 2;
-                            this.y -= Math.sin(angle) * force * 2;
-                        }
-                    }
-                }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = this.color;
-                    ctx.fill();
-                    ctx.shadowBlur = 0;
-                }
-            }
-
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-
-                // Draw connecting lines between particles
-                for (let a = 0; a < particles.length; a++) {
-                    particles[a].update();
-                    particles[a].draw();
-
-                    for (let b = a + 1; b < particles.length; b++) {
-                        const dx = particles[a].x - particles[b].x;
-                        const dy = particles[a].y - particles[b].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-
-                        if (dist < maxDistance) {
-                            const opacity = 1 - (dist / maxDistance);
-                            ctx.beginPath();
-                            ctx.moveTo(particles[a].x, particles[a].y);
-                            ctx.lineTo(particles[b].x, particles[b].y);
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.25})`;
-                            ctx.lineWidth = 1;
-                            ctx.stroke();
-                        }
-                    }
-
-                    // Draw line to mouse if close
-                    if (mouse.x !== null && mouse.y !== null) {
-                        const mdx = particles[a].x - mouse.x;
-                        const mdy = particles[a].y - mouse.y;
-                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-                        if (mdist < mouse.radius) {
-                            const mOpacity = 1 - (mdist / mouse.radius);
-                            ctx.beginPath();
-                            ctx.moveTo(particles[a].x, particles[a].y);
-                            ctx.lineTo(mouse.x, mouse.y);
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${mOpacity * 0.5})`;
-                            ctx.lineWidth = 1.2;
-                            ctx.stroke();
-                        }
-                    }
-                }
-
-                requestAnimationFrame(animate);
-            }
-
-            animate();
-        })();
-
-        // --- MENU ON THE HERO ---
-        // The menu bar turns grey while any of the (grey) hero is visible below it.
-        (function initHeroMenu() {
-            const header = document.querySelector('body > header');
-            const hero = document.getElementById('hero');
-            if (!header || !hero) return;
-            const observer = new IntersectionObserver(([entry]) => {
-                header.classList.toggle('on-hero', entry.isIntersecting);
-            }, { rootMargin: `-${header.offsetHeight}px 0px 0px 0px` });
-            observer.observe(hero);
-        })();
-
-
-    </script>
     <script>
         // Mobile Menu Toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', () => {
