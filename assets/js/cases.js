@@ -1324,8 +1324,23 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-7eleven-dinerdash",
+        title: "7-Eleven – Diner Dash",
+        client: "7-Eleven",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/7eleven-dinerdash-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/7eleven-dinerdash-1.jpg",
+            "assets/cases/pitch/7eleven-dinerdash-2.jpg",
+            "assets/cases/pitch/7eleven-dinerdash-3.jpg"
+        ],
+        description: "A CineGame Diner Dash pitch for 7-Eleven in Denmark. The audience serves the customers' orders at the 7-Eleven counter before time runs out, and the winner gets a STATE Energy."
+    },
+    {
         id: "pitch-7eleven",
-        title: "7-Eleven",
+        title: "7-Eleven – Shuffle",
         client: "7-Eleven",
         category: "Pitch",
         mediaType: "image",
