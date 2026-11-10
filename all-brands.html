@@ -349,6 +349,16 @@
                     [...el.attributes].forEach(a => { if (/^on/i.test(a.name) || /^\s*javascript:/i.test(a.value)) el.removeAttribute(a.name); });
                 });
                 svg.querySelectorAll('title').forEach(el => el.remove());
+                // Give this logo its own class names and ids: inlined SVGs share the page, so a style such as
+                // .st0 or an id such as SVGID_1_ in one logo would otherwise change or clip another logo
+                const uid = `svg${++tightenSvgLogo.count || (tightenSvgLogo.count = 1)}`;
+                svg.querySelectorAll('style').forEach(st => { st.textContent = st.textContent.replace(/\.(-?[_a-zA-Z][\w-]*)/g, `.${uid}-$1`).replace(/#([_a-zA-Z][\w-]*)/g, (m, id) => /^[0-9a-fA-F]{3,8}$/.test(id) ? m : `#${uid}-${id}`); });
+                svg.querySelectorAll('[class]').forEach(el => el.setAttribute('class', el.getAttribute('class').trim().split(/\s+/).map(c => `${uid}-${c}`).join(' ')));
+                svg.querySelectorAll('[id]').forEach(el => { el.id = `${uid}-${el.id}`; });
+                [svg, ...svg.querySelectorAll('*')].forEach(el => [...el.attributes].forEach(a => {
+                    if (/url\(#/.test(a.value)) el.setAttribute(a.name, a.value.replace(/url\(#([^)]+)\)/g, `url(#${uid}-$1)`));
+                    if (/^(xlink:)?href$/.test(a.name) && a.value.startsWith('#')) el.setAttribute(a.name, `#${uid}-${a.value.slice(1)}`);
+                }));
                 svg.removeAttribute('width');
                 svg.removeAttribute('height');
                 svg.setAttribute('role', 'img');
