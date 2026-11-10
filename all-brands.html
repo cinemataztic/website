@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All brands — Cinemataztic</title>
+    <meta name="description" content="All the brands that have advertised in cinemas with Cinemataztic, from A to Z.">
+    <!-- The one address search engines should use for this page (same as in sitemap.xml) -->
+    <link rel="canonical" href="https://www.cinemataztic.com/all-brands.html">
+    <!-- Favicon: the Cinemataztic mark (SVG for modern browsers, ICO as fallback, PNG for the iPhone home screen) -->
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <!-- Google Analytics 4 (not on a local preview, so testing doesn't count as visits) -->
+    <script>
+        if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+            const ga = Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-NSK27WGTDK' });
+            document.head.appendChild(ga);
+        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-NSK27WGTDK');
+    </script>
+    <!-- Page transition (same as the old site): loads first, so arriving pages start covered -->
+    <script src="assets/js/page-transition.js?v=3"></script>
+    <!-- Menu logo turns into the round mark when scrolling -->
+    <script src="assets/js/site-header.js?v=19" defer></script>
+    <style>
+        /* Premium buttons: light from above, a soft drop shadow, and a light sweep on hover */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(0, 0, 0, 0.06) 100%);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+                0 1px 2px rgba(0, 0, 0, 0.25),
+                0 8px 20px -6px rgba(0, 0, 0, 0.45);
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+            transform: translateX(-120%);
+            transition: transform 600ms ease;
+        }
+        .btn-shine:hover {
+            transform: translateY(-1px);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+                0 2px 4px rgba(0, 0, 0, 0.25),
+                0 14px 28px -8px rgba(0, 0, 0, 0.5);
+        }
+        .btn-shine:hover::after { transform: translateX(120%); }
+        .btn-shine:active { transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-shine:hover { transform: none; }
+            .btn-shine::after { display: none; }
+        }
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .animate-blink {
+            animation: cursorBlink 1s infinite;
+        }
+        /* Menu sits on the blue hero: blue bar with dark text while the hero is in view */
+        header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
+        header.on-hero { background-color: #3dc0c8 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
+        header.on-hero .text-white,
+        header.on-hero nav > a.text-brand-cyan { color: #1a1a1a !important; }
+        header.on-hero #mobileDrawer { color: rgba(255, 255, 255, 0.87); }
+        /* Case cards: text sits on the image over a blur that fades in towards the bottom */
+        .case-blur {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 55%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 55%, rgba(0, 0, 0, 0) 100%);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            -webkit-mask-image: linear-gradient(to top, #000 50%, transparent 100%);
+            mask-image: linear-gradient(to top, #000 50%, transparent 100%);
+            pointer-events: none;
+        }
+        /* Section headings: one size everywhere, set so the longest word ("TRANSFORMATION")
+           fits the narrow sidebar column; it scales with the screen width */
+        .section-title { font-size: clamp(1.75rem, 8.4vw, 3rem); }
+        @media (min-width: 1024px) { .section-title { font-size: 2.1vw; } }
+        /* Screens with ordinary pixels (like most external monitors): the thin, grey body text gets hard to read
+           there, so text is drawn with normal smoothing, paragraphs a little heavier and the grey a little
+           lighter. Retina screens are unchanged */
+        @media (max-resolution: 1.5dppx), (-webkit-max-device-pixel-ratio: 1.5) {
+            body.antialiased { -webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto; }
+            body p, body li { font-weight: 500; }
+            body .text-gray-400 { color: #d1d5db; }
+        }
+        /* Hero text beside the big heading: 16px up to about 1500px wide, then it grows with the screen (to 24px)
+           so it doesn't look tiny on big screens. The small second paragraph keeps its size relative to it */
+        .hero-copy.text-base { font-size: clamp(1rem, 0.4rem + 0.6vw, 1.5rem); }
+        .hero-copy .text-sm { font-size: 0.875em; }
+        /* Contact form: two columns of fields from 640px, dark fields with a cyan focus line */
+        .cf-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+        @media (min-width: 640px) { .cf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cf-wide { grid-column: 1 / -1; } }
+        .cf-field label { display: block; margin-bottom: 0.5rem; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #d1d5db; }
+        .cf-req { color: #f869b9; }
+        .cf-field input, .cf-field select, .cf-field textarea {
+            display: block; width: 100%; padding: 0.8rem 1rem; border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14);
+            color: rgba(255, 255, 255, 0.87); font: inherit; font-size: 1rem; transition: border-color 200ms, background-color 200ms;
+        }
+        .cf-field select { appearance: none; padding-right: 2.5rem; cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239ca3af' stroke-width='1.6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 1rem center; }
+        .cf-field select option { background: #141418; color: rgba(255, 255, 255, 0.87); }
+        .cf-field textarea { resize: vertical; min-height: 8rem; }
+        .cf-field input:hover, .cf-field select:hover, .cf-field textarea:hover { border-color: rgba(255, 255, 255, 0.3); }
+        .cf-field input:focus, .cf-field select:focus, .cf-field textarea:focus { outline: none; border-color: #3dc0c8; background-color: rgba(61, 192, 200, 0.06); }
+        .cf-field.is-invalid input, .cf-field.is-invalid select { border-color: #f869b9; }
+        .cf-error { display: block; margin-top: 0.4rem; font-size: 12px; color: #f869b9; }
+        .cf-check { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.875rem; line-height: 1.6; color: #9ca3af; cursor: pointer; }
+        .cf-check input { flex: none; width: 1.1rem; height: 1.1rem; margin-top: 0.2rem; accent-color: #3dc0c8; cursor: pointer; }
+        .cf-check.is-invalid { color: #f869b9; }
+        .cf-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        #contactForm button[disabled] { opacity: 0.6; cursor: wait; }
+    </style>
+    <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS, built once for the whole site (classes from all pages and scripts) -->
+    <link rel="stylesheet" href="assets/css/site.css?v=5">
+    <style>
+        /* Brand wall: every logo becomes one flat grey, brighter on hover */
+        .brand-logo {
+            filter: brightness(0) invert(1);
+            opacity: 0.55;
+            transition: opacity 200ms linear;
+        }
+        .brand-cell:hover .brand-logo { opacity: 1; }
+        /* Badge logos (text knocked out of a shape) would turn into a flat blob, so they go greyscale instead */
+        .brand-logo.brand-logo--badge {
+            filter: grayscale(1);
+            opacity: 0.7;
+        }
+        /* All brands: every brand at once, A to Z, in more columns the wider the screen */
+        #allBrands { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        @media (min-width: 640px) { #allBrands { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { #allBrands { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+        @media (min-width: 1700px) { #allBrands { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+    </style>
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
+        <div class="w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <span class="text-2xl sm:text-3xl font-logo font-bold tracking-[0.05em] uppercase text-white group-hover:opacity-90 transition">
+                    CINEMATAZTIC
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase">
+                <a href="cases.html" class="hover:text-brand-cyan transition">Cases</a>
+                <a href="products.html" class="hover:text-brand-cyan transition">Products</a>
+                <a href="technology.html" class="hover:text-brand-cyan transition">Technology</a>
+                <a href="contact.html" class="btn-shine px-5 py-2.5 bg-white text-brand-dark hover:bg-brand-dark hover:text-white transition">Contact</a>
+            </nav>
+
+            <button id="mobileMenuBtn" class="md:hidden text-2xl text-white focus:outline-none" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobileDrawer" class="hidden md:hidden bg-brand-dark/95 border-b border-brand-border px-6 py-6 space-y-4">
+            <a href="cases.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Cases</a>
+            <a href="products.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Products</a>
+            <a href="technology.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Technology</a>
+            <a href="contact.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Contact</a>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <!-- ALL BRANDS: one big brand wall with every brand from assets/js/brands.js, A to Z -->
+        <section class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+            <div class="space-y-6" style="margin-bottom: 3rem">
+                <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Who we work with</span>
+                <!-- The heading is hidden on screen but kept for search engines and screen readers -->
+                <h1 class="sr-only">All brands</h1>
+            </div>
+            <div id="allBrands" class="grid gap-6">
+                <!-- Filled from assets/js/brands.js -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black border-t border-brand-border text-sm text-gray-500">
+        <!-- LET'S TALK: same sidebar layout as the page sections -->
+        <div class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28 border-b border-brand-border">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+                <aside class="lg:col-span-3 space-y-6">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Contact</span>
+                    <h2 class="section-title font-black uppercase !leading-none text-white">Let’s Talk</h2>
+                    <a href="contact.html" class="inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-wider bg-white text-black hover:bg-brand-cyan transition">Contact</a>
+                    <div class="space-y-1">
+                        <a href="tel:+4531667341" class="block text-lg font-bold text-white hover:text-brand-cyan transition">+45 31 66 73 41</a>
+                        <span class="block text-xs text-gray-400">(Not for support related inquiries)</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">All support requests should be made <a href="http://support.cinegame.com/" target="_blank" rel="noopener" class="text-white underline decoration-brand-orange underline-offset-4 hover:text-brand-cyan">here</a>.</p>
+                </aside>
+                <!-- Resources, The App and Partners sit close together and wrap on narrow phones -->
+                <div class="lg:col-span-7 flex flex-wrap gap-10 lg:gap-16">
+                <!-- RESOURCES: links that are not in the top menu -->
+                <nav class="space-y-6" aria-label="Resources">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Resources</span>
+                    <ul class="space-y-2">
+                        <li><a href="order.html" class="text-sm text-gray-400 hover:text-white transition">Order</a></li>
+                        <li><a href="docs/index.html" class="text-sm text-gray-400 hover:text-white transition">Docs</a></li>
+                        <li><a href="careers/index.html" class="text-sm text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="https://support.cinegame.com/" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">End user support</a></li>
+                        <li><a href="https://form.asana.com/?k=_R4s-PqZgwO2LCVGomfuXw&amp;d=107314682691555" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">TechSupport</a></li>
+                        <li><a href="https://legal.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Privacy &amp; legal</a></li>
+                    </ul>
+                </nav>
+                <!-- THE APP: the CineGame app in each market (external sites) -->
+                <nav class="space-y-6" aria-label="The App">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">The App</span>
+                    <ul class="space-y-2">
+                        <li><a href="https://cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame</a></li>
+                        <li><a href="https://biospil.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Biospil DK</a></li>
+                        <li><a href="https://leffapeli.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">LeffaPeli FI</a></li>
+                        <li><a href="https://cinegame.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame SE</a></li>
+                        <li><a href="https://redyplay.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">REDyPLAY DE</a></li>
+                        <li><a href="https://ie.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame IE</a></li>
+                        <li><a href="https://cinegame.pt" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame PT</a></li>
+                    </ul>
+                </nav>
+                <!-- PARTNERS: our cinema partners (same links as the Where we are map) -->
+                <nav class="space-y-6" aria-label="Partners">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Partners</span>
+                    <ul class="space-y-2">
+                        <li><a href="https://drf.dk" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">DRF</a></li>
+                        <li><a href="https://www.finnkino.fi" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Finnkino</a></li>
+                        <li><a href="https://pearlanddean.ie" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Pearl &amp; Dean</a></li>
+                        <li><a href="https://weischer.net" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Weischer</a></li>
+                        <li><a href="https://www.filmstaden.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Filmstaden</a></li>
+                        <li><span class="text-sm text-gray-400">AdLine</span></li>
+                    </ul>
+                </nav>
+                </div>
+            </div>
+        </div>
+        <div class="w-full px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-xs text-gray-500">
+            <span>© 2026 Cinemataztic ApS. All rights reserved.</span>
+            <span class="md:text-center">Hellerupvej 46 - 2900 Hellerup - Denmark - VAT: 37207187</span>
+            <div class="flex items-center md:justify-end gap-5 text-lg">
+                <a href="https://www.facebook.com/CinemaTaztic" target="_blank" rel="noopener" aria-label="Cinemataztic on Facebook" class="text-gray-400 hover:text-brand-cyan transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/company/cinemataztic" target="_blank" rel="noopener" aria-label="Cinemataztic on LinkedIn" class="text-gray-400 hover:text-brand-cyan transition"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/cases.js?v=59"></script>
+    <script src="assets/js/cases-data.js?v=81"></script>
+    <script src="assets/js/brands.js?v=28"></script>
+    <script>
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+        }
+
+        function brandWordmark(name) {
+            return `<span class="text-lg sm:text-xl font-black uppercase tracking-wider text-white/55 group-hover:text-white transition text-center leading-tight">${escapeHtml(name)}</span>`;
+        }
+
+        // --- ALL BRANDS: every brand, A to Z, same tiles as the front page brand wall ---
+        (function renderAllBrands() {
+            const wall = document.getElementById('allBrands');
+            const brands = siteBrands.slice().sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+            wall.innerHTML = brands.map(b => {
+                // A brand with cases links to them on the cases page
+                const term = searchText(b.name);
+                const href = siteCases.some(c => c.category !== 'Pitch' && caseMatches(c, term)) ? ` href="cases.html?search=${encodeURIComponent(b.name)}"` : '';
+                const inner = b.logo
+                    ? `<img src="${escapeHtml(b.logo)}" alt="${escapeHtml(b.name)}" loading="lazy" class="brand-logo${b.badge ? ' brand-logo--badge' : ''} max-h-12 max-w-[130px] w-auto object-contain" data-badge="${b.badge ? 1 : ''}">`
+                    : brandWordmark(b.name);
+                return `<a class="brand-cell group flex items-center justify-center aspect-[3/2] px-4 bg-brand-card border border-brand-border hover:border-brand-cyan transition-colors" title="${escapeHtml(b.name)}"${href}>${inner}</a>`;
+            }).join('');
+            wall.querySelectorAll('img').forEach(img => {
+                // A broken logo link falls back to the name
+                img.addEventListener('error', () => { img.outerHTML = brandWordmark(img.alt); }, { once: true });
+                if (!img.dataset.badge) tightenSvgLogo(img);
+            });
+        })();
+
+        // Icon sets draw logos inside a padded square, so a wide wordmark ends up tiny. For SVG logos,
+        // inline the file and crop its viewBox to the drawing, so every logo gets the same visual height.
+        async function tightenSvgLogo(img) {
+            const url = img.getAttribute('src');
+            if (!/\.svg(\?|#|$)/i.test(url)) return;
+            try {
+                const res = await fetch(url);
+                if (!res.ok) return;
+                const svg = new DOMParser().parseFromString(await res.text(), 'image/svg+xml').documentElement;
+                if (svg.nodeName.toLowerCase() !== 'svg' || !img.isConnected) return;
+                // Drop anything executable before inlining
+                svg.querySelectorAll('script, foreignObject').forEach(el => el.remove());
+                [svg, ...svg.querySelectorAll('*')].forEach(el => {
+                    [...el.attributes].forEach(a => { if (/^on/i.test(a.name) || /^\s*javascript:/i.test(a.value)) el.removeAttribute(a.name); });
+                });
+                svg.querySelectorAll('title').forEach(el => el.remove());
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.setAttribute('role', 'img');
+                svg.setAttribute('aria-label', img.alt);
+                svg.setAttribute('class', 'brand-logo');
+                svg.style.height = '40px';
+                svg.style.width = 'auto';
+                svg.style.maxWidth = '140px';
+                img.replaceWith(svg);
+                const box = svg.getBBox();
+                if (box.width && box.height) svg.setAttribute('viewBox', `${box.x} ${box.y} ${box.width} ${box.height}`);
+            } catch (e) { /* keep the plain <img> */ }
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileDrawer').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
