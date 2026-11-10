@@ -99,6 +99,19 @@
         }
         /* Card grids: more cards across on big screens so the cards stop growing. Products and cases get 4 from
            1700px; cases get 5 from 2300px. Two classes, so they win over the xl:grid-cols-3 in site.css */
+        /* Cases on phones (same as Featured Cases on the front page): two narrow cards side by side. Smaller title and padding, no description,
+           badges as icons only and the tags wrap, so everything fits the narrow card */
+        @media (max-width: 639px) {
+            #casesGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; row-gap: 16px; }
+            #casesGrid h3 { font-size: 0.95rem; line-height: 1.05 !important; }
+            #casesGrid h3 + p { display: none; }
+            #casesGrid .inset-x-0.bottom-0 { padding: 12px; }
+            #casesGrid .inset-x-0.bottom-0 > div { flex-wrap: wrap; gap: 4px; font-size: 8px; letter-spacing: 0.05em; }
+            #casesGrid .top-3 { top: 8px; right: 8px; gap: 4px; }
+            #casesGrid .top-3, #casesGrid .top-3 > div { font-size: 0; padding: 4px 6px; }
+            #casesGrid .top-3.flex { padding: 0; }
+            #casesGrid .top-3 i { font-size: 10px; margin: 0; }
+        }
         @media (min-width: 1700px) { .grid.card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (min-width: 2300px) { .grid.card-grid--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
     </style>
