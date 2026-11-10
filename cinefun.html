@@ -107,6 +107,19 @@
         .hero-copy .text-sm { font-size: 0.875em; }
         /* Card grids: more cards across on big screens so the cards stop growing. Products and cases get 4 from
            1700px; cases get 5 from 2300px. Two classes, so they win over the xl:grid-cols-3 in site.css */
+        /* Latest cases on phones (as on the front page and the cases page), 4 of them: two narrow cards side by side. Smaller title and padding, no description,
+           badges as icons only and the tags wrap, so everything fits the narrow card */
+        @media (max-width: 639px) {
+            #gameCasesGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; row-gap: 16px; }
+            #gameCasesGrid h3 { font-size: 0.95rem; line-height: 1.05 !important; }
+            #gameCasesGrid h3 + p { display: none; }
+            #gameCasesGrid .inset-x-0.bottom-0 { padding: 12px; }
+            #gameCasesGrid .inset-x-0.bottom-0 > div { flex-wrap: wrap; gap: 4px; font-size: 8px; letter-spacing: 0.05em; }
+            #gameCasesGrid .top-3 { top: 8px; right: 8px; gap: 4px; }
+            #gameCasesGrid .top-3, #gameCasesGrid .top-3 > div { font-size: 0; padding: 4px 6px; }
+            #gameCasesGrid .top-3.flex { padding: 0; }
+            #gameCasesGrid .top-3 i { font-size: 10px; margin: 0; }
+        }
         @media (min-width: 1700px) { .grid.card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (min-width: 2300px) { .grid.card-grid--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
         /* CineGame+ phones: same frame as the TrailerQuiz illustration (dark body, thin edge, rounded screen, island) */
@@ -505,7 +518,8 @@
             const grid = document.getElementById('gameCasesGrid');
             if (!grid) return;
             const cases = siteCases;
-            const latest = cases.filter(c => c.category === 'CineFun').slice(0, 3);
+            // 3 cases, or 4 on phones where they stand two by two
+            const latest = cases.filter(c => c.category === 'CineFun').slice(0, window.matchMedia('(max-width: 639px)').matches ? 4 : 3);
             document.getElementById('gameCaseCount').innerText = latest.length;
             if (!latest.length) {
                 grid.innerHTML = `<div class="col-span-full py-12 text-gray-500 font-bold uppercase">No games yet.</div>`;
