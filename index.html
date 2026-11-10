@@ -718,7 +718,7 @@
     </footer>
 
     <script src="assets/js/cases.js?v=66"></script>
-    <script src="assets/js/brands.js?v=30"></script>
+    <script src="assets/js/brands.js?v=31"></script>
     <script src="assets/js/cases-data.js?v=88"></script>
     <script>
 // Cases come from assets/js/cases.js and the brand wall from assets/js/brands.js
@@ -740,18 +740,20 @@ const phoneQuery = window.matchMedia('(max-width: 639px)');
         const bigBrandWall = window.matchMedia('(min-width: 1280px) and (hover: hover) and (pointer: fine)');
         const tabletBrandWall = window.matchMedia('(min-width: 640px)');
         const BRAND_SWAP_MS = 2200;
-        let brandSlots = [];   // index into siteBrands for each visible place
+        // The wall leaves out pitch clients (they are only on all-brands.html)
+        const wallBrands = siteBrands.filter(b => !b.pitch);
+        let brandSlots = [];   // index into wallBrands for each visible place
         let brandSwapTimer = null;
 
         function brandCellContent(i) {
-            const b = siteBrands[i];
+            const b = wallBrands[i];
             return b.logo
                 ? `<img src="${escapeHtml(b.logo)}" alt="${escapeHtml(b.name)}" loading="lazy" class="brand-logo${b.badge ? ' brand-logo--badge' : ''} max-h-12 max-w-[130px] w-auto object-contain" data-brand-index="${i}">`
                 : brandWordmark(b.name);
         }
 
         function fillBrandCell(cell, i) {
-            const { name } = siteBrands[i];
+            const { name } = wallBrands[i];
             cell.title = name;
             cell.innerHTML = brandCellContent(i);
             // A brand with cases links to them on the cases page
@@ -761,13 +763,13 @@ const phoneQuery = window.matchMedia('(max-width: 639px)');
             // A broken logo link falls back to the name
             const img = cell.querySelector('img[data-brand-index]');
             if (!img) return;
-            img.addEventListener('error', () => { img.outerHTML = brandWordmark(siteBrands[i].name); }, { once: true });
-            if (!siteBrands[i].badge) tightenSvgLogo(img);
+            img.addEventListener('error', () => { img.outerHTML = brandWordmark(wallBrands[i].name); }, { once: true });
+            if (!wallBrands[i].badge) tightenSvgLogo(img);
         }
 
         function renderBrandWall() {
             const wall = document.getElementById('brandWall');
-            const total = siteBrands.length;
+            const total = wallBrands.length;
             wall.classList.toggle('brand-wall--big', bigBrandWall.matches);
             brandSlots = [...Array(Math.min(bigBrandWall.matches ? 12 : tabletBrandWall.matches ? 8 : 4, total)).keys()];
             wall.innerHTML = brandSlots.map(() => `

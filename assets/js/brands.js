@@ -3,6 +3,7 @@
 //   name   shown when there is no logo, or the logo link is broken
 //   logo   link or path to the logo (optional)
 //   badge  true for logos that are a coloured badge rather than a wordmark
+//   pitch  true for clients that only have Pitch cases: shown on all-brands.html, not on the front page wall
 //   group  product group, for the filter on all-brands.html: FMCG, TelCo & Tech, Retail, Finance & Insurance,
 //          Media & Entertainment, Movies, Travel & Transport, Logistics & Delivery, Automotive, Health & Pharma,
 //          Energy, Restaurants, Unions or Public & NGO. A brand in two groups gets a list, e.g. ["Energy", "TelCo & Tech"]
@@ -89,5 +90,34 @@ const siteBrands = [
     { name: "Trolls World Tour", logo: "assets/logos/trolls.png", group: "Movies" },
     { name: "Scream VI", logo: "assets/logos/scream.png", group: "Movies" },
     { name: "Visit Germany", logo: "assets/logos/visitgermany.png", badge: true, group: "Travel & Transport" },
-    { name: "Bundeswehr", logo: "assets/logos/bundeswehr.png", group: "Public & NGO" }
+    { name: "Bundeswehr", logo: "assets/logos/bundeswehr.png", group: "Public & NGO" },
+    // Pitch clients: only on all-brands.html, not on the front page brand wall (pitch: true)
+    { name: "Atlante", logo: "assets/logos/atlante-white.png", group: "Energy", pitch: true },
+    { name: "Very", logo: "assets/logos/very-white.png", group: "Retail", pitch: true },
+    { name: "Telenor", logo: "assets/logos/telenor.svg", group: "TelCo & Tech", pitch: true },
+    { name: "Elgiganten", logo: "assets/logos/elgiganten.svg", group: "Retail", pitch: true },
+    { name: "Re-turn", logo: "assets/logos/return.svg", group: "Public & NGO", pitch: true },
+    { name: "Jordan", logo: "assets/logos/jordan.svg", group: "FMCG", pitch: true },
+    { name: "Hitster", logo: "assets/logos/hitster-white.png", group: "Media & Entertainment", pitch: true },
+    { name: "Lidl", logo: "assets/cases/pitch/lidl_logo.png", group: "Retail", pitch: true },
+    { name: "Booking.com", logo: "assets/cases/pitch/logo_booking.png", group: "Travel & Transport", pitch: true },
+    { name: "DS Group", group: "Retail", pitch: true },
+    { name: "Marvel", logo: "assets/cases/pitch/marvel_logo_trans.png", badge: true, group: "Movies", pitch: true },
+    { name: "Oreo", logo: "assets/cases/pitch/oreo_logo.png", badge: true, group: "FMCG", pitch: true },
+    { name: "Red Rooster", logo: "assets/cases/pitch/rr-logo.png", group: "Restaurants", pitch: true },
+    { name: "KFC", logo: "assets/cases/pitch/kfc-logo.png", badge: true, group: "Restaurants", pitch: true },
+    { name: "Hungry Jack's", logo: "assets/cases/pitch/hj_logo.png", badge: true, group: "Restaurants", pitch: true },
+    { name: "Danske Bank", group: "Finance & Insurance", pitch: true },
+    { name: "Cocio", logo: "assets/cases/pitch/cocio_logo.png", badge: true, group: "FMCG", pitch: true },
+    { name: "OnePlus", logo: "assets/cases/pitch/one_plus_logo.png", group: "TelCo & Tech", pitch: true },
+    { name: "Stimorol", logo: "assets/cases/pitch/stimorol_logo.png", badge: true, group: "FMCG", pitch: true },
+    { name: "MobilePay", logo: "assets/cases/pitch/mobilepay_logo.png", group: "Finance & Insurance", pitch: true },
+    { name: "Volkswagen", logo: "assets/cases/pitch/vw_logo.png", group: "Automotive", pitch: true },
+    { name: "Sunweb", logo: "assets/cases/pitch/sunweb_logo.png", group: "Travel & Transport", pitch: true },
+    { name: "Kims", group: "FMCG", pitch: true },
+    { name: "Normal", logo: "assets/cases/pitch/normal.png", group: "Retail", pitch: true },
+    { name: "About You", logo: "assets/cases/pitch/about-you_logo.png", group: "Retail", pitch: true },
+    { name: "Vigor", logo: "assets/cases/pitch/logo_vigor.png", group: "FMCG", pitch: true },
+    { name: "Air New Zealand", logo: "assets/cases/pitch/logo_az.png", group: "Travel & Transport", pitch: true },
+    { name: "Wolt", logo: "assets/cases/pitch/logo_wolt.png", group: "Logistics & Delivery", pitch: true }
 ];

@@ -273,7 +273,7 @@
 
     <script src="assets/js/cases.js?v=66"></script>
     <script src="assets/js/cases-data.js?v=88"></script>
-    <script src="assets/js/brands.js?v=30"></script>
+    <script src="assets/js/brands.js?v=31"></script>
     <script>
         function escapeHtml(value) {
             return String(value).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
@@ -288,9 +288,9 @@
             const wall = document.getElementById('allBrands');
             const brands = siteBrands.slice().sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
             wall.innerHTML = brands.map(b => {
-                // A brand with cases links to them on the cases page
+                // A brand with cases links to them on the cases page (pitch clients to their pitches)
                 const term = searchText(b.name);
-                const href = siteCases.some(c => c.category !== 'Pitch' && caseMatches(c, term)) ? ` href="cases.html?search=${encodeURIComponent(b.name)}"` : '';
+                const href = siteCases.some(c => (c.category !== 'Pitch' || b.pitch) && caseMatches(c, term)) ? ` href="cases.html?search=${encodeURIComponent(b.name)}"` : '';
                 const inner = b.logo
                     ? `<img src="${escapeHtml(b.logo)}" alt="${escapeHtml(b.name)}" loading="lazy" class="brand-logo${b.badge ? ' brand-logo--badge' : ''} max-h-12 max-w-[130px] w-auto object-contain" data-badge="${b.badge ? 1 : ''}">`
                     : brandWordmark(b.name);
