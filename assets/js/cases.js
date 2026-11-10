@@ -1324,6 +1324,183 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-airtox",
+        title: "Airtox",
+        client: "Airtox",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/airtox-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/airtox-1.jpg",
+            "assets/cases/pitch/airtox-2.jpg",
+            "assets/cases/pitch/airtox-3.jpg",
+            "assets/cases/pitch/airtox-4.jpg"
+        ],
+        description: "A CineGame Jumper pitch for Airtox in Danish cinemas: Fear Nothing. The audience jumps between platforms collecting Airtox shoes, for a chance to win one of 10 pairs."
+    },
+    {
+        id: "pitch-chilimobil",
+        title: "Chili Mobil",
+        client: "Chili Mobil",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/chilimobil-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/chilimobil-1.jpg",
+            "assets/cases/pitch/chilimobil-2.jpg",
+            "assets/cases/pitch/chilimobil-3.jpg",
+            "assets/cases/pitch/chilimobil-4.jpg"
+        ],
+        description: "A CineGame Jumper pitch for Chili Mobil in Swedish cinemas: Logga in. Spela. Vinn Fri Surf. The audience jumps and picks up chili peppers, the winner gets free surf for a month, and everyone gets 15% off at ChiliMobil.se."
+    },
+    {
+        id: "pitch-droetker-flappypizza",
+        title: "Dr. Oetker – Flappy Pizza",
+        client: "Dr. Oetker",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/droetker-flappypizza-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/droetker-flappypizza-1.jpg",
+            "assets/cases/pitch/droetker-flappypizza-2.jpg",
+            "assets/cases/pitch/droetker-flappypizza-3.jpg",
+            "assets/cases/pitch/droetker-flappypizza-4.jpg",
+            "assets/cases/pitch/droetker-flappypizza-5.jpg"
+        ],
+        description: "A CineGame pitch for Dr. Oetker Ristorante in Danish cinemas: Flappy Pizza. The audience flies a pizza slice past the obstacles, and the winner gets a year's supply of Dr. Oetker pizza."
+    },
+    {
+        id: "pitch-eon",
+        title: "E.ON",
+        client: "E.ON",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/eon-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/eon-1.jpg",
+            "assets/cases/pitch/eon-2.jpg",
+            "assets/cases/pitch/eon-3.jpg",
+            "assets/cases/pitch/eon-4.jpg"
+        ],
+        description: "A CineGame Jumper pitch for E.ON in German cinemas: Clean energy for a brighter future. The audience jumps through a landscape of wind turbines, and the winner gets a free popcorn."
+    },
+    {
+        id: "pitch-ef",
+        title: "EF Education First",
+        client: "EF Education First",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/ef-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/ef-1.jpg",
+            "assets/cases/pitch/ef-2.jpg",
+            "assets/cases/pitch/ef-3.jpg",
+            "assets/cases/pitch/ef-4.jpg"
+        ],
+        description: "A CineGame Jumper pitch for EF Education First in Danish cinemas: Episk sprogrejse starter her. The audience races through Paris, and the winner gets an EF cycling water bottle."
+    },
+    {
+        id: "pitch-hp",
+        title: "HP",
+        client: "HP",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/hp-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/hp-1.jpg",
+            "assets/cases/pitch/hp-2.jpg",
+            "assets/cases/pitch/hp-3.jpg",
+            "assets/cases/pitch/hp-4.jpg"
+        ],
+        description: "A CineGame Jumper pitch for HP OMEN and Intel. The audience jumps across a gaming desk, the winner gets an exclusive prize from OMEN, and everyone gets a Bonus Spin."
+    },
+    {
+        id: "pitch-justspices",
+        title: "Just Spices",
+        client: "Just Spices",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/justspices-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/justspices-1.jpg",
+            "assets/cases/pitch/justspices-2.jpg",
+            "assets/cases/pitch/justspices-3.jpg"
+        ],
+        description: "A CineGame Jumper pitch for Just Spices in German cinemas. The audience jumps across the spice jars, the winner gets a prize from Just Spices, and everyone gets 20% off."
+    },
+    {
+        id: "pitch-legoland",
+        title: "LEGOLAND",
+        client: "LEGOLAND",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/legoland-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/legoland-1.jpg",
+            "assets/cases/pitch/legoland-2.jpg",
+            "assets/cases/pitch/legoland-3.jpg"
+        ],
+        description: "A CineGame Jumper pitch for LEGOLAND Billund Resort in Danish cinemas. The audience jumps through a LEGO world, and the best player wins a free popcorn."
+    },
+    {
+        id: "pitch-mcd-jumper",
+        title: "McDonald's – Jumper",
+        client: "McDonald's",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/mcd-jumper-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/mcd-jumper-1.jpg",
+            "assets/cases/pitch/mcd-jumper-2.jpg",
+            "assets/cases/pitch/mcd-jumper-3.jpg",
+            "assets/cases/pitch/mcd-jumper-4.jpg",
+            "assets/cases/pitch/mcd-jumper-5.jpg",
+            "assets/cases/pitch/mcd-jumper-6.jpg",
+            "assets/cases/pitch/mcd-jumper-7.jpg"
+        ],
+        description: "A CineGame Jumper pitch for McDonald's. The audience jumps across a world of McDonald's food, and the best player wins a free McDonald's Cheeseburger."
+    },
+    {
+        id: "pitch-oatly",
+        title: "Oatly",
+        client: "Oatly",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/oatly-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/oatly-1.jpg",
+            "assets/cases/pitch/oatly-2.jpg",
+            "assets/cases/pitch/oatly-3.jpg"
+        ],
+        description: "A CineGame Jumper pitch for Oatly in German cinemas. The audience jumps across Oatly cartons, and the winner gets a prize from Oatly."
+    },
+    {
+        id: "pitch-oister-jumper",
+        title: "Oister – Jumper",
+        client: "Oister",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/oister-jumper-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/oister-jumper-1.jpg",
+            "assets/cases/pitch/oister-jumper-2.jpg",
+            "assets/cases/pitch/oister-jumper-3.jpg",
+            "assets/cases/pitch/oister-jumper-4.jpg"
+        ],
+        description: "A CineGame pitch for Oister in Danish cinemas. The audience swipes to jump between rocks out at sea, and the winner gets a great Oister prize."
+    },
+    {
         id: "pitch-santamaria",
         title: "Santa Maria",
         client: "Santa Maria",

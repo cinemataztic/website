@@ -6,7 +6,7 @@
 //   pitch  true for clients that only have Pitch cases: shown on all-brands.html, not on the front page wall
 //   group  product group, for the filter on all-brands.html: FMCG, TelCo & Tech, Retail, Finance & Insurance,
 //          Media & Entertainment, Movies, Travel & Transport, Logistics & Delivery, Automotive, Health & Pharma,
-//          Energy, Restaurants, Unions or Public & NGO. A brand in two groups gets a list, e.g. ["Energy", "TelCo & Tech"]
+//          Energy, Restaurants, Unions, Education or Public & NGO. A brand in two groups gets a list, e.g. ["Energy", "TelCo & Tech"]
 
 const siteBrands = [
     { name: "Coca-Cola", logo: "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/cocacola.svg", group: "FMCG" },
@@ -119,6 +119,14 @@ const siteBrands = [
     { name: "About You", logo: "assets/cases/pitch/about-you_logo.png", group: "Retail", pitch: true },
     { name: "Vigor", logo: "assets/cases/pitch/logo_vigor.png", group: "FMCG", pitch: true },
     { name: "Air New Zealand", logo: "assets/cases/pitch/logo_az.png", group: "Travel & Transport", pitch: true },
+    { name: "Airtox", logo: "assets/logos/airtox-white.png", group: "Retail", pitch: true },
+    { name: "Chili Mobil", logo: "assets/logos/chilimobil-white.png", group: "TelCo & Tech", pitch: true },
+    { name: "E.ON", logo: "assets/logos/eon-white.png", group: "Energy", pitch: true },
+    { name: "EF Education First", logo: "assets/logos/ef-white.png", group: "Education", pitch: true },
+    { name: "HP", logo: "assets/logos/hp.svg", group: "TelCo & Tech", pitch: true },
+    { name: "Just Spices", logo: "assets/logos/justspices-white.png", group: "FMCG", pitch: true },
+    { name: "LEGOLAND", logo: "assets/logos/legoland.svg", group: "Media & Entertainment", pitch: true },
+    { name: "Oatly", logo: "assets/logos/oatly.svg", group: "FMCG", pitch: true },
     { name: "Santa Maria", logo: "assets/logos/santamaria-white.png", group: "FMCG", pitch: true },
     { name: "Stadium", logo: "assets/logos/stadium.svg", group: "Retail", pitch: true },
     { name: "Targobank", logo: "assets/logos/targobank.svg", group: "Finance & Insurance", pitch: true },

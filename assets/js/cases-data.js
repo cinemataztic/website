@@ -87,6 +87,14 @@ const caseLogos = {
     "Targobank": { src: "assets/logos/targobank.svg" }, // Wikimedia Commons, File:Targobank-logo.svg, made white
     "Stadium": { src: "assets/logos/stadium.svg" }, // Wikimedia Commons, File:Stadium logo.svg, made white
     "Santa Maria": { src: "assets/logos/santamaria-white.png" }, // taken from the pitch images, the white letters and oval on transparent
+    "Airtox": { src: "assets/logos/airtox-white.png" }, // taken from the pitch images, made white
+    "Chili Mobil": { src: "assets/logos/chilimobil-white.png" }, // taken from the pitch images, the white speech bubble with the name cut out
+    "E.ON": { src: "assets/logos/eon-white.png" }, // taken from the pitch images, made white
+    "EF Education First": { src: "assets/logos/ef-white.png" }, // taken from the pitch images, the pink badge made white with EF cut out
+    "HP": { src: "assets/logos/hp.svg" }, // Wikimedia Commons, File:HP logo 2012.svg, made white
+    "Just Spices": { src: "assets/logos/justspices-white.png" }, // taken from the pitch images, the white letters
+    "LEGOLAND": { src: "assets/logos/legoland.svg" }, // Wikimedia Commons, File:Legoland logo.svg, the wordmark made white
+    "Oatly": { src: "assets/logos/oatly.svg" }, // Wikimedia Commons, File:Oatly logo.svg, made white
     "Sygeforsikringen “danmark”": { src: "assets/logos/sygeforsikring.svg" }, // from sygeforsikring.dk, made white with the heart cut out
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },
