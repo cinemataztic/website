@@ -84,6 +84,9 @@ const caseLogos = {
     "Atlante": { src: "assets/logos/atlante-white.png" }, // the white logo from atlante.energy
     "2degrees": { src: "assets/logos/2degrees.svg" }, // the 2° mark from 2degrees.nz, white on transparent
     "7-Eleven": { src: "assets/logos/7eleven.svg" }, // Wikimedia Commons, File:7-Eleven logo 2021.svg, made white
+    "Targobank": { src: "assets/logos/targobank.svg" }, // Wikimedia Commons, File:Targobank-logo.svg, made white
+    "Stadium": { src: "assets/logos/stadium.svg" }, // Wikimedia Commons, File:Stadium logo.svg, made white
+    "Santa Maria": { src: "assets/logos/santamaria-white.png" }, // taken from the pitch images, the white letters and oval on transparent
     "Sygeforsikringen “danmark”": { src: "assets/logos/sygeforsikring.svg" }, // from sygeforsikring.dk, made white with the heart cut out
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },

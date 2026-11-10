@@ -1324,6 +1324,75 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-santamaria",
+        title: "Santa Maria",
+        client: "Santa Maria",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/santamaria-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/santamaria-1.jpg",
+            "assets/cases/pitch/santamaria-2.jpg",
+            "assets/cases/pitch/santamaria-3.jpg",
+            "assets/cases/pitch/santamaria-4.jpg"
+        ],
+        description: "A CineGame Jumper pitch for Santa Maria in Swedish cinemas. The audience jumps across shelves of Santa Maria products collecting diamonds. The Chef of the Day wins a bottle of wok sauce, and everyone gets 20% off their next Santa Maria dinner."
+    },
+    {
+        id: "pitch-stadium",
+        title: "Stadium",
+        client: "Stadium",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/stadium-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/stadium-1.jpg",
+            "assets/cases/pitch/stadium-2.jpg"
+        ],
+        description: "A CineGame pitch for Stadium in Swedish cinemas: Sports Camp. The audience runs, jumps over obstacles and picks up coins, then takes on rougher terrain on a bike."
+    },
+    {
+        id: "pitch-stimorol-jumper",
+        title: "Stimorol – Jumper",
+        client: "Stimorol",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/stimorol-jumper-1.jpg",
+        logo: "assets/cases/pitch/stimorol_logo.png",
+        logoBox: [0, 22, 350, 79, 350, 136],
+        video: "",
+        images: [
+            "assets/cases/pitch/stimorol-jumper-1.jpg",
+            "assets/cases/pitch/stimorol-jumper-2.jpg",
+            "assets/cases/pitch/stimorol-jumper-3.jpg",
+            "assets/cases/pitch/stimorol-jumper-4.jpg",
+            "assets/cases/pitch/stimorol-jumper-5.jpg",
+            "assets/cases/pitch/stimorol-jumper-6.jpg"
+        ],
+        description: "A CineGame Jumper pitch for Stimorol in Swedish cinemas: Chew Bold. The audience jumps over Stimorol packs and collects stars, and the winner gets a voucher for a free Stimorol Mega pack."
+    },
+    {
+        id: "pitch-targobank",
+        title: "Targobank",
+        client: "Targobank",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/targobank-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/targobank-1.jpg",
+            "assets/cases/pitch/targobank-2.jpg",
+            "assets/cases/pitch/targobank-3.jpg",
+            "assets/cases/pitch/targobank-4.jpg",
+            "assets/cases/pitch/targobank-5.jpg",
+            "assets/cases/pitch/targobank-6.jpg",
+            "assets/cases/pitch/targobank-7.jpg"
+        ],
+        description: "A CineGame Jumper pitch for Targobank in German cinemas: Wir geben Rückenwind. The audience jumps over obstacles, collects coins and uses the Targobank tailwind boost to unlock a first house and car. The winner gets a free popcorn."
+    },
+    {
         id: "pitch-7eleven-dinerdash",
         title: "7-Eleven – Diner Dash",
         client: "7-Eleven",

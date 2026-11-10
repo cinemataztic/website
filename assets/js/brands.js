@@ -119,6 +119,9 @@ const siteBrands = [
     { name: "About You", logo: "assets/cases/pitch/about-you_logo.png", group: "Retail", pitch: true },
     { name: "Vigor", logo: "assets/cases/pitch/logo_vigor.png", group: "FMCG", pitch: true },
     { name: "Air New Zealand", logo: "assets/cases/pitch/logo_az.png", group: "Travel & Transport", pitch: true },
+    { name: "Santa Maria", logo: "assets/logos/santamaria-white.png", group: "FMCG", pitch: true },
+    { name: "Stadium", logo: "assets/logos/stadium.svg", group: "Retail", pitch: true },
+    { name: "Targobank", logo: "assets/logos/targobank.svg", group: "Finance & Insurance", pitch: true },
     { name: "7-Eleven", logo: "assets/logos/7eleven.svg", group: "Retail", pitch: true },
     { name: "2degrees", logo: "assets/logos/2degrees.svg", group: "TelCo & Tech", pitch: true },
     { name: "Wolt", logo: "assets/cases/pitch/logo_wolt.png", group: "Logistics & Delivery", pitch: true }
