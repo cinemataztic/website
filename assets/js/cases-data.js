@@ -82,6 +82,8 @@ const caseLogos = {
     "Telenor": { src: "assets/logos/telenor.svg" }, // Wikimedia Commons, File:Telenor Logo (symbol and wordmark).svg, made white
     "Very": { src: "assets/logos/very-white.png" }, // Wikimedia Commons, File:Very Logo.png, the white letters on transparent
     "Atlante": { src: "assets/logos/atlante-white.png" }, // the white logo from atlante.energy
+    "2degrees": { src: "assets/logos/2degrees.svg" }, // the 2° mark from 2degrees.nz, white on transparent
+    "7-Eleven": { src: "assets/logos/7eleven.svg" }, // Wikimedia Commons, File:7-Eleven logo 2021.svg, made white
     "Sygeforsikringen “danmark”": { src: "assets/logos/sygeforsikring.svg" }, // from sygeforsikring.dk, made white with the heart cut out
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },

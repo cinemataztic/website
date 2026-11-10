@@ -1324,6 +1324,45 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-7eleven",
+        title: "7-Eleven",
+        client: "7-Eleven",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/7eleven-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/7eleven-1.jpg",
+            "assets/cases/pitch/7eleven-2.jpg",
+            "assets/cases/pitch/7eleven-3.jpg",
+            "assets/cases/pitch/7eleven-4.jpg",
+            "assets/cases/pitch/7eleven-5.jpg",
+            "assets/cases/pitch/7eleven-6.jpg"
+        ],
+        description: "A CineGame Shuffle pitch for 7-Eleven in Denmark. The audience keeps an eye on this week's treats while the phones shuffle, the winner gets a STATE Energy, and everyone can play on in the 7-Eleven app."
+    },
+    {
+        id: "pitch-2degrees",
+        title: "2degrees",
+        client: "2degrees",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/2degrees-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/2degrees-1.jpg",
+            "assets/cases/pitch/2degrees-2.jpg",
+            "assets/cases/pitch/2degrees-3.jpg",
+            "assets/cases/pitch/2degrees-4.jpg",
+            "assets/cases/pitch/2degrees-5.jpg",
+            "assets/cases/pitch/2degrees-6.jpg",
+            "assets/cases/pitch/2degrees-7.jpg",
+            "assets/cases/pitch/2degrees-8.jpg",
+            "assets/cases/pitch/2degrees-9.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for 2degrees in New Zealand: Fighting for Fair. The audience answers questions about 2degrees' rugby sponsorships, the winner enters the draw for an iPhone 15, and everyone gets a Bonus Spin."
+    },
+    {
         id: "pitch-atlante",
         title: "Atlante",
         client: "Atlante",
