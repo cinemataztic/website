@@ -1324,6 +1324,211 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-ally",
+        title: "Ally",
+        client: "Ally",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/ally-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/ally-1.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Ally in Danish cinemas. The audience answers questions about Ally on their phones."
+    },
+    {
+        id: "pitch-codan",
+        title: "Codan",
+        client: "Codan",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/codan-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/codan-1.jpg",
+            "assets/cases/pitch/codan-2.jpg",
+            "assets/cases/pitch/codan-3.jpg",
+            "assets/cases/pitch/codan-4.jpg",
+            "assets/cases/pitch/codan-5.jpg",
+            "assets/cases/pitch/codan-6.jpg",
+            "assets/cases/pitch/codan-7.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Codan in Danish cinemas. The audience plays the Codan quiz in the BioSpil app, and the winner gets a free popcorn."
+    },
+    {
+        id: "pitch-currys",
+        title: "Currys",
+        client: "Currys",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/currys-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/currys-1.jpg",
+            "assets/cases/pitch/currys-2.jpg",
+            "assets/cases/pitch/currys-3.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Currys in UK cinemas. The audience plays for free popcorn and Currys gift cards."
+    },
+    {
+        id: "pitch-dendy",
+        title: "Dendy Cinemas",
+        client: "Dendy Cinemas",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/dendy-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/dendy-1.jpg",
+            "assets/cases/pitch/dendy-2.jpg",
+            "assets/cases/pitch/dendy-3.jpg",
+            "assets/cases/pitch/dendy-4.jpg",
+            "assets/cases/pitch/dendy-5.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Dendy Cinemas. The audience answers movie questions for a chance to win Dendy cinema tickets."
+    },
+    {
+        id: "pitch-kilroy",
+        title: "Kilroy",
+        client: "Kilroy",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/kilroy-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/kilroy-1.jpg",
+            "assets/cases/pitch/kilroy-2.jpg",
+            "assets/cases/pitch/kilroy-3.jpg",
+            "assets/cases/pitch/kilroy-4.jpg",
+            "assets/cases/pitch/kilroy-5.jpg",
+            "assets/cases/pitch/kilroy-6.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Kilroy in Danish cinemas. The audience answers travel questions on their phones in the Kilroy quiz."
+    },
+    {
+        id: "pitch-krifa",
+        title: "Krifa",
+        client: "Krifa",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/krifa-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/krifa-1.jpg",
+            "assets/cases/pitch/krifa-2.jpg",
+            "assets/cases/pitch/krifa-3.jpg",
+            "assets/cases/pitch/krifa-4.jpg",
+            "assets/cases/pitch/krifa-5.jpg",
+            "assets/cases/pitch/krifa-6.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Krifa in Danish cinemas: God arbejdsliv. The audience plays the Krifa quiz in the BioSpil app, and the winner gets a popcorn."
+    },
+    {
+        id: "pitch-matas-quiz",
+        title: "Matas – Quiz Show",
+        client: "Matas",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/matas-quiz-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/matas-quiz-1.jpg",
+            "assets/cases/pitch/matas-quiz-2.jpg",
+            "assets/cases/pitch/matas-quiz-3.jpg",
+            "assets/cases/pitch/matas-quiz-4.jpg",
+            "assets/cases/pitch/matas-quiz-5.jpg",
+            "assets/cases/pitch/matas-quiz-6.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Club Matas in Danish cinemas: the beauty quiz. The audience answers beauty questions on their phones."
+    },
+    {
+        id: "pitch-mrgreen",
+        title: "Mr Green",
+        client: "Mr Green",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/mrgreen-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/mrgreen-1.jpg",
+            "assets/cases/pitch/mrgreen-2.jpg",
+            "assets/cases/pitch/mrgreen-3.jpg",
+            "assets/cases/pitch/mrgreen-4.jpg",
+            "assets/cases/pitch/mrgreen-5.jpg",
+            "assets/cases/pitch/mrgreen-6.jpg",
+            "assets/cases/pitch/mrgreen-7.jpg",
+            "assets/cases/pitch/mrgreen-8.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Mr Green in Danish cinemas. Log in, play along and win."
+    },
+    {
+        id: "pitch-nextory",
+        title: "Nextory",
+        client: "Nextory",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/nextory-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/nextory-1.jpg",
+            "assets/cases/pitch/nextory-2.jpg",
+            "assets/cases/pitch/nextory-3.jpg",
+            "assets/cases/pitch/nextory-4.jpg",
+            "assets/cases/pitch/nextory-5.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Nextory. The audience answers questions about books, and everyone can try Nextory for free for the next 30 days."
+    },
+    {
+        id: "pitch-sky",
+        title: "Sky",
+        client: "Sky",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/sky-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/sky-1.jpg",
+            "assets/cases/pitch/sky-2.jpg",
+            "assets/cases/pitch/sky-3.jpg",
+            "assets/cases/pitch/sky-4.jpg",
+            "assets/cases/pitch/sky-5.jpg",
+            "assets/cases/pitch/sky-6.jpg",
+            "assets/cases/pitch/sky-7.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Sky Glass in UK cinemas. The audience plays the quiz for a chance to win a Sky Glass TV."
+    },
+    {
+        id: "pitch-stryhns",
+        title: "Stryhns",
+        client: "Stryhns",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/stryhns-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/stryhns-1.jpg",
+            "assets/cases/pitch/stryhns-2.jpg",
+            "assets/cases/pitch/stryhns-3.jpg",
+            "assets/cases/pitch/stryhns-4.jpg"
+        ],
+        description: "A CineGame pitch for Stryhns and Børnetelefonen in Danish cinemas. The audience plays along in the BioSpil app and takes part in the lottery."
+    },
+    {
+        id: "pitch-vattenfall",
+        title: "Vattenfall",
+        client: "Vattenfall",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/vattenfall-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/vattenfall-1.jpg",
+            "assets/cases/pitch/vattenfall-2.jpg",
+            "assets/cases/pitch/vattenfall-3.jpg"
+        ],
+        description: "A CineGame Quiz Show pitch for Vattenfall. The audience plays the Vattenfall quiz, for a chance to win a free popcorn."
+    },
+    {
         id: "pitch-cupra",
         title: "Cupra",
         client: "Cupra",
@@ -1995,25 +2200,6 @@ const siteCases = [
             "assets/cases/pitch/dsgroup-quizshow-6.jpg"
         ],
         description: "A CineGame pitch for DS Group: Quiz Show."
-    },
-    {
-        id: "pitch-lidl",
-        title: "Lidl – Go Full Lidl",
-        client: "Lidl",
-        category: "Pitch",
-        mediaType: "image",
-        cover: "assets/cases/pitch/l2.jpg",
-        logo: "assets/cases/pitch/lidl_logo.png",
-        logoBox: [8, 10, 172, 69, 194, 87],
-        video: "",
-        images: [
-            "assets/cases/pitch/l2.jpg",
-            "assets/cases/pitch/l3.jpg",
-            "assets/cases/pitch/l4.jpg",
-            "assets/cases/pitch/l5.jpg",
-            "assets/cases/pitch/l6.jpg"
-        ],
-        description: "A CineGame pitch for Lidl: Go Full Lidl."
     },
     {
         id: "pitch-marvel",

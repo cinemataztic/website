@@ -97,6 +97,16 @@ const caseLogos = {
     "Toyota": { src: "assets/logos/toyota.svg" }, // Simple Icons (toyota), white
     "VisitDenmark": { src: "assets/logos/visitdenmark-white.png" }, // taken from the pitch images, made white
     "Copenhagen Zoo": { src: "assets/logos/copenhagenzoo-white.png" }, // taken from the pitch images, the white logo
+    "Codan": { src: "assets/logos/codan-white.png" }, // taken from the pitch images, made white
+    "Currys": { src: "assets/logos/currys-white.png" }, // taken from the pitch images, made white
+    "Dendy Cinemas": { src: "assets/logos/dendy-white.png" }, // taken from the pitch images, made white
+    "Kilroy": { src: "assets/logos/kilroy-white.png" }, // taken from the pitch images, made white
+    "Krifa": { src: "assets/logos/krifa-white.png" }, // taken from the pitch images, made white
+    "Mr Green": { src: "assets/logos/mrgreen-white.png" }, // taken from the pitch images, made white
+    "Nextory": { src: "assets/logos/nextory-white.png" }, // taken from the pitch images, made white
+    "Sky": { src: "assets/logos/sky-white.png" }, // taken from the pitch images, made white
+    "Stryhns": { src: "assets/logos/stryhns-white.png" }, // taken from the pitch images, made white
+    "Vattenfall": { src: "assets/logos/vattenfall-white.png" }, // taken from the pitch images, made white
     "Airtox": { src: "assets/logos/airtox-white.png" }, // taken from the pitch images, made white
     "Chili Mobil": { src: "assets/logos/chilimobil-white.png" }, // taken from the pitch images, the white speech bubble with the name cut out
     "E.ON": { src: "assets/logos/eon-white.png" }, // taken from the pitch images, made white
