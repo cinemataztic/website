@@ -468,7 +468,12 @@
 
         <!-- STUDIO: full-bleed image band with headline + stats -->
         <section id="about" class="relative overflow-hidden border-b border-brand-border scroll-mt-20">
-            <img src="assets/images/cinema-theater.jpg" alt="A full cinema auditorium: the audience in red seats watching the big screen" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+            <!-- Background film: before the cinema, in the auditorium playing, and after (Pexels stock clips, cut into
+                 assets/video/who-we-are.mp4). Silent and looping; the still image shows until it plays, and instead of it
+                 for people who prefer reduced motion -->
+            <video id="aboutVideo" class="absolute inset-0 w-full h-full object-cover" poster="assets/images/cinema-theater.jpg" muted loop playsinline preload="none" aria-hidden="true">
+                <source src="assets/video/who-we-are.mp4?v=3" type="video/mp4">
+            </video>
             <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/85 to-brand-dark/40"></div>
             <div class="relative w-full px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
                 <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow mb-10">Who we are</span>
@@ -1574,6 +1579,17 @@ const MAX_FEATURED = 9;
                 setTimeout(finish, COUNT_MS + HOLD_MS);
             }, { threshold: 0.6 });
             observer.observe(countEl);
+        })();
+
+        // --- WHO WE ARE: background film ---
+        // Loads and plays only when the section is near the screen, pauses when it leaves; never for reduced motion
+        (function initAboutVideo() {
+            const video = document.getElementById('aboutVideo');
+            if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting) video.play().catch(() => {});
+                else video.pause();
+            }, { rootMargin: '200px 0px' }).observe(video);
         })();
 
         // --- WHO WE ARE: arrow buttons step through the texts ---
