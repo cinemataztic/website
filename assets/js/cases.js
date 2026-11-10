@@ -1324,6 +1324,71 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-telenor",
+        title: "Telenor",
+        client: "Telenor",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/telenor-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/telenor-1.jpg",
+            "assets/cases/pitch/telenor-2.jpg",
+            "assets/cases/pitch/telenor-3.jpg",
+            "assets/cases/pitch/telenor-4.jpg",
+            "assets/cases/pitch/telenor-5.jpg",
+            "assets/cases/pitch/telenor-6.jpg"
+        ],
+        description: "A CineGame pitch for Telenor: Bedste siger. The audience follows Grandma's moves through the airport and repeats them in the right order, for a chance to win Denmark's best roaming package."
+    },
+    {
+        id: "pitch-elgiganten",
+        title: "Elgiganten",
+        client: "Elgiganten",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/elgiganten-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/elgiganten-1.jpg",
+            "assets/cases/pitch/elgiganten-2.jpg",
+            "assets/cases/pitch/elgiganten-3.jpg"
+        ],
+        description: "A Christmas CineGame pitch for Elgiganten: Pakkespillet. The audience sorts gifts into gaming, screens and sound, the winner gets popcorn, and everyone who plays gets a discount at Elgiganten."
+    },
+    {
+        id: "pitch-return",
+        title: "Re-turn",
+        client: "Re-turn",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/return-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/return-1.jpg",
+            "assets/cases/pitch/return-2.jpg",
+            "assets/cases/pitch/return-3.jpg",
+            "assets/cases/pitch/return-4.jpg"
+        ],
+        description: "A CineGame pitch for Re-turn, Ireland's Deposit Return Scheme: Re-turn it Right. The audience swipes rubbish left and returns bottles and cans right, for a chance to win One4all gift cards."
+    },
+    {
+        id: "pitch-jordan",
+        title: "Jordan",
+        client: "Jordan",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/jordan-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/jordan-1.jpg",
+            "assets/cases/pitch/jordan-2.jpg",
+            "assets/cases/pitch/jordan-3.jpg",
+            "assets/cases/pitch/jordan-4.jpg"
+        ],
+        description: "A CineGame pitch for Jordan: the Jordan Brush Academy Challenge. The audience avoids obstacles and picks up Ootie toothbrushes, and the winner gets a free Ootie brush."
+    },
+    {
         id: "pitch-hitster",
         title: "Hitster",
         client: "Hitster",

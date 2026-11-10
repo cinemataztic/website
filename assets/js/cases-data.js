@@ -76,6 +76,10 @@ const caseLogos = {
     "Teknicar": { src: "assets/logos/teknicar-white.png" }, // supplied by the user, the name cut out of a white badge
     "3F": { src: "assets/logos/3f.png" }, // logo from 3f.dk
     "Hitster": { src: "assets/logos/hitster-white.png" }, // from hitstergame.com, the neon letters made white on transparent
+    "Jordan": { src: "assets/logos/jordan.svg" }, // from jordanoralcare.com, made white
+    "Re-turn": { src: "assets/logos/return.svg" }, // the white logo from re-turn.ie
+    "Elgiganten": { src: "assets/logos/elgiganten.svg" }, // Wikimedia Commons, File:Elgiganten logo.svg, made white
+    "Telenor": { src: "assets/logos/telenor.svg" }, // Wikimedia Commons, File:Telenor Logo (symbol and wordmark).svg, made white
     "Sygeforsikringen “danmark”": { src: "assets/logos/sygeforsikring.svg" }, // from sygeforsikring.dk, made white with the heart cut out
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },
