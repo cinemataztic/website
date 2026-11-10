@@ -96,6 +96,19 @@
         .hero-copy .text-sm { font-size: 0.875em; }
         /* Card grids: more cards across on big screens so the cards stop growing. Products and cases get 4 from
            1700px; cases get 5 from 2300px. Two classes, so they win over the xl:grid-cols-3 in site.css */
+        /* Featured Cases on phones: two narrow cards side by side. Smaller title and padding, no description,
+           badges as icons only and the tags wrap, so everything fits the narrow card */
+        @media (max-width: 639px) {
+            #casesGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; row-gap: 16px; }
+            #casesGrid h3 { font-size: 0.95rem; line-height: 1.05 !important; }
+            #casesGrid h3 + p { display: none; }
+            #casesGrid .inset-x-0.bottom-0 { padding: 12px; }
+            #casesGrid .inset-x-0.bottom-0 > div { flex-wrap: wrap; gap: 4px; font-size: 8px; letter-spacing: 0.05em; }
+            #casesGrid .top-3 { top: 8px; right: 8px; gap: 4px; }
+            #casesGrid .top-3, #casesGrid .top-3 > div { font-size: 0; padding: 4px 6px; }
+            #casesGrid .top-3.flex { padding: 0; }
+            #casesGrid .top-3 i { font-size: 10px; margin: 0; }
+        }
         @media (min-width: 1700px) { .grid.card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (min-width: 2300px) { .grid.card-grid--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
     </style>
@@ -709,6 +722,9 @@
     <script>
 // Cases come from assets/js/cases.js and the brand wall from assets/js/brands.js
 const MAX_FEATURED = 9;
+// Phones show two narrow cases side by side, and only 8 of them (an even number fills the last row)
+const MAX_FEATURED_PHONE = 8;
+const phoneQuery = window.matchMedia('(max-width: 639px)');
 
         // --- BRAND WALL ---
         function escapeHtml(value) {
@@ -811,10 +827,10 @@ const MAX_FEATURED = 9;
             } catch (e) { /* keep the plain <img> */ }
         }
 
-        // Cases marked featured in cases.js, max 9; pitches are only on the cases page
+        // Cases marked featured in cases.js, max 9 (8 on phones); pitches are only on the cases page
         function frontPageCases() {
             const cases = siteCases.filter(c => c.category !== 'Pitch');
-            return mixCategories(cases.filter(c => c.featured).slice(0, MAX_FEATURED));
+            return mixCategories(cases.filter(c => c.featured).slice(0, phoneQuery.matches ? MAX_FEATURED_PHONE : MAX_FEATURED));
         }
 
         // Spreads the products out, so cases of one kind don't stand together: tries the orders of the kinds and keeps the
@@ -1752,6 +1768,8 @@ const MAX_FEATURED = 9;
             .replace(/,/g, '').replace(/\//g, '.');
         renderFilters();
         renderCasesGrid();
+        // Turning a phone or resizing across the phone width changes how many cases show
+        phoneQuery.addEventListener('change', () => { renderFilters(); renderCasesGrid(); });
         renderBrandWall();
         bigBrandWall.addEventListener('change', renderBrandWall);
         tabletBrandWall.addEventListener('change', renderBrandWall);
