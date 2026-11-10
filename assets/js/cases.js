@@ -1324,6 +1324,17 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-disney-wish",
+        title: "Disney",
+        client: "Disney",
+        category: "Pitch",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Wish_Demo_v2.mov",
+        preview: "assets/video/previews/disney-wish.mp4",
+        description: "A CineGame pitch for Disney's Wish in German cinemas. The audience swipes left, right and up to steer along glowing star paths and collect wishes."
+    },
+    {
         id: "pitch-airtox",
         title: "Airtox",
         client: "Airtox",

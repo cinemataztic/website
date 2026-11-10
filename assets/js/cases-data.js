@@ -87,6 +87,7 @@ const caseLogos = {
     "Targobank": { src: "assets/logos/targobank.svg" }, // Wikimedia Commons, File:Targobank-logo.svg, made white
     "Stadium": { src: "assets/logos/stadium.svg" }, // Wikimedia Commons, File:Stadium logo.svg, made white
     "Santa Maria": { src: "assets/logos/santamaria-white.png" }, // taken from the pitch images, the white letters and oval on transparent
+    "Disney": { src: "assets/logos/disney-white.png" }, // taken from the pitch video, the white wordmark
     "Airtox": { src: "assets/logos/airtox-white.png" }, // taken from the pitch images, made white
     "Chili Mobil": { src: "assets/logos/chilimobil-white.png" }, // taken from the pitch images, the white speech bubble with the name cut out
     "E.ON": { src: "assets/logos/eon-white.png" }, // taken from the pitch images, made white
