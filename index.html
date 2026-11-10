@@ -186,6 +186,10 @@
            longest line ("Digital cinema advertising") fits the screen, up to 60px */
         .about-title { font-size: min(3.75rem, calc((100vw - 3rem) / 14.6)); }
         .about-title > span { display: block; white-space: nowrap; }
+        /* Who we are: a light shade over the background film, darker only where the text sits, so the film is seen */
+        .about-shade { background: linear-gradient(to right, rgba(26, 26, 26, 0.82) 0%, rgba(26, 26, 26, 0.5) 45%, rgba(26, 26, 26, 0.1) 100%); }
+        @media (max-width: 767px) { .about-shade { background: linear-gradient(to bottom, rgba(26, 26, 26, 0.35), rgba(26, 26, 26, 0.6)); } }
+        #about h2, #about p { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6); }
         /* Who we are, slide 5: years on a line, a glowing dot for each (pink = CineGame launch, cyan = programmatic) */
         .years { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
         @media (min-width: 640px) { .years { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 20px; } }
@@ -488,7 +492,7 @@
             <video id="aboutVideo" class="absolute inset-0 w-full h-full object-cover" poster="assets/images/cinema-theater.jpg" muted loop playsinline preload="none" aria-hidden="true">
                 <source src="assets/video/who-we-are.mp4?v=3" type="video/mp4">
             </video>
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/85 to-brand-dark/40"></div>
+            <div class="about-shade absolute inset-0"></div>
             <div class="relative w-full px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
                 <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow mb-10">Who we are</span>
                 <!-- Slides share one grid cell, so the block keeps the height of the tallest text -->
