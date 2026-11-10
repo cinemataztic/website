@@ -1324,6 +1324,27 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-hitster",
+        title: "Hitster",
+        client: "Hitster",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/hitster-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/hitster-1.jpg",
+            "assets/cases/pitch/hitster-2.jpg",
+            "assets/cases/pitch/hitster-3.jpg",
+            "assets/cases/pitch/hitster-4.jpg",
+            "assets/cases/pitch/hitster-5.jpg",
+            "assets/cases/pitch/hitster-6.jpg",
+            "assets/cases/pitch/hitster-7.jpg",
+            "assets/cases/pitch/hitster-8.jpg",
+            "assets/cases/pitch/hitster-9.jpg"
+        ],
+        description: "A CineGame pitch for Hitster: the music party game on the big screen. The audience places hits on a timeline, round by round."
+    },
+    {
         id: "pitch-cocacola-jumper",
         title: "Coca-Cola – Jumper",
         client: "Coca-Cola",
