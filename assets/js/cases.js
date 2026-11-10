@@ -1324,6 +1324,21 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-samsonite",
+        title: "Samsonite",
+        client: "Samsonite",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/samsonite-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/samsonite-1.jpg",
+            "assets/cases/pitch/samsonite-2.jpg",
+            "assets/cases/pitch/samsonite-3.jpg"
+        ],
+        description: "A CineGame pitch for Samsonite and American Tourister. The audience runs through the airport to catch the suitcases, the winner gets two free cinema tickets, and everyone gets a Bonus Spin for a Samsonite gift worth over 499 euro."
+    },
+    {
         id: "pitch-disney-wish",
         title: "Disney",
         client: "Disney",

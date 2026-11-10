@@ -119,6 +119,7 @@ const siteBrands = [
     { name: "About You", logo: "assets/cases/pitch/about-you_logo.png", group: "Retail", pitch: true },
     { name: "Vigor", logo: "assets/cases/pitch/logo_vigor.png", group: "FMCG", pitch: true },
     { name: "Air New Zealand", logo: "assets/cases/pitch/logo_az.png", group: "Travel & Transport", pitch: true },
+    { name: "Samsonite", logo: "assets/logos/samsonite-white.png", group: "Retail", pitch: true },
     { name: "Disney", logo: "assets/logos/disney-white.png", group: "Movies", pitch: true },
     { name: "Airtox", logo: "assets/logos/airtox-white.png", group: "Retail", pitch: true },
     { name: "Chili Mobil", logo: "assets/logos/chilimobil-white.png", group: "TelCo & Tech", pitch: true },
