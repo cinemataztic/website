@@ -190,12 +190,14 @@
     </header>
 
     <main class="flex-grow pt-20">
-        <!-- ALL BRANDS: one big brand wall with every brand from assets/js/brands.js, A to Z -->
+        <!-- ALL BRANDS: one big brand wall with every brand from assets/js/brands.js, A to Z, filtered by product group -->
         <section class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
             <div class="space-y-6" style="margin-bottom: 3rem">
                 <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Who we work with</span>
                 <!-- The heading is hidden on screen but kept for search engines and screen readers -->
                 <h1 class="sr-only">All brands</h1>
+                <!-- Product group filter: All plus one button per group in brands.js (filled by the script) -->
+                <div id="brandGroups" class="flex flex-wrap gap-2" role="group" aria-label="Filter brands by product group"></div>
             </div>
             <div id="allBrands" class="grid gap-6">
                 <!-- Filled from assets/js/brands.js -->
@@ -271,7 +273,7 @@
 
     <script src="assets/js/cases.js?v=66"></script>
     <script src="assets/js/cases-data.js?v=88"></script>
-    <script src="assets/js/brands.js?v=28"></script>
+    <script src="assets/js/brands.js?v=30"></script>
     <script>
         function escapeHtml(value) {
             return String(value).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
@@ -292,13 +294,43 @@
                 const inner = b.logo
                     ? `<img src="${escapeHtml(b.logo)}" alt="${escapeHtml(b.name)}" loading="lazy" class="brand-logo${b.badge ? ' brand-logo--badge' : ''} max-h-12 max-w-[130px] w-auto object-contain" data-badge="${b.badge ? 1 : ''}">`
                     : brandWordmark(b.name);
-                return `<a class="brand-cell group flex items-center justify-center aspect-[3/2] px-4 bg-brand-card border border-brand-border hover:border-brand-cyan transition-colors" title="${escapeHtml(b.name)}"${href}>${inner}</a>`;
+                return `<a data-groups="${escapeHtml(JSON.stringify([].concat(b.group || [])))}" class="brand-cell group flex items-center justify-center aspect-[3/2] px-4 bg-brand-card border border-brand-border hover:border-brand-cyan transition-colors" title="${escapeHtml(b.name)}"${href}>${inner}</a>`;
             }).join('');
             wall.querySelectorAll('img').forEach(img => {
                 // A broken logo link falls back to the name
                 img.addEventListener('error', () => { img.outerHTML = brandWordmark(img.alt); }, { once: true });
                 if (!img.dataset.badge) tightenSvgLogo(img);
             });
+
+            // --- Product group filter (only on this page): the tiles are drawn once and hidden or shown ---
+            const groupBox = document.getElementById('brandGroups');
+            const order = ['FMCG', 'TelCo & Tech', 'Retail', 'Finance & Insurance', 'Media & Entertainment', 'Movies', 'Travel & Transport', 'Logistics & Delivery', 'Automotive', 'Health & Pharma', 'Energy', 'Restaurants', 'Unions', 'Public & NGO'];
+            // A brand can be in more than one group (group is then a list)
+            const groupsOf = b => [].concat(b.group || []);
+            const counts = {};
+            brands.forEach(b => groupsOf(b).forEach(g => { counts[g] = (counts[g] || 0) + 1; }));
+            const groups = ['All', ...order.filter(g => counts[g]), ...Object.keys(counts).filter(g => !order.includes(g)).sort()];
+            const params = new URLSearchParams(location.search);
+            let current = groups.includes(params.get('group')) ? params.get('group') : 'All';
+            function applyGroup() {
+                groupBox.innerHTML = groups.map(g => {
+                    const active = g === current;
+                    const n = g === 'All' ? brands.length : counts[g];
+                    return `<button type="button" data-group="${escapeHtml(g)}" aria-pressed="${active}" class="px-4 py-2 text-xs font-bold uppercase tracking-wider transition ${active ? 'bg-brand-cyan text-black' : 'border border-brand-border text-gray-300 hover:border-brand-cyan hover:text-white'}">${escapeHtml(g)} <span class="${active ? 'text-black/60' : 'text-gray-500'} ml-1">${n}</span></button>`;
+                }).join('');
+                [...wall.children].forEach(cell => { cell.style.display = current === 'All' || JSON.parse(cell.dataset.groups).includes(current) ? '' : 'none'; });
+            }
+            groupBox.addEventListener('click', e => {
+                const btn = e.target.closest('button[data-group]');
+                if (!btn) return;
+                current = btn.dataset.group;
+                // Keep the choice in the address, so the filtered page can be shared
+                const url = new URL(location.href);
+                if (current === 'All') url.searchParams.delete('group'); else url.searchParams.set('group', current);
+                history.replaceState(null, '', url);
+                applyGroup();
+            });
+            applyGroup();
         })();
 
         // Icon sets draw logos inside a padded square, so a wide wordmark ends up tiny. For SVG logos,
