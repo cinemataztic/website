@@ -1324,6 +1324,154 @@ const siteCases = [
     // Images are copies from cinemataztic.com in assets/cases/pitch. logoBox is the visible part of the logo image
     // [x, y, width, height, image width, image height], so the card can crop away its empty margins.
     {
+        id: "pitch-cupra",
+        title: "Cupra",
+        client: "Cupra",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/cupra-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/cupra-1.jpg",
+            "assets/cases/pitch/cupra-2.jpg",
+            "assets/cases/pitch/cupra-3.jpg",
+            "assets/cases/pitch/cupra-4.jpg",
+            "assets/cases/pitch/cupra-5.jpg",
+            "assets/cases/pitch/cupra-6.jpg",
+            "assets/cases/pitch/cupra-7.jpg"
+        ],
+        description: "A CineGame Obstacle Runner pitch for the new Cupra Tavascan. The audience races past the obstacles, the winner gets an exclusive test drive, and everyone gets a Bonus Spin for a high-end home EV charger."
+    },
+    {
+        id: "pitch-opel",
+        title: "Opel",
+        client: "Opel",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/opel-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/opel-1.jpg",
+            "assets/cases/pitch/opel-2.jpg",
+            "assets/cases/pitch/opel-3.jpg",
+            "assets/cases/pitch/opel-4.jpg",
+            "assets/cases/pitch/opel-5.jpg"
+        ],
+        description: "A CineGame Obstacle Runner pitch for the Opel Frontera in German cinemas. The audience races past the obstacles, and the winner gets a free popcorn."
+    },
+    {
+        id: "pitch-polestar",
+        title: "Polestar",
+        client: "Polestar",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/polestar-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/polestar-1.jpg",
+            "assets/cases/pitch/polestar-2.jpg",
+            "assets/cases/pitch/polestar-3.jpg",
+            "assets/cases/pitch/polestar-4.jpg",
+            "assets/cases/pitch/polestar-5.jpg",
+            "assets/cases/pitch/polestar-6.jpg",
+            "assets/cases/pitch/polestar-7.jpg"
+        ],
+        description: "A CineGame Obstacle Runner pitch for the new Polestar 4. The audience races past the obstacles, and the winner gets an exclusive test drive of the Polestar 4."
+    },
+    {
+        id: "pitch-ruegenwalder",
+        title: "Rügenwalder Mühle",
+        client: "Rügenwalder Mühle",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/ruegenwalder-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/ruegenwalder-1.jpg",
+            "assets/cases/pitch/ruegenwalder-2.jpg",
+            "assets/cases/pitch/ruegenwalder-3.jpg",
+            "assets/cases/pitch/ruegenwalder-4.jpg",
+            "assets/cases/pitch/ruegenwalder-5.jpg",
+            "assets/cases/pitch/ruegenwalder-6.jpg",
+            "assets/cases/pitch/ruegenwalder-7.jpg",
+            "assets/cases/pitch/ruegenwalder-8.jpg"
+        ],
+        description: "A CineGame Obstacle Runner pitch for Rügenwalder Mühle in German cinemas: Rügenwalder Abenteuer. The audience runs through the countryside past the obstacles, and the winner gets an adventure deal."
+    },
+    {
+        id: "pitch-telia",
+        title: "Telia",
+        client: "Telia",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/telia-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/telia-1.jpg",
+            "assets/cases/pitch/telia-2.jpg",
+            "assets/cases/pitch/telia-3.jpg",
+            "assets/cases/pitch/telia-4.jpg"
+        ],
+        description: "A CineGame pitch for Telia and HBO Max in Danish cinemas, for the premiere of House of the Dragon. The audience collects dragon eggs for a chance to win prizes."
+    },
+    {
+        id: "pitch-toyota",
+        title: "Toyota",
+        client: "Toyota",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/toyota-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/toyota-1.jpg",
+            "assets/cases/pitch/toyota-2.jpg",
+            "assets/cases/pitch/toyota-3.jpg",
+            "assets/cases/pitch/toyota-4.jpg",
+            "assets/cases/pitch/toyota-5.jpg",
+            "assets/cases/pitch/toyota-6.jpg",
+            "assets/cases/pitch/toyota-7.jpg"
+        ],
+        description: "A CineGame Obstacle Runner pitch for the new Toyota bZ4X in Danish cinemas. The audience races past the obstacles, and the winner gets a test drive of the Toyota bZ4X."
+    },
+    {
+        id: "pitch-visitdenmark",
+        title: "VisitDenmark",
+        client: "VisitDenmark",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/visitdenmark-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/visitdenmark-1.jpg",
+            "assets/cases/pitch/visitdenmark-2.jpg",
+            "assets/cases/pitch/visitdenmark-3.jpg",
+            "assets/cases/pitch/visitdenmark-4.jpg",
+            "assets/cases/pitch/visitdenmark-5.jpg",
+            "assets/cases/pitch/visitdenmark-6.jpg",
+            "assets/cases/pitch/visitdenmark-7.jpg"
+        ],
+        description: "A CineGame quiz pitch for VisitDenmark: the Denmark Tour Quiz. The audience shows how well they know Denmark's most beautiful and historical landmarks, and the winner gets a large popcorn at Nordisk Film."
+    },
+    {
+        id: "pitch-copenhagenzoo",
+        title: "Copenhagen Zoo",
+        client: "Copenhagen Zoo",
+        category: "Pitch",
+        mediaType: "image",
+        cover: "assets/cases/pitch/copenhagenzoo-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/pitch/copenhagenzoo-1.jpg",
+            "assets/cases/pitch/copenhagenzoo-2.jpg",
+            "assets/cases/pitch/copenhagenzoo-3.jpg",
+            "assets/cases/pitch/copenhagenzoo-4.jpg",
+            "assets/cases/pitch/copenhagenzoo-5.jpg",
+            "assets/cases/pitch/copenhagenzoo-6.jpg",
+            "assets/cases/pitch/copenhagenzoo-7.jpg"
+        ],
+        description: "A CineGame Guess Object pitch for Copenhagen Zoo in Danish cinemas. The audience follows the pointer on the map of the zoo and picks the right area on their phone, and the faster they answer, the more points they get."
+    },
+    {
         id: "pitch-samsonite",
         title: "Samsonite",
         client: "Samsonite",
