@@ -121,6 +121,18 @@
         }
         @media (min-width: 1700px) { .grid.card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (min-width: 2300px) { .grid.card-grid--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+        /* Latest cases: 4 cards in one row from iPad width (768px), the same size as on cases.html */
+        @media (min-width: 768px) { .grid#gameCasesGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+        /* While the 4 cards are narrow (iPad and small laptops), badges show as icons only and the title is smaller */
+        @media (min-width: 768px) and (max-width: 1699px) {
+            #gameCasesGrid h3 { font-size: 1.1rem; line-height: 1.05 !important; }
+            #gameCasesGrid .inset-x-0.bottom-0 { padding: 14px; }
+            #gameCasesGrid .inset-x-0.bottom-0 > div { flex-wrap: wrap; gap: 4px; }
+            #gameCasesGrid .top-3 { top: 8px; right: 8px; gap: 4px; }
+            #gameCasesGrid .top-3, #gameCasesGrid .top-3 > div { font-size: 0; padding: 4px 6px; }
+            #gameCasesGrid .top-3.flex { padding: 0; }
+            #gameCasesGrid .top-3 i { font-size: 10px; margin: 0; }
+        }
         /* CineGame+ phones: same frame as the TrailerQuiz illustration (dark body, thin edge, rounded screen, island) */
         .game-phone {
             position: relative;
@@ -519,7 +531,7 @@
             if (!grid) return;
             const cases = siteCases;
             // 3 cases, or 4 on phones where they stand two by two
-            const latest = cases.filter(c => c.category === 'CineFun').slice(0, window.matchMedia('(max-width: 639px)').matches ? 4 : 3);
+            const latest = cases.filter(c => c.category === 'CineFun').slice(0, 4);
             document.getElementById('gameCaseCount').innerText = latest.length;
             if (!latest.length) {
                 grid.innerHTML = `<div class="col-span-full py-12 text-gray-500 font-bold uppercase">No games yet.</div>`;
