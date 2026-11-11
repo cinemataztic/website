@@ -104,7 +104,6 @@
         @media (max-width: 639px) {
             #casesGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; row-gap: 16px; }
             #casesGrid h3 { font-size: 0.95rem; line-height: 1.05 !important; }
-            #casesGrid h3 + p { display: none; }
             #casesGrid .inset-x-0.bottom-0 { padding: 12px; }
             #casesGrid .inset-x-0.bottom-0 > div { flex-wrap: wrap; gap: 4px; font-size: 8px; letter-spacing: 0.05em; }
             #casesGrid .top-3 { top: 8px; right: 8px; gap: 4px; }
@@ -522,7 +521,6 @@
                         <div class="case-blur"></div>
                         <div class="absolute inset-x-0 bottom-0 p-5 space-y-2">
                             <h3 class="text-xl font-black uppercase !leading-none text-white line-clamp-2">${c.title}</h3>
-                            <p class="text-sm text-white/80 line-clamp-2 leading-relaxed">${c.description}</p>
                             <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/70">
                                 <span class="px-2 py-0.5 rounded" style="background-color: ${categoryColor(c.category)}40; color: ${categoryColor(c.category)}">${c.category}</span>
                                 ${c.gameType ? `<span class="px-2 py-0.5 rounded" style="background-color: rgba(255, 255, 255, 0.2); color: rgba(255, 255, 255, 0.87)">${c.gameType}</span>` : ''}
