@@ -368,6 +368,8 @@
                 if (current === 'All') url.searchParams.delete('group'); else url.searchParams.set('group', current);
                 history.replaceState(null, '', url);
                 applyGroup();
+                // Back to the top, so the brands of a small group are not left above the screen
+                window.scrollTo({ top: 0, behavior: 'instant' });
             });
             // Keep the search in the address too, so the result can be shared
             function keepInUrl() {
