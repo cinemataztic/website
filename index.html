@@ -111,6 +111,18 @@
         }
         @media (min-width: 1700px) { .grid.card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (min-width: 2300px) { .grid.card-grid--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+        /* Featured Cases: 4 across from iPad width (768px) up, so the 8 cases fill two rows */
+        @media (min-width: 768px) { .grid#casesGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 16px; row-gap: 24px; } }
+        /* While the 4 cards are narrow (iPad and small laptops), badges show as icons only and the title is smaller */
+        @media (min-width: 768px) and (max-width: 1699px) {
+            #casesGrid h3 { font-size: 1.1rem; line-height: 1.05 !important; }
+            #casesGrid .inset-x-0.bottom-0 { padding: 14px; }
+            #casesGrid .inset-x-0.bottom-0 > div { flex-wrap: wrap; gap: 4px; }
+            #casesGrid .top-3 { top: 8px; right: 8px; gap: 4px; }
+            #casesGrid .top-3, #casesGrid .top-3 > div { font-size: 0; padding: 4px 6px; }
+            #casesGrid .top-3.flex { padding: 0; }
+            #casesGrid .top-3 i { font-size: 10px; margin: 0; }
+        }
     </style>
     <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -727,9 +739,8 @@
     <script src="assets/js/cases-data.js?v=106"></script>
     <script>
 // Cases come from assets/js/cases.js and the brand wall from assets/js/brands.js
-const MAX_FEATURED = 9;
-// Phones show two narrow cases side by side, and only 8 of them (an even number fills the last row)
-const MAX_FEATURED_PHONE = 8;
+// The front page shows 8 featured cases: two full rows of 4 (iPad and up) or four rows of 2 (phones)
+const MAX_FEATURED = 8;
 const phoneQuery = window.matchMedia('(max-width: 639px)');
 
         // --- BRAND WALL ---
@@ -848,7 +859,7 @@ const phoneQuery = window.matchMedia('(max-width: 639px)');
         // Cases marked featured in cases.js, max 9 (8 on phones); pitches are only on the cases page
         function frontPageCases() {
             const cases = siteCases.filter(c => c.category !== 'Pitch');
-            return mixCategories(cases.filter(c => c.featured).slice(0, phoneQuery.matches ? MAX_FEATURED_PHONE : MAX_FEATURED));
+            return mixCategories(cases.filter(c => c.featured).slice(0, MAX_FEATURED));
         }
 
         // Spreads the products out, so cases of one kind don't stand together: tries the orders of the kinds and keeps the

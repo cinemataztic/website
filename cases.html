@@ -114,6 +114,18 @@
         }
         @media (min-width: 1700px) { .grid.card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (min-width: 2300px) { .grid.card-grid--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+        /* 4 cases across from iPad width (768px) until the 5-column step; same steps in columnsForWidth() */
+        @media (min-width: 768px) and (max-width: 2299px) { .grid#casesGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+        /* While the 4 cards are narrow (iPad and small laptops), badges show as icons only and the title is smaller */
+        @media (min-width: 768px) and (max-width: 1699px) {
+            #casesGrid h3 { font-size: 1.1rem; line-height: 1.05 !important; }
+            #casesGrid .inset-x-0.bottom-0 { padding: 14px; }
+            #casesGrid .inset-x-0.bottom-0 > div { flex-wrap: wrap; gap: 4px; }
+            #casesGrid .top-3 { top: 8px; right: 8px; gap: 4px; }
+            #casesGrid .top-3, #casesGrid .top-3 > div { font-size: 0; padding: 4px 6px; }
+            #casesGrid .top-3.flex { padding: 0; }
+            #casesGrid .top-3 i { font-size: 10px; margin: 0; }
+        }
     </style>
     <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -537,9 +549,9 @@
         const conveyor = { active: false, cols: 1, steps: 0, visibleSlots: 0, cardW: 0, rowH: 0, s: 0, target: 0 };
 
         function columnsForWidth() {
-            // Same steps as the grid's CSS: 2 from 640px, 3 from 1280px, 4 from 1700px, 5 from 2300px
+            // Same steps as the grid's CSS: 2 from 640px, 4 from 768px (iPad), 5 from 2300px
             const w = window.innerWidth;
-            return w >= 2300 ? 5 : w >= 1700 ? 4 : w >= 1280 ? 3 : w >= 640 ? 2 : 1;
+            return w >= 2300 ? 5 : w >= 768 ? 4 : w >= 640 ? 2 : 1;
         }
 
         // Path slot n -> top-left position. Slot 0 is the exit end of row 1 (right side);
