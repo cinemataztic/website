@@ -2558,7 +2558,7 @@ const siteCases = [
         category: "Pitch",
         mediaType: "image",
         cover: "assets/cases/pitch/hj1.jpg",
-        logo: "assets/cases/pitch/hj_logo.png",
+        logo: "assets/logos/hungryjacks-white.png",
         video: "",
         images: [
             "assets/cases/pitch/hj1.jpg",
@@ -2713,8 +2713,7 @@ const siteCases = [
         category: "Pitch",
         mediaType: "image",
         cover: "assets/cases/pitch/kim-s-dating.jpg",
-        logo: "assets/cases/pitch/logo_kims.png",
-        logoBox: [2, 0, 192, 87, 194, 87],
+        logo: "assets/logos/kims-white.png",
         video: "",
         images: [
             "assets/cases/pitch/kim-s-dating.jpg",

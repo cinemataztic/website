@@ -102,10 +102,12 @@ const caseLogos = {
     "Dendy Cinemas": { src: "assets/logos/dendy-white.png" }, // taken from the pitch images, made white
     "Kilroy": { src: "assets/logos/kilroy-white.png" }, // taken from the pitch images, made white
     "Krifa": { src: "assets/logos/krifa-white.png" }, // taken from the pitch images, made white
-    "Nextory": { src: "assets/logos/nextory-white.png" }, // taken from the pitch images, made white
-    "Sky": { src: "assets/logos/sky-white.png" }, // taken from the pitch images, made white
+    "Nextory": { src: "assets/logos/nextory-logo-white.png" }, // taken from the pitch images, made white
+    "Sky": { src: "assets/logos/sky-logo-white.png" }, // taken from the pitch images, made white
     "Stryhns": { src: "assets/logos/stryhns-white.png" }, // taken from the pitch images, made white
     "Vattenfall": { src: "assets/logos/vattenfall-white.png" }, // taken from the pitch images, made white
+    "Lynx": { src: "assets/logos/lynx-white.png" }, // supplied by the user, made white
+    "Mr Green": { src: "assets/logos/mrgreen-white.png" }, // supplied by the user, made white
     "Fisherman's Friend": { src: "assets/logos/fishermansfriend-white.png" }, // taken from the pitch images, made white
     "Kapten & Son": { src: "assets/logos/kaptenandson-white.png" }, // taken from the pitch images, made white
     "Lindex": { src: "assets/logos/lindex-white.png" }, // taken from the pitch images, made white
@@ -115,7 +117,7 @@ const caseLogos = {
     "Snocks": { src: "assets/logos/snocks-white.png" }, // taken from the pitch images, made white
     "Spotify": { src: "assets/logos/spotify-white.png" }, // taken from the pitch images, made white
     "Street Fighter": { src: "assets/logos/streetfighter-white.png" }, // taken from the pitch images, made white
-    "TK Maxx": { src: "assets/logos/tkmaxx-white.png" }, // taken from the pitch images, made white
+    "TK Maxx": { src: "assets/logos/tkmaxx-logo-white.png" }, // taken from the pitch images, made white
     "Zalando": { src: "assets/logos/zalando-white.png" }, // taken from the pitch images, made white
     "Airtox": { src: "assets/logos/airtox-white.png" }, // taken from the pitch images, made white
     "Chili Mobil": { src: "assets/logos/chilimobil-white.png" }, // taken from the pitch images, the white speech bubble with the name cut out
@@ -180,7 +182,7 @@ const escapeCoverText = s => String(s || '').replace(/[&<>"]/g, ch => ({ '&': '&
 const KNOCKOUT_LIGHT_LOGOS = new Set(['assets/logos/liiga.png']);
 
 // Logos that turn into a blob either way (letters with a dark outline): the card shows the name instead
-const NAME_INSTEAD_OF_LOGO = new Set(['assets/cases/pitch/logo_kims.png', 'assets/cases/pitch/hj_logo.png']);
+const NAME_INSTEAD_OF_LOGO = new Set([]);
 
 // Badge logos (a name on a filled shape) shown as a white shape with the name cut out
 const KNOCKOUT_LOGOS = new Set([
