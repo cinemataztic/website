@@ -167,6 +167,11 @@
         .brand-search button { position: absolute; right: 0; top: 0; bottom: 0; width: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #fece00; transition: color 150ms; }
         .brand-search button[hidden] { display: none; }
         .brand-search button:hover { color: rgba(255, 255, 255, 0.87); }
+        .brand-copy { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255, 255, 255, 0.87); transition: color 150ms; }
+        .brand-copy i { color: #fece00; }
+        .brand-copy:hover { color: #3dc0c8; }
+        .brand-copy[hidden] { display: none; }
+        .brand-copy.is-copied, .brand-copy.is-copied i { color: #6ceec4; }
     </style>
 </head>
 <body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
@@ -214,6 +219,8 @@
                         <input id="brandSearch" type="search" placeholder="Search brand" aria-label="Search by brand name" autocomplete="off" spellcheck="false">
                         <button id="brandSearchClear" type="button" aria-label="Clear search" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
                     </div>
+                    <!-- Shown once a group or a search is chosen: copies the link to exactly this view -->
+                    <button id="brandCopyLink" type="button" class="brand-copy" hidden><i class="fa-solid fa-link" aria-hidden="true"></i> <span>Copy link</span></button>
                     <!-- Product group filter: All plus one button per group in brands.js (filled by the script) -->
                     <div id="brandGroups" class="flex flex-wrap gap-2" role="group" aria-label="Filter brands by product group"></div>
                     <div class="hidden lg:block pt-4">
@@ -257,6 +264,7 @@
                         <li><a href="https://support.cinegame.com/" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">End user support</a></li>
                         <li><a href="https://form.asana.com/?k=_R4s-PqZgwO2LCVGomfuXw&amp;d=107314682691555" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">TechSupport</a></li>
                         <li><a href="https://legal.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Privacy &amp; legal</a></li>
+                        <li><a href="https://www.youtube.com/@cinemataztic" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">YouTube</a></li>
                     </ul>
                 </nav>
                 <!-- THE APP: the CineGame app in each market (external sites) -->
@@ -340,6 +348,7 @@
             let current = groups.includes(params.get('group')) ? params.get('group') : 'All';
             const searchInput = document.getElementById('brandSearch');
             const searchClear = document.getElementById('brandSearchClear');
+            const copyBtn = document.getElementById('brandCopyLink');
             searchInput.value = params.get('search') || '';
             searchClear.hidden = !searchInput.value;
             function applyGroup() {
@@ -357,6 +366,9 @@
                     if (on) shown++;
                 });
                 document.getElementById('brandCount').textContent = shown;
+                // The copy link button names what is shown, and is only there when something is chosen
+                copyBtn.hidden = current === 'All' && !searchInput.value;
+                if (!copyBtn.classList.contains('is-copied')) copyBtn.querySelector('span').textContent = current === 'All' ? 'Copy link to this search' : `Copy link to ${current}`;
                 document.getElementById('allBrandsEmpty').hidden = shown > 0;
             }
             groupBox.addEventListener('click', e => {
@@ -379,6 +391,20 @@
             }
             searchInput.addEventListener('input', () => { searchClear.hidden = !searchInput.value; keepInUrl(); applyGroup(); });
             searchClear.addEventListener('click', () => { searchInput.value = ''; searchClear.hidden = true; keepInUrl(); applyGroup(); searchInput.focus(); });
+            copyBtn.addEventListener('click', async () => {
+                const url = new URL(location.href);
+                url.searchParams.delete('r');
+                try { await navigator.clipboard.writeText(url.href); } catch (e) {
+                    // Older browsers: copy through a hidden text field
+                    const t = Object.assign(document.createElement('textarea'), { value: url.href });
+                    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove();
+                }
+                const label = copyBtn.querySelector('span');
+                const before = label.textContent;
+                copyBtn.classList.add('is-copied');
+                label.textContent = 'Link copied';
+                setTimeout(() => { copyBtn.classList.remove('is-copied'); label.textContent = before; applyGroup(); }, 2000);
+            });
             applyGroup();
         })();
 
