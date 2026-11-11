@@ -134,6 +134,11 @@
         .case-search button { position: absolute; right: 0; top: 0; bottom: 0; width: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #fece00; transition: color 150ms; }
         .case-search button[hidden] { display: none; }
         .case-search button:hover { color: rgba(255, 255, 255, 0.87); }
+        .case-copy { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255, 255, 255, 0.87); transition: color 150ms; }
+        .case-copy i { color: #fece00; }
+        .case-copy:hover { color: #3dc0c8; }
+        .case-copy[hidden] { display: none; }
+        .case-copy.is-copied, .case-copy.is-copied i { color: #6ceec4; }
         .conveyor-on #conveyorWindow {
             position: sticky;
             top: 5rem;
@@ -209,6 +214,8 @@
                         <input id="caseSearch" type="search" placeholder="Search client" aria-label="Search by client name" autocomplete="off" spellcheck="false">
                         <button id="caseSearchClear" type="button" aria-label="Clear search" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
                     </div>
+                    <!-- Shown once a client is searched: copies the link to exactly these cases (same as on all-brands.html) -->
+                    <button id="caseCopyLink" type="button" class="case-copy" hidden><i class="fa-solid fa-link" aria-hidden="true"></i> <span>Copy link</span></button>
                     <div class="flex flex-wrap lg:flex-col lg:items-start gap-2" id="filterContainer">
                         <!-- Filter buttons populated by JS -->
                     </div>
@@ -440,9 +447,30 @@
             input.dispatchEvent(new Event('input'));
             input.focus();
         });
+        // Copy link: the cases page searched for this client, ready to share
+        const copyBtn = document.getElementById('caseCopyLink');
+        function updateCopyLink() {
+            const value = document.getElementById('caseSearch').value.trim();
+            copyBtn.hidden = !value;
+            if (!copyBtn.classList.contains('is-copied')) copyBtn.querySelector('span').textContent = `Copy link to ${value}`;
+        }
+        copyBtn.addEventListener('click', async () => {
+            const url = new URL(location.pathname, location.origin);
+            url.searchParams.set('search', document.getElementById('caseSearch').value.trim());
+            try { await navigator.clipboard.writeText(url.href); } catch (e) {
+                // Older browsers: copy through a hidden text field
+                const t = Object.assign(document.createElement('textarea'), { value: url.href });
+                document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove();
+            }
+            copyBtn.classList.add('is-copied');
+            copyBtn.querySelector('span').textContent = 'Link copied';
+            setTimeout(() => { copyBtn.classList.remove('is-copied'); updateCopyLink(); }, 2000);
+        });
+        updateCopyLink();
         document.getElementById('caseSearch').addEventListener('input', (e) => {
             currentSearch = searchText(e.target.value);
             searchClear.hidden = !e.target.value;
+            updateCopyLink();
             window.scrollTo({ top: 0, behavior: 'instant' });
             renderFilters();
             renderCasesGrid();
