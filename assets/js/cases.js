@@ -404,7 +404,7 @@ const siteCases = [
     },
     {
         id: "norlys-jumper",
-        title: "Norlys",
+        title: "Norlys – Jumper",
         client: "Norlys",
         category: "CineGame",
         gameType: "Jumper",
@@ -464,7 +464,7 @@ const siteCases = [
     },
     {
         id: "apotekets-shuffle",
-        title: "Apotekets",
+        title: "Apotekets – Shuffle",
         client: "Apotekets",
         category: "CineGame",
         gameType: "Shuffle",
@@ -537,7 +537,7 @@ const siteCases = [
     {
         id: "iberdrola-quiz",
         featured: false,
-        title: "Quizshow",
+        title: "Iberdrola",
         client: "Iberdrola",
         category: "CineGame",
         gameType: "Quizshow",
@@ -549,7 +549,7 @@ const siteCases = [
     },
     {
         id: "odeon-quiz",
-        title: "Quiz",
+        title: "ODEON – Quiz",
         client: "ODEON",
         category: "CineGame",
         gameType: "Quiz",
@@ -561,7 +561,7 @@ const siteCases = [
     },
     {
         id: "odeon-sportsball",
-        title: "Sports Ball",
+        title: "ODEON – Sports Ball",
         client: "ODEON",
         category: "CineGame",
         gameType: "SportsBall",
@@ -574,7 +574,7 @@ const siteCases = [
     {
         id: "ikea-collector",
         featured: true,
-        title: "Collector",
+        title: "IKEA – Collector",
         client: "IKEA",
         category: "CineGame",
         gameType: "Collector",
@@ -586,7 +586,7 @@ const siteCases = [
     },
     {
         id: "kirppu",
-        title: "Collector",
+        title: "Kirppu",
         client: "Kirppu",
         category: "CineGame",
         gameType: "Collector",
@@ -598,7 +598,7 @@ const siteCases = [
     },
     {
         id: "redyplay",
-        title: "Collector",
+        title: "REDyPLAY",
         client: "REDyPLAY",
         category: "CineGame",
         gameType: "Collector",
@@ -610,7 +610,7 @@ const siteCases = [
     },
     {
         id: "mcd-swipehero",
-        title: "Swipe Hero",
+        title: "McDonald's – Swipe Hero",
         client: "McDonald's",
         category: "CineGame",
         gameType: "Swipe Hero",
@@ -622,7 +622,7 @@ const siteCases = [
     },
     {
         id: "danone-swipehero",
-        title: "Swipe Hero",
+        title: "Danone",
         client: "Danone",
         category: "CineGame",
         gameType: "Swipe Hero",
@@ -634,7 +634,7 @@ const siteCases = [
     },
     {
         id: "homeguard",
-        title: "Quizshow",
+        title: "The Home Guard",
         client: "The Home Guard",
         category: "CineGame",
         gameType: "Quizshow",
@@ -647,7 +647,7 @@ const siteCases = [
     {
         id: "santander",
         featured: true,
-        title: "Swipe Hero",
+        title: "Santander",
         client: "Santander",
         category: "CineGame",
         gameType: "Swipe Hero",
@@ -660,7 +660,7 @@ const siteCases = [
     {
         id: "subway",
         featured: false,
-        title: "Jump and stay alive",
+        title: "Subway",
         client: "Subway",
         category: "CineGame",
         gameType: "Jumper",
@@ -699,7 +699,7 @@ const siteCases = [
     {
         id: "politikens-publisher",
         featured: false,
-        title: "The children's book game",
+        title: "Politikens Forlag",
         client: "Politikens Forlag",
         category: "CineGame",
         gameType: "Shuffle",
@@ -712,7 +712,7 @@ const siteCases = [
     {
         id: "tivoli",
         featured: false,
-        title: "The Rollercoaster",
+        title: "Tivoli",
         client: "Tivoli",
         category: "CineGame",
         gameType: "Experience",
@@ -725,7 +725,7 @@ const siteCases = [
     {
         id: "ikea",
         featured: false,
-        title: "It is meatball Friday",
+        title: "IKEA – Meatball Friday",
         client: "IKEA",
         category: "CineGame",
         gameType: "Swipe Hero",
@@ -764,7 +764,7 @@ const siteCases = [
     {
         id: "hummel",
         featured: false,
-        title: "New official jersey",
+        title: "Hummel",
         client: "Hummel",
         category: "CineGame",
         gameType: "Quiz",
@@ -777,7 +777,7 @@ const siteCases = [
     {
         id: "jdsports",
         featured: false,
-        title: "King of the game",
+        title: "JD Sports",
         client: "JD Sports",
         category: "CineGame",
         gameType: "Jumper",
@@ -790,7 +790,7 @@ const siteCases = [
     {
         id: "samsung",
         featured: false,
-        title: "Galaxy S23 Series",
+        title: "Samsung – Galaxy S23 Series",
         client: "Samsung",
         category: "CineGame",
         gameType: "Jumper",
@@ -842,7 +842,7 @@ const siteCases = [
     {
         id: "podimo",
         featured: false,
-        title: "Your favourite stories",
+        title: "Podimo – Your favourite stories",
         client: "Podimo",
         category: "CineGame",
         gameType: "Shuffle",
@@ -933,7 +933,7 @@ const siteCases = [
     {
         id: "fanta-halloween",
         featured: false,
-        title: "Halloween",
+        title: "Fanta – Halloween",
         client: "Fanta",
         category: "CineGame",
         gameType: "Simon",
@@ -946,7 +946,7 @@ const siteCases = [
     {
         id: "toms",
         featured: false,
-        title: "Haunted House",
+        title: "Toms",
         client: "Toms",
         category: "CineGame",
         gameType: "Miscellaneous",
@@ -972,7 +972,7 @@ const siteCases = [
     {
         id: "pepsimax",
         featured: false,
-        title: "Max the music",
+        title: "Pepsi",
         client: "Pepsi",
         category: "CineGame",
         gameType: "Swipe Hero",
@@ -998,7 +998,7 @@ const siteCases = [
     {
         id: "battery-black",
         featured: false,
-        title: "Black energy",
+        title: "Battery – Black energy",
         client: "Battery",
         category: "CineGame",
         gameType: "Find object",
@@ -1024,7 +1024,7 @@ const siteCases = [
     {
         id: "coke-maze-game",
         featured: false,
-        title: "The Coke maze game",
+        title: "Coca-Cola – Maze game",
         client: "Coca-Cola",
         category: "CineGame",
         gameType: "Collector",
@@ -1037,7 +1037,7 @@ const siteCases = [
     {
         id: "derby25",
         featured: false,
-        title: "Ganz genau",
+        title: "Bet25",
         client: "Bet25",
         category: "CineGame",
         gameType: "Swipe Hero",
@@ -1063,7 +1063,7 @@ const siteCases = [
     {
         id: "sonic",
         featured: false,
-        title: "Are you fast?",
+        title: "Sonic",
         client: "Sonic",
         category: "CineGame",
         gameType: "Shuffle",
@@ -1102,7 +1102,7 @@ const siteCases = [
     {
         id: "tuborg-derby",
         featured: false,
-        title: "Let the race begin",
+        title: "Tuborg",
         client: "Tuborg",
         category: "CineGame",
         gameType: "Miscellaneous",
@@ -1128,7 +1128,7 @@ const siteCases = [
     {
         id: "paula",
         featured: false,
-        title: "Where's Paula?",
+        title: "Dr. Oetker – Where's Paula?",
         client: "Dr. Oetker",
         category: "CineGame",
         gameType: "Find object",
@@ -1284,7 +1284,7 @@ const siteCases = [
     {
         id: "bundeswehr",
         featured: false,
-        title: "Karriereberatung",
+        title: "Bundeswehr",
         client: "Bundeswehr",
         category: "CineGame",
         gameType: "Quizshow",
@@ -1297,7 +1297,7 @@ const siteCases = [
     {
         id: "specsavers",
         featured: false,
-        title: "Test your vision",
+        title: "Specsavers – Test your vision",
         client: "Specsavers",
         category: "CineGame",
         gameType: "Miscellaneous",

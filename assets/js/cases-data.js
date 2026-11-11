@@ -106,6 +106,10 @@ const caseLogos = {
     "Sky": { src: "assets/logos/sky-logo-white.png" }, // taken from the pitch images, made white
     "Stryhns": { src: "assets/logos/stryhns-white.png" }, // taken from the pitch images, made white
     "Vattenfall": { src: "assets/logos/vattenfall-white.png" }, // taken from the pitch images, made white
+    "NetOnNet": { src: "assets/logos/netonnet-white.png" }, // taken from the pitch images, made white
+    "Rituals": { src: "assets/logos/rituals-white.png" }, // Wikimedia Commons, File:Rituals Cosmetics logo.png, the letters made white
+    "Ally": { src: "assets/logos/ally-white.png" }, // taken from the pitch images, made white
+    "DS Group": { src: "assets/logos/dsgroup-white.png" }, // taken from the pitch images, made white
     "Lynx": { src: "assets/logos/lynx-white.png" }, // supplied by the user, made white
     "Mr Green": { src: "assets/logos/mrgreen-white.png" }, // supplied by the user, made white
     "Fisherman's Friend": { src: "assets/logos/fishermansfriend-white.png" }, // taken from the pitch images, made white
