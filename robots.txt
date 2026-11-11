@@ -6,8 +6,5 @@ Allow: /
 Disallow: /design/
 Disallow: /tools/
 Disallow: /index-v1.html
-Disallow: /index-v3.html
-Disallow: /cases-overview.html
-Disallow: /deploy.sh
 
 Sitemap: https://www.cinemataztic.com/sitemap.xml

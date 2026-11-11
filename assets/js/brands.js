@@ -9,13 +9,13 @@
 //          Energy, Restaurants, Unions, Education or Public & NGO. A brand in two groups gets a list, e.g. ["Energy", "TelCo & Tech"]
 
 const siteBrands = [
-    { name: "Coca-Cola", logo: "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/cocacola.svg", group: "FMCG" },
-    { name: "Pepsi", logo: "https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/pepsi.svg", group: "FMCG" },
+    { name: "Coca-Cola", logo: "assets/logos/cocacola.svg", group: "FMCG" },
+    { name: "Pepsi", logo: "assets/logos/pepsi.svg", group: "FMCG" },
     { name: "Carlsberg", logo: "assets/logos/carlsberg.svg", group: "FMCG" },
-    { name: "Santander", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Banco_Santander_Logotipo.svg", group: "Finance & Insurance" },
-    { name: "Red Bull", logo: "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/redbull.svg", group: "FMCG" },
-    { name: "McDonald's", logo: "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/mcdonalds.svg", group: "Restaurants" },
-    { name: "UNICEF", logo: "https://upload.wikimedia.org/wikipedia/commons/e/ed/Logo_of_UNICEF.svg", group: "Public & NGO" },
+    { name: "Santander", logo: "assets/logos/santander.svg", group: "Finance & Insurance" },
+    { name: "Red Bull", logo: "assets/logos/redbull.svg", group: "FMCG" },
+    { name: "McDonald's", logo: "assets/logos/mcdonalds.svg", group: "Restaurants" },
+    { name: "UNICEF", logo: "assets/logos/unicef.svg", group: "Public & NGO" },
     { name: "M&M's", logo: "assets/logos/mms.svg", group: "FMCG" },
     { name: "Subway", logo: "assets/logos/subway.svg", group: "Restaurants" },
     { name: "Fanta", logo: "assets/logos/fanta.svg", badge: true, group: "FMCG" },

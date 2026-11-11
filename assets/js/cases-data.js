@@ -6,8 +6,6 @@
 // Logos are looked up by client name; a case can also set its own `logo`. Dark logos are shown white
 // (white), and M&M's gets a white outline (outline) like on its own packaging. Clients without a logo
 // get their name as a wordmark.
-// Simple Icons logos come in one colour; their CDN paints them in the brand colour
-const brandIcon = (slug, hex) => `https://cdn.simpleicons.org/${slug}/${hex}`;
 const caseLogos = {
     "Subway": { src: "assets/logos/subway.svg" },
     "Fanta": { src: "assets/logos/fanta.svg" },
@@ -21,7 +19,7 @@ const caseLogos = {
     "Hummel": { src: "assets/logos/hummel.svg", white: true },
     "JD Sports": { src: "assets/logos/jdsports.svg", white: true },
     "Samsung": { src: "assets/logos/samsung.svg", white: true },
-    "McDonald's": { src: brandIcon("mcdonalds", "FBC817") },
+    "McDonald's": { src: "assets/logos/mcdonalds-yellow.svg" },
     "Podimo": { src: "assets/logos/podimo.svg" },
     "LEGO": { src: "assets/logos/lego.svg" },
     "Arla": { src: "assets/logos/arla.svg" },
@@ -29,10 +27,10 @@ const caseLogos = {
     "Coca-Cola": { src: "assets/logos/cocacola.svg" }, // Simple Icons, cropped to the drawing
     "Boozt": { src: "assets/logos/boozt.svg", white: true },
     // Pepsi left Simple Icons after 9.x: the old icon is painted here instead (see colourCaseLogo)
-    "Pepsi": { src: "https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/pepsi.svg", color: "#2152A4" },
+    "Pepsi": { src: "assets/logos/pepsi.svg", color: "#2152A4" },
     "Cinemataztic": { src: "assets/logos/cinemataztic-mark-white.svg" },
     "Ben & Jerry's": { src: "assets/logos/benjerry.svg" },
-    "Nokia": { src: brandIcon("nokia", "005AFF") },
+    "Nokia": { src: "assets/logos/nokia-blue.svg" },
     "Sprite": { src: "assets/logos/sprite.svg" },
     "Mentos": { src: "assets/logos/mentos.svg" },
     "Dr. Oetker": { src: "assets/logos/droetker.svg" },
