@@ -129,13 +129,13 @@ const caseLogos = {
     "EF Education First": { src: "assets/logos/ef-white.png" }, // taken from the pitch images, the pink badge made white with EF cut out
     "HP": { src: "assets/logos/hp.svg" }, // Wikimedia Commons, File:HP logo 2012.svg, made white
     "Just Spices": { src: "assets/logos/justspices-white.png" }, // taken from the pitch images, the white letters
-    "LEGOLAND": { src: "assets/logos/legoland.svg" }, // Wikimedia Commons, File:Legoland logo.svg, the wordmark made white
+    "LEGOLAND": { src: "assets/logos/legoland-logo.svg" }, // Wikimedia Commons, File:Legoland logo.svg, the wordmark made white
     "Oatly": { src: "assets/logos/oatly.svg" }, // Wikimedia Commons, File:Oatly logo.svg, made white
     "Sygeforsikringen “danmark”": { src: "assets/logos/sygeforsikring.svg" }, // from sygeforsikring.dk, made white with the heart cut out
     "Knorr": { src: "assets/logos/knorr.svg" }, // Wikimedia Commons, File:Knorr Logo 2020.svg
     "Politiken": { src: "assets/logos/politiken.svg", white: true },
     "Viking Line": { src: "assets/logos/vikingline.svg" }, // Wikimedia Commons, File:Viking Line wordmark.svg
-    "Spider-Man": { src: "assets/logos/spiderman.svg", scale: 1.4 }, // Wikimedia Commons, File:Spider-Man-Logo.svg
+    "Spider-Man": { src: "assets/logos/spiderman-logo.svg", scale: 1.4 }, // Wikimedia Commons, File:Spider-Man-Logo.svg
     "TUI": { src: "assets/logos/tui.svg" }, // simple-icons
     "Iberdrola": { src: "assets/logos/iberdrola.svg" }, // Wikimedia Commons, File:Logo Iberdrola (2023).svg
     "Kirppu": { src: "assets/logos/kirppu.svg" }, // logo from kirppu.dk (the version for dark backgrounds)
