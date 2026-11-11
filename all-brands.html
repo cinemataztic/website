@@ -154,8 +154,19 @@
         /* All brands: every brand at once, A to Z, in more columns the wider the screen */
         #allBrands { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         @media (min-width: 640px) { #allBrands { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { #allBrands { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
-        @media (min-width: 1700px) { #allBrands { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { #allBrands { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+        @media (min-width: 1280px) { #allBrands { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+        @media (min-width: 1700px) { #allBrands { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+        /* Search field in the left menu (same look as on the cases page) */
+        .brand-search { position: relative; }
+        .brand-search > i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; color: #9ca3af; pointer-events: none; }
+        .brand-search input { width: 100%; padding: 10px 44px 10px 38px; background: #282828; border: 1px solid #3a3a3a; border-radius: 0; color: rgba(255, 255, 255, 0.87); font-size: 16px; line-height: 1.25; outline: none; transition: border-color 150ms; -webkit-appearance: none; appearance: none; }
+        .brand-search input::placeholder { color: #9ca3af; }
+        .brand-search input:focus { border-color: #3dc0c8; }
+        .brand-search input::-webkit-search-cancel-button { display: none; }
+        .brand-search button { position: absolute; right: 0; top: 0; bottom: 0; width: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #fece00; transition: color 150ms; }
+        .brand-search button[hidden] { display: none; }
+        .brand-search button:hover { color: rgba(255, 255, 255, 0.87); }
     </style>
 </head>
 <body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
@@ -192,15 +203,30 @@
     <main class="flex-grow pt-20">
         <!-- ALL BRANDS: one big brand wall with every brand from assets/js/brands.js, A to Z, filtered by product group -->
         <section class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-            <div class="space-y-6" style="margin-bottom: 3rem">
-                <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Who we work with</span>
-                <!-- The heading is hidden on screen but kept for search engines and screen readers -->
-                <h1 class="sr-only">All brands</h1>
-                <!-- Product group filter: All plus one button per group in brands.js (filled by the script) -->
-                <div id="brandGroups" class="flex flex-wrap gap-2" role="group" aria-label="Filter brands by product group"></div>
-            </div>
-            <div id="allBrands" class="grid gap-6">
-                <!-- Filled from assets/js/brands.js -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+                <!-- LEFT MENU: search and product groups, like the cases page -->
+                <aside class="lg:col-span-3 lg:sticky lg:top-28 lg:self-start space-y-6">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Who we work with</span>
+                    <!-- The heading is hidden on screen but kept for search engines and screen readers -->
+                    <h1 class="sr-only">All brands</h1>
+                    <div class="brand-search">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input id="brandSearch" type="search" placeholder="Search brand" aria-label="Search by brand name" autocomplete="off" spellcheck="false">
+                        <button id="brandSearchClear" type="button" aria-label="Clear search" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                    </div>
+                    <!-- Product group filter: All plus one button per group in brands.js (filled by the script) -->
+                    <div id="brandGroups" class="flex flex-wrap lg:flex-col lg:items-start gap-2" role="group" aria-label="Filter brands by product group"></div>
+                    <div class="hidden lg:block pt-4">
+                        <span id="brandCount" class="block text-6xl font-black text-brand-pink">0</span>
+                        <span class="text-xs uppercase tracking-wider text-gray-400">Brands</span>
+                    </div>
+                </aside>
+                <div class="lg:col-span-9">
+                    <div id="allBrands" class="grid gap-6">
+                        <!-- Filled from assets/js/brands.js -->
+                    </div>
+                    <p id="allBrandsEmpty" class="py-12 text-gray-500 font-bold uppercase" hidden>No brands found.</p>
+                </div>
             </div>
         </section>
     </main>
@@ -294,7 +320,7 @@
                 const inner = b.logo
                     ? `<img src="${escapeHtml(b.logo)}" alt="${escapeHtml(b.name)}" loading="lazy" class="brand-logo${b.badge ? ' brand-logo--badge' : ''} max-h-12 max-w-[130px] w-auto object-contain" data-badge="${b.badge ? 1 : ''}">`
                     : brandWordmark(b.name);
-                return `<a data-groups="${escapeHtml(JSON.stringify([].concat(b.group || [])))}" class="brand-cell group flex items-center justify-center aspect-[3/2] px-4 bg-brand-card border border-brand-border hover:border-brand-cyan transition-colors" title="${escapeHtml(b.name)}"${href}>${inner}</a>`;
+                return `<a data-name="${escapeHtml(searchText(b.name))}" data-groups="${escapeHtml(JSON.stringify([].concat(b.group || [])))}" class="brand-cell group flex items-center justify-center aspect-[3/2] px-4 bg-brand-card border border-brand-border hover:border-brand-cyan transition-colors" title="${escapeHtml(b.name)}"${href}>${inner}</a>`;
             }).join('');
             wall.querySelectorAll('img').forEach(img => {
                 // A broken logo link falls back to the name
@@ -312,13 +338,26 @@
             const groups = ['All', ...order.filter(g => counts[g]), ...Object.keys(counts).filter(g => !order.includes(g)).sort()];
             const params = new URLSearchParams(location.search);
             let current = groups.includes(params.get('group')) ? params.get('group') : 'All';
+            const searchInput = document.getElementById('brandSearch');
+            const searchClear = document.getElementById('brandSearchClear');
+            searchInput.value = params.get('search') || '';
+            searchClear.hidden = !searchInput.value;
             function applyGroup() {
                 groupBox.innerHTML = groups.map(g => {
                     const active = g === current;
                     const n = g === 'All' ? brands.length : counts[g];
                     return `<button type="button" data-group="${escapeHtml(g)}" aria-pressed="${active}" class="px-4 py-2 text-xs font-bold uppercase tracking-wider transition ${active ? 'bg-brand-cyan text-black' : 'border border-brand-border text-gray-300 hover:border-brand-cyan hover:text-white'}">${escapeHtml(g)} <span class="${active ? 'text-black/60' : 'text-gray-500'} ml-1">${n}</span></button>`;
                 }).join('');
-                [...wall.children].forEach(cell => { cell.style.display = current === 'All' || JSON.parse(cell.dataset.groups).includes(current) ? '' : 'none'; });
+                // Shown: in the chosen group and matching the search (any part of the name, ignoring case and accents)
+                const term = searchText(searchInput.value);
+                let shown = 0;
+                [...wall.children].forEach(cell => {
+                    const on = (current === 'All' || JSON.parse(cell.dataset.groups).includes(current)) && (!term || cell.dataset.name.includes(term));
+                    cell.style.display = on ? '' : 'none';
+                    if (on) shown++;
+                });
+                document.getElementById('brandCount').textContent = shown;
+                document.getElementById('allBrandsEmpty').hidden = shown > 0;
             }
             groupBox.addEventListener('click', e => {
                 const btn = e.target.closest('button[data-group]');
@@ -330,6 +369,14 @@
                 history.replaceState(null, '', url);
                 applyGroup();
             });
+            // Keep the search in the address too, so the result can be shared
+            function keepInUrl() {
+                const url = new URL(location.href);
+                if (searchInput.value) url.searchParams.set('search', searchInput.value); else url.searchParams.delete('search');
+                history.replaceState(null, '', url);
+            }
+            searchInput.addEventListener('input', () => { searchClear.hidden = !searchInput.value; keepInUrl(); applyGroup(); });
+            searchClear.addEventListener('click', () => { searchInput.value = ''; searchClear.hidden = true; keepInUrl(); applyGroup(); searchInput.focus(); });
             applyGroup();
         })();
 
