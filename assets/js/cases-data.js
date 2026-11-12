@@ -44,6 +44,8 @@ const caseLogos = {
     "Allianz": { src: "assets/logos/allianz.svg", white: true }, // Wikimedia Commons, File:Allianz.svg
     "Norlys": { src: "assets/logos/norlys.svg" }, // logo from norlys.dk
     "Apotekets": { src: "assets/logos/apotekets-white.png" }, // logo from apotekets.dk, made white on transparent
+    "GreenMobility": { src: "assets/logos/greenmobility-white.png" }, // cut from the CineFun game screens, white on transparent
+    "Call me": { src: "assets/logos/callme-white.png" }, // cut from the CineFun game screens, white on transparent
     "LEGO House": { src: "assets/logos/lego.svg" },
     "VillaVilla": { src: "assets/logos/villavilla.svg" }, // logo from villavilla.dk
     "LYKO": { src: "assets/logos/lyko.svg" }, // logo from lyko.com (white)

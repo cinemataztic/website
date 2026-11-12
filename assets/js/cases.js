@@ -160,6 +160,48 @@ const siteCases = [
         description: "A CineFun game for Apotekets."
     },
     {
+        id: "cinefun-ikea-meatball-blitz",
+        title: "IKEA – Meatball Blitz",
+        client: "IKEA",
+        category: "CineFun",
+        mediaType: "image",
+        cover: "assets/cases/cinefun/ikea-meatball-blitz-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/cinefun/ikea-meatball-blitz-1.jpg",
+            "assets/cases/cinefun/ikea-meatball-blitz-2.jpg"
+        ],
+        description: "Meatball Blitz, a CineFun game for IKEA. Players catch the falling meatballs and win a soft ice voucher for the IKEA Swedish Restaurant."
+    },
+    {
+        id: "cinefun-greenmobility",
+        title: "GreenMobility",
+        client: "GreenMobility",
+        category: "CineFun",
+        mediaType: "image",
+        cover: "assets/cases/cinefun/greenmobility-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/cinefun/greenmobility-1.jpg",
+            "assets/cases/cinefun/greenmobility-2.jpg"
+        ],
+        description: "Catch the Energy, a CineFun drop game for GreenMobility. Players catch the falling energy and win free driving time with GreenMobility."
+    },
+    {
+        id: "cinefun-callme",
+        title: "Call me",
+        client: "Call me",
+        category: "CineFun",
+        mediaType: "image",
+        cover: "assets/cases/cinefun/callme-1.jpg",
+        video: "",
+        images: [
+            "assets/cases/cinefun/callme-1.jpg",
+            "assets/cases/cinefun/callme-2.jpg"
+        ],
+        description: "Call me Word Game, a CineFun game for Call me. Players find the hidden words and win a prize from Call me."
+    },
+    {
         id: "sygeforsikring-jumper",
         title: "Sygeforsikringen “danmark”",
         client: "Sygeforsikringen “danmark”",
