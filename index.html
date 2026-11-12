@@ -1591,13 +1591,14 @@ const phoneQuery = window.matchMedia('(max-width: 639px)');
         })();
 
         // --- BRANDS: COUNT-UP ---
-        // When the counter scrolls into view it rolls up to 346 like a mechanical counter; the label below then
-        // changes to a pulsing "And counting".
+        // When the counter scrolls into view it rolls up to the number of brands in assets/js/brands.js (the same
+        // count as All brands), so it grows by itself when a brand is added; the label below then changes to a
+        // pulsing "And counting".
         (function initBrandCounter() {
             const countEl = document.getElementById('brandCount');
             const labelEl = document.getElementById('brandCountLabel');
             if (!countEl) return;
-            const TARGET = 346, COUNT_MS = 1800, HOLD_MS = 400;
+            const TARGET = siteBrands.length, COUNT_MS = 1800, HOLD_MS = 400;
 
             function finish() {
                 labelEl.style.opacity = '0';
