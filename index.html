@@ -949,10 +949,24 @@ const desktopQuery = window.matchMedia('(min-width: 1280px)');
             currentFilter = category;
             renderFilters();
             renderCasesGrid();
+            revealCases();
             // Back to the top of Featured Cases when further down: with fewer cases the section gets shorter,
             // and the new cases could end up above the screen
             const section = document.getElementById('work');
             if (section.getBoundingClientRect().top < 0) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // The cases of the chosen category come in one by one, as on the cases page: each fades in and grows from
+        // 90% to full size a little after the one before. Off for reduced motion.
+        function revealCases() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            [...document.querySelectorAll('#casesGrid > article')].forEach((card, i) => {
+                if (!card.animate) return;
+                card.animate(
+                    [{ opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1 }],
+                    { duration: 450, delay: Math.min(i, 20) * 35, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)', fill: 'backwards' }
+                );
+            });
         }
 
         function renderCasesGrid() {
