@@ -153,9 +153,14 @@
             filter: grayscale(1);
             opacity: 0.7;
         }
-        /* The wall shows 8 places; their logos fade out and in as they rotate through all brands */
-        .brand-cell > * { transition: opacity 400ms ease; }
-        .brand-cell.is-swapping > * { opacity: 0 !important; }
+        /* The places rotate through all brands, one at a time (after hugeinc.com): the logo sits in an invisible
+           window; the old one slides up and fades out while the new one slides up from below and fades in */
+        .brand-cell { position: relative; overflow: hidden; }
+        .brand-window { position: absolute; left: 16px; right: 16px; top: 50%; height: 64px; margin-top: -32px; overflow: hidden; }
+        .brand-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            transition: transform 800ms cubic-bezier(0.87, 0, 0.13, 1), opacity 800ms cubic-bezier(0.87, 0, 0.13, 1); }
+        .brand-face.is-below { transform: translateY(50%); opacity: 0; transition: none; }
+        .brand-face.is-above { transform: translateY(-50%); opacity: 0; }
         /* Brand wall: 4 logos on phones (2 x 2), 8 on tablets (2 rows of 4) and 18 in 3 rows of 6 on big
            screens with a mouse (the script adds brand-wall--big) */
         #brandWall.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -759,7 +764,7 @@ const desktopQuery = window.matchMedia('(min-width: 1280px)');
         // 12 places on big screens with a mouse, 8 on tablets (also an iPad held sideways), 4 on phones
         const bigBrandWall = window.matchMedia('(min-width: 1280px) and (hover: hover) and (pointer: fine)');
         const tabletBrandWall = window.matchMedia('(min-width: 640px)');
-        const BRAND_SWAP_MS = 2200;
+        const BRAND_SWAP_MS = 1500;
         // The wall leaves out pitch clients (they are only on all-brands.html)
         const wallBrands = siteBrands.filter(b => !b.pitch);
         let brandSlots = [];   // index into wallBrands for each visible place
@@ -772,16 +777,34 @@ const desktopQuery = window.matchMedia('(min-width: 1280px)');
                 : brandWordmark(b.name);
         }
 
-        function fillBrandCell(cell, i) {
+        // Puts brand i in a place. With animate, the new logo slides up into the window as the old one leaves.
+        function fillBrandCell(cell, i, animate = false) {
             const { name } = wallBrands[i];
             cell.title = name;
-            cell.innerHTML = brandCellContent(i);
+            let win = cell.querySelector('.brand-window');
+            if (!win) {
+                cell.innerHTML = '<span class="brand-window"></span>';
+                win = cell.firstElementChild;
+            }
+            const face = document.createElement('span');
+            face.className = 'brand-face';
+            face.innerHTML = brandCellContent(i);
+            if (!animate) {
+                win.replaceChildren(face);
+            } else {
+                const old = [...win.children];
+                face.classList.add('is-below');
+                win.appendChild(face);
+                void face.offsetWidth; // start from below
+                face.classList.remove('is-below');
+                old.forEach(f => { f.classList.add('is-above'); setTimeout(() => f.remove(), 850); });
+            }
             // A brand with cases links to them on the cases page
             const term = searchText(name);
             if (siteCases.some(c => c.category !== 'Pitch' && caseMatches(c, term))) cell.href = `cases.html?search=${encodeURIComponent(name)}`;
             else cell.removeAttribute('href');
             // A broken logo link falls back to the name
-            const img = cell.querySelector('img[data-brand-index]');
+            const img = face.querySelector('img[data-brand-index]');
             if (!img) return;
             img.addEventListener('error', () => { img.outerHTML = brandWordmark(wallBrands[i].name); }, { once: true });
             if (!wallBrands[i].badge) tightenSvgLogo(img);
@@ -810,13 +833,8 @@ const desktopQuery = window.matchMedia('(min-width: 1280px)');
                 const next = hidden[Math.floor(Math.random() * hidden.length)];
                 const cell = wall.children[slot];
                 if (!cell || cell.matches(':hover')) return;
-                cell.classList.add('is-swapping');
-                setTimeout(() => {
-                    brandSlots[slot] = next;
-                    fillBrandCell(cell, next);
-                    void cell.offsetWidth; // start the fade-in from the hidden state
-                    cell.classList.remove('is-swapping');
-                }, 400);
+                brandSlots[slot] = next;
+                fillBrandCell(cell, next, true);
             }, BRAND_SWAP_MS);
         }
 
