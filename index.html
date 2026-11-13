@@ -1853,5 +1853,35 @@ const desktopQuery = window.matchMedia('(min-width: 1280px)');
             refit();
         })();
     </script>
+    <!-- HEADER FADE-IN (start): the hero heading comes in line by line. To remove it, delete from here to
+         "HEADER FADE-IN (end)". Nothing else on the page depends on it. -->
+    <style>
+        .hx-line { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+        .hx-line > span { display: block; animation: hx-up 1000ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+        @keyframes hx-up { from { transform: translateY(105%); opacity: 0; } to { transform: none; opacity: 1; } }
+        .hx-fade { animation: hx-fade 900ms ease-out both; }
+        @keyframes hx-fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    </style>
+    <script>
+        (function headerFadeIn() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const h1 = document.querySelector('#hero h1');
+            if (!h1) return;
+            // Arriving through the page transition, wait until its panel starts to lift
+            const start = document.documentElement.classList.contains('pt-covered') ? 300 : 100;
+            // Each line (split at the <br>s) slides up out of an invisible edge, 140ms after the one before
+            const lines = h1.innerHTML.split(/<br\s*\/?>/i).map(s => s.trim());
+            h1.innerHTML = lines.map((l, i) => `<span class="hx-line"><span style="animation-delay:${start + i * 140}ms">${l}</span></span>`).join('');
+            // The label above and the text beside it fade in after the heading
+            const label = h1.previousElementSibling;
+            if (label) { label.classList.add('hx-fade'); label.style.animationDelay = `${start}ms`; }
+            document.querySelectorAll('#hero .hero-copy > *').forEach((p, i) => {
+                p.classList.add('hx-fade');
+                p.style.animationDelay = `${start + lines.length * 140 + 150 + i * 120}ms`;
+            });
+        })();
+    </script>
+    <!-- HEADER FADE-IN (end) -->
+
 </body>
 </html>
