@@ -108,8 +108,8 @@
             #casesGrid .top-3.flex { padding: 0; }
             #casesGrid .top-3 i { font-size: 10px; margin: 0; }
         }
-        /* Products on small desktops (1024-1279px): 3 across too, so the two cards stay small and the third cell stays empty */
-        @media (min-width: 1024px) and (max-width: 1279px) { #products .grid.card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        /* Products on small desktops (1024-1279px): two cards, each 40% of the row (between 2 and 3 across), with the rest left empty */
+        @media (min-width: 1024px) and (max-width: 1279px) { #products .grid.card-grid { grid-template-columns: repeat(2, minmax(0, 40%)); } }
         @media (min-width: 1700px) { .grid.card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (min-width: 2300px) { .grid.card-grid--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
         /* Featured Cases: 4 across from iPad width (768px) up, so the 8 cases fill two rows */
