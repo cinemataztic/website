@@ -427,6 +427,7 @@
             window.scrollTo({ top: 0, behavior: 'instant' });
             renderFilters();
             renderCasesGrid();
+            revealCases();
         }
 
         function filterCases(category) {
@@ -437,9 +438,29 @@
             window.scrollTo({ top: 0, behavior: 'instant' });
             renderFilters();
             renderCasesGrid();
+            revealCases();
         }
 
-        // On this page the client name in the popup searches right here instead of loading the page again
+        // The cases on screen come in one by one (as on all-brands.html): each fades in and grows from 90% to full
+        // size a little after the one before. Uses the scale property, not transform, which the conveyor uses to
+        // move the cards. Cards below the screen are left alone.
+        function revealCases(startDelay = 0) {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const cards = [...document.querySelectorAll('#casesGrid .case-card')].filter(card => {
+                const r = card.getBoundingClientRect();
+                return card.animate && r.bottom > 0 && r.top < window.innerHeight && card.style.visibility !== 'hidden';
+            });
+            cards.forEach((card, i) => {
+                card.getAnimations().filter(a => a.id === 'reveal').forEach(a => a.cancel());
+                const a = card.animate(
+                    [{ opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1 }],
+                    { duration: 450, delay: startDelay + Math.min(i, 20) * 35, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)', fill: 'backwards' }
+                );
+                a.id = 'reveal';
+            });
+        }
+
+        // On this page the client name) in the popup searches right here instead of loading the page again
         document.getElementById('caseModalClient').addEventListener('click', (e) => {
             e.preventDefault();
             closeCaseDetailModal();
@@ -730,6 +751,8 @@
         // --- INIT ---
         renderFilters();
         renderCasesGrid();
+        // Arriving through the page transition, wait until its panel starts to lift
+        revealCases(document.documentElement.classList.contains('pt-covered') ? 250 : 0);
         if (!reduceMotion) requestAnimationFrame(tick);
         // ?case=<id> (from the programmatic page) opens that case straight away
         const requestedCase = new URLSearchParams(window.location.search).get('case');
