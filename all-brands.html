@@ -382,7 +382,21 @@
                 applyGroup();
                 // Back to the top, so the brands of a small group are not left above the screen
                 window.scrollTo({ top: 0, behavior: 'instant' });
+                revealShown();
             });
+            // A new category comes in tile by tile: each fades in and grows from 90% to full size, a little after
+            // the one before (the delay stops growing after 20 tiles, so a big group doesn't take long)
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            function revealShown() {
+                if (reduceMotion.matches || !wall.animate) return;
+                [...wall.children].filter(cell => cell.style.display !== 'none').forEach((cell, i) => {
+                    cell.getAnimations().forEach(a => a.cancel());
+                    cell.animate(
+                        [{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }],
+                        { duration: 450, delay: Math.min(i, 20) * 35, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)', fill: 'backwards' }
+                    );
+                });
+            }
             // Keep the search in the address too, so the result can be shared
             function keepInUrl() {
                 const url = new URL(location.href);
