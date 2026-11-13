@@ -253,6 +253,28 @@
             .pflow__dot, .pflow__tile .fa-arrows-rotate { animation: none; }
             .pflow__dot { display: none; }
         }
+        /* Market picker in the hero: one button; hover (mouse) or tap opens the two trade desk markets below it */
+        .market-pick { position: relative; display: inline-block; }
+        .market-pick__btn:hover, .market-pick.is-open .market-pick__btn { background: #1A1A1A; color: #fff; }
+        .market-pick__chev { transition: transform 250ms ease; }
+        .market-pick.is-open .market-pick__chev { transform: rotate(180deg); }
+        .market-pick__menu { position: absolute; left: 0; top: 100%; z-index: 20; min-width: 100%; width: max-content; margin-top: 8px; padding: 8px;
+            background: #fff; box-shadow: 0 18px 40px rgba(0,0,0,0.25); opacity: 0; visibility: hidden; transform: translateY(-6px);
+            transition: opacity 200ms ease, transform 200ms ease, visibility 0s linear 200ms; }
+        /* An invisible bridge over the gap, so the menu stays open while the mouse moves down to it */
+        .market-pick__menu::before { content: ''; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+        .market-pick.is-open .market-pick__menu { opacity: 1; visibility: visible; transform: none; transition: opacity 200ms ease, transform 200ms ease, visibility 0s; }
+        .market-pick__label { display: block; padding: 6px 12px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.45); }
+        .market-pick__menu a { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 12px; color: #000;
+            font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; transition: background 150ms ease, color 150ms ease; }
+        .market-pick__menu a small { margin-left: 6px; font-size: 10px; font-weight: 600; color: rgba(0,0,0,0.45); transition: color 150ms ease; }
+        .market-pick__menu a:hover, .market-pick__menu a:focus-visible { background: #1A1A1A; color: #fff; outline: none; }
+        .market-pick__menu a:hover small, .market-pick__menu a:focus-visible small { color: rgba(255,255,255,0.6); }
+        /* Phones and tablets: the hero clips anything below it, so the menu opens in the page under the button instead of floating */
+        @media (max-width: 1023px) {
+            .market-pick__menu { position: static; display: none; transform: none; }
+            .market-pick.is-open .market-pick__menu { display: block; }
+        }
     </style>
     <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
     <link rel="preconnect" href="https://api.fontshare.com">
@@ -315,13 +337,16 @@
                         <p>
                             Digital advertising has grown to more than 75% of the global advertising spend. Cinema's share of digital advertising is non-existing. To change that, Cinemataztic has introduced the first 'Programmatic Cinema' advertising platform - Book your programmatic campaign today
                         </p>
-                        <div class="flex flex-wrap gap-3 pt-2">
-                            <a href="https://drf.dk.tradedesk.cinead.eu-1.cinemataztic.com/" target="_blank" rel="noopener" class="btn-shine px-6 py-3 bg-white text-black font-bold uppercase tracking-wider text-xs hover:bg-brand-dark hover:text-white transition">
-                                Programmatic DK <i class="fa-solid fa-arrow-right fa-rotate-by ml-2" style="--fa-rotate-angle: -45deg"></i>
-                            </a>
-                            <a href="https://finnkino.fi.tradedesk.cinead.eu-1.cinemataztic.com/" target="_blank" rel="noopener" class="btn-shine px-6 py-3 bg-white text-black font-bold uppercase tracking-wider text-xs hover:bg-brand-dark hover:text-white transition">
-                                Programmatic FI <i class="fa-solid fa-arrow-right fa-rotate-by ml-2" style="--fa-rotate-angle: -45deg"></i>
-                            </a>
+                        <!-- One button for the trade desk; hovering (or tapping) it opens a choice of market -->
+                        <div class="market-pick pt-2" id="marketPick">
+                            <button type="button" class="market-pick__btn btn-shine px-6 py-3 bg-white text-black font-bold uppercase tracking-wider text-xs transition" aria-haspopup="true" aria-expanded="false" aria-controls="marketMenu">
+                                Book programmatic <i class="fa-solid fa-chevron-down ml-2 market-pick__chev" aria-hidden="true"></i>
+                            </button>
+                            <div class="market-pick__menu" id="marketMenu">
+                                <span class="market-pick__label">Choose market</span>
+                                <a href="https://drf.dk.tradedesk.cinead.eu-1.cinemataztic.com/" target="_blank" rel="noopener"><span>Denmark <small>DRF</small></span> <i class="fa-solid fa-arrow-right fa-rotate-by" style="--fa-rotate-angle: -45deg" aria-hidden="true"></i></a>
+                                <a href="https://finnkino.fi.tradedesk.cinead.eu-1.cinemataztic.com/" target="_blank" rel="noopener"><span>Finland <small>Finnkino</small></span> <i class="fa-solid fa-arrow-right fa-rotate-by" style="--fa-rotate-angle: -45deg" aria-hidden="true"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1347,6 +1372,23 @@
         })();
     </script>
     <script src="assets/js/more-products.js?v=8" data-current="programmatic"></script>
+    <script>
+        // Market picker: opens on hover with a mouse, on tap/click otherwise; closes on leaving, Escape or a click elsewhere
+        (function initMarketPick() {
+            const pick = document.getElementById('marketPick');
+            if (!pick) return;
+            const btn = pick.querySelector('.market-pick__btn');
+            const hoverable = window.matchMedia('(hover: hover) and (pointer: fine)');
+            let closeTimer;
+            const set = open => { clearTimeout(closeTimer); pick.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', String(open)); };
+            pick.addEventListener('mouseenter', () => { if (hoverable.matches) set(true); });
+            pick.addEventListener('mouseleave', () => { if (hoverable.matches) closeTimer = setTimeout(() => set(false), 150); });
+            btn.addEventListener('click', () => set(hoverable.matches ? true : !pick.classList.contains('is-open')));
+            document.addEventListener('click', e => { if (!pick.contains(e.target)) set(false); });
+            pick.addEventListener('keydown', e => { if (e.key === 'Escape') { set(false); btn.focus(); } });
+            pick.addEventListener('focusout', e => { if (!pick.contains(e.relatedTarget)) set(false); });
+        })();
+    </script>
     <!-- Hero heading fades in line by line -->
     <script src="assets/js/hero-fade.js?v=1"></script>
 </body>
