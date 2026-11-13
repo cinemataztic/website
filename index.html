@@ -145,6 +145,9 @@
             transition: opacity 200ms linear;
         }
         .brand-cell:hover .brand-logo { opacity: 1; }
+        /* Wide logos keep some air to the edges: never wider than 82% of the place (the 130/140px caps are wider than a
+           place on desktop, where 6 sit side by side) */
+        #brandWall .brand-logo { max-width: 82% !important; min-width: 0; }
         /* Badge logos (text knocked out of a shape) would turn into a flat blob, so they go greyscale instead */
         .brand-logo.brand-logo--badge {
             filter: grayscale(1);
