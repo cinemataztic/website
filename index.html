@@ -153,7 +153,7 @@
         /* The wall shows 8 places; their logos fade out and in as they rotate through all brands */
         .brand-cell > * { transition: opacity 400ms ease; }
         .brand-cell.is-swapping > * { opacity: 0 !important; }
-        /* Brand wall: 4 logos on phones (2 x 2), 8 on tablets (2 rows of 4) and 12 in 2 rows of 6 on big
+        /* Brand wall: 4 logos on phones (2 x 2), 8 on tablets (2 rows of 4) and 18 in 3 rows of 6 on big
            screens with a mouse (the script adds brand-wall--big) */
         #brandWall.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         @media (min-width: 640px) { #brandWall.grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -733,14 +733,16 @@
         </div>
     </footer>
 
-    <script src="assets/js/cases.js?v=85"></script>
+    <script src="assets/js/cases.js?v=86"></script>
     <script src="assets/js/brands.js?v=53"></script>
     <script src="assets/js/cases-data.js?v=108"></script>
     <script>
 // Cases come from assets/js/cases.js and the brand wall from assets/js/brands.js
-// The front page shows 8 featured cases: two full rows of 4 (iPad and up) or four rows of 2 (phones)
+// The front page shows 8 featured cases: two full rows of 4 (iPad) or four rows of 2 (phones).
+// Desktop (1280px and wider) also shows the cases marked featuredDesktop: three rows of 4.
 const MAX_FEATURED = 8;
 const phoneQuery = window.matchMedia('(max-width: 639px)');
+const desktopQuery = window.matchMedia('(min-width: 1280px)');
 
         // --- BRAND WALL ---
         function escapeHtml(value) {
@@ -786,7 +788,7 @@ const phoneQuery = window.matchMedia('(max-width: 639px)');
             const wall = document.getElementById('brandWall');
             const total = wallBrands.length;
             wall.classList.toggle('brand-wall--big', bigBrandWall.matches);
-            brandSlots = [...Array(Math.min(bigBrandWall.matches ? 12 : tabletBrandWall.matches ? 8 : 4, total)).keys()];
+            brandSlots = [...Array(Math.min(bigBrandWall.matches ? 18 : tabletBrandWall.matches ? 8 : 4, total)).keys()];
             wall.innerHTML = brandSlots.map(() => `
                 <a class="brand-cell group flex items-center justify-center aspect-[3/2] px-4 bg-brand-card border border-brand-border hover:border-brand-cyan transition-colors"></a>
             `).join('');
@@ -855,10 +857,13 @@ const phoneQuery = window.matchMedia('(max-width: 639px)');
             } catch (e) { /* keep the plain <img> */ }
         }
 
-        // Cases marked featured in cases.js, max 9 (8 on phones); pitches are only on the cases page
+        // Cases marked featured in cases.js (the first 8), plus the featuredDesktop ones on desktop after them;
+        // pitches are only on the cases page
         function frontPageCases() {
             const cases = siteCases.filter(c => c.category !== 'Pitch');
-            return mixCategories(cases.filter(c => c.featured).slice(0, MAX_FEATURED));
+            const main = mixCategories(cases.filter(c => c.featured).slice(0, MAX_FEATURED));
+            if (!desktopQuery.matches) return main;
+            return main.concat(mixCategories(cases.filter(c => c.featuredDesktop && !main.includes(c))));
         }
 
         // Spreads the products out, so cases of one kind don't stand together: tries the orders of the kinds and keeps the
@@ -1798,6 +1803,7 @@ const phoneQuery = window.matchMedia('(max-width: 639px)');
         renderCasesGrid();
         // Turning a phone or resizing across the phone width changes how many cases show
         phoneQuery.addEventListener('change', () => { renderFilters(); renderCasesGrid(); });
+        desktopQuery.addEventListener('change', () => { renderFilters(); renderCasesGrid(); });
         renderBrandWall();
         bigBrandWall.addEventListener('change', renderBrandWall);
         tabletBrandWall.addEventListener('change', renderBrandWall);

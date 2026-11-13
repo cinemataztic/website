@@ -4,7 +4,8 @@
 //
 // The order here is the order on the site. Fields per case:
 //   id           unique name, also used in share links (cases.html?case=<id>)
-//   featured     true = shown on the front page (max 9, Pitch cases never)
+//   featured     true = shown on the front page (the first 8; Pitch cases never)
+//   featuredDesktop  true = also shown on the front page, but only on desktop (1280px and wider), after the 8 featured
 //   title        headline on the card and in the popup
 //   client       client name; picks the logo on the card (see caseLogos in cases-data.js)
 //   category     CineGame, Programmatic, CineFun, Leadsite or Pitch
@@ -150,6 +151,7 @@ const siteCases = [
     },
     {
         id: "appotek",
+        featuredDesktop: true,
         title: "Apotekets",
         client: "Apotekets",
         category: "CineFun",
@@ -664,6 +666,7 @@ const siteCases = [
     },
     {
         id: "danone-swipehero",
+        featuredDesktop: true,
         title: "Danone",
         client: "Danone",
         category: "CineGame",
@@ -688,7 +691,7 @@ const siteCases = [
     },
     {
         id: "santander",
-        featured: true,
+        featuredDesktop: true,
         title: "Santander",
         client: "Santander",
         category: "CineGame",
@@ -727,7 +730,7 @@ const siteCases = [
     },
     {
         id: "mars",
-        featured: false,
+        featuredDesktop: true,
         title: "M&M's – The Jumper",
         client: "M&M's + Extra",
         category: "CineGame",
