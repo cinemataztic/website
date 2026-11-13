@@ -387,13 +387,13 @@
             // A new category comes in tile by tile: each fades in and grows from 90% to full size, a little after
             // the one before (the delay stops growing after 20 tiles, so a big group doesn't take long)
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-            function revealShown() {
+            function revealShown(startDelay = 0) {
                 if (reduceMotion.matches || !wall.animate) return;
                 [...wall.children].filter(cell => cell.style.display !== 'none').forEach((cell, i) => {
                     cell.getAnimations().forEach(a => a.cancel());
                     cell.animate(
                         [{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }],
-                        { duration: 450, delay: Math.min(i, 20) * 35, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)', fill: 'backwards' }
+                        { duration: 450, delay: startDelay + Math.min(i, 20) * 35, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)', fill: 'backwards' }
                     );
                 });
             }
@@ -420,6 +420,9 @@
                 setTimeout(() => { copyBtn.classList.remove('is-copied'); label.textContent = before; applyGroup(); }, 2000);
             });
             applyGroup();
+            // The same entrance when the page opens. Arriving through the page transition, wait until its panel
+            // starts to lift, so the first tiles are not already in place behind it.
+            revealShown(document.documentElement.classList.contains('pt-covered') ? 250 : 0);
         })();
 
         // Icon sets draw logos inside a padded square, so a wide wordmark ends up tiny. For SVG logos,
