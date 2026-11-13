@@ -12,7 +12,7 @@
     const style = document.createElement('style');
     style.textContent = `
         .hx-wait { visibility: hidden; }
-        .hx-line { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+        .hx-line { display: block; overflow: hidden; overflow: visible clip; padding-bottom: 0.1em; margin-bottom: -0.1em; }
         .hx-line > span { display: block; animation: hx-up 1000ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
         @keyframes hx-up { from { transform: translateY(105%); opacity: 0; } to { transform: none; opacity: 1; } }
         .hx-fade { animation: hx-fade 900ms ease-out both; }
@@ -48,7 +48,8 @@
             p.style.animationDelay = `${start + lines.length * 140 + 150 + i * 120}ms`;
         });
         // Afterwards the heading gets its own markup back, so it wraps freely when the window is resized
-        setTimeout(() => { h1.innerHTML = original; }, start + lines.length * 140 + 1100);
+        // (and the pages' fit-text script measures it again, so a long word that is too wide still shrinks)
+        setTimeout(() => { h1.innerHTML = original; window.dispatchEvent(new Event('resize')); }, start + lines.length * 140 + 1100);
     }
 
     // Measure the lines with the real font, not a fallback (but never wait more than 600ms)
