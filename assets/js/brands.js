@@ -109,7 +109,7 @@ const siteBrands = [
     { name: "Red Rooster", logo: "assets/cases/pitch/rr-logo.png", group: "Restaurants", pitch: true },
     { name: "KFC", logo: "assets/logos/kfc.svg", group: "Restaurants", pitch: true },
     { name: "Hungry Jack's", logo: "assets/logos/hungryjacks-white.png", group: "Restaurants", pitch: true },
-    { name: "Danske Bank", group: "Finance & Insurance", pitch: true },
+    { name: "Danske Bank", logo: "assets/logos/danskebank-white.png", group: "Finance & Insurance", pitch: true },
     { name: "Cocio", logo: "assets/logos/cocio-white.png", group: "FMCG", pitch: true },
     { name: "OnePlus", logo: "assets/cases/pitch/one_plus_logo.png", group: "TelCo & Tech", pitch: true },
     { name: "Stimorol", logo: "assets/cases/pitch/stimorol_logo.png", badge: true, group: "FMCG", pitch: true },

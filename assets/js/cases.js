@@ -2639,9 +2639,7 @@ const siteCases = [
         category: "Pitch",
         mediaType: "image",
         cover: "assets/cases/pitch/pengeskyen_1.jpg",
-        logo: "assets/cases/pitch/pengeskyen_logo.png",
-        logoBox: [0, 9, 350, 81, 350, 136],
-        logoWhite: true,
+        logo: "assets/logos/danskebank-white.png", // supplied by the user, made white with the Danske box cut out
         video: "",
         images: [
             "assets/cases/pitch/pengeskyen_1.jpg",
