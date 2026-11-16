@@ -121,8 +121,8 @@ const siteCases = [
         category: "Programmatic",
         mediaType: "image",
         cover: "assets/cases/programmatic/prog-lyko-results.svg",
-        video: "",
-        images: ["assets/cases/programmatic/prog-lyko-results.svg"],
+        video: "https://storage.googleapis.com/cinemataztic-public/video/programmatic_lyko_case_story.mp4",
+        images: ["assets/cases/programmatic/prog-lyko-results.svg", "https://storage.googleapis.com/cinemataztic-public/video/programmatic_lyko_case_story.mp4"],
         description: "130,000 impressions and 14,000 vouchers with a 23.1% CTR. Leads: club members."
     },
     {
