@@ -856,11 +856,14 @@
                 height = canvas.parentElement.offsetHeight;
                 canvas.width = width * dpr; canvas.height = height * dpr;
                 heroBg = getComputedStyle(canvas.parentElement).backgroundColor || heroBg;
-                // Beside the heading on wide screens, behind it (and fainter) on narrow ones
+                // Left of the info text and button, so they stay easy to read: the tree's outer edge (about 0.95 R
+                // from the middle) ends 24px before the text column starts
                 const wide = width >= 1024;
-                cx = wide ? width * 0.6 : width * 0.62;
-                cy = height * 0.5;
                 R = Math.min(wide ? height * 0.56 : height * 0.42, wide ? width * 0.28 : width * 0.6);
+                const copy = canvas.parentElement.querySelector('.hero-copy');
+                const copyLeft = copy ? copy.getBoundingClientRect().left - canvas.parentElement.getBoundingClientRect().left : width * 0.67;
+                cx = wide ? Math.max(R, copyLeft - R * 0.95 - 24) : width * 0.62;
+                cy = height * 0.5;
             }
 
             const rand = (a, b) => a + Math.random() * (b - a);
