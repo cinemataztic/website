@@ -78,6 +78,7 @@ const siteBrands = [
     { name: "Apotekets", logo: "assets/logos/apotekets-white.png", group: "Health & Pharma" },
     { name: "GreenMobility", logo: "assets/logos/greenmobility-logo-white.png", group: "Travel & Transport" },
     { name: "Call me", logo: "assets/logos/callme-logo-white.png", group: "TelCo & Tech" },
+    { name: "Dansk Annoncørforening", logo: "assets/logos/daf-logo-white.png", group: "Unions" },
     { name: "LYKO", logo: "assets/logos/lyko.svg", group: "Retail" },
     { name: "VillaVilla", logo: "assets/logos/villavilla.svg", group: "Travel & Transport" },
     { name: "Ase", logo: "assets/logos/ase.svg", badge: true, group: "Finance & Insurance" },

@@ -46,6 +46,7 @@ const caseLogos = {
     "Apotekets": { src: "assets/logos/apotekets-white.png" }, // logo from apotekets.dk, made white on transparent
     "GreenMobility": { src: "assets/logos/greenmobility-logo-white.png" }, // supplied by the user, made white on transparent
     "Call me": { src: "assets/logos/callme-logo-white.png" }, // supplied by the user, made white on transparent
+    "Dansk Annoncørforening": { src: "assets/logos/daf-logo-white.png" }, // supplied by the user, made white on transparent
     "LEGO House": { src: "assets/logos/lego.svg" },
     "VillaVilla": { src: "assets/logos/villavilla.svg" }, // logo from villavilla.dk
     "LYKO": { src: "assets/logos/lyko.svg" }, // logo from lyko.com (white)

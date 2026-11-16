@@ -11,7 +11,7 @@
 //   category     CineGame, Programmatic, CineFun, Leadsite or Pitch
 //   gameType     CineGame only: the kind of game, for the second row of filters on the cases page:
 //                Quizshow, Quiz, Shuffle, Word game, Experience, Collector, Swipe Hero, Simon, Jumper,
-//                SportsBall, Find object, AR, Wheel of Fortune, Build, Arcade, Catch, Shooter or Miscellaneous
+//                SportsBall, Find object, AR, Wheel of Fortune, Build, Arcade, Catch, Shooter, Voting or Miscellaneous
 //   mediaType    "video" or "image": what the popup shows first
 //   cover        picture used in the popup
 //   video        video link (may be "")
@@ -202,6 +202,18 @@ const siteCases = [
             "assets/cases/cinefun/callme-2.jpg"
         ],
         description: "Call me Word Game, a CineFun game for Call me. Players find the hidden words and win a prize from Call me."
+    },
+    {
+        id: "daf-voting",
+        title: "Dansk Annoncørforening",
+        client: "Dansk Annoncørforening",
+        category: "CineGame",
+        gameType: "Voting",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/DanishMediaBattle_26_build13.mov",
+        preview: "assets/video/previews/daf-voting.mp4",
+        description: "Danish Media Battle 2026, a CineGame for Dansk Annoncørforening. The audience voted for Media of the Year."
     },
     {
         id: "sygeforsikring-jumper",

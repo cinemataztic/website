@@ -353,8 +353,8 @@
         </div>
     </footer>
 
-    <script src="assets/js/cases.js?v=88"></script>
-    <script src="assets/js/cases-data.js?v=108"></script>
+    <script src="assets/js/cases.js?v=89"></script>
+    <script src="assets/js/cases-data.js?v=109"></script>
     <script>
         // --- CASE DATA ---
         // Every case, in the order of assets/js/cases.js
@@ -366,7 +366,7 @@
         const requestedCategory = new URLSearchParams(window.location.search).get('category');
         let currentFilter = categories.includes(requestedCategory) ? requestedCategory : 'All';
         // Under CineGame a second row narrows the list to one kind of game (gameType in cases.js)
-        const gameTypes = ['Quizshow', 'Quiz', 'Shuffle', 'Word game', 'Experience', 'Collector', 'Swipe Hero', 'Simon', 'Jumper', 'SportsBall', 'Find object', 'AR', 'Wheel of Fortune', 'Build', 'Arcade', 'Catch', 'Shooter', 'Miscellaneous'];
+        const gameTypes = ['Quizshow', 'Quiz', 'Shuffle', 'Word game', 'Experience', 'Collector', 'Swipe Hero', 'Simon', 'Jumper', 'SportsBall', 'Find object', 'AR', 'Wheel of Fortune', 'Build', 'Arcade', 'Catch', 'Shooter', 'Voting', 'Miscellaneous'];
         let currentGameType = 'All';
         // A brand on the front page links here with ?search=<name>
         const requestedSearch = new URLSearchParams(window.location.search).get('search') || '';
