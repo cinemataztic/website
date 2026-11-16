@@ -691,131 +691,256 @@
         })();
     </script>
     <script>
-        // --- INTERACTIVE HERO CANVAS CONSTELLATION MESH ---
-        (function initHeroCanvas() {
+        // --- HERO: PROGRAMMATIC NETWORK ---
+        // In the style of 1508.dk: a tree of thin lines grows out from the middle. The middle is the ad server;
+        // the branches are cinemas, they split into auditoriums, and each auditorium fans out into its audience.
+        // Every auditorium has an audience of one kind (one of the site's colours). The server keeps sending out
+        // campaigns, several at once: a campaign is a colour, and its ads (dots) run down the branches to the
+        // auditoriums whose audience matches it, where the audience lights up. With the mouse over the hero, the
+        // auditorium nearest the cursor is in the next campaign. The tree is always fully shown, never fades, and sways gently.
+        // Reduced motion: the tree, still.
+        (function initHeroNetwork() {
             const canvas = document.getElementById('heroCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
+            const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const INK = '26, 26, 26';                                   // brand dark, for the lines on the cyan hero
+            // Audience kinds, one per campaign colour: pink, mint, orange, yellow and white (no cyan: it is the background)
+            const KINDS = [[248, 105, 185], [108, 238, 196], [254, 169, 23], [254, 206, 0], [255, 255, 255]];
+            const SEND_MS = 1100;                                       // a new campaign this often
 
-            let width, height;
-            let particles = [];
-            const particleCount = 45;
-            const maxDistance = 140;
-
-            const mouse = { x: null, y: null, radius: 180 };
+            let width = 0, height = 0, dpr = 1, cx = 0, cy = 0, R = 0, heroBg = '#3dc0c8';
+            let tree = null, spin = 0, lastSend = 0, pulses = [];
+            const mouse = { x: null, y: null };
 
             function resize() {
-                width = canvas.width = canvas.parentElement.offsetWidth;
-                height = canvas.height = canvas.parentElement.offsetHeight;
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                width = canvas.parentElement.offsetWidth;
+                height = canvas.parentElement.offsetHeight;
+                canvas.width = width * dpr; canvas.height = height * dpr;
+                canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+                heroBg = getComputedStyle(canvas.parentElement).backgroundColor || heroBg;
+                // Beside the heading on wide screens, behind it (and fainter) on narrow ones
+                const wide = width >= 1024;
+                cx = wide ? width * 0.6 : width * 0.62;
+                cy = height * 0.5;
+                R = Math.min(wide ? height * 0.56 : height * 0.42, wide ? width * 0.28 : width * 0.6);
             }
 
-            window.addEventListener('resize', resize);
-            resize();
+            const rand = (a, b) => a + Math.random() * (b - a);
 
-            // Track Mouse Position
-            const heroSection = document.getElementById('hero');
-            heroSection.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                mouse.x = e.clientX - rect.left;
-                mouse.y = e.clientY - rect.top;
-            });
-
-            heroSection.addEventListener('mouseleave', () => {
-                mouse.x = null;
-                mouse.y = null;
-            });
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.vx = (Math.random() - 0.5) * 0.8;
-                    this.vy = (Math.random() - 0.5) * 0.8;
-                    this.radius = Math.random() * 2 + 1.5;
-                    this.color = Math.random() > 0.3 ? '#fece00' : '#f869b9';
-                }
-
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-
-                    if (this.x < 0 || this.x > width) this.vx *= -1;
-                    if (this.y < 0 || this.y > height) this.vy *= -1;
-
-                    // Mouse Interaction
-                    if (mouse.x !== null && mouse.y !== null) {
-                        const dx = mouse.x - this.x;
-                        const dy = mouse.y - this.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < mouse.radius) {
-                            const angle = Math.atan2(dy, dx);
-                            const force = (mouse.radius - dist) / mouse.radius;
-                            this.x -= Math.cos(angle) * force * 2;
-                            this.y -= Math.sin(angle) * force * 2;
+            // The tree, in units of R around (0,0): segments with a parent, so an ad can follow the path down
+            function buildTree() {
+                const segs = [], halls = [], venues = [];
+                const add = (x1, y1, ang, len, depth, parent, delay) => {
+                    const s = { x1, y1, x2: x1 + Math.cos(ang) * len, y2: y1 + Math.sin(ang) * len, ang, ang0: ang, len, depth, parent, delay, glow: 0, color: null,
+                        phase: rand(0, Math.PI * 2), speed: rand(0.00035, 0.0006), off: 0 };
+                    segs.push(s);
+                    return s;
+                };
+                const cinemas = Math.round(rand(6, 8));
+                const turn = rand(0, Math.PI * 2);
+                for (let c = 0; c < cinemas; c++) {
+                    const a0 = turn + (c / cinemas) * Math.PI * 2 + rand(-0.15, 0.15);
+                    // Server to cinema, in two bends
+                    const t1 = add(0, 0, a0, rand(0.16, 0.22), 0, null, 0);
+                    const t2 = add(t1.x2, t1.y2, a0 + rand(-0.35, 0.35), rand(0.14, 0.2), 0, t1, 0.08);
+                    // The cinema itself: a square where the branch ends
+                    const venue = { at: t2, flash: 0, color: null };
+                    venues.push(venue);
+                    // Cinema to auditoriums
+                    const n = Math.round(rand(2, 4));
+                    for (let h = 0; h < n; h++) {
+                        const spread = (h - (n - 1) / 2) * rand(0.32, 0.46);
+                        const b1 = add(t2.x2, t2.y2, t2.ang + spread, rand(0.15, 0.22), 1, t2, 0.22);
+                        const b2 = add(b1.x2, b1.y2, b1.ang + rand(-0.25, 0.25), rand(0.1, 0.16), 1, b1, 0.34);
+                        // The auditorium's audience: a fan of short lines, each ending in a seat
+                        // (the first auditoriums get one kind each, so every campaign colour has an audience)
+                        const kind = halls.length < KINDS.length ? halls.length : Math.floor(Math.random() * KINDS.length);
+                        const hall = { end: b2, kind, fan: [], flash: 0, venue };
+                        const seats = Math.round(rand(6, 11));
+                        const fanSpread = rand(0.7, 1.1);
+                        for (let s = 0; s < seats; s++) {
+                            const a = b2.ang + (s / (seats - 1) - 0.5) * fanSpread;
+                            hall.fan.push(add(b2.x2, b2.y2, a, rand(0.06, 0.11), 2, b2, 0.5 + s * 0.012));
                         }
+                        halls.push(hall);
                     }
                 }
+                return { segs, halls, venues };
+            }
 
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = this.color;
-                    ctx.fill();
-                    ctx.shadowBlur = 0;
+            // The branches sway gently, like a tree in the wind: each line turns a little back and forth, and
+            // takes the lines beyond it along (parents come before their children in the list)
+            const SWAY = [0.05, 0.08, 0.12];
+            function sway(now) {
+                tree.segs.forEach(s => {
+                    const own = still ? 0 : SWAY[s.depth] * Math.sin(now * s.speed + s.phase);
+                    s.off = (s.parent ? s.parent.off : 0) + own;
+                    s.ang = s.ang0 + s.off;
+                    s.x1 = s.parent ? s.parent.x2 : 0;
+                    s.y1 = s.parent ? s.parent.y2 : 0;
+                    s.x2 = s.x1 + Math.cos(s.ang) * s.len;
+                    s.y2 = s.y1 + Math.sin(s.ang) * s.len;
+                });
+            }
+
+            function point(x, y) {
+                const c = Math.cos(spin), s = Math.sin(spin);
+                return [cx + (x * c - y * s) * R, cy + (x * s + y * c) * R];
+            }
+
+            // One campaign: a colour, sent from the server to up to 3 auditoriums whose audience matches it
+            // (with the mouse over the hero, the campaign of the auditorium nearest the cursor, that one included)
+            function send(now) {
+                let first = null;
+                if (mouse.x !== null) {
+                    let best = Infinity;
+                    tree.halls.forEach(h => {
+                        const [x, y] = point(h.end.x2, h.end.y2);
+                        const d = (x - mouse.x) ** 2 + (y - mouse.y) ** 2;
+                        if (d < best) { best = d; first = h; }
+                    });
                 }
+                const kind = first ? first.kind : Math.floor(Math.random() * KINDS.length);
+                const matching = tree.halls.filter(h => h.kind === kind && h !== first).sort(() => Math.random() - 0.5);
+                const targets = (first ? [first] : []).concat(matching).slice(0, 3);
+                targets.forEach((hall, i) => {
+                    const path = [];
+                    for (let s = hall.end; s; s = s.parent) path.unshift(s);
+                    pulses.push({ path, hall, start: now + i * 250, dur: rand(2400, 3000) });
+                });
             }
 
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-
-            function animate() {
+            function draw(now) {
+                const narrow = width < 1024;
+                sway(now);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
                 ctx.clearRect(0, 0, width, height);
+                ctx.globalAlpha = narrow ? 0.55 : 1;
+                ctx.lineCap = 'round';
 
-                // Draw connecting lines between particles
-                for (let a = 0; a < particles.length; a++) {
-                    particles[a].update();
-                    particles[a].draw();
-
-                    for (let b = a + 1; b < particles.length; b++) {
-                        const dx = particles[a].x - particles[b].x;
-                        const dy = particles[a].y - particles[b].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-
-                        if (dist < maxDistance) {
-                            const opacity = 1 - (dist / maxDistance);
-                            ctx.beginPath();
-                            ctx.moveTo(particles[a].x, particles[a].y);
-                            ctx.lineTo(particles[b].x, particles[b].y);
-                            ctx.strokeStyle = `rgba(254, 206, 0, ${opacity * 0.25})`;
-                            ctx.lineWidth = 1;
-                            ctx.stroke();
-                        }
+                // The lines, always the whole tree
+                tree.segs.forEach(s => {
+                    const [x1, y1] = point(s.x1, s.y1);
+                    const [x2, y2] = point(s.x2, s.y2);
+                    const ex = x2, ey = y2;
+                    ctx.lineWidth = s.depth === 0 ? 1.6 : s.depth === 1 ? 1.2 : 0.9;
+                    ctx.strokeStyle = `rgba(${INK}, ${s.depth === 2 ? 0.28 : 0.42})`;
+                    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+                    // The path an ad has taken glows in the ad's colour for a moment
+                    if (s.glow > 0.01) {
+                        const [r, g, b] = s.color;
+                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${s.glow})`;
+                        ctx.lineWidth = 2.4;
+                        ctx.shadowColor = `rgb(${r}, ${g}, ${b})`; ctx.shadowBlur = 10;
+                        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+                        ctx.shadowBlur = 0;
+                        s.glow *= 0.965;
                     }
-
-                    // Draw line to mouse if close
-                    if (mouse.x !== null && mouse.y !== null) {
-                        const mdx = particles[a].x - mouse.x;
-                        const mdy = particles[a].y - mouse.y;
-                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-                        if (mdist < mouse.radius) {
-                            const mOpacity = 1 - (mdist / mouse.radius);
-                            ctx.beginPath();
-                            ctx.moveTo(particles[a].x, particles[a].y);
-                            ctx.lineTo(mouse.x, mouse.y);
-                            ctx.strokeStyle = `rgba(248, 105, 185, ${mOpacity * 0.4})`;
-                            ctx.lineWidth = 1.2;
-                            ctx.stroke();
-                        }
+                    // Seats at the ends of the fans
+                    if (s.depth === 2) {
+                        ctx.fillStyle = `rgba(${INK}, 0.35)`;
+                        ctx.beginPath(); ctx.arc(ex, ey, 1.4, 0, Math.PI * 2); ctx.fill();
                     }
+                });
+
+                // Audiences that just got an ad: their seats light up in their colour
+                tree.halls.forEach(h => {
+                    if (h.flash < 0.01) return;
+                    const [r, g, b] = KINDS[h.kind];
+                    ctx.shadowColor = `rgb(${r}, ${g}, ${b})`; ctx.shadowBlur = 12;
+                    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${h.flash})`;
+                    h.fan.forEach(s => {
+                        const [x, y] = point(s.x2, s.y2);
+                        ctx.beginPath(); ctx.arc(x, y, 2.6, 0, Math.PI * 2); ctx.fill();
+                    });
+                    ctx.shadowBlur = 0;
+                    h.flash *= 0.975;
+                });
+
+                // The cinemas: a simple square where each branch from the server ends. It fills with the
+                // colour of an ad passing through it
+                tree.venues.forEach(v => {
+                    const [x, y] = point(v.at.x2, v.at.y2);
+                    const size = narrow ? 9 : 12;
+                    ctx.fillStyle = heroBg;
+                    ctx.fillRect(x - size / 2, y - size / 2, size, size);
+                    if (v.flash > 0.01) {
+                        const [r, g, b] = v.color;
+                        ctx.shadowColor = `rgb(${r}, ${g}, ${b})`; ctx.shadowBlur = 12;
+                        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${v.flash})`;
+                        ctx.fillRect(x - size / 2, y - size / 2, size, size);
+                        ctx.shadowBlur = 0;
+                        v.flash *= 0.96;
+                    }
+                    ctx.strokeStyle = `rgb(${INK})`;
+                    ctx.lineWidth = 1.5;
+                    ctx.strokeRect(x - size / 2, y - size / 2, size, size);
+                });
+
+                // The ads on their way
+                pulses = pulses.filter(pl => {
+                    const t = (now - pl.start) / pl.dur;
+                    const color = KINDS[pl.hall.kind];
+                    if (t < 0) return true;                             // not sent yet
+                    if (t >= 1) {
+                        pl.hall.flash = 1;
+                        pl.hall.fan.forEach(s => { s.glow = 0.8; s.color = color; });
+                        return false;
+                    }
+                    const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                    const along = eased * pl.path.length;
+                    const i = Math.min(pl.path.length - 1, Math.floor(along));
+                    const s = pl.path[i], f = along - i;
+                    for (let k = 0; k < i; k++) { pl.path[k].glow = Math.max(pl.path[k].glow, 0.7); pl.path[k].color = color; }
+                    if (i >= 2 && !pl.passed) { pl.passed = true; pl.hall.venue.flash = 1; pl.hall.venue.color = color; }
+                    const [x, y] = point(s.x1 + (s.x2 - s.x1) * f, s.y1 + (s.y2 - s.y1) * f);
+                    const [r, g, b] = color;
+                    ctx.shadowColor = `rgb(${r}, ${g}, ${b})`; ctx.shadowBlur = 16;
+                    ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+                    ctx.beginPath(); ctx.arc(x, y, 3.6, 0, Math.PI * 2); ctx.fill();
+                    ctx.shadowBlur = 0;
+                    return true;
+                });
+
+                // The server in the middle, with a ring each time it sends
+                const [sx, sy] = point(0, 0);
+                const ring = still ? 0 : ((now - lastSend) / 900);
+                if (ring < 1) {
+                    ctx.strokeStyle = `rgba(${INK}, ${0.5 * (1 - ring)})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.arc(sx, sy, 7 + ring * 22, 0, Math.PI * 2); ctx.stroke();
                 }
-
-                requestAnimationFrame(animate);
+                ctx.fillStyle = `rgb(${INK})`;
+                ctx.beginPath(); ctx.arc(sx, sy, 5.5, 0, Math.PI * 2); ctx.fill();
+                ctx.globalAlpha = 1;
             }
 
-            animate();
+            function frame(now) {
+                spin += 0.0006;
+                if (now - lastSend > SEND_MS) {
+                    send(now); lastSend = now;
+                }
+                draw(now);
+                if (running) requestAnimationFrame(frame);
+            }
+
+            const hero = canvas.parentElement;
+            hero.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+            hero.addEventListener('mouseleave', () => { mouse.x = mouse.y = null; });
+            window.addEventListener('resize', () => { resize(); if (still) draw(performance.now()); });
+
+            resize();
+            tree = buildTree();
+            let running = false;
+            if (still) { draw(performance.now()); return; }
+            // Only animate while the hero is on screen
+            new IntersectionObserver(entries => {
+                const on = entries[0].isIntersecting;
+                if (on && !running) { running = true; requestAnimationFrame(frame); }
+                else if (!on) running = false;
+            }).observe(hero);
         })();
 
         // --- MENU ON THE HERO ---

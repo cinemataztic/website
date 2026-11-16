@@ -1,3 +1,5 @@
 .DS_Store
 # Original master video (191 MB, over GitHub's 100 MB limit); the site uses cinemataztic_programmatic_web.mp4
 assets/video/cinemataztic_programmatic_final.mp4
+# Local experiment page, copy of index.html: never committed or published
+test.html
