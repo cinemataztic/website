@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="da" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gratis premiere i biografen for DAF-medlemmer — Cinemataztic</title>
+    <meta name="description" content="Medlemmer af Dansk Annoncørforening kan få premiere gratis i biografen med et nyt spot. Sådan booker du visningen på Dansk Reklame Films platform.">
+    <!-- The one address search engines should use for this page (same as in sitemap.xml) -->
+    <link rel="canonical" href="https://www.cinemataztic.com/daf.html">
+    <!-- Favicon: the Cinemataztic mark (SVG for modern browsers, ICO as fallback, PNG for the iPhone home screen) -->
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <!-- Google Analytics 4 (not on a local preview, so testing doesn't count as visits) -->
+    <script>
+        if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+            const ga = Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-NSK27WGTDK' });
+            document.head.appendChild(ga);
+        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-NSK27WGTDK');
+    </script>
+    <!-- Page transition (same as the old site): loads first, so arriving pages start covered -->
+    <script src="assets/js/page-transition.js?v=3"></script>
+    <!-- Menu logo turns into the round mark when scrolling -->
+    <script src="assets/js/site-header.js?v=19" defer></script>
+    <style>
+        /* Premium buttons: light from above, a soft drop shadow, and a light sweep on hover */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(0, 0, 0, 0.06) 100%);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+                0 1px 2px rgba(0, 0, 0, 0.25),
+                0 8px 20px -6px rgba(0, 0, 0, 0.45);
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+            transform: translateX(-120%);
+            transition: transform 600ms ease;
+        }
+        .btn-shine:hover {
+            transform: translateY(-1px);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+                0 2px 4px rgba(0, 0, 0, 0.25),
+                0 14px 28px -8px rgba(0, 0, 0, 0.5);
+        }
+        .btn-shine:hover::after { transform: translateX(120%); }
+        .btn-shine:active { transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-shine:hover { transform: none; }
+            .btn-shine::after { display: none; }
+        }
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .animate-blink {
+            animation: cursorBlink 1s infinite;
+        }
+        /* Menu sits on the blue hero: blue bar with dark text while the hero is in view */
+        header { transition: background-color 250ms linear, color 250ms linear, border-color 250ms linear; }
+        header.on-hero { background-color: #3dc0c8 !important; border-color: rgba(26, 26, 26, 0.12) !important; color: #1a1a1a; }
+        header.on-hero .text-white { color: #1a1a1a !important; }
+        header.on-hero #mobileDrawer { color: rgba(255, 255, 255, 0.87); }
+                /* Section headings: one size everywhere, set so the longest word ("TRANSFORMATION")
+           fits the narrow sidebar column; it scales with the screen width */
+        .section-title { font-size: clamp(1.75rem, 8.4vw, 3rem); }
+        @media (min-width: 1024px) { .section-title { font-size: 2.1vw; } }
+        /* Screens with ordinary pixels (like most external monitors): the thin, grey body text gets hard to read
+           there, so text is drawn with normal smoothing, paragraphs a little heavier and the grey a little
+           lighter. Retina screens are unchanged */
+        @media (max-resolution: 1.5dppx), (-webkit-max-device-pixel-ratio: 1.5) {
+            body.antialiased { -webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto; }
+            body p, body li { font-weight: 500; }
+            body .text-gray-400 { color: #d1d5db; }
+        }
+        /* Hero text beside the big heading: 16px up to about 1500px wide, then it grows with the screen (to 24px)
+           so it doesn't look tiny on big screens. The small second paragraph keeps its size relative to it */
+        .hero-copy.text-base { font-size: clamp(1.0625rem, 0.45rem + 0.7vw, 1.7rem); }
+        .hero-copy .text-sm { font-size: 0.875em; }
+        /* DAF booking steps: number, field in the platform, what to do */
+        .daf-steps { list-style: none; padding: 0; }
+        .daf-steps li { display: grid; grid-template-columns: 3rem 11rem 1fr; gap: 8px 16px; align-items: baseline; padding: 18px 24px; border-radius: 16px; background: #282828; border: 1px solid #3A3A3A; }
+        .daf-steps__no { font-weight: 900; font-size: 1.25rem; color: #3dc0c8; font-variant-numeric: tabular-nums; }
+        .daf-steps__name { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.87); }
+        .daf-steps__text { font-size: 15px; line-height: 1.55; color: #d1d5db; }
+        .daf-steps__text strong { color: rgba(255, 255, 255, 0.87); }
+        .daf-steps li.is-key { border-color: #3dc0c8; box-shadow: 0 0 24px rgba(61, 192, 200, 0.18); }
+        @media (max-width: 639px) {
+            .daf-steps li { grid-template-columns: 2.25rem 1fr; padding: 16px 18px; }
+            .daf-steps__text { grid-column: 2; }
+        }
+        .daf-done { border: 1px solid rgba(61, 192, 200, 0.4); background: rgba(61, 192, 200, 0.1); }
+        .daf-logo { display: block; height: 34px; width: auto; }
+    </style>
+    <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS, built once for the whole site (classes from all pages and scripts) -->
+    <link rel="stylesheet" href="assets/css/site.css?v=5">
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
+        <div class="w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <span class="text-2xl sm:text-3xl font-logo font-bold tracking-[0.05em] uppercase text-white group-hover:opacity-90 transition">
+                    CINEMATAZTIC
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase">
+                <a href="cases.html" class="hover:text-brand-cyan transition">Cases</a>
+                <a href="products.html" class="hover:text-brand-cyan transition">Products</a>
+                <a href="technology.html" class="hover:text-brand-cyan transition">Technology</a>
+                <a href="contact.html" class="btn-shine px-5 py-2.5 bg-white text-brand-dark hover:bg-brand-dark hover:text-white transition">Contact</a>
+            </nav>
+
+            <button id="mobileMenuBtn" class="md:hidden text-2xl text-white focus:outline-none" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobileDrawer" class="hidden md:hidden bg-brand-dark/95 border-b border-brand-border px-6 py-6 space-y-4">
+            <a href="cases.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Cases</a>
+            <a href="products.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Products</a>
+            <a href="technology.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Technology</a>
+            <a href="contact.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Contact</a>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <!-- HERO: the offer for members of Dansk Annoncørforening (from the DAF/DRF flyer), blue like the programmatic pages -->
+        <section id="hero" class="relative overflow-hidden border-b border-brand-border bg-brand-cyan">
+            <canvas id="heroCanvas" class="absolute inset-0 z-0 w-full h-full"></canvas>
+            <div class="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-28 lg:pb-32">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+                    <div class="lg:col-span-8 space-y-8">
+                        <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-brand-dark">
+                            <span class="w-2 h-2 rounded-full bg-brand-dark animate-ping"></span>
+                            <span>For medlemmer af Dansk Annoncørforening</span>
+                        </span>
+                        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tighter !leading-none text-white">
+                            Alle reklamefilm fortjener premiere i biografen
+                        </h1>
+                    </div>
+                    <div class="hero-copy lg:col-span-4 space-y-5 text-brand-dark text-base leading-relaxed lg:pb-3">
+                        <p>Alle medlemmer af Dansk Annoncørforening, som lancerer en kampagne med et nyt spot, kan nu få premiere gratis på det store lærred.</p>
+                        <p class="text-sm text-brand-dark/70">Book din første visning gratis via Dansk Reklame Films programmatiske platform.</p>
+                        <div class="flex flex-wrap gap-3 pt-2">
+                            <a href="#booking" class="btn-shine px-6 py-3 bg-white text-black font-bold uppercase tracking-wider text-xs hover:bg-brand-dark hover:text-white transition">Sådan booker du <i class="fa-solid fa-arrow-down ml-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE OFFER: a premiere on the big screen -->
+        <section id="premiere" class="border-b border-brand-border">
+            <div class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+                    <aside class="lg:col-span-3 lg:sticky lg:top-28 lg:self-start space-y-6">
+                        <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Gratis premiere</span>
+                        <h2 class="section-title font-black uppercase !leading-none">Dit spot på det store lærred</h2>
+                        <p class="text-sm text-gray-400 leading-relaxed">Lancerer du en kampagne med et nyt spot? Så kan din reklamefilm få premiere i biografen, uden at det koster noget.</p>
+                    </aside>
+                    <div class="lg:col-span-9 space-y-6">
+                        <!-- The programmatic film, the same as in "Digital transformation of the cinema media" on programmatic.html -->
+                        <div class="relative aspect-video overflow-hidden bg-brand-card border border-brand-border">
+                            <video class="absolute inset-0 w-full h-full object-cover" src="assets/video/cinemataztic_programmatic_web.mp4" poster="assets/video/cinemataztic_programmatic_poster.jpg?v=3" controls playsinline preload="none" aria-label="Programmatisk biografreklame med Cinemataztic"></video>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-3">
+                                <i class="fa-solid fa-film text-2xl text-brand-cyan"></i>
+                                <p class="text-sm text-gray-300 leading-relaxed"><span class="text-white font-bold">Et nyt spot</span> i en ny kampagne kan få premiere.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-3">
+                                <i class="fa-solid fa-ticket text-2xl text-brand-mint"></i>
+                                <p class="text-sm text-gray-300 leading-relaxed"><span class="text-white font-bold">Din første visning er gratis</span>, så den bliver ikke faktureret.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-3">
+                                <i class="fa-solid fa-display text-2xl text-brand-pink"></i>
+                                <p class="text-sm text-gray-300 leading-relaxed">Du booker selv på <span class="text-white font-bold">Dansk Reklame Films programmatiske platform</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW TO BOOK: the steps from the flyer, in the platform's own order -->
+        <section id="booking" class="border-b border-brand-border scroll-mt-20">
+            <div class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+                    <aside class="lg:col-span-3 lg:sticky lg:top-28 lg:self-start space-y-6">
+                        <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Trin for trin</span>
+                        <h2 class="section-title font-black uppercase !leading-none">Sådan booker du din gratis premiere</h2>
+                        <p class="text-sm text-gray-400 leading-relaxed">Gå ind på drf.dk og vælg ‘Programmatic Cinema’ under ‘Services’, og tryk på opret. Følg derefter trinene i platformen.</p>
+                        <a href="https://drf.dk.tradedesk.cinead.eu-1.cinemataztic.com/" target="_blank" rel="noopener" class="btn-shine inline-flex items-center px-6 py-3 bg-white text-black font-bold uppercase tracking-wider text-xs hover:bg-brand-cyan transition">Opret – tryk her <i class="fa-solid fa-arrow-right fa-rotate-by ml-2" style="--fa-rotate-angle: -45deg"></i></a>
+                    </aside>
+                    <div class="lg:col-span-9 space-y-8">
+                        <ol class="daf-steps space-y-3">
+                            <li><span class="daf-steps__no">01</span><span class="daf-steps__name">Tryk på</span><span class="daf-steps__text">‘Create Campaign’</span></li>
+                            <li><span class="daf-steps__no">02</span><span class="daf-steps__name">Advertiser</span><span class="daf-steps__text">Indtast annoncørnavn og derefter kampagnenavn</span></li>
+                            <li><span class="daf-steps__no">03</span><span class="daf-steps__name">Spot details</span><span class="daf-steps__text">Vælg spotlængde</span></li>
+                            <li><span class="daf-steps__no">04</span><span class="daf-steps__name">Creatives</span><span class="daf-steps__text">Tryk på feltet ‘Upload creative’ og vælg din mp4-spotfil (fra dit skrivebord eller en mappe)</span></li>
+                            <li><span class="daf-steps__no">05</span><span class="daf-steps__name">Voucher</span><span class="daf-steps__text">Lad denne stå på ‘nej’, medmindre du gerne vil dele en voucher ud til publikum</span></li>
+                            <li><span class="daf-steps__no">06</span><span class="daf-steps__name">Day &amp; Time</span><span class="daf-steps__text">Vælg den specifikke dag for din visning. Vælg ét time slot: tryk på ‘Custom’, og vælg et time slot for din visning</span></li>
+                            <li><span class="daf-steps__no">07</span><span class="daf-steps__name">Audience</span><span class="daf-steps__text">Vælg én film</span></li>
+                            <li><span class="daf-steps__no">08</span><span class="daf-steps__name">Distribution</span><span class="daf-steps__text">Vælg én biograf og én sal</span></li>
+                            <li class="is-key"><span class="daf-steps__no">09</span><span class="daf-steps__name">Budget</span><span class="daf-steps__text">Tryk på ‘edit’, sæt CPM til <strong>0 kr</strong>, og skriv <strong>DAF</strong> i kommentarfeltet</span></li>
+                            <li><span class="daf-steps__no">10</span><span class="daf-steps__name">Acceptér T&amp;C</span><span class="daf-steps__text">Scroll ned, og afkryds feltet ‘I accept the Terms &amp; Conditions’</span></li>
+                            <li><span class="daf-steps__no">11</span><span class="daf-steps__name">Book</span><span class="daf-steps__text">Tryk på ‘Order Campaign’</span></li>
+                        </ol>
+                        <div class="daf-done p-8 rounded-2xl flex items-start gap-5">
+                            <i class="fa-solid fa-circle-check text-3xl text-brand-cyan"></i>
+                            <p class="text-lg font-bold text-white leading-snug">Nu er din kampagne booket. Du skal ikke bekymre dig om budgettet, da visningen ikke bliver faktureret.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUESTIONS: one contact at each organisation -->
+        <section id="sporgsmal">
+            <div class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+                    <aside class="lg:col-span-3 space-y-6">
+                        <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Kontakt</span>
+                        <h2 class="section-title font-black uppercase !leading-none">Har du spørgsmål?</h2>
+                        <p class="text-sm text-gray-400 leading-relaxed">Tilbuddet kommer fra Dansk Annoncørforening og Dansk Reklame Film.</p>
+                    </aside>
+                    <div class="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-6 self-start">
+                        <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-5">
+                            <img src="assets/daf/daf-logo.png" alt="Dansk Annoncørforening" class="daf-logo" loading="lazy">
+                            <div class="space-y-2">
+                                <p class="text-lg font-bold text-white">Thomas Kragh</p>
+                                <a href="mailto:thomas@danskannoncørforening.dk" class="block text-sm text-white underline decoration-brand-orange underline-offset-4 hover:text-brand-cyan w-fit">thomas@danskannoncørforening.dk</a>
+                            </div>
+                        </div>
+                        <div class="p-8 rounded-2xl bg-brand-card border border-brand-border space-y-5">
+                            <img src="assets/daf/drf-logo.png" alt="Dansk Reklame Film" class="daf-logo" loading="lazy">
+                            <div class="space-y-2">
+                                <p class="text-lg font-bold text-white">Sarah Memborg Pahl</p>
+                                <a href="mailto:sm@drf.dk" class="block text-sm text-white underline decoration-brand-orange underline-offset-4 hover:text-brand-cyan w-fit">sm@drf.dk</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="bg-black border-t border-brand-border text-sm text-gray-500">
+        <!-- LET'S TALK: same sidebar layout as the page sections -->
+        <div class="w-full px-4 sm:px-6 lg:px-8 py-20 lg:py-28 border-b border-brand-border">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+                <aside class="lg:col-span-3 space-y-6">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Contact</span>
+                    <h2 class="section-title font-black uppercase !leading-none text-white">Let’s Talk</h2>
+                    <a href="contact.html" class="inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-wider bg-white text-black hover:bg-brand-cyan transition">Contact</a>
+                    <div class="space-y-1">
+                        <a href="tel:+4531667341" class="block text-lg font-bold text-white hover:text-brand-cyan transition">+45 31 66 73 41</a>
+                        <span class="block text-xs text-gray-400">(Not for support related inquiries)</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">All support requests should be made <a href="http://support.cinegame.com/" target="_blank" rel="noopener" class="text-white underline decoration-brand-orange underline-offset-4 hover:text-brand-cyan">here</a>.</p>
+                </aside>
+                <!-- Resources, The App and Partners sit close together and wrap on narrow phones -->
+                <div class="lg:col-span-7 flex flex-wrap gap-10 lg:gap-16">
+                <!-- RESOURCES: links that are not in the top menu -->
+                <nav class="space-y-6" aria-label="Resources">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Resources</span>
+                    <ul class="space-y-2">
+                        <li><a href="order.html" class="text-sm text-gray-400 hover:text-white transition">Order</a></li>
+                        <li><a href="docs/index.html" class="text-sm text-gray-400 hover:text-white transition">Docs</a></li>
+                        <li><a href="careers/index.html" class="text-sm text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="https://support.cinegame.com/" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">End user support</a></li>
+                        <li><a href="https://form.asana.com/?k=_R4s-PqZgwO2LCVGomfuXw&amp;d=107314682691555" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">TechSupport</a></li>
+                        <li><a href="https://legal.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Privacy &amp; legal</a></li>
+                        <li><a href="https://www.youtube.com/@cinemataztic" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">YouTube</a></li>
+                    </ul>
+                </nav>
+                <!-- THE APP: the CineGame app in each market (external sites) -->
+                <nav class="space-y-6" aria-label="The App">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">The App</span>
+                    <ul class="space-y-2">
+                        <li><a href="https://cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame</a></li>
+                        <li><a href="https://biospil.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Biospil DK</a></li>
+                        <li><a href="https://leffapeli.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">LeffaPeli FI</a></li>
+                        <li><a href="https://cinegame.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame SE</a></li>
+                        <li><a href="https://redyplay.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">REDyPLAY DE</a></li>
+                        <li><a href="https://ie.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame IE</a></li>
+                        <li><a href="https://cinegame.pt" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame PT</a></li>
+                    </ul>
+                </nav>
+                <!-- PARTNERS: our cinema partners (same links as the Where we are map) -->
+                <nav class="space-y-6" aria-label="Partners">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Partners</span>
+                    <ul class="space-y-2">
+                        <li><a href="https://drf.dk" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">DRF</a></li>
+                        <li><a href="https://www.finnkino.fi" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Finnkino</a></li>
+                        <li><a href="https://pearlanddean.ie" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Pearl &amp; Dean</a></li>
+                        <li><a href="https://weischer.net" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Weischer</a></li>
+                        <li><a href="https://www.filmstaden.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Filmstaden</a></li>
+                        <li><span class="text-sm text-gray-400">AdLine</span></li>
+                    </ul>
+                </nav>
+                </div>
+            </div>
+        </div>
+        <div class="w-full px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-xs text-gray-500">
+            <span>© 2026 Cinemataztic ApS. All rights reserved.</span>
+            <span class="md:text-center">Hellerupvej 46 - 2900 Hellerup - Denmark - VAT: 37207187</span>
+            <div class="flex items-center md:justify-end gap-5 text-lg">
+                <a href="https://www.facebook.com/CinemaTaztic" target="_blank" rel="noopener" aria-label="Cinemataztic on Facebook" class="text-gray-400 hover:text-brand-cyan transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/company/cinemataztic" target="_blank" rel="noopener" aria-label="Cinemataztic on LinkedIn" class="text-gray-400 hover:text-brand-cyan transition"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- INTERACTIVE HERO CANVAS CONSTELLATION MESH ---
+        (function initHeroCanvas() {
+            const canvas = document.getElementById('heroCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            let width, height;
+            let particles = [];
+            const particleCount = 45;
+            const maxDistance = 140;
+
+            const mouse = { x: null, y: null, radius: 180 };
+
+            function resize() {
+                width = canvas.width = canvas.parentElement.offsetWidth;
+                height = canvas.height = canvas.parentElement.offsetHeight;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            // Track Mouse Position
+            const heroSection = document.getElementById('hero');
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            heroSection.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.radius = Math.random() * 2 + 1.5;
+                    this.color = Math.random() > 0.3 ? '#fece00' : '#f869b9';
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                    // Mouse Interaction
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = mouse.x - this.x;
+                        const dy = mouse.y - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < mouse.radius) {
+                            const angle = Math.atan2(dy, dx);
+                            const force = (mouse.radius - dist) / mouse.radius;
+                            this.x -= Math.cos(angle) * force * 2;
+                            this.y -= Math.sin(angle) * force * 2;
+                        }
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw connecting lines between particles
+                for (let a = 0; a < particles.length; a++) {
+                    particles[a].update();
+                    particles[a].draw();
+
+                    for (let b = a + 1; b < particles.length; b++) {
+                        const dx = particles[a].x - particles[b].x;
+                        const dy = particles[a].y - particles[b].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < maxDistance) {
+                            const opacity = 1 - (dist / maxDistance);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.strokeStyle = `rgba(254, 206, 0, ${opacity * 0.25})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+
+                    // Draw line to mouse if close
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mdx = particles[a].x - mouse.x;
+                        const mdy = particles[a].y - mouse.y;
+                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+                        if (mdist < mouse.radius) {
+                            const mOpacity = 1 - (mdist / mouse.radius);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(248, 105, 185, ${mOpacity * 0.4})`;
+                            ctx.lineWidth = 1.2;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        })();
+
+        // --- MENU ON THE HERO ---
+        // The menu bar turns blue while any of the (blue) hero is visible below it.
+        (function initHeroMenu() {
+            const header = document.querySelector('body > header');
+            const hero = document.getElementById('hero');
+            if (!header || !hero) return;
+            const observer = new IntersectionObserver(([entry]) => {
+                header.classList.toggle('on-hero', entry.isIntersecting);
+            }, { rootMargin: `-${header.offsetHeight}px 0px 0px 0px` });
+            observer.observe(hero);
+        })();
+
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileDrawer').classList.toggle('hidden');
+        });
+    </script>
+    <script>
+        // --- FIT TEXT TO NARROW SCREENS ---
+        // A heading with one long word (e.g. "PROGRAMMATIC") can be wider than a phone. Such text keeps
+        // its designed size where it fits and only shrinks as much as needed to stay on screen.
+        (function initFitText() {
+            const SELECTOR = 'h1, h2, h3, dd, li > span';
+            function fit() {
+                document.querySelectorAll(SELECTOR).forEach(el => {
+                    el.style.fontSize = '';
+                    if (!el.clientWidth) return;
+                    for (let i = 0; i < 6 && el.scrollWidth > el.clientWidth + 1; i++) {
+                        const size = parseFloat(getComputedStyle(el).fontSize);
+                        el.style.fontSize = `${Math.floor(size * el.clientWidth / el.scrollWidth * 10) / 10}px`;
+                    }
+                });
+            }
+            let frame;
+            const refit = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(fit); };
+            window.addEventListener('resize', refit);
+            if (document.fonts) document.fonts.ready.then(refit);
+            window.addEventListener('load', refit);
+            refit();
+        })();
+    </script>
+    <!-- Hero heading fades in line by line -->
+    <script src="assets/js/hero-fade.js?v=3"></script>
+</body>
+</html>

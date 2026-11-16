@@ -54,7 +54,20 @@
 
     // Measure the lines with the real font, not a fallback (but never wait more than 600ms)
     let done = false;
-    const go = () => { if (!done) { done = true; run(); } };
+    const go = () => { if (!done) { done = true; afterIntro(run); } };
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
     setTimeout(go, 600);
+
+    // On the first visit to the front page the splash intro (intro.js) covers the page for about 1.3s.
+    // Wait until it lifts (html loses its "intro" class), so the heading animates where it can be seen
+    function afterIntro(fn) {
+        const root = document.documentElement;
+        if (!root.classList.contains('intro')) { fn(); return; }
+        const watch = new MutationObserver(() => {
+            if (root.classList.contains('intro')) return;
+            watch.disconnect();
+            setTimeout(fn, 150);
+        });
+        watch.observe(root, { attributes: true, attributeFilter: ['class'] });
+    }
 })();
