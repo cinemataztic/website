@@ -698,6 +698,8 @@
             const SELECTOR = 'h1, h2, h3, dd, li > span';
             function fit() {
                 document.querySelectorAll(SELECTOR).forEach(el => {
+                    // Keep the size while hero-fade.js moves the heading (its moving lines would count as overflow)
+                    if (el.classList.contains('hx-moving')) return;
                     el.style.fontSize = '';
                     if (!el.clientWidth) return;
                     for (let i = 0; i < 6 && el.scrollWidth > el.clientWidth + 1; i++) {
@@ -715,6 +717,6 @@
         })();
     </script>
     <!-- Hero heading fades in line by line -->
-    <script src="assets/js/hero-fade.js?v=3"></script>
+    <script src="assets/js/hero-fade.js?v=4"></script>
 </body>
 </html>
