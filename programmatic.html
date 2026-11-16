@@ -691,6 +691,139 @@
         })();
     </script>
     <script>
+        // --- HERO ON PHONES AND TABLETS: CONSTELLATION MESH ---
+        // Below 1024px the hero text covers the whole width, so the network animation (below) would be under the
+        // text; there, these softly drifting dots are drawn instead. Each animation only draws on its own screens.
+        (function initHeroCanvas() {
+            const canvas = document.getElementById('heroCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const onPhone = window.matchMedia('(max-width: 1023px)');
+
+            let width, height;
+            let particles = [];
+            const particleCount = 45;
+            const maxDistance = 140;
+
+            const mouse = { x: null, y: null, radius: 180 };
+
+            function resize() {
+                width = canvas.parentElement.offsetWidth;
+                height = canvas.parentElement.offsetHeight;
+                if (onPhone.matches) { canvas.width = width; canvas.height = height; }
+            }
+
+            window.addEventListener('resize', resize);
+            onPhone.addEventListener('change', resize);
+            resize();
+
+            // Track Mouse Position
+            const heroSection = document.getElementById('hero');
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            heroSection.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.radius = Math.random() * 2 + 1.5;
+                    this.color = Math.random() > 0.3 ? '#fece00' : '#f869b9';
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                    // Mouse Interaction
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = mouse.x - this.x;
+                        const dy = mouse.y - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < mouse.radius) {
+                            const angle = Math.atan2(dy, dx);
+                            const force = (mouse.radius - dist) / mouse.radius;
+                            this.x -= Math.cos(angle) * force * 2;
+                            this.y -= Math.sin(angle) * force * 2;
+                        }
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                if (!onPhone.matches) { requestAnimationFrame(animate); return; }
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw connecting lines between particles
+                for (let a = 0; a < particles.length; a++) {
+                    particles[a].update();
+                    particles[a].draw();
+
+                    for (let b = a + 1; b < particles.length; b++) {
+                        const dx = particles[a].x - particles[b].x;
+                        const dy = particles[a].y - particles[b].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < maxDistance) {
+                            const opacity = 1 - (dist / maxDistance);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.strokeStyle = `rgba(254, 206, 0, ${opacity * 0.25})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+
+                    // Draw line to mouse if close
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mdx = particles[a].x - mouse.x;
+                        const mdy = particles[a].y - mouse.y;
+                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+                        if (mdist < mouse.radius) {
+                            const mOpacity = 1 - (mdist / mouse.radius);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(248, 105, 185, ${mOpacity * 0.4})`;
+                            ctx.lineWidth = 1.2;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        })();
+
         // --- HERO: PROGRAMMATIC NETWORK ---
         // In the style of 1508.dk: a tree of thin lines grows out from the middle. The middle is the ad server;
         // the branches are cinemas, they split into auditoriums, and each auditorium fans out into its audience.
@@ -713,12 +846,15 @@
             let tree = null, spin = 0, lastSend = 0, pulses = [];
             const mouse = { x: null, y: null };
 
+            // Phones and tablets get the drifting dots above instead (the text would cover the tree there)
+            const onPhone = window.matchMedia('(max-width: 1023px)');
+
             function resize() {
+                if (onPhone.matches) return;
                 dpr = Math.min(window.devicePixelRatio || 1, 2);
                 width = canvas.parentElement.offsetWidth;
                 height = canvas.parentElement.offsetHeight;
                 canvas.width = width * dpr; canvas.height = height * dpr;
-                canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
                 heroBg = getComputedStyle(canvas.parentElement).backgroundColor || heroBg;
                 // Beside the heading on wide screens, behind it (and fainter) on narrow ones
                 const wide = width >= 1024;
@@ -813,6 +949,7 @@
             }
 
             function draw(now) {
+                if (onPhone.matches || !width) return;
                 const narrow = width < 1024;
                 sway(now);
                 ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
