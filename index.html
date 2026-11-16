@@ -147,6 +147,8 @@
             transition: opacity 200ms linear;
         }
         .brand-cell:hover .brand-logo { opacity: 1; }
+        /* Lapsimessut is an almost square, hand-drawn logo: at the 48px cap it looks small and faint next to wide wordmarks */
+        img.brand-logo[alt="Lapsimessut"] { max-height: 4.25rem; }
         /* Wide logos keep some air to the edges: never wider than 82% of the place (the 130/140px caps are wider than a
            place on desktop, where 6 sit side by side) */
         #brandWall .brand-logo { max-width: 82% !important; min-width: 0; }

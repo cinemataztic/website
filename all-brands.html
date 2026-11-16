@@ -146,6 +146,8 @@
             transition: opacity 200ms linear;
         }
         .brand-cell:hover .brand-logo { opacity: 1; }
+        /* Lapsimessut is an almost square, hand-drawn logo: at the 48px cap it looks small and faint next to wide wordmarks */
+        img.brand-logo[alt="Lapsimessut"] { max-height: 4.25rem; }
         /* Badge logos (text knocked out of a shape) would turn into a flat blob, so they go greyscale instead */
         .brand-logo.brand-logo--badge {
             filter: grayscale(1);
