@@ -3,3 +3,6 @@
 assets/video/cinemataztic_programmatic_final.mp4
 # Local experiment page, copy of index.html: never committed or published
 test.html
+
+# Markets: the games are only published encrypted (markets/live.enc.json), never as plain JSON
+markets/live.json

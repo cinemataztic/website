@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markets — Cinemataztic</title>
+    <meta name="description" content="Internal: the games that are live in each Cinemataztic market, from Asana.">
+    <!-- Hidden page: not in the menu, the footer or sitemap.xml, and not to be shown in search engines.
+         Under it: a page per country (dk, se, fi, de, pt, ie) and live.html with all markets on one timeline -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://www.cinemataztic.com/markets/">
+    <link rel="icon" href="../favicon.ico" sizes="32x32">
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+    <!-- General Sans (Indian Type Foundry, free via Fontshare) -->
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=5">
+    <link rel="stylesheet" href="markets.css?v=3">
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
+        <div class="w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="./" class="flex items-center space-x-2 group">
+                <span class="text-2xl sm:text-3xl font-logo font-bold tracking-[0.05em] uppercase text-white group-hover:opacity-90 transition">CINEMATAZTIC / MARKETS</span>
+            </a>
+            <nav class="flex items-center space-x-6 text-xs font-bold tracking-widest uppercase">
+                <a href="../index.html" class="mk-website hover:text-brand-cyan transition">Website</a>
+                <button type="button" id="mkLogout" class="mk-logout">Log out</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <div class="mk-wrap">
+            <nav class="mk-nav" id="mkNav" aria-label="Markets"></nav>
+            <span class="mk-label">Internal · from Asana</span>
+            <h1 class="mk-title">Markets</h1>
+            <p class="mk-sub">The games that are live today in each market, and what starts in the next 30 days. Fetched from the Asana project “Live” every hour.</p>
+            <p class="mk-updated mt-3" id="mkUpdated"></p>
+            <div class="mk-grid" id="mkGrid"></div>
+        </div>
+    </main>
+
+    <footer class="border-t border-brand-border px-4 sm:px-6 lg:px-8 py-6 text-xs text-gray-500">© 2026 Cinemataztic ApS · Internal page</footer>
+
+    <script src="markets.js?v=3"></script>
+    <script>
+        (async function renderMarkets() {
+            const M = Markets;
+            M.nav(document.getElementById('mkNav'), 'markets');
+            const grid = document.getElementById('mkGrid');
+            let data;
+            try { data = await M.load(); } catch (e) {
+                grid.outerHTML = '<p class="mk-error">The games could not be loaded. Try again in a moment.</p>';
+                return;
+            }
+            document.getElementById('mkUpdated').textContent = M.updated(data);
+            // A card per country, linking to its page
+            grid.innerHTML = M.COUNTRIES.map(c => {
+                const games = data.tasks.filter(t => t.market === c.name);
+                const live = games.filter(M.isLive).sort((a, b) => a.due.localeCompare(b.due));
+                const soon = games.filter(M.startsSoon).sort((a, b) => a.start.localeCompare(b.start));
+                return `
+                    <a class="mk-card" href="${c.code}.html">
+                        <div class="mk-card__head"><span class="mk-card__name">${M.esc(c.name)}</span><span class="mk-card__count">${live.length} live</span></div>
+                        <h3>Live now</h3>
+                        ${live.length ? M.list(live, t => `until ${M.fmt(t.due)}`) : '<p class="mk-card__empty">Nothing live right now</p>'}
+                        ${soon.length ? `<h3>Starts soon</h3>${M.list(soon, t => M.fmt(t.start))}` : ''}
+                        <span class="mk-card__link text-brand-cyan">${c.short} page <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></span>
+                    </a>`;
+            }).join('');
+        })();
+    </script>
+</body>
+</html>
