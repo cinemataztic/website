@@ -17,23 +17,38 @@
     <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/site.css?v=5">
-    <link rel="stylesheet" href="markets.css?v=4">
+    <script src="../assets/js/site-header.js?v=19" defer></script>
+    <link rel="stylesheet" href="markets.css?v=5">
 </head>
 <body data-country="dk" class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
     <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
         <div class="w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="./" class="flex items-center space-x-2 group">
-                <span class="text-2xl sm:text-3xl font-logo font-bold tracking-[0.05em] uppercase text-white group-hover:opacity-90 transition">CINEMATAZTIC / MARKETS</span>
+            <a href="../index.html" class="flex items-center space-x-2 group">
+                <span class="text-2xl sm:text-3xl font-logo font-bold tracking-[0.05em] uppercase text-white group-hover:opacity-90 transition">
+                    CINEMATAZTIC
+                </span>
             </a>
-            <nav class="flex items-center space-x-6 text-xs font-bold tracking-widest uppercase">
-                <a href="../index.html" class="mk-website hover:text-brand-cyan transition">Website</a>
-                <button type="button" id="mkLogout" class="mk-logout">Log out</button>
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase">
+                <a href="../cases.html" class="hover:text-brand-cyan transition">Cases</a>
+                <a href="../products.html" class="hover:text-brand-cyan transition">Products</a>
+                <a href="../technology.html" class="hover:text-brand-cyan transition">Technology</a>
+                <a href="../contact.html" class="btn-shine px-5 py-2.5 bg-white text-brand-dark hover:bg-brand-dark hover:text-white transition">Contact</a>
             </nav>
+            <button id="mobileMenuBtn" class="md:hidden text-2xl text-white focus:outline-none" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobileDrawer" class="hidden md:hidden bg-brand-dark/95 border-b border-brand-border px-6 py-6 space-y-4">
+            <a href="../cases.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Cases</a>
+            <a href="../products.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Products</a>
+            <a href="../technology.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Technology</a>
+            <a href="../contact.html" class="block text-lg font-bold uppercase hover:text-brand-cyan">Contact</a>
         </div>
     </header>
 
     <main class="flex-grow pt-20">
         <div class="mk-wrap">
+            <div class="mk-top"><a href="./" class="mk-home" id="mkHome"><i class="fa-solid fa-arrow-left"></i> Markets</a><button type="button" id="mkLogout" class="mk-logout">Log out</button></div>
             <nav class="mk-nav" id="mkNav" aria-label="Markets"></nav>
             <span class="mk-label">Internal · from Asana</span>
             <h1 class="mk-title">Denmark</h1>
@@ -72,7 +87,7 @@
             // With the shared password (Playlist): links to the other markets. With this country's own password
             // (Market Tools): this page only, so the logo leads back here instead of to Markets
             if (data.full) M.nav(document.getElementById('mkNav'), country.code);
-            else document.querySelector('header a[href="./"]').setAttribute('href', `${country.code}.html`);
+            else document.getElementById('mkHome').remove();
             document.getElementById('mkUpdated').textContent = M.updated(data);
 
             // Only this country's games
@@ -89,6 +104,12 @@
                 year: document.getElementById('mkYear'), prev: document.getElementById('mkPrev'), next: document.getElementById('mkNext'),
             }, data, [country.name]);
         })();
+    </script>
+    <script>
+        // Mobile menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileDrawer').classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>

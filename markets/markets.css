@@ -23,7 +23,7 @@ html.mk-locked { overflow: hidden; }
 .mk-login__btn { display: inline-flex; align-items: center; margin-top: 22px; padding: 12px 24px; background: #fff; color: #000; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; transition: background-color 150ms; }
 .mk-login__btn:hover { background: #3dc0c8; }
 .mk-login__btn:disabled { opacity: 0.6; }
-.mk-logout { margin-left: 24px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); transition: color 150ms; }
+.mk-logout { margin-left: auto; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); transition: color 150ms; }
 .mk-logout:hover { color: #3dc0c8; }
 
 /* Cards on the Markets page */
@@ -95,6 +95,23 @@ html.mk-locked { overflow: hidden; }
 .mk-tl__today::before { content: ''; position: absolute; top: -4px; left: -3px; width: 8px; height: 8px; border-radius: 50%; background: #3dc0c8; }
 .mk-tl__none { padding: 28px 10px; color: rgba(255, 255, 255, 0.45); font-size: 14px; }
 
-/* "Website" in the top bar: not on phones, where the bar is full */
-.mk-website { display: none; }
-@media (min-width: 640px) { .mk-website { display: inline; } }
+
+/* Contact button in the top menu (same as .btn-shine on the other pages) */
+.btn-shine {
+    position: relative; overflow: hidden; isolation: isolate;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(0, 0, 0, 0.06) 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(0, 0, 0, 0.18), 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 20px -6px rgba(0, 0, 0, 0.45);
+}
+.btn-shine::after {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+    transform: translateX(-120%); transition: transform 600ms ease;
+}
+.btn-shine:hover { transform: translateY(-1px); }
+.btn-shine:hover::after { transform: translateX(120%); }
+@media (prefers-reduced-motion: reduce) { .btn-shine:hover { transform: none; } .btn-shine::after { display: none; } }
+
+/* Bar under the site menu: back to Markets and Log out */
+.mk-top { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.mk-home { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); transition: color 150ms; }
+.mk-home:hover { color: #3dc0c8; }
