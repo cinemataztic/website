@@ -1,6 +1,6 @@
 # Every hour: fetch the games from the Asana project "Live" into markets/live.enc.json (encrypted, for the hidden
 # Markets pages), and publish when something changed. Needs the repository secrets ASANA_TOKEN (an Asana personal
-# access token), MARKETS_PASSWORD (the shared password, Playlist) and MARKETS_PASSWORD_DK … _IE (a password per
+# access token), MARKETS_PASSWORD (the shared password, Playlist) and PLAYLIST_DK … _IE (a password per
 # country, Market Tools). It can also be run by hand from the Actions tab.
 name: Asana live games
 
@@ -29,12 +29,12 @@ jobs:
         env:
           ASANA_TOKEN: ${{ secrets.ASANA_TOKEN }}
           MARKETS_PASSWORD: ${{ secrets.MARKETS_PASSWORD }}
-          MARKETS_PASSWORD_DK: ${{ secrets.MARKETS_PASSWORD_DK }}
-          MARKETS_PASSWORD_SE: ${{ secrets.MARKETS_PASSWORD_SE }}
-          MARKETS_PASSWORD_FI: ${{ secrets.MARKETS_PASSWORD_FI }}
-          MARKETS_PASSWORD_DE: ${{ secrets.MARKETS_PASSWORD_DE }}
-          MARKETS_PASSWORD_PT: ${{ secrets.MARKETS_PASSWORD_PT }}
-          MARKETS_PASSWORD_IE: ${{ secrets.MARKETS_PASSWORD_IE }}
+          MARKETS_PASSWORD_DK: ${{ secrets.PLAYLIST_DK }}
+          MARKETS_PASSWORD_SE: ${{ secrets.PLAYLIST_SE }}
+          MARKETS_PASSWORD_FI: ${{ secrets.PLAYLIST_FI }}
+          MARKETS_PASSWORD_DE: ${{ secrets.PLAYLIST_DE }}
+          MARKETS_PASSWORD_PT: ${{ secrets.PLAYLIST_PT }}
+          MARKETS_PASSWORD_IE: ${{ secrets.PLAYLIST_IE }}
         run: node tools/asana-live.mjs
       - name: Commit and publish when the games changed
         env:
