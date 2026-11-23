@@ -64,7 +64,7 @@ window.Markets = (() => {
             box.className = 'mk-login';
             box.innerHTML = `
                 <form class="mk-login__box" autocomplete="on">
-                    <span class="mk-label">${title === 'Playlist' ? 'Internal tools' : 'Market Tools'}</span>
+                    <span class="mk-label">${COUNTRIES.some(c => c.name === title) ? 'Market Tools' : 'Internal tools'}</span>
                     <h1 class="mk-login__title">${esc(title)}</h1>
                     <p class="mk-login__text">${esc(text)}</p>
                     <input type="text" name="username" value="cinemataztic-${esc(title.toLowerCase())}" autocomplete="username" hidden>
@@ -124,6 +124,21 @@ window.Markets = (() => {
         return c
             ? login(files.reverse(), c.name, `Log in with the ${c.name} password to see the games in ${c.name}.`)
             : login(files, 'Playlist', 'Log in with the shared password to see the games in each market.');
+    }
+
+    // Another page behind the shared password (Intra): "url" is its encrypted file, made with the same password and
+    // salt as live.enc.json, so whoever is logged in to Playlist gets straight in, and the other way round
+    async function unlock(url, title, text) {
+        const file = await fetchFile(url);
+        if (!file) throw new Error(`No file ${url}`);
+        const saved = store.get('all');
+        if (saved && saved.startsWith(`${file.salt}:`)) {
+            try {
+                const key = await crypto.subtle.importKey('raw', b64(saved.split(':')[1]), 'AES-GCM', false, ['decrypt']);
+                return await open(file, key);
+            } catch (e) { /* a new password: log in again */ }
+        }
+        return login([{ id: 'all', file }], title, text);
     }
 
     // "Log out" in the top bar of every Markets page
@@ -214,5 +229,5 @@ window.Markets = (() => {
         draw();
     }
 
-    return { COUNTRIES, pageOf, color, today, isLive, startsSoon, fmt, esc, updated, load, nav, list, legend, timeline };
+    return { COUNTRIES, pageOf, color, today, isLive, startsSoon, fmt, esc, updated, load, unlock, nav, list, legend, timeline };
 })();
