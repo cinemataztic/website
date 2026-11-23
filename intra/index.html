@@ -6,8 +6,8 @@
     <title>Intra — Cinemataztic</title>
     <meta name="description" content="Internal: links and tools for the Cinemataztic team.">
     <!-- Hidden page behind the shared password (the one for Playlist): linked from Internal tools in the footer, but not
-         in sitemap.xml and not to be shown in search engines. The content is in intra.enc.json, encrypted, made from the
-         private repository cinemataztic/intra by tools/intra-build.mjs -->
+         in sitemap.xml and not to be shown in search engines. The content is in intra.enc.json, encrypted; see tools/intra.mjs
+         for how to change it -->
     <meta name="robots" content="noindex, nofollow">
     <link rel="canonical" href="https://www.cinemataztic.com/intra/">
     <link rel="icon" href="../favicon.ico" sizes="32x32">
@@ -76,7 +76,7 @@
                 root.innerHTML = '<p class="mk-error">Intra could not be loaded. Try again in a moment.</p>';
                 return;
             }
-            // The content comes from the private intra repository (tools/intra-build.mjs); its links open in a new tab
+            // The content is in intra.enc.json (see tools/intra.mjs to change it); its links open in a new tab
             root.innerHTML = data.main;
             const sectionsEl = document.getElementById('sections'), emptyEl = document.getElementById('empty');
             const host = url => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };

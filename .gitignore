@@ -6,3 +6,6 @@ test.html
 
 # Markets: the games are only published encrypted (markets/live.enc.json), never as plain JSON
 markets/live.json
+
+# Intra: the content is only published encrypted (intra/intra.enc.json); intra/src/ is the local copy to edit (tools/intra.mjs)
+intra/src/
