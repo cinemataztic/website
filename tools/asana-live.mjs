@@ -1,5 +1,6 @@
 // Fetches the games from the Asana project "Live" and writes them, encrypted, to markets/live.enc.json for the hidden
-// Markets pages (the "Playlist" link under Internal tools in the footer). Run by .github/workflows/asana-live.yml
+// Markets pages (the "Playlist" link under Internal tools in the footer). It also writes the counts of the
+// Asana project "Alerts" to alerts/alerts.enc.json (the "Alerts" link), see the end of this file. Run by .github/workflows/asana-live.yml
 // every hour. Needs two GitHub secrets, given as environment variables (never put them in a file):
 //   ASANA_TOKEN        an Asana personal access token
 //   MARKETS_PASSWORD   the shared password for the Markets pages (Playlist); opens all markets
@@ -35,11 +36,11 @@ const fields = [
     'custom_fields.name', 'custom_fields.enum_value.name', 'custom_fields.enum_value.color',
 ].join(',');
 
-async function fetchAll() {
+async function fetchAll(project = PROJECT, optFields = fields) {
     const tasks = [];
     let offset = '';
     do {
-        const url = `https://app.asana.com/api/1.0/projects/${PROJECT}/tasks?limit=100&opt_fields=${fields}${offset ? `&offset=${offset}` : ''}`;
+        const url = `https://app.asana.com/api/1.0/projects/${project}/tasks?limit=100&opt_fields=${optFields}${offset ? `&offset=${offset}` : ''}`;
         const res = await fetch(url, { headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' } });
         if (!res.ok) throw new Error(`Asana answered ${res.status}: ${await res.text()}`);
         const body = await res.json();
@@ -122,4 +123,74 @@ for (const c of COUNTRIES) {
     if (pass === password) { console.error(`${c.name}: its password is the shared password; give it its own`); process.exit(1); }
     const own = tasks.filter(t => t.market === c.name);
     await save(new URL(`../markets/live-${c.code}.enc.json`, import.meta.url), pass, { markets: [c.name], tasks: own }, c.name);
+}
+
+// --- Alerts (alerts/index.html, the "Alerts" link under Internal tools): the charts of the dashboard of the Asana
+// project "Alerts". Only the counts leave Asana, not the alerts themselves. Encrypted with the shared password and the
+// same salt as live.enc.json, so one login opens Playlist, Intra and Alerts.
+const ALERTS = '1213415935916920';           // Asana project "Alerts"
+const ALERTS_OUT = new URL('../alerts/alerts.enc.json', import.meta.url);
+const CLIENTS_SINCE = '2026-07-01';          // "Alerts by Client - Since 01/07/26"
+const GAME_DAYS = 31;                        // "Game alerts in the last 31 days"
+const TOP = 7;                               // slices in a ring before the rest goes into "Other"
+// The cinema rings: the country and its value in the "Marked" field
+const CINEMA_MARKETS = [['Denmark', 'BioSpil - DK'], ['Germany', 'REDyPLAY - DE'], ['Finland', 'Leffapeli - FI'],
+    ['Ireland', 'CineGame - IE'], ['Portugal', 'CineGame - PT'], ['Sweden', 'CineGame - SE']];
+
+const dayOf = iso => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Copenhagen' }).format(new Date(iso)); // YYYY-MM-DD, Danish time
+const now = new Date();
+const today = dayOf(now.toISOString());
+const addDays = (day, n) => { const d = new Date(day + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+
+const alerts = (await fetchAll(ALERTS, 'created_at,completed,custom_fields.name,custom_fields.enum_value.name,custom_fields.enum_value.color')).map(t => {
+    const f = name => field(t, name);
+    return { at: t.created_at, day: dayOf(t.created_at), done: !!t.completed, type: f('Type of Alert'), market: f('Marked'), cinema: f('Cinema'), client: f('Client') };
+});
+
+// Slices of a ring: [name, colour, count], biggest first; with "top", the rest is put together as "Other"
+function slices(list, key, top) {
+    const m = new Map();
+    list.forEach(a => { const v = a[key]; if (!v || !v.name) return; const s = m.get(v.name) || [v.name, v.color || '', 0]; s[2]++; m.set(v.name, s); });
+    const all = [...m.values()].sort((a, b) => b[2] - a[2] || a[0].localeCompare(b[0]));
+    if (!top || all.length <= top + 1) return all;
+    return [...all.slice(0, top), ['Other', 'other', all.slice(top).reduce((n, s) => n + s[2], 0)]];
+}
+
+// Game alerts: "Game did not complete" per day and market, the last 31 days
+const gameDays = Array.from({ length: GAME_DAYS }, (_, i) => addDays(today, i - GAME_DAYS + 1));
+const games = alerts.filter(a => a.type?.name === 'Game did not complete' && a.day >= gameDays[0]);
+const gameSeries = slices(games, 'market').map(([name, color]) => [name, color, gameDays.map(d => games.filter(a => a.day === d && a.market?.name === name).length)]);
+
+// Hacker: alerts per day, from the first day with one to the last
+const hackers = alerts.filter(a => a.type?.name === 'Hacker').map(a => a.day).sort();
+const hackerDays = [];
+for (let d = hackers[0]; hackers.length && d <= hackers[hackers.length - 1]; d = addDays(d, 1)) hackerDays.push([d, hackers.filter(h => h === d).length]);
+
+const since24h = new Date(now - 86400000).toISOString();
+const dashboard = {
+    total: alerts.length,
+    done: alerts.filter(a => a.done).length,
+    clientsMonth: slices(alerts.filter(a => a.day.slice(0, 7) === today.slice(0, 7)), 'client', TOP),
+    clientsSince: slices(alerts.filter(a => a.day >= CLIENTS_SINCE), 'client', TOP),
+    game: { days: gameDays, series: gameSeries },
+    hacker: hackerDays,
+    types: slices(alerts, 'type'),
+    markets: slices(alerts, 'market', TOP),
+    markets24h: slices(alerts.filter(a => a.at >= since24h), 'market', TOP),
+    cinemas: CINEMA_MARKETS.map(([country, market]) => [country, slices(alerts.filter(a => a.market?.name === market), 'cinema', TOP)]),
+};
+
+// Written (and so committed) only when a count changed
+{
+    const live = JSON.parse(await readFile(OUT, 'utf8'));
+    let old = null;
+    try {
+        const file = JSON.parse(await readFile(ALERTS_OUT, 'utf8'));
+        if (file.salt === live.salt) { const { updated, ...counts } = await decrypt(file, password); old = counts; }
+    } catch { /* no file yet, or a new password */ }
+    if (old && JSON.stringify(old) === JSON.stringify(dashboard)) console.log(`Alerts: no changes (${alerts.length} alerts)`);
+    else {
+        await writeFile(ALERTS_OUT, JSON.stringify(await encrypt({ updated: now.toISOString(), ...dashboard }, unb64(live.salt), password)) + '\n');
+        console.log(`Alerts: wrote the dashboard of ${alerts.length} alerts (encrypted)`);
+    }
 }
