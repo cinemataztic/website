@@ -31,15 +31,17 @@ window.Markets = (() => {
     const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const updated = data => `Updated ${new Date(data.updated).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}`;
 
-    // --- Login: the games are in live.enc.json, encrypted with the shared password (see tools/asana-live.mjs).
+    // --- Login. The games are encrypted (see tools/asana-live.mjs): live.enc.json with the shared password (Playlist,
+    // all markets) and live-dk.enc.json … live-ie.enc.json with a password per country (Market Tools, that country only).
     // The password itself is never stored: after login the key made from it is kept in this browser tab, or on this
     // device with "Keep me logged in", and is thrown away on "Log out" or when the password is changed.
-    const KEY = 'marketsKey';
     const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
     const store = {
-        get() { try { return sessionStorage.getItem(KEY) || localStorage.getItem(KEY); } catch (e) { return null; } },
-        set(v, keep) { try { (keep ? localStorage : sessionStorage).setItem(KEY, v); } catch (e) { /* storage unavailable */ } },
-        clear() { try { sessionStorage.removeItem(KEY); localStorage.removeItem(KEY); } catch (e) { /* storage unavailable */ } },
+        name: id => `marketsKey:${id}`,
+        get(id) { try { return sessionStorage.getItem(this.name(id)) || localStorage.getItem(this.name(id)); } catch (e) { return null; } },
+        set(id, v, keep) { try { (keep ? localStorage : sessionStorage).setItem(this.name(id), v); } catch (e) { /* storage unavailable */ } },
+        drop(id) { try { sessionStorage.removeItem(this.name(id)); localStorage.removeItem(this.name(id)); } catch (e) { /* storage unavailable */ } },
+        clear() { ['all', ...COUNTRIES.map(c => c.code)].forEach(id => this.drop(id)); },
     };
     async function keyFromPassword(password, file) {
         const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
@@ -50,18 +52,22 @@ window.Markets = (() => {
         const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(file.iv) }, key, b64(file.data));
         return JSON.parse(new TextDecoder().decode(plain));
     }
+    async function fetchFile(url) {
+        const res = await fetch(url, { cache: 'no-cache' });
+        return res.ok ? res.json() : null;
+    }
 
-    // The login screen, over the page until the password is right
-    function login(file) {
+    // The login screen, over the page until a password opens one of the files ({ id, file }, tried in order)
+    function login(files, title, text) {
         return new Promise(resolve => {
             const box = document.createElement('div');
             box.className = 'mk-login';
             box.innerHTML = `
                 <form class="mk-login__box" autocomplete="on">
-                    <span class="mk-label">Internal tools</span>
-                    <h1 class="mk-login__title">Playlist</h1>
-                    <p class="mk-login__text">Log in with the shared password to see the games in each market.</p>
-                    <input type="text" name="username" value="cinemataztic-playlist" autocomplete="username" hidden>
+                    <span class="mk-label">${title === 'Playlist' ? 'Internal tools' : 'Market Tools'}</span>
+                    <h1 class="mk-login__title">${esc(title)}</h1>
+                    <p class="mk-login__text">${esc(text)}</p>
+                    <input type="text" name="username" value="cinemataztic-${esc(title.toLowerCase())}" autocomplete="username" hidden>
                     <label class="mk-login__label" for="mkPassword">Password</label>
                     <input class="mk-login__input" id="mkPassword" type="password" autocomplete="current-password" required>
                     <label class="mk-login__keep"><input type="checkbox" id="mkKeep"> Keep me logged in on this device</label>
@@ -76,37 +82,48 @@ window.Markets = (() => {
                 e.preventDefault();
                 btn.disabled = true;
                 error.hidden = true;
-                try {
-                    const key = await keyFromPassword(input.value, file);
-                    const data = await open(file, key);
-                    const raw = new Uint8Array(await crypto.subtle.exportKey('raw', key));
-                    store.set(`${file.salt}:${btoa(String.fromCharCode(...raw))}`, box.querySelector('#mkKeep').checked);
-                    box.remove();
-                    document.documentElement.classList.remove('mk-locked');
-                    resolve(data);
-                } catch (err) {
-                    error.hidden = false;
-                    input.select();
-                    btn.disabled = false;
+                for (const { id, file } of files) {
+                    try {
+                        const key = await keyFromPassword(input.value, file);
+                        const data = await open(file, key);
+                        const raw = new Uint8Array(await crypto.subtle.exportKey('raw', key));
+                        store.set(id, `${file.salt}:${btoa(String.fromCharCode(...raw))}`, box.querySelector('#mkKeep').checked);
+                        box.remove();
+                        document.documentElement.classList.remove('mk-locked');
+                        resolve({ ...data, full: id === 'all' });
+                        return;
+                    } catch (err) { /* not this file's password */ }
                 }
+                error.hidden = false;
+                input.select();
+                btn.disabled = false;
             });
         });
     }
 
-    // Loads the games: with the saved key when there is one, otherwise after the login screen
-    async function load() {
-        const res = await fetch('live.enc.json', { cache: 'no-cache' });
-        if (!res.ok) throw new Error(`live.enc.json: ${res.status}`);
-        const file = await res.json();
-        const saved = store.get();
-        if (saved && saved.startsWith(`${file.salt}:`)) {
+    // Loads the games: with a saved key when there is one, otherwise after the login screen. On a country page
+    // ("country" is its code) both the shared password and the country's own password work; "full" in the result
+    // says which: true for all markets (Playlist), false for only this country (Market Tools).
+    async function load(country) {
+        const c = COUNTRIES.find(x => x.code === country);
+        const files = [];
+        const all = await fetchFile('live.enc.json');
+        const own = c ? await fetchFile(`live-${c.code}.enc.json`) : null;
+        if (all) files.push({ id: 'all', file: all });
+        if (own) files.push({ id: c.code, file: own });
+        if (!files.length) throw new Error('No games file');
+        for (const { id, file } of files) {
+            const saved = store.get(id);
+            if (!saved || !saved.startsWith(`${file.salt}:`)) { store.drop(id); continue; }
             try {
                 const key = await crypto.subtle.importKey('raw', b64(saved.split(':')[1]), 'AES-GCM', false, ['decrypt']);
-                return await open(file, key);
-            } catch (e) { /* a new password: log in again */ }
+                return { ...(await open(file, key)), full: id === 'all' };
+            } catch (e) { store.drop(id); /* a new password: log in again */ }
         }
-        store.clear();
-        return login(file);
+        // On a country page its own password is tried first
+        return c
+            ? login(files.reverse(), c.name, `Log in with the ${c.name} password to see the games in ${c.name}.`)
+            : login(files, 'Playlist', 'Log in with the shared password to see the games in each market.');
     }
 
     // "Log out" in the top bar of every Markets page

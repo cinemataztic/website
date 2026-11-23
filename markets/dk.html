@@ -17,7 +17,7 @@
     <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/site.css?v=5">
-    <link rel="stylesheet" href="markets.css?v=3">
+    <link rel="stylesheet" href="markets.css?v=4">
 </head>
 <body data-country="dk" class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-cyan selection:text-black min-h-screen flex flex-col">
     <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
@@ -59,17 +59,20 @@
 
     <footer class="border-t border-brand-border px-4 sm:px-6 lg:px-8 py-6 text-xs text-gray-500">© 2026 Cinemataztic ApS · Internal page</footer>
 
-    <script src="markets.js?v=3"></script>
+    <script src="markets.js?v=4"></script>
     <script>
         (async function renderCountry() {
             const M = Markets;
             const country = M.COUNTRIES.find(c => c.code === document.body.dataset.country);
-            M.nav(document.getElementById('mkNav'), country.code);
             let data;
-            try { data = await M.load(); } catch (e) {
+            try { data = await M.load(country.code); } catch (e) {
                 document.getElementById('mkTimeline').innerHTML = '<p class="mk-tl__none">The games could not be loaded. Try again in a moment.</p>';
                 return;
             }
+            // With the shared password (Playlist): links to the other markets. With this country's own password
+            // (Market Tools): this page only, so the logo leads back here instead of to Markets
+            if (data.full) M.nav(document.getElementById('mkNav'), country.code);
+            else document.querySelector('header a[href="./"]').setAttribute('href', `${country.code}.html`);
             document.getElementById('mkUpdated').textContent = M.updated(data);
 
             // Only this country's games

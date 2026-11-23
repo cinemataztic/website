@@ -2,7 +2,9 @@
 // Markets pages (the "Playlist" link under Internal tools in the footer). Run by .github/workflows/asana-live.yml
 // every hour. Needs two GitHub secrets, given as environment variables (never put them in a file):
 //   ASANA_TOKEN        an Asana personal access token
-//   MARKETS_PASSWORD   the shared password for the Markets pages; the data can only be read with it
+//   MARKETS_PASSWORD   the shared password for the Markets pages (Playlist); opens all markets
+//   MARKETS_PASSWORD_DK, _SE, _FI, _DE, _PT, _IE
+//                      a password per country (Market Tools); opens only that country's page and games
 //
 // Only what the pages show leaves Asana: name, market (the section), dates, done or not, product type and audience.
 // Prices, invoices and other fields stay in Asana. The games are never written unencrypted, as the repository is public.
@@ -17,6 +19,11 @@ const SKIP_SECTIONS = ['New Bookings'];   // sections that are not a market
 const SKIP_TYPES = ['Pitch'];             // Product Types that are not shown
 const OUT = new URL('../markets/live.enc.json', import.meta.url);
 const ITERATIONS = 310000;                // PBKDF2-SHA256, the same in markets/markets.js
+// The Market Tools pages, as in markets/markets.js: code and the Asana section of the market
+const COUNTRIES = [
+    { code: 'dk', name: 'Denmark' }, { code: 'se', name: 'Sweden' }, { code: 'fi', name: 'Finland' },
+    { code: 'de', name: 'Germany' }, { code: 'pt', name: 'Portugal' }, { code: 'ie', name: 'Ireland' },
+];
 
 const token = process.env.ASANA_TOKEN;
 const password = process.env.MARKETS_PASSWORD;
@@ -45,18 +52,18 @@ async function fetchAll() {
 // --- Encryption: AES-GCM with a key from the password (PBKDF2-SHA256), as the browser decrypts it with WebCrypto ---
 const b64 = buf => Buffer.from(buf).toString('base64');
 const unb64 = s => new Uint8Array(Buffer.from(s, 'base64'));
-async function keyFor(salt) {
-    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+async function keyFor(salt, pass) {
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
     return crypto.subtle.deriveKey({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: ITERATIONS }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
 }
-async function decrypt(file) {
-    const key = await keyFor(unb64(file.salt));
+async function decrypt(file, pass) {
+    const key = await keyFor(unb64(file.salt), pass);
     const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(file.iv) }, key, unb64(file.data));
     return JSON.parse(new TextDecoder().decode(plain));
 }
-async function encrypt(payload, salt) {
+async function encrypt(payload, salt, pass) {
     const iv = crypto.getRandomValues(new Uint8Array(12));
-    const data = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, await keyFor(salt), new TextEncoder().encode(JSON.stringify(payload)));
+    const data = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, await keyFor(salt, pass), new TextEncoder().encode(JSON.stringify(payload)));
     return { v: 1, kdf: 'PBKDF2-SHA256', iterations: ITERATIONS, salt: b64(salt), iv: b64(iv), data: b64(data) };
 }
 
@@ -86,18 +93,33 @@ const tasks = raw.map(t => {
 // Markets in the order of the sections in Asana
 const markets = [...new Set(raw.map(sectionOf))].filter(m => m && !SKIP_SECTIONS.includes(m) && tasks.some(t => t.market === m));
 
-// Only write (and so only commit) when the games changed. The old file is opened with the password; when it can't be
-// (first run, or a new password), a new salt is made, and anyone logged in has to log in again.
-let old = null, salt = null;
-try {
-    const file = JSON.parse(await readFile(OUT, 'utf8'));
-    old = await decrypt(file);
-    salt = unb64(file.salt);
-} catch { /* no file yet, or another password */ }
-if (old && JSON.stringify(old.tasks) === JSON.stringify(tasks) && JSON.stringify(old.markets) === JSON.stringify(markets)) {
-    console.log(`No changes (${tasks.length} games)`);
-} else {
+// Writes one encrypted file, but only (and so only commits) when its games changed. The old file is opened with the
+// password; when it can't be (first run, or a new password), a new salt is made, and anyone logged in logs in again.
+async function save(out, pass, payload, label) {
+    let old = null, salt = null;
+    try {
+        const file = JSON.parse(await readFile(out, 'utf8'));
+        old = await decrypt(file, pass);
+        salt = unb64(file.salt);
+    } catch { /* no file yet, or another password */ }
+    if (old && JSON.stringify(old.tasks) === JSON.stringify(payload.tasks) && JSON.stringify(old.markets) === JSON.stringify(payload.markets)) {
+        console.log(`${label}: no changes (${payload.tasks.length} games)`);
+        return;
+    }
     salt = salt || crypto.getRandomValues(new Uint8Array(16));
-    await writeFile(OUT, JSON.stringify(await encrypt({ updated: new Date().toISOString(), markets, tasks }, salt)) + '\n');
-    console.log(`Wrote ${tasks.length} games in ${markets.length} markets (encrypted)`);
+    await writeFile(out, JSON.stringify(await encrypt({ updated: new Date().toISOString(), ...payload }, salt, pass)) + '\n');
+    console.log(`${label}: wrote ${payload.tasks.length} games (encrypted)`);
+}
+
+// Playlist: all markets, with the shared password
+await save(OUT, password, { markets, tasks }, 'All markets');
+
+// Market Tools: a file per country with only its own games, each with its own password (MARKETS_PASSWORD_DK, …).
+// A country without a password is left out (its page then only opens with the shared password).
+for (const c of COUNTRIES) {
+    const pass = process.env[`MARKETS_PASSWORD_${c.code.toUpperCase()}`];
+    if (!pass) { console.log(`${c.name}: no MARKETS_PASSWORD_${c.code.toUpperCase()}, skipped`); continue; }
+    if (pass === password) { console.error(`${c.name}: its password is the shared password; give it its own`); process.exit(1); }
+    const own = tasks.filter(t => t.market === c.name);
+    await save(new URL(`../markets/live-${c.code}.enc.json`, import.meta.url), pass, { markets: [c.name], tasks: own }, c.name);
 }

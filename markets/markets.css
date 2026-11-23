@@ -23,7 +23,7 @@ html.mk-locked { overflow: hidden; }
 .mk-login__btn { display: inline-flex; align-items: center; margin-top: 22px; padding: 12px 24px; background: #fff; color: #000; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; transition: background-color 150ms; }
 .mk-login__btn:hover { background: #3dc0c8; }
 .mk-login__btn:disabled { opacity: 0.6; }
-.mk-logout { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); transition: color 150ms; }
+.mk-logout { margin-left: 24px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); transition: color 150ms; }
 .mk-logout:hover { color: #3dc0c8; }
 
 /* Cards on the Markets page */
