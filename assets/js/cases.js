@@ -169,7 +169,7 @@ const siteCases = [
         mediaType: "video",
         cover: "",
         video: "https://storage.googleapis.com/cinemataztic-public/video/Appotek.mov",
-        preview: "assets/video/previews/appotek.mp4",
+        preview: "assets/video/previews/appotek.mp4?v=2",
         description: "A CineFun game for Apotekets."
     },
     {
