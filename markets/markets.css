@@ -115,3 +115,14 @@ html.mk-locked { overflow: hidden; }
 .mk-top { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
 .mk-home { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); transition: color 150ms; }
 .mk-home:hover { color: #3dc0c8; }
+
+/* The site footer (the same as on the other pages): its "Let's Talk" heading */
+footer .section-title { font-size: clamp(1.75rem, 8.4vw, 3rem); }
+@media (min-width: 1024px) { footer .section-title { font-size: 2.1vw; } }
+
+/* Thin grey text is hard to read on screens with ordinary pixels: the same fix as on the other pages */
+@media (max-resolution: 1.5dppx), (-webkit-max-device-pixel-ratio: 1.5) {
+    body.antialiased { -webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto; }
+    body p, body li { font-weight: 500; }
+    body .text-gray-400 { color: #d1d5db; }
+}
