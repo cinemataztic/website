@@ -126,8 +126,19 @@ const siteCases = [
         description: "130,000 impressions and 14,000 vouchers with a 23.1% CTR. Leads: club members."
     },
     {
-        id: "nordlys",
+        id: "flimmer",
         featured: true,
+        title: "Flimmer",
+        client: "Flimmer",
+        category: "CineFun",
+        mediaType: "video",
+        cover: "",
+        video: "https://storage.googleapis.com/cinemataztic-public/video/Flimmer_GameCenter_ForWeb.mp4",
+        preview: "assets/video/previews/flimmer.mp4",
+        description: "A CineFun game for Flimmer."
+    },
+    {
+        id: "nordlys",
         title: "Norlys",
         client: "Norlys",
         category: "CineFun",

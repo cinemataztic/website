@@ -75,6 +75,7 @@ const siteBrands = [
     { name: "Allianz", logo: "assets/logos/allianz.svg", group: "Finance & Insurance" },
     { name: "Royal Copenhagen", logo: "assets/logos/royal-copenhagen.svg", group: "Retail" },
     { name: "Norlys", logo: "assets/logos/norlys.svg", group: ["Energy", "TelCo & Tech"] },
+    { name: "Flimmer", logo: "assets/logos/flimmer-white.png", group: "Media & Entertainment" },
     { name: "Apotekets", logo: "assets/logos/apotekets-white.png", group: "Health & Pharma" },
     { name: "GreenMobility", logo: "assets/logos/greenmobility-logo-white.png", group: "Travel & Transport" },
     { name: "Call me", logo: "assets/logos/callme-logo-white.png", group: "TelCo & Tech" },

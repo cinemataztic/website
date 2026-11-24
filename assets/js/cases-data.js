@@ -42,6 +42,7 @@ const caseLogos = {
     "Specsavers": { src: "assets/logos/specsavers.svg" },
     "BookBeat": { src: "assets/logos/bookbeat.svg", white: true },
     "Allianz": { src: "assets/logos/allianz.svg", white: true }, // Wikimedia Commons, File:Allianz.svg
+    "Flimmer": { src: "assets/logos/flimmer-white.png" }, // wordmark from flimmer.app, made white on transparent
     "Norlys": { src: "assets/logos/norlys.svg" }, // logo from norlys.dk
     "Apotekets": { src: "assets/logos/apotekets-white.png" }, // logo from apotekets.dk, made white on transparent
     "GreenMobility": { src: "assets/logos/greenmobility-logo-white.png" }, // supplied by the user, made white on transparent
