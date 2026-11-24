@@ -57,3 +57,17 @@
 #inMain .faq a { color: #3dc0c8; text-decoration: underline; text-underline-offset: 2px; }
 #inMain .faq strong { color: #fff; }
 #inMain .faq-qr { background: #fff; padding: 8px; }
+
+/* Text sections, such as the rules for remote work */
+#inMain .guide { padding: 22px 26px; background: #282828; border: 1px solid #3A3A3A; color: rgba(255, 255, 255, 0.75); font-size: 14px; line-height: 1.65; }
+#inMain .guide h3 { margin: 22px 0 10px; font-size: 15px; font-weight: 700; color: #fff; }
+#inMain .guide h3:first-child { margin-top: 0; }
+#inMain .guide ul { display: grid; gap: 8px; padding-left: 18px; list-style: disc; }
+#inMain .guide li::marker { color: #3dc0c8; }
+#inMain .guide p + p { margin-top: 10px; }
+/* Two columns: the short text on the left, the list of rules on the right (stacked on phones) */
+#inMain .guide--two { display: grid; gap: 24px 40px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) {
+    #inMain .guide--two { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+    #inMain .guide--two > div + div { padding-left: 40px; border-left: 1px solid #3A3A3A; }
+}
