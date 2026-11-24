@@ -1,8 +1,8 @@
 # Every hour: fetch the games from the Asana project "Live" into markets/live.enc.json (encrypted, for the hidden
-# Markets pages) and the counts of the Asana project "Alerts" into alerts/alerts.enc.json, and publish when something changed.
+# Markets pages) and the counts of the Asana projects "Alerts" and "Support" into alerts/ and support/, and publish when something changed.
 # Needs the repository secrets ASANA_TOKEN (an Asana personal access token), MARKETS_PASSWORD (the shared password, Playlist) and PLAYLIST_DK … _IE (a password per
 # country, Market Tools). It can also be run by hand from the Actions tab.
-name: Asana live games and alerts
+name: Asana live games, alerts and support
 
 on:
   schedule:
@@ -36,17 +36,17 @@ jobs:
           MARKETS_PASSWORD_PT: ${{ secrets.PLAYLIST_PT }}
           MARKETS_PASSWORD_IE: ${{ secrets.PLAYLIST_IE }}
         run: node tools/asana-live.mjs
-      - name: Commit and publish when the games or alerts changed
+      - name: Commit and publish when the games, alerts or support tickets changed
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ -z "$(git status --porcelain -- 'markets/*.enc.json' 'alerts/*.enc.json')" ]; then
+          if [ -z "$(git status --porcelain -- 'markets/*.enc.json' 'alerts/*.enc.json' 'support/*.enc.json')" ]; then
             echo "Nothing changed"
             exit 0
           fi
           git config user.name "asana-live"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add markets/*.enc.json alerts/*.enc.json
+          git add markets/*.enc.json alerts/*.enc.json support/*.enc.json
           git commit -m "Live games from Asana"
           git pull --rebase origin main
           git push origin HEAD:main

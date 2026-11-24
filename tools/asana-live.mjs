@@ -1,6 +1,7 @@
 // Fetches the games from the Asana project "Live" and writes them, encrypted, to markets/live.enc.json for the hidden
 // Markets pages (the "Playlist" link under Internal tools in the footer). It also writes the counts of the
-// Asana project "Alerts" to alerts/alerts.enc.json (the "Alerts" link), see the end of this file. Run by .github/workflows/asana-live.yml
+// Asana project "Alerts" to alerts/alerts.enc.json (the "Alerts" link) and of "Support" to support/support.enc.json (the
+// "Support Dashboard" link), see the end of this file. Run by .github/workflows/asana-live.yml
 // every hour. Needs two GitHub secrets, given as environment variables (never put them in a file):
 //   ASANA_TOKEN        an Asana personal access token
 //   MARKETS_PASSWORD   the shared password for the Markets pages (Playlist); opens all markets
@@ -192,5 +193,47 @@ const dashboard = {
     else {
         await writeFile(ALERTS_OUT, JSON.stringify(await encrypt({ updated: now.toISOString(), ...dashboard }, unb64(live.salt), password)) + '\n');
         console.log(`Alerts: wrote the dashboard of ${alerts.length} alerts (encrypted)`);
+    }
+}
+
+// --- Support Dashboard (support/index.html, the "Support Dashboard" link under Internal tools): the charts of the
+// dashboard of the Asana project "Support". Like Alerts: only the counts, encrypted with the shared password and salt.
+const SUPPORT = '1210672026118849';          // Asana project "Support"
+const SUPPORT_OUT = new URL('../support/support.enc.json', import.meta.url);
+const SUPPORT_DAYS = 31;                     // "Last month's inquiries"
+const HIDDEN_INQUIRIES = ['CineCard'];       // not shown on the Asana dashboard, so left out here too
+// The country rings, in the order of the dashboard: [title, the value in the "M - Support" field]
+const SUPPORT_COUNTRIES = [['SE', 'Sweden'], ['DK', 'Denmark'], ['DE', 'Germany'], ['FI', 'Finland'], ['PT', 'Portugal'], ['IE', 'Ireland']];
+
+const tickets = (await fetchAll(SUPPORT, 'created_at,completed,custom_fields.name,custom_fields.enum_value.name,custom_fields.enum_value.color')).map(t => {
+    const inquiry = field(t, 'inquiry - Support');
+    return { day: dayOf(t.created_at), country: field(t, 'M - Support'), inquiry: inquiry && !HIDDEN_INQUIRIES.includes(inquiry.name) ? inquiry : null };
+});
+const supportDays = Array.from({ length: SUPPORT_DAYS }, (_, i) => addDays(today, i - SUPPORT_DAYS + 1));
+const recent = tickets.filter(t => t.day >= supportDays[0]);
+// The countries in the order of the field's options in Asana (Denmark, Sweden, Finland, Germany, Ireland, Portugal …)
+const countryOrder = ['Denmark', 'Sweden', 'Finland', 'Germany', 'Ireland', 'Portugal', 'Australia', 'New Zealand'];
+const byCountryOrder = s => s.sort((a, b) => countryOrder.indexOf(a[0]) - countryOrder.indexOf(b[0]));
+const support = {
+    total: tickets.length,
+    monthCountries: byCountryOrder(slices(recent, 'country')),
+    monthDays: supportDays.map(d => [d, recent.filter(t => t.day === d).length]),
+    inquiries: slices(tickets, 'inquiry'),
+    countries: byCountryOrder(slices(tickets, 'country')),
+    perCountry: SUPPORT_COUNTRIES.map(([code, name]) => [code, slices(tickets.filter(t => t.country?.name === name), 'inquiry')]),
+};
+
+// Written (and so committed) only when a count changed
+{
+    const live = JSON.parse(await readFile(OUT, 'utf8'));
+    let old = null;
+    try {
+        const file = JSON.parse(await readFile(SUPPORT_OUT, 'utf8'));
+        if (file.salt === live.salt) { const { updated, ...counts } = await decrypt(file, password); old = counts; }
+    } catch { /* no file yet, or a new password */ }
+    if (old && JSON.stringify(old) === JSON.stringify(support)) console.log(`Support: no changes (${tickets.length} tickets)`);
+    else {
+        await writeFile(SUPPORT_OUT, JSON.stringify(await encrypt({ updated: now.toISOString(), ...support }, unb64(live.salt), password)) + '\n');
+        console.log(`Support: wrote the dashboard of ${tickets.length} tickets (encrypted)`);
     }
 }

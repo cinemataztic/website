@@ -50,6 +50,7 @@
 
     // --- Bars: columns of [label, segments of [name, colour, count]]; the legend lists the series
     function bars(columns, series, opts = {}) {
+        const lab = opts.label || dm;
         const max = Math.max(1, ...columns.map(c => c[1].reduce((n, s) => n + s[2], 0)));
         const step = max > 60 ? 50 : max > 12 ? 5 : max > 6 ? 2 : 1;
         const top = Math.ceil(max / step) * step;
@@ -57,12 +58,12 @@
         const cols = columns.map(([label, segs]) => {
             const sum = segs.reduce((n, s) => n + s[2], 0);
             const tip = segs.filter(s => s[2]).map(s => `${esc(s[0])}: ${s[2]}`).join(' · ');
-            return `<div class="al-col"${tip ? ` title="${dm(label)} · ${tip}"` : ''}>
+            return `<div class="al-col"${tip ? ` title="${esc(lab(label))} · ${tip}"` : ''}>
                 <div class="al-stack" style="height:${(sum / top) * 100}%">
                     <span class="al-col__sum">${sum}</span>
                     ${segs.filter(s => s[2]).reverse().map(s => `<div class="al-bar" style="flex-grow:${s[2]};background-color:${color(s[1])};--glow:${color(s[1])}">${opts.inner !== false && s[2] / top > 0.07 ? `<span>${s[2]}</span>` : ''}</div>`).join('')}
                 </div>
-                <span class="al-col__label">${dm(label)}</span>
+                <span class="al-col__label">${esc(lab(label))}</span>
             </div>`;
         }).join('');
         const legend = series.length > 1 ? `<ul class="al-legend al-legend--side">${series.map(([name, c]) => `<li><span style="background:${color(c)};--glow:${color(c)}"></span>${esc(name)}</li>`).join('')}</ul>` : '';
@@ -76,6 +77,9 @@
     }
 
     const card = (title, body, wide) => `<section class="al-card${wide ? ' al-card--wide' : ''}"><h2 class="al-card__title">${esc(title)}</h2>${body}</section>`;
+
+    // Shared with the Support Dashboard (support/index.html)
+    window.Dash = { ring, bars, card };
 
     window.drawAlerts = function (el, d) {
         const game = bars(d.game.days.map((day, i) => [day, d.game.series.map(([name, c, counts]) => [name, c, counts[i]])]), d.game.series);
