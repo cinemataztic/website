@@ -70,7 +70,14 @@ tailwind.config = {
                     src: "local('Klavika Bold'), local('Klavika-Bold'), url('../fonts/Klavika-Bold.otf') format('opentype')"
                 },
                 body: { lineHeight: '1.383' },
-                '.font-black': { letterSpacing: '-0.0525em' }
+                '.font-black': { letterSpacing: '-0.0525em' },
+                // Footer dropdown (Market Tools → Playlist with the country pages)
+                '.footer-dd summary': { display: 'inline-flex', alignItems: 'center', gap: '.5rem', cursor: 'pointer', listStyle: 'none' },
+                '.footer-dd summary::-webkit-details-marker': { display: 'none' },
+                '.footer-dd summary i': { fontSize: '10px', transition: 'transform .2s' },
+                '.footer-dd[open] summary i': { transform: 'rotate(180deg)' },
+                '.footer-dd ul': { marginTop: '.5rem', paddingLeft: '.75rem', borderLeft: '1px solid #3a3a3a' },
+                '.footer-dd li + li': { marginTop: '.5rem' }
             });
         }
     ]

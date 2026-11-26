@@ -33,7 +33,7 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Tailwind CSS, built once for the whole site (classes from all pages and scripts) -->
-    <link rel="stylesheet" href="../assets/css/site.css?v=5">
+    <link rel="stylesheet" href="../assets/css/site.css?v=6">
     <!-- Docs layout: left menu and page text -->
     <link rel="stylesheet" href="docs.css?v=49">
 </head>
@@ -191,39 +191,24 @@
                 <nav class="space-y-6" aria-label="Resources">
                     <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Resources</span>
                     <ul class="space-y-2">
-                        <li><a href="../order.html" class="text-sm text-gray-400 hover:text-white transition">Order</a></li>
                         <li><a href="index.html" class="text-sm text-gray-400 hover:text-white transition">Docs</a></li>
                         <li><a href="../careers/index.html" class="text-sm text-gray-400 hover:text-white transition">Careers</a></li>
                         <li><a href="https://support.cinegame.com/" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">End user support</a></li>
-                        <li><a href="https://form.asana.com/?k=_R4s-PqZgwO2LCVGomfuXw&amp;d=107314682691555" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">TechSupport</a></li>
                         <li><a href="https://legal.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Privacy &amp; legal</a></li>
                         <li><a href="https://www.youtube.com/@cinemataztic" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">YouTube</a></li>
-                    </ul>
-                </nav>
-                <!-- THE APP: the CineGame app in each market (external sites) -->
-                <nav class="space-y-6" aria-label="The App">
-                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">The App</span>
-                    <ul class="space-y-2">
-                        <li><a href="https://cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame</a></li>
-                        <li><a href="https://biospil.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Biospil DK</a></li>
-                        <li><a href="https://leffapeli.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">LeffaPeli FI</a></li>
-                        <li><a href="https://cinegame.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame SE</a></li>
-                        <li><a href="https://redyplay.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">REDyPLAY DE</a></li>
-                        <li><a href="https://ie.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame IE</a></li>
-                        <li><a href="https://cinegame.pt" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame PT</a></li>
-                    </ul>
-                </nav>
-                <!-- PARTNERS: our cinema partners (same links as the Where we are map) -->
-                <nav class="space-y-6" aria-label="Partners">
-                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Partners</span>
-                    <ul class="space-y-2">
-                        <li><a href="https://drf.dk" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">DRF</a></li>
-                        <li><a href="https://www.finnkino.fi" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Finnkino</a></li>
-                        <li><a href="https://pearlanddean.ie" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Pearl &amp; Dean</a></li>
-                        <li><a href="https://weischer.net" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Weischer</a></li>
-                        <li><a href="https://www.filmstaden.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Filmstaden</a></li>
-                        <li><span class="text-sm text-gray-400">AdLine</span></li>
-                        <li><a href="../daf.html" class="text-sm text-gray-400 hover:text-white transition">DAF</a></li>
+                        <!-- Apps: the CineGame app in each market (external sites) in a dropdown -->
+                        <li><details class="footer-dd">
+                            <summary class="text-sm text-gray-400 hover:text-white transition">Apps <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+                            <ul>
+                                <li><a href="https://cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame</a></li>
+                                <li><a href="https://biospil.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Biospil DK</a></li>
+                                <li><a href="https://leffapeli.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">LeffaPeli FI</a></li>
+                                <li><a href="https://cinegame.se" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame SE</a></li>
+                                <li><a href="https://redyplay.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">REDyPLAY DE</a></li>
+                                <li><a href="https://ie.cinegame.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame IE</a></li>
+                                <li><a href="https://cinegame.pt" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">CineGame PT</a></li>
+                            </ul>
+                        </details></li>
                     </ul>
                 </nav>
                 <!-- INTERNAL TOOLS: for the team; Playlist, Intra, Alerts and Support Dashboard ask for the shared password -->
@@ -232,28 +217,41 @@
                     <ul class="space-y-2">
                         <li><a href="../markets/" class="text-sm text-gray-400 hover:text-white transition">Playlist</a></li>
                         <li><a href="../intra/" class="text-sm text-gray-400 hover:text-white transition">Intra</a></li>
-                        <li><a href="../alerts/" class="text-sm text-gray-400 hover:text-white transition">Alert Dashboard</a></li>
-                        <li><a href="../support/" class="text-sm text-gray-400 hover:text-white transition">Support Dashboard</a></li>
+                        <!-- Dashboards: Alert and Support in a dropdown -->
+                        <li><details class="footer-dd">
+                            <summary class="text-sm text-gray-400 hover:text-white transition">Dashboards <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+                            <ul>
+                                <li><a href="../alerts/" class="text-sm text-gray-400 hover:text-white transition">Alert</a></li>
+                                <li><a href="../support/" class="text-sm text-gray-400 hover:text-white transition">Support</a></li>
+                            </ul>
+                        </details></li>
                     </ul>
                 </nav>
-                <!-- MARKET TOOLS: a page per country, each with its own password -->
-                <nav class="space-y-6" aria-label="Market Tools">
-                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Market Tools</span>
-                    <ul class="space-y-2">
-                        <li><a href="../markets/dk.html" class="text-sm text-gray-400 hover:text-white transition">Denmark</a></li>
-                        <li><a href="../markets/fi.html" class="text-sm text-gray-400 hover:text-white transition">Finland</a></li>
-                        <li><a href="../markets/se.html" class="text-sm text-gray-400 hover:text-white transition">Sweden</a></li>
-                        <li><a href="../markets/de.html" class="text-sm text-gray-400 hover:text-white transition">Germany</a></li>
-                        <li><a href="../markets/ie.html" class="text-sm text-gray-400 hover:text-white transition">Ireland</a></li>
-                        <li><a href="../markets/pt.html" class="text-sm text-gray-400 hover:text-white transition">Portugal</a></li>
-                    </ul>
-                </nav>
-                <!-- CLIENT TOOLS: for clients -->
+                <!-- CLIENT TOOLS: a page per country, each with its own password -->
                 <nav class="space-y-6" aria-label="Client tools">
                     <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Client tools</span>
                     <ul class="space-y-2">
-                        <li><a href="https://app.asana.com/-/login" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Client Portal</a></li>
+                        <!-- Playlist: the country pages in a dropdown -->
+                        <li><details class="footer-dd">
+                            <summary class="text-sm text-gray-400 hover:text-white transition">Playlist <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+                            <ul>
+                                <li><a href="../markets/dk.html" class="text-sm text-gray-400 hover:text-white transition">Denmark</a></li>
+                                <li><a href="../markets/fi.html" class="text-sm text-gray-400 hover:text-white transition">Finland</a></li>
+                                <li><a href="../markets/se.html" class="text-sm text-gray-400 hover:text-white transition">Sweden</a></li>
+                                <li><a href="../markets/de.html" class="text-sm text-gray-400 hover:text-white transition">Germany</a></li>
+                                <li><a href="../markets/ie.html" class="text-sm text-gray-400 hover:text-white transition">Ireland</a></li>
+                                <li><a href="../markets/pt.html" class="text-sm text-gray-400 hover:text-white transition">Portugal</a></li>
+                            </ul>
+                        </details></li>
                         <li><a href="https://support.cinemataztic.com" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Technical support</a></li>
+                        <li><a href="../order.html" class="text-sm text-gray-400 hover:text-white transition">Order</a></li>
+                    </ul>
+                </nav>
+                <!-- ADVERTISER TOOLS: for advertisers -->
+                <nav class="space-y-6" aria-label="Advertiser tools">
+                    <span class="block text-[10px] font-bold uppercase tracking-widest text-brand-yellow">Advertiser tools</span>
+                    <ul class="space-y-2">
+                        <li><a href="https://app.asana.com/-/login" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition">Client Portal</a></li>
                     </ul>
                 </nav>
                 </div>
