@@ -75,9 +75,12 @@ tailwind.config = {
                 '.footer-dd summary': { display: 'inline-flex', alignItems: 'center', gap: '.5rem', cursor: 'pointer', listStyle: 'none' },
                 '.footer-dd summary::-webkit-details-marker': { display: 'none' },
                 '.footer-dd summary i': { fontSize: '10px', transition: 'transform .2s' },
-                '.footer-dd[open] summary i': { transform: 'rotate(180deg)' },
+                '.footer-dd[open] summary .fa-chevron-down': { transform: 'rotate(180deg)' },
                 '.footer-dd ul': { marginTop: '.5rem', paddingLeft: '.75rem', borderLeft: '1px solid #3a3a3a' },
-                '.footer-dd li + li': { marginTop: '.5rem' }
+                '.footer-dd li + li': { marginTop: '.5rem' },
+                // Small lock before the footer links that ask for a password
+                '.footer-lock': { fontSize: '10px', marginRight: '8px', verticalAlign: '1px' },
+                '.footer-dd summary .footer-lock': { marginRight: '0' }
             });
         }
     ]
